@@ -10,17 +10,12 @@ const proxyOptions = {
   changeOrigin: false,
   secure: true,
   ws: false,
-  configure: (proxy) => {
-    proxy.on("error", (err) => {
-      console.log("proxy error", err);
-    });
-  },
 };
 
 export default defineConfig({
   root: path.join(__dirname, "."),
   build: {
-    sourcemap: process.env.NODE_ENV !== "production",
+    sourcemap: true,
   },
   plugins: [
     react(),
