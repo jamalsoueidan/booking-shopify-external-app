@@ -10,6 +10,7 @@ export const createNewPassword = async (staff: Staff) => {
     uppercase: false,
   });
 
+  // user not exists
   let user = await UserModel.findOne({ staff: staff._id });
   if (!user) {
     user = new UserModel();
@@ -18,6 +19,7 @@ export const createNewPassword = async (staff: Staff) => {
     user.phone = staff.phone;
     user.email = staff.email;
   }
+
   user.password = password;
   user.save();
   return password;

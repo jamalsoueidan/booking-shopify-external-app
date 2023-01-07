@@ -51,7 +51,7 @@ export default () => {
                 />
 
                 <Button submit>Login</Button>
-                <Link url="phone">Receive code by phone</Link>
+                <Link url="/phone">Receive code by phone</Link>
               </FormLayout>
             </Form>
           </Card>

@@ -12,18 +12,11 @@ import {
 import { useCallback, useState } from "react";
 
 export default () => {
-  const [newsletter, setNewsletter] = useState(false);
   const [email, setEmail] = useState("");
 
   const handleSubmit = useCallback((event: any) => {
     setEmail("");
-    setNewsletter(false);
   }, []);
-
-  const handleNewsLetterChange = useCallback(
-    (value: any) => setNewsletter(value),
-    []
-  );
 
   const handleEmailChange = useCallback((value: any) => setEmail(value), []);
 
@@ -33,7 +26,7 @@ export default () => {
         <Page
           narrowWidth
           title="Receive password by phone"
-          breadcrumbs={[{ content: "Login", url: "/login" }]}
+          breadcrumbs={[{ content: "Login", url: "/" }]}
         >
           <Card sectioned>
             <Form onSubmit={handleSubmit}>

@@ -2,7 +2,8 @@ import { Frame } from "@shopify/polaris";
 import { AppNavigation } from "components/AppNavigation";
 import { AppTopBar } from "components/AppTopBar";
 import { useCallback, useState } from "react";
-import logo from "../logo.svg";
+import logo from "../../logo.svg";
+import { Outlet } from "react-router-dom";
 
 export default () => {
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
@@ -32,7 +33,7 @@ export default () => {
       showMobileNavigation={mobileNavigationActive}
       onNavigationDismiss={toggleMobileNavigationActive}
     >
-      ijosd
+      <Outlet />
     </Frame>
   );
 };
