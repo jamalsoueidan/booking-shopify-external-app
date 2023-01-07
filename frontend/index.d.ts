@@ -1,3 +1,4 @@
+declare module "*";
 declare module "*.svg" {
   import * as React from "react";
 
