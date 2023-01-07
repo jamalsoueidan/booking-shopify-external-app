@@ -1,9 +1,11 @@
+import bookingRoutes from "@libs/booking/booking.route";
 import { connection } from "database/connection";
 import express, { Router } from "express";
 import path from "path";
 import assetsRouter from "./assets-router";
 import dotenv from "dotenv";
 import authenticationRoutes from "@libs/authentication/authentication.route";
+import { authenticateToken } from "@libs/jwt/jwt.helper";
 
 dotenv.config();
 
@@ -40,10 +42,9 @@ export async function createServer(
   app.use("/api", authenticationRoutes);
 
   // All endpoints after this point will require an active session
-  /*app.use(
-    "/api/*",
-    verifyRequest(app)
-  );*/
+  app.use("/api/*", authenticateToken);
+
+  app.use("/api", bookingRoutes);
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(

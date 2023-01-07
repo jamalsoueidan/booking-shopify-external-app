@@ -1,7 +1,7 @@
+import { createToken } from "@libs/jwt/jwt.helper";
 import smsdkApi from "@libs/smsdk/smsdk.api";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
-import jwt from "jsonwebtoken";
 
 interface LoginPasswordBody {
   phone: string;
@@ -53,11 +53,7 @@ export const loginEmail = async ({ query, body }: LoginEmailProps) => {
     ...body,
   });
   if (user) {
-    return jwt.sign(
-      { userId: user._id, staffId: user.staff },
-      process.env.TOKEN_SECRET,
-      { expiresIn: "1h" }
-    );
+    return createToken(user);
   }
   throw new Error("email or password wrong");
 };
