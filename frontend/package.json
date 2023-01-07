@@ -21,13 +21,14 @@
     "@shopify/polaris": "^10.16.1",
     "@shopify/react-form": "^2.4.1",
     "@shopify/react-i18n": "^7.5.1",
+    "axios": "^1.2.2",
     "date-fns": "^2.29.3",
     "date-fns-tz": "^1.3.7",
-    "axios": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.6.1",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@rollup/plugin-dynamic-import-vars": "^2.0.2",

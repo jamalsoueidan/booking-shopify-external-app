@@ -12,6 +12,7 @@ import {
 } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useLocation, useNavigate } from "react-router-dom";
+import CenterScreen from "styled/CenterScreen";
 
 export default () => {
   const location = useLocation();
@@ -41,8 +42,8 @@ export default () => {
 
   return (
     <Frame>
-      <div className="inline-block align-middle">
-        <Page narrowWidth title="Login">
+      <CenterScreen>
+        <Page fullWidth title="Login">
           <Card sectioned>
             {location.state?.message && (
               <>
@@ -75,7 +76,7 @@ export default () => {
             </Form>
           </Card>
         </Page>
-      </div>
+      </CenterScreen>
     </Frame>
   );
 };

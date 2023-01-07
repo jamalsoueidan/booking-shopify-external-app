@@ -11,6 +11,7 @@ import {
 } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useNavigate } from "react-router-dom";
+import CenterScreen from "styled/CenterScreen";
 
 export default () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default () => {
 
   return (
     <Frame>
-      <div className="inline-block align-middle">
+      <CenterScreen>
         <Page
           narrowWidth
           title="Receive password by phone"
@@ -55,7 +56,7 @@ export default () => {
             </Form>
           </Card>
         </Page>
-      </div>
+      </CenterScreen>
     </Frame>
   );
 };
