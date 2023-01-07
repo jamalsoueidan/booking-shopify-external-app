@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="../@types/index.d.ts" />
+/// <reference path="../@types/staff.d.ts" />
+/// <reference path="../@types/user.d.ts" />
+
 declare module "*";
 declare module "*.svg" {
   import * as React from "react";

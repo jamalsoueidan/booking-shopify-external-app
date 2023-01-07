@@ -3,16 +3,15 @@ import smsdkApi from "@libs/smsdk/smsdk.api";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
 
-interface LoginPasswordBody {
-  phone: string;
-}
-
-interface LoginPhoneProps {
+interface ReceivePasswordProps {
   query: ShopQuery;
-  body: LoginPasswordBody;
+  body: ReceivePasswordBody;
 }
 
-export const loginPhone = async ({ query, body }: LoginPhoneProps) => {
+export const receivePassword = async ({
+  query,
+  body,
+}: ReceivePasswordProps): Promise<ReceivePasswordReturn> => {
   const staff = await StaffService.findStaffByPhone({
     shop: query.shop,
     phone: body.phone,
@@ -36,18 +35,12 @@ export const loginPhone = async ({ query, body }: LoginPhoneProps) => {
   }
 };
 
-interface LoginEmailBody {
-  email?: string;
-  phone?: string;
-  password: string;
-}
-
-interface LoginEmailProps {
+interface LoginProps {
   query: ShopQuery;
-  body: LoginEmailBody;
+  body: LoginBody;
 }
 
-export const loginEmail = async ({ query, body }: LoginEmailProps) => {
+export const login = async ({ query, body }: LoginProps): Promise<string> => {
   const user = await UserService.findUser({
     ...query,
     ...body,
@@ -55,5 +48,5 @@ export const loginEmail = async ({ query, body }: LoginEmailProps) => {
   if (user) {
     return createToken(user);
   }
-  throw new Error("email or password wrong");
+  throw new Error("your information is wrong");
 };

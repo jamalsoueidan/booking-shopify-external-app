@@ -1,24 +1,40 @@
+import { FormErrors } from "@components/FormErrors";
+import { useReceivePassword } from "@services/auth";
 import {
   Button,
   Card,
-  Checkbox,
   Form,
   FormLayout,
   Frame,
-  Link,
   Page,
   TextField,
 } from "@shopify/polaris";
-import { useCallback, useState } from "react";
+import { useField, useForm } from "@shopify/react-form";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const { receivePassword } = useReceivePassword();
 
-  const handleSubmit = useCallback((event: any) => {
-    setEmail("");
-  }, []);
-
-  const handleEmailChange = useCallback((value: any) => setEmail(value), []);
+  const {
+    fields: { phone },
+    submit,
+    submitErrors,
+  } = useForm({
+    fields: {
+      phone: useField("4531317428"),
+    },
+    onSubmit: async (fieldValues) => {
+      const response = await receivePassword(fieldValues);
+      if (response.error) {
+        return {
+          status: "fail",
+          errors: [{ field: ["phone"], message: "bad form data" }],
+        };
+      }
+      navigate("/login", { state: { message: "login" } });
+    },
+  });
 
   return (
     <Frame>
@@ -28,15 +44,11 @@ export default () => {
           title="Receive password by phone"
           breadcrumbs={[{ content: "Login", url: "/" }]}
         >
+          <FormErrors errors={submitErrors} />
           <Card sectioned>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={submit}>
               <FormLayout>
-                <TextField
-                  value={email}
-                  onChange={handleEmailChange}
-                  label="Phone"
-                  autoComplete="phone"
-                />
+                <TextField label="Phone" autoComplete="phone" {...phone} />
 
                 <Button submit>Receive password</Button>
               </FormLayout>

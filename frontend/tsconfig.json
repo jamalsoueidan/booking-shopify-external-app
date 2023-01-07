@@ -16,7 +16,17 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@services/*": ["services/*"],
+      "@services": ["services"],
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@hooks": ["hooks"],
+      "@providers/*": ["providers/*"],
+      "@libs/*": ["libs/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules/**", "dist"]

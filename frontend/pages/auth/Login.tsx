@@ -1,7 +1,8 @@
+import { useLogin } from "@services/auth";
 import {
+  Banner,
   Button,
   Card,
-  Checkbox,
   Form,
   FormLayout,
   Frame,
@@ -9,49 +10,67 @@ import {
   Page,
   TextField,
 } from "@shopify/polaris";
-import { useCallback, useState } from "react";
+import { useField, useForm } from "@shopify/react-form";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default () => {
-  const [newsletter, setNewsletter] = useState(false);
-  const [email, setEmail] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { login } = useLogin();
 
-  const handleSubmit = useCallback((event: any) => {
-    setEmail("");
-    setNewsletter(false);
-  }, []);
-
-  const handleNewsLetterChange = useCallback(
-    (value: any) => setNewsletter(value),
-    []
-  );
-
-  const handleEmailChange = useCallback((value: any) => setEmail(value), []);
+  const {
+    fields: { identification, password },
+    submit,
+    submitErrors,
+  } = useForm({
+    fields: {
+      identification: useField("4531317428"),
+      password: useField(""),
+    },
+    onSubmit: async (fieldValues) => {
+      const response = await login(fieldValues);
+      if (response.error) {
+        return {
+          status: "fail",
+          errors: [{ field: ["phone"], message: "bad form data" }],
+        };
+      }
+      navigate("/login", { state: { message: "login" } });
+    },
+  });
 
   return (
     <Frame>
       <div className="inline-block align-middle">
         <Page narrowWidth title="Login">
           <Card sectioned>
-            <Form onSubmit={handleSubmit}>
+            {location.state?.message && (
+              <>
+                <Banner onDismiss={() => {}}>
+                  <p>Please type the password you received on your mobile.</p>
+                </Banner>
+                <br />
+              </>
+            )}
+
+            <Form onSubmit={submit}>
               <FormLayout>
                 <TextField
-                  value={email}
-                  onChange={handleEmailChange}
-                  label="Email"
+                  label="Email/Phone"
                   type="email"
                   autoComplete="email"
+                  {...identification}
                 />
 
                 <TextField
-                  value={email}
-                  onChange={handleEmailChange}
                   label="Password"
                   type="password"
                   autoComplete="false"
+                  {...password}
                 />
 
                 <Button submit>Login</Button>
-                <Link url="/phone">Receive code by phone</Link>
+                <Link url="phone">Receive code by phone</Link>
               </FormLayout>
             </Form>
           </Card>

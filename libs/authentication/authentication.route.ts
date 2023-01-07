@@ -6,23 +6,16 @@ import * as controller from "./authentication.controller";
 const router = Router();
 
 router.post(
-  "/login/phone",
+  "/password-phone",
   body("phone").notEmpty(),
-  expressHelpers(controller.loginPhone)
+  expressHelpers(controller.receivePassword)
 );
 
 router.post(
-  "/login/phone-password",
-  body("phone").notEmpty(),
+  "/login",
+  body("identification").notEmpty(),
   body("password").notEmpty(),
-  expressHelpers(controller.loginEmail)
-);
-
-router.post(
-  "/login/email-password",
-  body("email").notEmpty(),
-  body("password").notEmpty(),
-  expressHelpers(controller.loginEmail)
+  expressHelpers(controller.login)
 );
 
 export default router;
