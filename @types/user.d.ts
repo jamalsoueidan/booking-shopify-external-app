@@ -11,11 +11,15 @@ interface ReceivePasswordBody {
   phone: string;
 }
 
-interface ReceivePasswordReturn {
+interface ReceivePasswordResponse {
   message: string;
 }
 
 interface LoginBody {
   identification: string;
   password: string;
+}
+
+interface LoginResponse {
+  token: string;
 }

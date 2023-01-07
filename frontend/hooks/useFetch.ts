@@ -10,16 +10,10 @@ if (import.meta.env.PROD) {
 export const useFetch = () => {
   const queryClient = useQueryClient();
 
-  axios.interceptors.request.use(
-    function (config) {
-      // Do something before request is sent
-      return config;
-    },
-    function (error) {
-      // Do something with request error
-      return Promise.reject(error);
-    }
-  );
+  const token = localStorage.getItem("token");
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
 
   const put = useCallback(async (url: string, body?: any) => {
     const response = await axios.put(`/api/${url}?shop=${shop}`, body);
@@ -31,7 +25,7 @@ export const useFetch = () => {
     return response.data;
   }, []);
 
-  const post = useCallback(async <T>(url: string, body?: any) => {
+  const post = useCallback(async <T>(url: string, body?: any): Promise<T> => {
     try {
       const response = await axios.post<any, AxiosResponse<T>>(
         `/api/${url}?shop=${shop}`,

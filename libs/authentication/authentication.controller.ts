@@ -11,7 +11,7 @@ interface ReceivePasswordProps {
 export const receivePassword = async ({
   query,
   body,
-}: ReceivePasswordProps): Promise<ReceivePasswordReturn> => {
+}: ReceivePasswordProps): Promise<ReceivePasswordResponse> => {
   const staff = await StaffService.findStaffByPhone({
     shop: query.shop,
     phone: body.phone,
@@ -40,13 +40,16 @@ interface LoginProps {
   body: LoginBody;
 }
 
-export const login = async ({ query, body }: LoginProps): Promise<string> => {
+export const login = async ({
+  query,
+  body,
+}: LoginProps): Promise<LoginResponse> => {
   const user = await UserService.findUser({
     ...query,
     ...body,
   });
   if (user) {
-    return createToken(user);
+    return { token: createToken(user) };
   }
   throw new Error("your information is wrong");
 };

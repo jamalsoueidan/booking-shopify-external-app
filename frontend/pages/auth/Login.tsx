@@ -1,4 +1,4 @@
-import { useLogin } from "@services/auth";
+import { useLogin } from "@services/login";
 import {
   Banner,
   Button,
@@ -36,7 +36,7 @@ export default () => {
           errors: [{ field: ["phone"], message: "bad form data" }],
         };
       }
-      navigate("/login", { state: { message: "login" } });
+      navigate("/dashboard");
     },
   });
 
@@ -58,7 +58,6 @@ export default () => {
               <FormLayout>
                 <TextField
                   label="Email/Phone"
-                  type="email"
                   autoComplete="email"
                   {...identification}
                 />

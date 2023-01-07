@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 
 type UseReceivePasswordPhoneFetch = ({
   phone,
-}: ReceivePasswordBody) => Promise<ApiResponse<ReceivePasswordReturn>>;
+}: ReceivePasswordBody) => Promise<ApiResponse<ReceivePasswordResponse>>;
 
 export const useReceivePassword = () => {
   const { post, mutate } = useFetch();
@@ -13,7 +13,7 @@ export const useReceivePassword = () => {
   const receivePassword: UseReceivePasswordPhoneFetch = useCallback(
     async ({ phone }) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<ReceivePasswordReturn>>(
+      const response = await post<ApiResponse<ReceivePasswordResponse>>(
         "password-phone",
         { phone }
       );
@@ -34,7 +34,7 @@ export const useReceivePassword = () => {
 type UseLoginFetch = ({
   identification,
   password,
-}: LoginBody) => Promise<ApiResponse<string>>;
+}: LoginBody) => Promise<ApiResponse<LoginResponse>>;
 
 export const useLogin = () => {
   const { post, mutate } = useFetch();
@@ -44,9 +44,11 @@ export const useLogin = () => {
   const login: UseLoginFetch = useCallback(
     async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<string>>("login", body);
+      const response = await post<ApiResponse<LoginResponse>>("login", body);
       setIsFetching(false);
       setIsFetched(true);
+      const token = response.payload.token;
+      localStorage.setItem("token", token);
       return response;
     },
     [mutate, post]

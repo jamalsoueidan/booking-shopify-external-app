@@ -4,8 +4,10 @@ import { AppTopBar } from "components/AppTopBar";
 import { useCallback, useState } from "react";
 import logo from "../../logo.svg";
 import { Outlet } from "react-router-dom";
+import { useBookings } from "@services/booking";
 
 export default () => {
+  const { data } = useBookings();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(

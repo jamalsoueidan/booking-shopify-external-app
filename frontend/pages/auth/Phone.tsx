@@ -1,5 +1,5 @@
 import { FormErrors } from "@components/FormErrors";
-import { useReceivePassword } from "@services/auth";
+import { useReceivePassword } from "@services/login";
 import {
   Button,
   Card,
