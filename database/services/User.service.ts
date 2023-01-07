@@ -24,18 +24,26 @@ export const createNewPassword = async (staff: Staff) => {
 };
 
 interface FindUserByPhoneAndPasswordProps extends ShopQuery {
-  phone: string;
+  phone?: string;
+  email?: string;
   password: string;
 }
 
-export const findUserByPhoneAndPassword = async ({
+export const findUser = async ({
   shop,
   phone,
+  email,
   password,
 }: FindUserByPhoneAndPasswordProps) => {
-  const user = await UserModel.findOne({ shop, phone });
+  const user = await UserModel.findOne({
+    shop,
+    $or: [{ phone }, { email }],
+  });
   if (user) {
-    return await bcrypt.compare(password, user.password);
+    const correctPassword = await bcrypt.compare(password, user.password);
+    if (correctPassword) {
+      return user;
+    }
   }
   return false;
 };

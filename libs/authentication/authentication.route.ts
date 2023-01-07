@@ -15,11 +15,11 @@ router.post(
   "/login/phone-password",
   body("phone").notEmpty(),
   body("password").notEmpty(),
-  expressHelpers(controller.validatePhonePassword)
+  expressHelpers(controller.loginEmail)
 );
 
 router.post(
-  "/login/email",
+  "/login/email-password",
   body("email").notEmpty(),
   body("password").notEmpty(),
   expressHelpers(controller.loginEmail)
