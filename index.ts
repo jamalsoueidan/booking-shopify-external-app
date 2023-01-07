@@ -1,11 +1,18 @@
-import express from "express";
+import { connection } from "database/connection";
+import express, { Router } from "express";
 import path from "path";
 import assetsRouter from "./assets-router";
+import dotenv from "dotenv";
+import authenticationRoutes from "@libs/authentication/authentication.route";
+
+dotenv.config();
 
 const { PORT = 8000 } = process.env;
 
 const DEV_INDEX_PATH = `${process.cwd()}/frontend/`;
 const PROD_INDEX_PATH = `${process.cwd()}/frontend/dist/`;
+
+connection();
 
 export async function createServer(
   root = process.cwd(),
@@ -14,17 +21,29 @@ export async function createServer(
   const app = express();
 
   if (isProd) {
-    app.use("/", express.static(PROD_INDEX_PATH));
+    const compression = await import("compression").then(
+      ({ default: fn }) => fn
+    );
+    const serveStatic = await import("serve-static").then(
+      ({ default: fn }) => fn
+    );
+    app.use(compression());
+    app.use(serveStatic(PROD_INDEX_PATH, { index: false }));
   } else {
     app.use("/", assetsRouter);
   }
 
-  app.get("/api/v1", (req, res) => {
-    res.json({
-      project: "React and Express Boilerplate",
-      from: "Vanaldito",
-    });
-  });
+  // All endpoints after this point will have access to a request.body
+  // attribute, as a result of the express.json() middleware
+  app.use(express.json({ limit: "1mb", extended: true } as any));
+
+  app.use("/api", authenticationRoutes);
+
+  // All endpoints after this point will require an active session
+  /*app.use(
+    "/api/*",
+    verifyRequest(app)
+  );*/
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(
