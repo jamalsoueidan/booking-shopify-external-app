@@ -9,22 +9,26 @@ export default ({ children }: { children: JSX.Element }) => {
   const { data } = useUserSetting();
 
   const i18nManager = useContext<I18nManager>(I18nContext);
-  const language = useMemo(() => data?.language || "da-DK", [data]);
+  const language = useMemo(() => data?.language || "da", [data]);
 
   const [i18n, ShareTranslations] = useI18n({
     id: "Application",
-    fallback: en,
+    fallback: da,
     translations(locale: string) {
-      return locale === "en-US" ? en : da;
+      return locale === "en" ? en : da;
     },
   });
 
   useEffect(() => {
-    i18nManager.update({ locale: language });
+    if (language) {
+      i18nManager.update({ locale: language });
+    }
   }, []);
 
   useEffect(() => {
-    i18nManager.update({ locale: language });
+    if (language) {
+      i18nManager.update({ locale: language });
+    }
   }, [language]);
 
   if (language !== i18n.locale || i18n.translations.length < 2) {

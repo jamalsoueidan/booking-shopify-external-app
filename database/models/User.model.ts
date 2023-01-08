@@ -22,11 +22,19 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   language: {
     type: String,
-    default: "en-US",
+    default: "da",
   },
   timeZone: {
     type: String,
     default: "Europe/Copenhagen",
+  },
+  role: {
+    type: Number,
+    default: 1,
+  },
+  group: {
+    type: String,
+    index: true,
   },
 });
 

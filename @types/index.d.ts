@@ -12,7 +12,10 @@ interface Session {
   _id: string;
   staff: string;
   shop: string;
+  iat: number;
+  exp: number;
 }
+
 interface ControllerProps<Q = any, B = any> {
   query: Q;
   body: B;

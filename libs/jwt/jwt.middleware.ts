@@ -1,6 +1,7 @@
+import { Response, Request } from "express";
 import jwt from "jsonwebtoken";
 
-export const jwtMiddleware = (req, res, next) => {
+export const jwtMiddleware = (req, res: Response, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
@@ -9,11 +10,12 @@ export const jwtMiddleware = (req, res, next) => {
   jwt.verify(
     token,
     process.env.TOKEN_SECRET as string,
-    (err: any, user: User) => {
-      if (err) return res.sendStatus(403);
-      req.query.shop = user.shop;
+    (err: any, token: Session) => {
+      if (err)
+        return res.status(403).send({ success: false, error: "denied access" });
+      req.query.shop = token.shop;
       req.session = {
-        ...user,
+        ...token,
       };
 
       next();

@@ -13,5 +13,5 @@ export const user = async ({
   ShopQuery,
   ReceivePasswordBody
 >): Promise<SettingsResponse> => {
-  return UserModel.findById(session._id, "_id, language, timeZone");
+  return UserModel.findById(session._id, "_id language timeZone");
 };

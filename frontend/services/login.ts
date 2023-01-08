@@ -1,12 +1,12 @@
 import { useFetch } from "../hooks/useFetch";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type UseReceivePasswordPhoneFetch = ({
   phone,
 }: ReceivePasswordBody) => Promise<ApiResponse<ReceivePasswordResponse>>;
 
 export const useReceivePassword = () => {
-  const { post, mutate } = useFetch();
+  const { post } = useFetch();
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isFetched, setIsFetched] = useState<boolean>(false);
 
@@ -21,7 +21,7 @@ export const useReceivePassword = () => {
       setIsFetched(true);
       return response;
     },
-    [mutate, post]
+    [post]
   );
 
   return {
@@ -37,7 +37,7 @@ type UseLoginFetch = ({
 }: LoginBody) => Promise<ApiResponse<LoginResponse>>;
 
 export const useLogin = () => {
-  const { post, mutate } = useFetch();
+  const { post } = useFetch();
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isFetched, setIsFetched] = useState<boolean>(false);
 
@@ -51,12 +51,38 @@ export const useLogin = () => {
       localStorage.setItem("token", token);
       return response;
     },
-    [mutate, post]
+    [post]
   );
 
   return {
     login,
     isFetching,
     isFetched,
+  };
+};
+
+export const checkLogin = () => {
+  const { get } = useFetch();
+  const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(null);
+
+  useEffect(() => {
+    const login = async () => {
+      try {
+        await get<ApiResponse<LoginResponse>>("settings");
+        setIsFetching(false);
+        setIsLoggedIn(true);
+      } catch (error) {
+        setIsFetching(false);
+        setIsLoggedIn(false);
+      }
+    };
+
+    login();
+  }, []);
+
+  return {
+    isLoggedIn,
+    isFetching,
   };
 };

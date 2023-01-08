@@ -14,7 +14,7 @@ import Default from "@pages/application/default";
 import Create from "@pages/application/create";
 
 const i18nManager = new I18nManager({
-  locale: "da-DK",
+  locale: "da",
 });
 
 export default () => {
@@ -23,28 +23,26 @@ export default () => {
       <BrowserRouter>
         <QueryProvider>
           <PolarisProvider>
-            <AuthProvider>
-              <Translation>
-                <Routes>
-                  <Route index element={<Login />} />
-                  <Route path="login" element={<Login />} />
-                  <Route path="phone" element={<Phone />} />
-                  <Route
-                    path="dashboard"
-                    element={
-                      <ProtectedRoute>
-                        <Dashboard />
-                      </ProtectedRoute>
-                    }
-                  >
-                    <Route index element={<Default />} />
-                    <Route path="bookings" element={<Booking />} />
-                    <Route path="create" element={<Create />} />
-                  </Route>
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Translation>
-            </AuthProvider>
+            <Translation>
+              <Routes>
+                <Route index element={<Login />} />
+                <Route path="login" element={<Login />} />
+                <Route path="phone" element={<Phone />} />
+                <Route
+                  path="dashboard"
+                  element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<Default />} />
+                  <Route path="bookings" element={<Booking />} />
+                  <Route path="create" element={<Create />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Translation>
           </PolarisProvider>
         </QueryProvider>
       </BrowserRouter>

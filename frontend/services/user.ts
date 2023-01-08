@@ -6,6 +6,7 @@ export const useStaff = () => {
   const { data, isLoading } = useQuery<ApiResponse<Staff>>({
     queryKey: ["user"],
     queryFn: () => get(`current-staff`),
+    enabled: !!localStorage.getItem("token"),
   });
 
   return {
@@ -17,7 +18,7 @@ export const useStaff = () => {
 export const useUserSetting = () => {
   const { get } = useFetch();
   const { data, isLoading } = useQuery<ApiResponse<SettingsResponse>>({
-    queryKey: ["user"],
+    queryKey: ["settings"],
     queryFn: () => get(`settings`),
     enabled: !!localStorage.getItem("token"),
   });
