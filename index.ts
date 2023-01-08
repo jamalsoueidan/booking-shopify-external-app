@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import express from "express";
 import path from "path";
 import assetsRouter from "./assets-router";
-import { query } from "express-validator";
+import userRoutes from "@libs/user/user.route";
 
 dotenv.config();
 
@@ -46,6 +46,7 @@ export async function createServer(
   app.use("/api/*", jwtMiddleware);
 
   app.use("/api", bookingRoutes);
+  app.use("/api", userRoutes);
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(

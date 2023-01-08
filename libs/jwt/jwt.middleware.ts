@@ -12,9 +12,10 @@ export const jwtMiddleware = (req, res, next) => {
     (err: any, user: User) => {
       if (err) return res.sendStatus(403);
       req.query.shop = user.shop;
-      req.staff = user.staff;
-      req.user = user._id;
-      req.shop = user.shop;
+      req.session = {
+        ...user,
+      };
+
       next();
     }
   );

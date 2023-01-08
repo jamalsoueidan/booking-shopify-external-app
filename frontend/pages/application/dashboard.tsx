@@ -1,13 +1,13 @@
+import { useStaff } from "@services/user";
 import { Frame } from "@shopify/polaris";
 import { AppNavigation } from "components/AppNavigation";
 import { AppTopBar } from "components/AppTopBar";
 import { useCallback, useState } from "react";
-import logo from "../../logo.svg";
 import { Outlet } from "react-router-dom";
-import { useBookings } from "@services/booking";
+import logo from "../../logo.svg";
 
 export default () => {
-  const { data } = useBookings();
+  const { data } = useStaff();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
@@ -21,10 +21,9 @@ export default () => {
   const logoOptions = {
     width: 124,
     topBarSource: logo,
-    contextualSaveBarSource:
-      "https://cdn.shopify.com/s/files/1/0446/6937/files/jaded-pixel-logo-gray.svg?6215648040070010999",
+    contextualSaveBarSource: data?.avatar,
     url: "http://jadedpixel.com",
-    accessibilityLabel: "Jaded Pixel",
+    accessibilityLabel: data?.fullname,
   };
 
   return (

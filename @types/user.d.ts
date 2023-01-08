@@ -5,6 +5,8 @@ interface User {
   email: string;
   phone: string;
   password: string;
+  language: string;
+  timeZone: string;
 }
 
 interface ReceivePasswordBody {
@@ -22,4 +24,10 @@ interface LoginBody {
 
 interface LoginResponse {
   token: string;
+}
+
+interface SettingsResponse {
+  _id: string;
+  language: string;
+  timeZone: string;
 }

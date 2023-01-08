@@ -6,7 +6,7 @@ interface FindStaffByEmailProps {
 }
 
 export const findStaffByEmail = (document: FindStaffByEmailProps) => {
-  return StaffModel.findOne(document).lean();
+  return StaffModel.findOne({ ...document, active: true }).lean();
 };
 
 interface FindStaffByPhoneProps {
@@ -15,5 +15,5 @@ interface FindStaffByPhoneProps {
 }
 
 export const findStaffByPhone = (document: FindStaffByPhoneProps) => {
-  return StaffModel.findOne(document).lean();
+  return StaffModel.findOne({ ...document, active: true }).lean();
 };

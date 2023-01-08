@@ -16,6 +16,7 @@ export const expressHelpers = (controller) => async (req, res) => {
           ...req.params,
         },
         body: req.body,
+        session: req.session,
       }),
     });
   } catch (error) {

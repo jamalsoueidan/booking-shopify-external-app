@@ -9,9 +9,10 @@ import { AuthProvider } from "providers/AuthProvider";
 import { PolarisProvider } from "providers/PolarisProvider";
 import { ProtectedRoute } from "providers/Protected";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Translation from "@components/Translation";
 
 const i18nManager = new I18nManager({
-  locale: "en-US",
+  locale: "da-DK",
 });
 
 export default () => {
@@ -21,22 +22,24 @@ export default () => {
         <QueryProvider>
           <PolarisProvider>
             <AuthProvider>
-              <Routes>
-                <Route index element={<Login />} />
-                <Route path="login" element={<Login />} />
-                <Route path="phone" element={<Phone />} />
-                <Route
-                  path="dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route index element={<Booking />} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <Translation>
+                <Routes>
+                  <Route index element={<Login />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="phone" element={<Phone />} />
+                  <Route
+                    path="dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<Booking />} />
+                  </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Translation>
             </AuthProvider>
           </PolarisProvider>
         </QueryProvider>

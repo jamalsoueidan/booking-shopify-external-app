@@ -20,6 +20,14 @@ const UserSchema = new Schema({
   email: { type: String, index: true, required: true },
   phone: { type: String, index: true, required: true },
   password: { type: String, required: true },
+  language: {
+    type: String,
+    default: "en-US",
+  },
+  timeZone: {
+    type: String,
+    default: "Europe/Copenhagen",
+  },
 });
 
 UserSchema.pre("save", async function save(next) {
