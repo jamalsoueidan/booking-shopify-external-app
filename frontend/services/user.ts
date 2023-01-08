@@ -19,6 +19,7 @@ export const useUserSetting = () => {
   const { data, isLoading } = useQuery<ApiResponse<SettingsResponse>>({
     queryKey: ["user"],
     queryFn: () => get(`settings`),
+    enabled: !!localStorage.getItem("token"),
   });
 
   return {

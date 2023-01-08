@@ -10,6 +10,8 @@ import { PolarisProvider } from "providers/PolarisProvider";
 import { ProtectedRoute } from "providers/Protected";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Translation from "@components/Translation";
+import Default from "@pages/application/default";
+import Create from "@pages/application/create";
 
 const i18nManager = new I18nManager({
   locale: "da-DK",
@@ -35,7 +37,9 @@ export default () => {
                       </ProtectedRoute>
                     }
                   >
-                    <Route index element={<Booking />} />
+                    <Route index element={<Default />} />
+                    <Route path="bookings" element={<Booking />} />
+                    <Route path="create" element={<Create />} />
                   </Route>
                   <Route path="*" element={<NotFound />} />
                 </Routes>

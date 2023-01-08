@@ -4,10 +4,9 @@ import { AppNavigation } from "components/AppNavigation";
 import { AppTopBar } from "components/AppTopBar";
 import { useCallback, useState } from "react";
 import { Outlet } from "react-router-dom";
-import logo from "../../logo.svg";
 
 export default () => {
-  const { data } = useStaff();
+  //const { data } = useStaff();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
@@ -19,11 +18,11 @@ export default () => {
   );
 
   const logoOptions = {
-    width: 124,
-    topBarSource: logo,
-    contextualSaveBarSource: data?.avatar,
-    url: "http://jadedpixel.com",
-    accessibilityLabel: data?.fullname,
+    //width: 124,
+    //topBarSource: logo,
+    //contextualSaveBarSource: data?.avatar,
+    //url: "http://jadedpixel.com",
+    //accessibilityLabel: data?.fullname,
   };
 
   return (

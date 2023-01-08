@@ -28,7 +28,6 @@ export default ({ children }: { children: JSX.Element }) => {
   }, [language]);
 
   if (language !== i18n.locale || i18n.translations.length < 2) {
-    console.log("loading...");
     return <LoadingPage title="Loading translations"></LoadingPage>;
   }
 
