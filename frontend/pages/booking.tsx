@@ -6,10 +6,8 @@ import { useTranslation } from "@hooks/useTranslation";
 import { useBookingGetStaff, useBookings } from "@services/booking";
 import { Badge, Card, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default () => {
-  const navigate = useNavigate();
   const [info, setInfo] = useState(null);
   const [staff, setStaff] = useState<Staff>();
   const [date, setDate] = useState<Pick<GetBookingsRequest, "start" | "end">>();
@@ -37,23 +35,17 @@ export default () => {
   );
 
   return (
-    <Page
-      fullWidth
-      title={t("title")}
-      primaryAction={{
-        content: "Opret en bestilling",
-        onAction: () => navigate("/Bookings/New"),
-      }}
-    >
+    <Page fullWidth title={t("title")}>
       <Card sectioned>
         <Card.Section title={badges}>
-          <br />
-          <StaffSelection
-            isLoadingBookings={isLoading}
-            data={staffier}
-            selected={staff}
-            onSelect={setStaff}
-          ></StaffSelection>
+          <Suspense fallback={<LoadingSpinner />}>
+            <StaffSelection
+              isLoadingBookings={isLoading}
+              data={staffier}
+              selected={staff}
+              onSelect={setStaff}
+            ></StaffSelection>
+          </Suspense>
         </Card.Section>
         <Card.Section>
           <Suspense fallback={<LoadingSpinner />}>

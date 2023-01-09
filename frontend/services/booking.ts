@@ -44,6 +44,7 @@ export const useBookingGetStaff = () => {
   const { data, isLoading } = useQuery<ApiResponse<Array<Staff>>>({
     queryKey: ["booking", "staff"],
     queryFn: () => get(`booking/staff`),
+    suspense: true,
   });
 
   return {
