@@ -6,7 +6,10 @@ import {
   Form,
   FormLayout,
   Frame,
+  Link,
   Page,
+  Stack,
+  Text,
   TextField,
 } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
@@ -40,20 +43,23 @@ export default () => {
   return (
     <Frame>
       <CenterScreen>
-        <Page
-          narrowWidth
-          title="Receive password by phone"
-          breadcrumbs={[{ content: "Login", url: "/" }]}
-        >
+        <Page narrowWidth>
           <FormErrors errors={submitErrors} />
-          <Card sectioned>
-            <Form onSubmit={submit}>
-              <FormLayout>
-                <TextField label="Phone" autoComplete="phone" {...phone} />
-
-                <Button submit>Receive password</Button>
-              </FormLayout>
-            </Form>
+          <Card title="Receive password by phone">
+            <Card.Section>
+              <Form onSubmit={submit}>
+                <FormLayout>
+                  <TextField label="Phone" autoComplete="phone" {...phone} />
+                  <Stack alignment="center" spacing="tight">
+                    <Button submit>Receive password</Button>
+                    <Text variant="bodyMd" as="span">
+                      or
+                    </Text>
+                    <Link url="/login">Login</Link>
+                  </Stack>
+                </FormLayout>
+              </Form>
+            </Card.Section>
           </Card>
         </Page>
       </CenterScreen>

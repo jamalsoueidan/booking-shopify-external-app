@@ -94,6 +94,8 @@ export default memo(({ data, onOpenModal, onChangeDate }: CalendarProps) => {
             }}
           >
             {arg.event.title}
+            <br />
+            {booking.staff.fullname}
           </div>
         </div>
       </Tooltip>

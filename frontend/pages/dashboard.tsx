@@ -1,12 +1,14 @@
-import { useStaff } from "@services/user";
-import { Frame } from "@shopify/polaris";
+import { DashboardGroup } from "@components/dashboard/Group";
+import { useBookingGetStaff } from "@services/booking";
+import { Card, Frame, Grid, Page } from "@shopify/polaris";
 import { AppNavigation } from "components/AppNavigation";
 import { AppTopBar } from "components/AppTopBar";
 import { useCallback, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 export default () => {
-  //const { data } = useStaff();
+  const { data } = useBookingGetStaff();
+  const { pathname } = useLocation();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
@@ -33,7 +35,22 @@ export default () => {
       showMobileNavigation={mobileNavigationActive}
       onNavigationDismiss={toggleMobileNavigationActive}
     >
-      <Outlet />
+      {pathname === "/dashboard" ? (
+        <Page title="Dashboard">
+          <Grid>
+            <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+              <Card title="Dashboard" sectioned>
+                <p>Welcome to dashboard</p>
+              </Card>
+            </Grid.Cell>
+            <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+              <DashboardGroup data={data}></DashboardGroup>
+            </Grid.Cell>
+          </Grid>
+        </Page>
+      ) : (
+        <Outlet />
+      )}
     </Frame>
   );
 };

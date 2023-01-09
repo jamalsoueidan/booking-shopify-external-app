@@ -8,6 +8,8 @@ import {
   Frame,
   Link,
   Page,
+  Stack,
+  Text,
   TextField,
 } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
@@ -43,36 +45,43 @@ export default () => {
   return (
     <Frame>
       <CenterScreen>
-        <Page fullWidth title="Login">
-          <Card sectioned>
-            {location.state?.message && (
-              <>
-                <Banner onDismiss={() => {}}>
-                  <p>Please type the password you received on your mobile.</p>
-                </Banner>
-                <br />
-              </>
-            )}
+        <Page narrowWidth>
+          <Card title="Login">
+            <Card.Section>
+              {location.state?.message && (
+                <>
+                  <Banner onDismiss={() => {}}>
+                    <p>Please type the password you received on your mobile.</p>
+                  </Banner>
+                  <br />
+                </>
+              )}
 
-            <Form onSubmit={submit}>
-              <FormLayout>
-                <TextField
-                  label="Email/Phone"
-                  autoComplete="email"
-                  {...identification}
-                />
+              <Form onSubmit={submit}>
+                <FormLayout>
+                  <TextField
+                    label="Email/Phone"
+                    autoComplete="email"
+                    {...identification}
+                  />
 
-                <TextField
-                  label="Password"
-                  type="password"
-                  autoComplete="false"
-                  {...password}
-                />
+                  <TextField
+                    label="Password"
+                    type="password"
+                    autoComplete="false"
+                    {...password}
+                  />
 
-                <Button submit>Login</Button>
-                <Link url="phone">Receive code by phone</Link>
-              </FormLayout>
-            </Form>
+                  <Stack alignment="center" spacing="tight">
+                    <Button submit>Login</Button>
+                    <Text variant="bodyMd" as="span">
+                      or
+                    </Text>
+                    <Link url="phone">Receive code on phone</Link>
+                  </Stack>
+                </FormLayout>
+              </Form>
+            </Card.Section>
           </Card>
         </Page>
       </CenterScreen>

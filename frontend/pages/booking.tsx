@@ -38,14 +38,12 @@ export default () => {
     <Page fullWidth title={t("title")}>
       <Card sectioned>
         <Card.Section title={badges}>
-          <Suspense fallback={<LoadingSpinner />}>
-            <StaffSelection
-              isLoadingBookings={isLoading}
-              data={staffier}
-              selected={staff}
-              onSelect={setStaff}
-            ></StaffSelection>
-          </Suspense>
+          <StaffSelection
+            isLoadingBookings={isLoading}
+            data={staffier}
+            selected={staff}
+            onSelect={setStaff}
+          ></StaffSelection>
         </Card.Section>
         <Card.Section>
           <Suspense fallback={<LoadingSpinner />}>

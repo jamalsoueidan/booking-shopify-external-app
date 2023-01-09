@@ -1,13 +1,12 @@
 import Translation from "@components/Translation";
 import Create from "@pages/create";
-import Default from "@pages/default";
 import UserSetting from "@pages/user/user.setting";
 import { I18nContext, I18nManager } from "@shopify/react-i18n";
 import NotFound from "pages/NotFound";
-import Booking from "pages/booking";
-import Dashboard from "pages/dashboard";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
+import Booking from "pages/booking";
+import Dashboard from "pages/dashboard";
 import { PolarisProvider } from "providers/PolarisProvider";
 import { ProtectedRoute } from "providers/Protected";
 import { QueryProvider } from "providers/QueryProvider";
@@ -36,7 +35,6 @@ export default () => {
                     </ProtectedRoute>
                   }
                 >
-                  <Route index element={<Default />} />
                   <Route path="bookings" element={<Booking />} />
                   <Route path="create" element={<Create />} />
                   <Route path="user/setting" element={<UserSetting />} />
