@@ -2,13 +2,17 @@ import { beginningOfDay, closeOfDay } from "@helpers/date";
 import BookingModel from "@models/Booking.model";
 import mongoose from "mongoose";
 
+interface GetBookingProps extends ShopQuery, Omit<GetBookingsRequest, "staff"> {
+  staff?: string[];
+}
+
 export const getBookings = ({
   _id,
   shop,
   start,
   end,
   staff,
-}: GetBookingsQuery) => {
+}: GetBookingProps) => {
   return BookingModel.aggregate([
     {
       $match: {

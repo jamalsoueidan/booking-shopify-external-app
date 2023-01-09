@@ -17,27 +17,38 @@ export const useFetch = () => {
     delete axios.defaults.headers.common["Authorization"];
   }
 
+  const createURL = useCallback((url: string) => {
+    let uri = url;
+    let params = new URLSearchParams();
+    if (url.indexOf("?") > -1) {
+      uri = url.substring(0, url.indexOf("?"));
+      params = new URLSearchParams(url.substring(url.indexOf("?") + 1));
+    }
+    params.append("shop", shop);
+    return uri + "?" + params.toString();
+  }, []);
+
   const put = useCallback(
     async (url: string, body?: any) => {
-      const response = await axios.put(`/api/${url}?shop=${shop}`, body);
+      const response = await axios.put(createURL(`/api/${url}`), body);
       return response.data;
     },
-    [axios]
+    [axios, createURL]
   );
 
   const destroy = useCallback(
     async (url: string) => {
-      const response = await axios.delete(`/api/${url}?shop=${shop}`);
+      const response = await axios.delete(createURL(`/api/${url}`));
       return response.data;
     },
-    [axios]
+    [axios, createURL]
   );
 
   const post = useCallback(
     async <T>(url: string, body?: any): Promise<T> => {
       try {
         const response = await axios.post<any, AxiosResponse<T>>(
-          `/api/${url}?shop=${shop}`,
+          createURL(`/api/${url}`),
           body
         );
         return response.data;
@@ -45,21 +56,21 @@ export const useFetch = () => {
         return error.response.data;
       }
     },
-    [axios]
+    [axios, createURL]
   );
 
   const get = useCallback(
     async <T>(url: string): Promise<T> => {
       try {
         const response = await axios.get<any, AxiosResponse<T>>(
-          `/api/${url}?shop=${shop}`
+          createURL(`/api/${url}`)
         );
         return response.data;
       } catch (error) {
         return error.response.data;
       }
     },
-    [axios]
+    [axios, createURL]
   );
 
   return {

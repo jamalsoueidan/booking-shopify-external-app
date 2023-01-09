@@ -1,4 +1,7 @@
 {
+	"bookings": {
+		"title": "Bookings"
+	},
 	"positions": {
 		"hairdresser": "Hairdresser",
 		"makeup": "Makeup"

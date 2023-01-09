@@ -1,11 +1,11 @@
 import Translation from "@components/Translation";
-import Create from "@pages/application/create";
-import Default from "@pages/application/default";
-import UserSetting from "@pages/application/user/user.setting";
+import Create from "@pages/create";
+import Default from "@pages/default";
+import UserSetting from "@pages/user/user.setting";
 import { I18nContext, I18nManager } from "@shopify/react-i18n";
 import NotFound from "pages/NotFound";
-import Booking from "pages/application/booking";
-import Dashboard from "pages/application/dashboard";
+import Booking from "pages/booking";
+import Dashboard from "pages/dashboard";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
 import { PolarisProvider } from "providers/PolarisProvider";

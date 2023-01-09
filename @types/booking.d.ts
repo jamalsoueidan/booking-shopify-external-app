@@ -25,9 +25,9 @@ interface GetBookingsResponse extends Booking {
   end: string;
 }
 
-interface GetBookingsQuery extends ShopQuery {
+interface GetBookingsRequest {
   _id?: string;
   start: string;
   end: string;
-  staff: string[];
+  staff: string;
 }
