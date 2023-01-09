@@ -22,6 +22,7 @@ export const getBooking = async ({
     if (!isAllowed) {
       throw new Error("not allowed to access this user");
     }
+    allStaff = [staff];
   }
 
   return BookingService.getBookings({ ...query, staff: allStaff });

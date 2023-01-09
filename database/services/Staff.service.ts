@@ -42,6 +42,5 @@ interface isAllowed extends GetIdsByGroup {
 
 export const isAllowed = async ({ shop, group, staff }: isAllowed) => {
   const allStaff = await getIdsbyGroup({ shop, group });
-  console.log(allStaff, staff);
   return !!allStaff.find((s) => s.toString() === staff);
 };

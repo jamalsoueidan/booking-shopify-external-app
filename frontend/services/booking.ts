@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 
 export const useBookings = ({ start, end, staff }: GetBookingsRequest) => {
   const { get } = useFetch();
+
   const { data, isLoading } = useQuery<ApiResponse<Array<GetBookingsResponse>>>(
     {
       queryKey: ["bookings", { start, end, staff }],
@@ -34,5 +35,19 @@ export const useBookingGet = ({ id }: UseBookingGetProps) => {
 
   return {
     data: data?.payload,
+  };
+};
+
+export const useBookingGetStaff = () => {
+  const { get } = useFetch();
+
+  const { data, isLoading } = useQuery<ApiResponse<Array<Staff>>>({
+    queryKey: ["booking", "staff"],
+    queryFn: () => get(`booking/staff`),
+  });
+
+  return {
+    data: data?.payload,
+    isLoading,
   };
 };
