@@ -1,19 +1,47 @@
 import StaffModel from "@models/Staff.model";
+import UserModel from "@models/User.model";
 
-interface FindStaffByEmailProps {
+interface FindByProps {
   shop: string;
-  email: string;
+  _id?: string;
+  email?: string;
+  phone?: string;
 }
 
-export const findStaffByEmail = (document: FindStaffByEmailProps) => {
+export const findBy = (document: FindByProps) => {
   return StaffModel.findOne({ ...document, active: true }).lean();
 };
-
-interface FindStaffByPhoneProps {
-  shop: string;
-  phone: string;
+interface getAllByGroup extends ShopQuery {
+  group: string;
 }
 
-export const findStaffByPhone = (document: FindStaffByPhoneProps) => {
-  return StaffModel.findOne({ ...document, active: true }).lean();
+export const getAllByGroup = async ({ shop, group }: getAllByGroup) => {
+  if (!group) {
+    return null;
+  }
+
+  return StaffModel.find({ shop, group }).lean();
+};
+
+interface GetIdsByGroup extends ShopQuery {
+  group: string;
+}
+
+export const getIdsbyGroup = async ({ shop, group }: GetIdsByGroup) => {
+  if (!group) {
+    return null;
+  }
+
+  const users = await StaffModel.find({ shop, group }, "").lean();
+  return users.map((user) => user._id);
+};
+
+interface isAllowed extends GetIdsByGroup {
+  staff: string;
+}
+
+export const isAllowed = async ({ shop, group, staff }: isAllowed) => {
+  const allStaff = await getIdsbyGroup({ shop, group });
+  console.log(allStaff, staff);
+  return !!allStaff.find((s) => s.toString() === staff);
 };

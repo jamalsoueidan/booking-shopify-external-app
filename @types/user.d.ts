@@ -8,7 +8,6 @@ interface User {
   language: string;
   timeZone: string;
   role: number;
-  group: string;
 }
 
 interface ReceivePasswordBody {

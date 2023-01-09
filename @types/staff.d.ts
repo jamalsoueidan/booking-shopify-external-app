@@ -9,7 +9,5 @@ interface Staff {
   position: string;
   postal: number;
   address: string;
+  group: string;
 }
-
-interface StaffBodyUpdate extends Partial<Omit<Staff, "_id" | "shop">> {}
-interface StaffBodyCreate extends Omit<Staff, "_id" | "shop"> {}

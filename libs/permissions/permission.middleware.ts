@@ -11,10 +11,8 @@ export const jwtMiddleware = (req, res: Response, next) => {
     token,
     process.env.TOKEN_SECRET as string,
     (err: any, token: Session) => {
-      if (err) {
+      if (err)
         return res.status(403).send({ success: false, error: "denied access" });
-      }
-
       req.query.shop = token.shop;
       req.session = {
         ...token,

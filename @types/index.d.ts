@@ -12,12 +12,20 @@ interface Session {
   _id: string;
   staff: string;
   shop: string;
-  iat: number;
-  exp: number;
+  role: number;
+  group: string;
+  iat?: number;
+  exp?: number;
 }
 
 interface ControllerProps<Q = any, B = any> {
   query: Q;
   body: B;
   session: Session;
+}
+
+declare namespace Express {
+  export interface Request {
+    session?: Session;
+  }
 }

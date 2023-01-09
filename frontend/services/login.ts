@@ -69,9 +69,9 @@ export const checkLogin = () => {
   useEffect(() => {
     const login = async () => {
       try {
-        await get<ApiResponse<LoginResponse>>("settings");
+        const response = await get<ApiResponse<LoginResponse>>("settings");
         setIsFetching(false);
-        setIsLoggedIn(true);
+        setIsLoggedIn(response.success);
       } catch (error) {
         setIsFetching(false);
         setIsLoggedIn(false);

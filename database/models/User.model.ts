@@ -32,10 +32,6 @@ const UserSchema = new Schema({
     type: Number,
     default: 1,
   },
-  group: {
-    type: String,
-    index: true,
-  },
 });
 
 UserSchema.pre("save", async function save(next) {

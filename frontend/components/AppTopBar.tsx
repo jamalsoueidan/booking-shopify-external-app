@@ -26,6 +26,10 @@ export const AppTopBar = ({ toggleNavigation }: any) => {
     {
       items: [
         {
+          content: "Setting",
+          onAction: () => navigate("user/setting"),
+        },
+        {
           content: "Log ud",
           onAction: () => {
             localStorage.clear();

@@ -12,7 +12,7 @@ export const receivePassword = async ({
   query,
   body,
 }: ReceivePasswordProps): Promise<ReceivePasswordResponse> => {
-  const staff = await StaffService.findStaffByPhone({
+  const staff = await StaffService.findBy({
     shop: query.shop,
     phone: body.phone,
   });
@@ -49,7 +49,14 @@ export const login = async ({
     ...body,
   });
   if (user) {
-    return { token: createToken(user) };
+    // check if staff is still active
+    const staff = await StaffService.findBy({
+      shop: query.shop,
+      _id: user.staff,
+    });
+    if (staff) {
+      return { token: createToken(user, staff.group) };
+    }
   }
   throw new Error("your information is wrong");
 };

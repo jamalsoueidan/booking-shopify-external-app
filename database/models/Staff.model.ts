@@ -24,6 +24,11 @@ const StaffSchema = new Schema({
   avatar: { type: String, required: true },
   position: { type: String, required: true },
   active: { type: Boolean, default: true },
+  group: {
+    type: String,
+    index: true,
+    default: "all",
+  },
 });
 
 export default mongoose.model<IStaffModel>("staff", StaffSchema, "Staff");
