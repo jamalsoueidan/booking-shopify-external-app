@@ -1,10 +1,10 @@
 import { DashboardGroup } from "@components/dashboard/Group";
-import { useBookingGetStaff } from "@services/booking";
+import { useGroup } from "@services/group";
 import { Card, Grid, Page } from "@shopify/polaris";
 import { Outlet, useLocation } from "react-router-dom";
 
 export default () => {
-  const { data } = useBookingGetStaff();
+  const { data } = useGroup();
   const { pathname } = useLocation();
 
   return pathname === "/dashboard" ? (

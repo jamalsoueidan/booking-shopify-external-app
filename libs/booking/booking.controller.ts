@@ -1,12 +1,12 @@
 import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
 
-interface GetBookingQuery extends ShopQuery, GetBookingsRequest {}
+interface GetBookingsQuery extends ShopQuery, GetBookingsRequest {}
 
-export const getBooking = async ({
+export const getBookings = async ({
   query,
   session,
-}: ControllerProps<GetBookingQuery>) => {
+}: ControllerProps<GetBookingsQuery>) => {
   let allStaff = await StaffService.getIdsbyGroup({
     shop: session.shop,
     group: session.group,
@@ -28,9 +28,13 @@ export const getBooking = async ({
   return BookingService.getBookings({ ...query, staff: allStaff });
 };
 
-export const getStaff = ({ query, session }: ControllerProps) => {
-  return StaffService.getAllByGroup({
-    shop: query.shop,
-    group: session.group,
-  });
+interface GetBookingByIdQuery extends ShopQuery {
+  id: string;
+}
+
+export const getBookingById = async ({
+  query,
+  session,
+}: ControllerProps<GetBookingByIdQuery>) => {
+  return BookingService.getBookingById({ ...query });
 };

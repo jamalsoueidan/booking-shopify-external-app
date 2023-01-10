@@ -1,4 +1,5 @@
 import ApplicationFrame from "@components/application/ApplicationFrame";
+import BookingNew from "@pages/booking/booking.new";
 import Create from "@pages/create";
 import Setting from "@pages/user/setting";
 import { SaveBarProvider } from "@providers/saveBar";
@@ -32,7 +33,7 @@ export default () => {
         }
       >
         <Route path="bookings" element={<Booking />} />
-        <Route path="create" element={<Create />} />
+        <Route path="booking/new" element={<BookingNew />} />
         <Route path="user/setting" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />

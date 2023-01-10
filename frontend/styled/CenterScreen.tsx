@@ -8,10 +8,11 @@ const Center = styled.div`
 `;
 
 const Flex = styled.div`
-  width: 100%;
+  width: 90%;
 
   @media only screen and (min-width: 768px) {
-    width: 60%;
+    margin-top: -50px;
+    width: 50%;
   }
 `;
 

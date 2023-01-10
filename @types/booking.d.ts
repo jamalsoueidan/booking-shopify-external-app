@@ -26,7 +26,6 @@ interface GetBookingsResponse extends Booking {
 }
 
 interface GetBookingsRequest {
-  _id?: string;
   start: string;
   end: string;
   staff: string;

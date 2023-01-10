@@ -1,7 +1,7 @@
 import StaffModel from "@models/Staff.model";
 import UserModel from "@models/User.model";
 
-export const staff = async ({
+export const current = async ({
   session,
 }: ControllerProps<ShopQuery, ReceivePasswordBody>): Promise<Staff> => {
   return StaffModel.findById(session.staff);

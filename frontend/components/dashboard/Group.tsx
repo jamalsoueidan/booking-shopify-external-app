@@ -1,3 +1,4 @@
+import LoadingSpinner from "@components/LoadingSpinner";
 import { Avatar, Card, ResourceList, Text } from "@shopify/polaris";
 import { memo, useMemo } from "react";
 
@@ -11,6 +12,10 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
     plural: "staff",
   };
 
+  if (!data) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <Card title="Medarbejder">
       <ResourceList
@@ -18,7 +23,7 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
         showHeader
         items={data}
         renderItem={(item: Staff) => {
-          const { _id, fullname, avatar, group, phone } = item;
+          const { _id, fullname, avatar, phone } = item;
           const media = (
             <Avatar customer size="medium" name={fullname} source={avatar} />
           );

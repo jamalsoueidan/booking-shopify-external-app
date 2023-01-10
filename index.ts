@@ -1,12 +1,15 @@
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import bookingRoutes from "@libs/booking/booking.route";
+import groupRoutes from "@libs/group/group.routes";
+import productRoutes from "@libs/product/product.route";
+import customerRoutes from "@libs/customer/customer.route";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
+import userRoutes from "@libs/user/user.route";
 import { connection } from "database/connection";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
 import assetsRouter from "./assets-router";
-import userRoutes from "@libs/user/user.route";
 
 dotenv.config();
 
@@ -46,7 +49,10 @@ export async function createServer(
   app.use("/api/*", jwtMiddleware);
 
   app.use("/api", bookingRoutes);
+  app.use("/api", productRoutes);
   app.use("/api", userRoutes);
+  app.use("/api", groupRoutes);
+  app.use("/api", customerRoutes);
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(

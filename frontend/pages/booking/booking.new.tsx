@@ -4,7 +4,7 @@ import {
   ScheduleDateSelect,
   ScheduleStaffSelect,
   ScheduleTimerSelect,
-} from "@components/bookings/BookingForm";
+} from "@components/booking/booking-form";
 import { useExtendForm, useTranslation } from "@hooks";
 import { notEmptyObject } from "@libs/validators/notEmptyObject";
 import { useToast } from "@providers/toast";

@@ -3,11 +3,14 @@ import Calendar from "@components/booking/Calendar";
 import StaffSelection from "@components/booking/StaffSelection";
 import { useFulfillment } from "@hooks/useFulfillment";
 import { useTranslation } from "@hooks/useTranslation";
-import { useBookingGetStaff, useBookings } from "@services/booking";
+import { useBookings } from "@services/booking";
+import { useGroup } from "@services/group";
 import { Badge, Card, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
+  const navigate = useNavigate();
   const [info, setInfo] = useState(null);
   const [staff, setStaff] = useState<Staff>();
   const [date, setDate] = useState<Pick<GetBookingsRequest, "start" | "end">>();
@@ -15,7 +18,7 @@ export default () => {
   const { t } = useTranslation("bookings");
 
   const { options } = useFulfillment();
-  const { data: staffier } = useBookingGetStaff();
+  const { data: staffier } = useGroup();
   const { data: bookings, isLoading } = useBookings({
     start: date?.start,
     end: date?.end,
@@ -35,7 +38,14 @@ export default () => {
   );
 
   return (
-    <Page fullWidth title={t("title")}>
+    <Page
+      fullWidth
+      title={t("title")}
+      primaryAction={{
+        content: "Opret en bestilling",
+        onAction: () => navigate("/booking/new"),
+      }}
+    >
       <Card sectioned>
         <Card.Section title={badges}>
           <StaffSelection

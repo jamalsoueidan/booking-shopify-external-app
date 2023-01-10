@@ -4,8 +4,7 @@ import * as controller from "./booking.controller";
 
 const router = Router();
 
-router.get("/booking", expressHelpers(controller.getBooking));
-router.get("/booking/staff", expressHelpers(controller.getStaff));
-router.get("/booking/:_id", expressHelpers(controller.getBooking));
+router.get("/bookings", expressHelpers(controller.getBookings));
+router.get("/bookings/:id", expressHelpers(controller.getBookingById));
 
 export default router;

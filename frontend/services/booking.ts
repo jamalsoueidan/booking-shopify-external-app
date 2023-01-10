@@ -10,7 +10,7 @@ export const useBookings = ({ start, end, staff }: GetBookingsRequest) => {
       queryKey: ["bookings", { start, end, staff }],
       queryFn: () =>
         get(
-          `booking?start=${start}&end=${end}${staff ? "&staff=" + staff : ""}`
+          `bookings?start=${start}&end=${end}${staff ? "&staff=" + staff : ""}`
         ),
       enabled: !!start && !!end,
     }
@@ -39,21 +39,6 @@ export const useBookingGet = ({ id }: UseBookingGetProps) => {
   };
 };
 
-export const useBookingGetStaff = () => {
-  const { get } = useFetch();
-
-  const { data, isLoading } = useQuery<ApiResponse<Array<Staff>>>({
-    queryKey: ["booking", "staff"],
-    queryFn: () => get(`booking/staff`),
-    suspense: true,
-  });
-
-  return {
-    data: data?.payload,
-    isLoading,
-  };
-};
-
 type UseBookingCreateFetch = (
   body: BookingBodyCreateRequest
 ) => Promise<ApiResponse<GetBookingsResponse>>;
@@ -67,7 +52,7 @@ export const useBookingCreate = () => {
         "/api/admin/bookings",
         body
       );
-      await mutate(["bookings"]);
+      await mutate(["booking"]);
       await mutate(["widget", "availability"]);
       return response;
     },
@@ -92,6 +77,7 @@ export const useBookingUpdate = ({ id }: UseBookingUpdateProps) => {
     async (body) => {
       await put("/api/admin/bookings/" + id, body);
       await mutate(["booking", id]);
+      await mutate(["widget", "availability"]);
     },
     [put, mutate]
   );
