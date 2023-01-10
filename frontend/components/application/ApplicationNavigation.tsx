@@ -22,7 +22,7 @@ export const AppNavigation = () => {
           {
             label: "Create new booking",
             icon: OrdersMajor,
-            onClick: () => navigate("/dashboard/create"),
+            onClick: () => navigate("/dashboard/bookings/new"),
           },
           ,
         ]}

@@ -1,7 +1,17 @@
 {
 	"bookings": {
 		"all": "All",
+		"new": {
+			"title": "New booking"
+		},
 		"title": "Bookings"
+	},
+	"common": {
+		"buttons": {
+			"discard": "Discard",
+			"save": "Save"
+		},
+		"unsaved": "Unsaved changes"
 	},
 	"positions": {
 		"hairdresser": "Hairdresser",

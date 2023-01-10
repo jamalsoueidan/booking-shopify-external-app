@@ -5,7 +5,7 @@ export const useStaff = () => {
   const { get } = useFetch();
   const { data, isLoading } = useQuery<ApiResponse<Staff>>({
     queryKey: ["user"],
-    queryFn: () => get(`current-staff`),
+    queryFn: () => get(`current`),
     enabled: !!localStorage.getItem("token"),
   });
 

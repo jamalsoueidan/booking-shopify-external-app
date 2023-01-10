@@ -1,6 +1,6 @@
 import { beginningOfDay, closeOfDay } from "@helpers/date";
 import BookingModel from "@models/Booking.model";
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 interface GetBookingsProps
   extends ShopQuery,
@@ -85,3 +85,62 @@ const lookupBooking = [
     },
   },
 ];
+
+export interface GetBookingsByStaffProps
+  extends ShopQuery,
+    Pick<Booking, "start" | "end"> {
+  staff: Types.ObjectId[];
+}
+
+export const getBookingsForWidget = ({
+  shop,
+  start,
+  end,
+  staff,
+}: GetBookingsByStaffProps) => {
+  return BookingModel.aggregate<Booking>([
+    {
+      $match: {
+        shop,
+        staff: {
+          $in: staff,
+        },
+        $or: [
+          {
+            start: {
+              $gte: beginningOfDay(start),
+            },
+          },
+          {
+            end: {
+              $gte: beginningOfDay(start),
+            },
+          },
+        ],
+      },
+    },
+    {
+      $match: {
+        $or: [
+          {
+            start: {
+              $lt: closeOfDay(end),
+            },
+          },
+          {
+            end: {
+              $lt: closeOfDay(end),
+            },
+          },
+        ],
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        shop: 0,
+        productId: 0,
+      },
+    },
+  ]);
+};

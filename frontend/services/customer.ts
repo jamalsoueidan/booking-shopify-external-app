@@ -1,4 +1,4 @@
-import { useFetch } from '@hooks';
+import { useFetch } from "@hooks";
 
 export const useCustomer = () => {
   const { get } = useFetch();
@@ -6,7 +6,7 @@ export const useCustomer = () => {
   return {
     find: async (value: string) => {
       const response: ApiResponse<Array<CustomerQuery>> = await get(
-        `/api/admin/customers?name=${value}`
+        `customers?name=${value}`
       );
       return response.payload;
     },

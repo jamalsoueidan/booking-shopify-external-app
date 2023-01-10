@@ -9,7 +9,6 @@ import { useExtendForm, useTranslation } from "@hooks";
 import { notEmptyObject } from "@libs/validators/notEmptyObject";
 import { useToast } from "@providers/toast";
 import { useBookingCreate } from "@services/booking";
-import { useNavigate } from "@shopify/app-bridge-react";
 import {
   Card,
   Form,
@@ -19,6 +18,7 @@ import {
   PageActions,
 } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ export default () => {
       <Page
         fullWidth
         title={t("title")}
-        breadcrumbs={[{ content: "Bookings", url: "/Bookings" }]}
+        breadcrumbs={[{ content: "Bookings", url: "../Bookings" }]}
       >
         <Layout>
           <Layout.AnnotatedSection title={"Produkt"}>

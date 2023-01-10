@@ -1,7 +1,17 @@
 {
 	"bookings": {
 		"all": "Alle ",
+		"new": {
+			"title": "Ny bestilling"
+		},
 		"title": "Bestillinger"
+	},
+	"common": {
+		"buttons": {
+			"discard": "Annullere",
+			"save": "Gem"
+		},
+		"unsaved": "Ikke-gemte ændringer"
 	},
 	"positions": {
 		"hairdresser": "Frisør",

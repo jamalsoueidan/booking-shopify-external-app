@@ -43,7 +43,7 @@ export default () => {
       title={t("title")}
       primaryAction={{
         content: "Opret en bestilling",
-        onAction: () => navigate("/booking/new"),
+        onAction: () => navigate("new"),
       }}
     >
       <Card sectioned>

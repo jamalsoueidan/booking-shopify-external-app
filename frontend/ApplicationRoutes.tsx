@@ -33,7 +33,7 @@ export default () => {
         }
       >
         <Route path="bookings" element={<Booking />} />
-        <Route path="booking/new" element={<BookingNew />} />
+        <Route path="bookings/new" element={<BookingNew />} />
         <Route path="user/setting" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />
