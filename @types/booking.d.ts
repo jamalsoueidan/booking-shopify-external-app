@@ -31,3 +31,14 @@ interface GetBookingsRequest {
   end: string;
   staff: string;
 }
+
+interface BookingBodyUpdateRequest extends Pick<Booking, "staff"> {
+  start: string;
+  end: string;
+}
+
+interface BookingBodyCreateRequest
+  extends Pick<Booking, "productId" | "customerId" | "staff"> {
+  start: string;
+  end: string;
+}

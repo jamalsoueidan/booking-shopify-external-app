@@ -1,7 +1,11 @@
 import Translation from "@components/Translation";
+import ApplicationFrame from "@components/application/ApplicationFrame";
 import Create from "@pages/create";
 import UserSetting from "@pages/user/user.setting";
+import { SaveBarProvider } from "@providers/saveBar";
+import { ToastProvider } from "@providers/toast";
 import { I18nContext, I18nManager } from "@shopify/react-i18n";
+import ApplicationRoutes from "ApplicationRoutes";
 import NotFound from "pages/NotFound";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
@@ -23,24 +27,7 @@ export default () => {
         <QueryProvider>
           <PolarisProvider>
             <Translation>
-              <Routes>
-                <Route index element={<Login />} />
-                <Route path="login" element={<Login />} />
-                <Route path="phone" element={<Phone />} />
-                <Route
-                  path="dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route path="bookings" element={<Booking />} />
-                  <Route path="create" element={<Create />} />
-                  <Route path="user/setting" element={<UserSetting />} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <ApplicationRoutes />
             </Translation>
           </PolarisProvider>
         </QueryProvider>
