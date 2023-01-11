@@ -1,3 +1,4 @@
+import { Product } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
 import { useProducts } from "@services/product";
 import { Select, SelectOption } from "@shopify/polaris";
 import { Field } from "@shopify/react-form";

@@ -3,7 +3,6 @@
 /// <reference path="../@types/staff.d.ts" />
 /// <reference path="../@types/user.d.ts" />
 /// <reference path="../@types/booking.d.ts" />
-/// <reference path="../@types/customer.d.ts" />
 /// <reference path="../@types/product.d.ts" />
 
 declare module "*";

@@ -1,3 +1,4 @@
+import { Customer } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
 import { useCustomer } from "@services/customer";
 import { Autocomplete, Icon, InlineError, Text } from "@shopify/polaris";
 import { CustomerPlusMajor } from "@shopify/polaris-icons";
