@@ -34,7 +34,6 @@ interface GetBookingByIdQuery extends ShopQuery {
 
 export const getBookingById = async ({
   query,
-  session,
 }: ControllerProps<GetBookingByIdQuery>) => {
   return BookingService.getBookingById({ ...query });
 };

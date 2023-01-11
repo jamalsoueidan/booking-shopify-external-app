@@ -1,4 +1,4 @@
-import CustomerService from "@services/Customer.service";
+import { CustomerServiceFind } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 
 interface GetQuery {
   shop: string;
@@ -7,5 +7,5 @@ interface GetQuery {
 
 export const get = ({ query }: { query: GetQuery }) => {
   const { shop, name } = query;
-  return CustomerService.findCustomer({ shop, name });
+  return CustomerServiceFind({ shop, name });
 };

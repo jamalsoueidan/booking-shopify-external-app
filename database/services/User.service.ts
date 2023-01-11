@@ -1,5 +1,5 @@
-import UserModel from "@models/User.model";
 import bcrypt from "bcryptjs";
+import { UserModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 import generator from "generate-password";
 
 export const createNewPassword = async (staff: Staff) => {

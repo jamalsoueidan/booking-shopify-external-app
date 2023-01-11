@@ -5,8 +5,6 @@
 /// <reference path="../@types/booking.d.ts" />
 /// <reference path="../@types/customer.d.ts" />
 /// <reference path="../@types/product.d.ts" />
-/// <reference path="../@types/schedule.d.ts" />
-/// <reference path="../@types/widget.d.ts" />
 
 declare module "*";
 declare module "*.svg" {

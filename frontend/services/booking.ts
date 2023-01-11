@@ -49,7 +49,7 @@ export const useBookingCreate = () => {
   const create: UseBookingCreateFetch = useCallback(
     async (body) => {
       const response: ApiResponse<GetBookingsResponse> = await post(
-        "/api/admin/bookings",
+        "booking",
         body
       );
       await mutate(["booking"]);

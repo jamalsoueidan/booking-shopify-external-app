@@ -1,9 +1,16 @@
-import * as BookingService from "@services/Booking.service";
-import * as CartService from "@services/Cart.service";
-import * as WidgetService from "@services/Widget.service";
-import * as ScheduleService from "@services/Schedule.service";
-import helpers from "./widget.helpers";
-import UserModel from "@models/User.model";
+import {
+  BookingServiceGetForWidget,
+  CartServiceGetByStaff,
+  ScheduleServiceGetByStaffAndTag,
+  UserModel,
+  WidgetDateQuery,
+  WidgetSchedule,
+  WidgetServiceCalculator,
+  WidgetServiceGetProduct,
+  WidgetServiceGetStaff,
+  WidgetStaff,
+  WidgetStaffQuery,
+} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 
 export interface AvailabilityReturn extends WidgetSchedule {}
 
@@ -17,7 +24,7 @@ export const staff = ({
   query: StaffQuery;
 }): Promise<Array<WidgetStaff>> => {
   const { productId, shop } = query;
-  return WidgetService.getStaff({
+  return WidgetServiceGetStaff({
     shop,
     productId: +productId,
   });
@@ -35,34 +42,34 @@ export const availability = async ({
 }): Promise<Array<WidgetSchedule>> => {
   const { staff, start, end, shop, productId } = query;
 
-  const product = await WidgetService.getProduct({
+  const product = await WidgetServiceGetProduct({
     shop,
     productId: +productId,
     staff,
   });
 
-  const schedules = await ScheduleService.getByStaffAndTag({
+  const schedules = await ScheduleServiceGetByStaffAndTag({
     tag: product.staff.map((s) => s.tag),
     staff: product.staff.map((s) => s.staff),
     start,
     end,
   });
 
-  const bookings = await BookingService.getBookingsForWidget({
+  const bookings = await BookingServiceGetForWidget({
     shop,
     staff: product.staff.map((s) => s.staff),
     start: new Date(start),
     end: new Date(end),
   });
 
-  const carts = await CartService.getCartsByStaff({
+  const carts = await CartServiceGetByStaff({
     shop,
     staff: product.staff.map((s) => s.staff),
     start: new Date(start),
     end: new Date(end),
   });
 
-  return helpers.calculate({ schedules, bookings, carts, product });
+  return WidgetServiceCalculator({ schedules, bookings, carts, product });
 };
 
 export const settings = () => {

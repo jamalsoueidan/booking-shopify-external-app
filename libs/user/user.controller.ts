@@ -1,5 +1,7 @@
-import StaffModel from "@models/Staff.model";
-import UserModel from "@models/User.model";
+import {
+  StaffModel,
+  UserModel,
+} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 
 export const current = async ({
   session,

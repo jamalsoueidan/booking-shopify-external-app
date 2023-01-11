@@ -1,5 +1,5 @@
 import { createToken } from "@libs/jwt/jwt.helper";
-import smsdkApi from "@libs/smsdk/smsdk.api";
+import { SmsApiSend } from "@jamalsoueidan/booking-shopify-backend.api.pkg";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
 
@@ -19,7 +19,7 @@ export const receivePassword = async ({
   if (staff) {
     const password = await UserService.createNewPassword(staff);
     if (process.env.NODE_ENV === "production") {
-      smsdkApi.send({
+      SmsApiSend({
         receiver: staff.phone,
         message: `Din adgangskode: ${password}`,
       });

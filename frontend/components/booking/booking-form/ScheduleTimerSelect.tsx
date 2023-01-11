@@ -1,9 +1,9 @@
-import { useDate } from '@hooks/useDate';
-import { useWidgetDate } from '@services/widget';
-import { Select, SelectOption } from '@shopify/polaris';
-import { Field } from '@shopify/react-form';
-import { format } from 'date-fns';
-import { useCallback, useMemo } from 'react';
+import { useDate } from "@hooks/useDate";
+import { useWidgetDate } from "@services/widget";
+import { Select, SelectOption } from "@shopify/polaris";
+import { Field } from "@shopify/react-form";
+import { format } from "date-fns";
+import { useCallback, useMemo } from "react";
 
 interface ScheduleTimerSelectProps {
   date: Date;
@@ -13,8 +13,8 @@ interface ScheduleTimerSelectProps {
 }
 
 const defaultOption: SelectOption = {
-  key: 'vælg tid',
-  label: 'Vælg tid',
+  key: "vælg tid",
+  label: "Vælg tid",
   value: null,
 } as any;
 
@@ -24,7 +24,7 @@ export const ScheduleTimerSelect = ({
   productId,
   field,
 }: ScheduleTimerSelectProps) => {
-  const selectedDate = date ? format(new Date(date), 'yyyy-MM-dd') : null;
+  const selectedDate = date ? format(new Date(date), "yyyy-MM-dd") : null;
   const { toTimeZone } = useDate();
 
   const { data } = useWidgetDate({
@@ -40,15 +40,15 @@ export const ScheduleTimerSelect = ({
     }
 
     const schedule = data.find(
-      (s) => s.date === format(new Date(date), 'yyyy-MM-dd')
+      (s) => s.date === format(new Date(date), "yyyy-MM-dd")
     );
 
     const hours =
       schedule?.hours.map((t) => ({
         label:
-          format(toTimeZone(t.start), 'HH:mm') +
-          ' - ' +
-          format(toTimeZone(t.end), 'HH:mm'),
+          format(toTimeZone(t.start), "HH:mm") +
+          " - " +
+          format(toTimeZone(t.end), "HH:mm"),
         value: t.start,
       })) || [];
 
@@ -60,7 +60,7 @@ export const ScheduleTimerSelect = ({
   const onChange = useCallback(
     (selected: string) => {
       const schedule = data.find(
-        (s) => s.date === format(new Date(date), 'yyyy-MM-dd')
+        (s) => s.date === format(new Date(date), "yyyy-MM-dd")
       );
 
       const selectedHour = schedule?.hours.find((t) => t.start === selected);

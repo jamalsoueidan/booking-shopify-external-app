@@ -1,5 +1,11 @@
 import { useFetch } from "@hooks";
 import { useQuery } from "react-query";
+import {
+  WidgetStaffQuery,
+  WidgetStaff,
+  WidgetDateQuery,
+  WidgetSchedule,
+} from "@jamalsoueidan/booking-shopify-backend.mongo.types";
 
 export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
   const { get, mutate } = useFetch();

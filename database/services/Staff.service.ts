@@ -1,5 +1,4 @@
-import StaffModel from "@models/Staff.model";
-import UserModel from "@models/User.model";
+import { StaffModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 
 interface FindByProps {
   shop: string;

@@ -1,4 +1,4 @@
-import CartModel, { ICartModel } from "@models/Cart.model";
+import { CartModel, ICartModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 import { Types } from "mongoose";
 
 export interface GetCartsByStaffReturn {
