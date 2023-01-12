@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@jamalsoueidan/booking-shopify-backend.api.pkg": "^0.0.1",
-    "@jamalsoueidan/booking-shopify-backend.mongo.pkg": "^0.0.5",
+    "@jamalsoueidan/booking-shopify-backend.mongo.pkg": "^0.0.10",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",

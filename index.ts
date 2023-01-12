@@ -4,6 +4,8 @@ import groupRoutes from "@libs/group/group.routes";
 import productRoutes from "@libs/product/product.route";
 import customerRoutes from "@libs/customer/customer.route";
 import widgetRoutes from "@libs/widget/widget.route";
+import staffRoutes from "@libs/staff/staff.routes";
+import schedulesRoutes from "@libs/staff-schedule/staff-schedule.routes";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
 import userRoutes from "@libs/user/user.route";
 import { connection } from "database/connection";
@@ -55,6 +57,8 @@ export async function createServer(
   app.use("/api", groupRoutes);
   app.use("/api", customerRoutes);
   app.use("/api", widgetRoutes);
+  app.use("/api", staffRoutes);
+  app.use("/api", schedulesRoutes);
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(
