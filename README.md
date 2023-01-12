@@ -6,6 +6,10 @@
 
 The supervisor use another application embedded in shopify: [Booking Shopify Embedded Application](https://github.com/jamalsoueidan/booking-shopify-embed-app)
 
+We also use the [Booking Shopify Backend Library](https://github.com/jamalsoueidan/booking-shopify-backend)
+
+[View the documentation](https://bit.cloud/jamalsoueidan/booking-shopify-backend)
+
 ## What is this and who is it for 🤷‍♀️
 
 Frontend consulting is what I do! Angular and React, and this is a showcase product I made in my spare time. It is an excellent example of a modern, real-world React codebase and it integrate with the Shopify Admin, uses Shopify Polaris UI Framework, and extensions that are built into the Shopify theme.
