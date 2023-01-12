@@ -16,5 +16,75 @@
 	"positions": {
 		"hairdresser": "Frisør",
 		"makeup": "Makeup"
+	},
+	"staff": {
+		"empty": {
+			"add": "Tilføj medarbejder",
+			"heading": "Gå igang med at oprette medarbejder!",
+			"text": "Tilføj nye medarbejder. Efterfølgende kan du tilføje timer, og tilføje medarbejder til behandlinger.",
+			"title": "Medarbejder"
+		},
+		"form": {
+			"image": {
+				"title": "Vedhæft"
+			},
+			"save": "Gem",
+			"staff": {
+				"address": {
+					"label": "Din adresse",
+					"placeholder": "Indtast din adresse"
+				},
+				"avatarUrl": {
+					"help": "Brug en url til at importere billedet",
+					"label": "Avatar Link",
+					"placeholder": "http://..."
+				},
+				"email": {
+					"help": "Vi bruger denne e-mailadresse til at informere dig om fremtidige aftaler.",
+					"label": "E-mail",
+					"placeholder": "Eksempel: kristina.larsen@gmail.com"
+				},
+				"fullname": {
+					"label": "Fuldnavn",
+					"placeholder": "Eksempel: Kristina Larsen"
+				},
+				"group": {
+					"help": "Læg bruger ind i samme gruppe hvis de skal have adgang til hinanden tid",
+					"label": "Gruppe",
+					"placeholder": "Angive gruppe"
+				},
+				"phone": {
+					"help": "Vi bruger denne mobilnummer til at informere dig om fremtidige bestillinger.",
+					"label": "Mobilnummer",
+					"placeholder": "Eksempel: +4531311234"
+				},
+				"position": {
+					"label": "Title",
+					"title": "Din position, makeup artist, eller frisør?"
+				},
+				"postal": {
+					"help": "8000, 8200",
+					"label": "Postnummer",
+					"placeholder": "Postnummer"
+				},
+				"title": "Medarbejder overblik"
+			},
+			"title": "Ny medarbejder"
+		},
+		"title": "test"
+	},
+	"tabs": {
+		"bookings": "Bestillinger",
+		"collections": "Kategorier",
+		"settings": "Indstillinger",
+		"staff": "Medarbejder"
+	},
+	"tags": {
+		"all": "Alle dage",
+		"end": "Slutning af ugen",
+		"everyday": "Hverdag",
+		"middle": "Midten af ugen",
+		"start": "Starten af ugen",
+		"weekend": "Weekend"
 	}
 }

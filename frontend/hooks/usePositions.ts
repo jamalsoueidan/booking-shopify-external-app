@@ -11,7 +11,7 @@ interface UseTagOptions {
   value: string;
 }
 
-export const usePosition = (): UseTagOptionsReturn => {
+export const usePositions = (): UseTagOptionsReturn => {
   const { t } = useTranslation("positions");
 
   const options: UseTagOptions[] = useMemo(

@@ -1,13 +1,4 @@
-import {
-  StaffModel,
-  UserModel,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
-
-export const current = async ({
-  session,
-}: ControllerProps<ShopQuery, ReceivePasswordBody>): Promise<Staff> => {
-  return StaffModel.findById(session.staff);
-};
+import { UserModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
 
 export const user = async ({
   session,

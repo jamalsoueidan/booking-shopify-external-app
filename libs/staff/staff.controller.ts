@@ -3,6 +3,7 @@ import {
   StaffServiceFindByIdAndUpdate,
   StaffServiceFindOne,
 } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { matchedData } from "express-validator";
 
 export const get = ({ session }: ControllerProps) => {
   const { staff, shop } = session;
@@ -14,5 +15,8 @@ export const update = ({
   session,
 }: ControllerProps<any, StaffBodyUpdate>) => {
   const id = session.staff;
+  delete body.group;
+  delete body.active;
+
   return StaffServiceFindByIdAndUpdate(id, body);
 };

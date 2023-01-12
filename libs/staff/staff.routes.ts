@@ -9,9 +9,9 @@ router.get("/staff", expressHelpers(controller.get));
 
 router.put(
   "/staff",
-  body("group").isEmpty(),
-  body("shop").isEmpty(),
-  body("active").isEmpty(),
+  body("group").not().exists(),
+  body("shop").not().exists(),
+  body("active").not().exists(),
   expressHelpers(controller.update)
 );
 

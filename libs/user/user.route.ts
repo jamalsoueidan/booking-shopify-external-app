@@ -4,7 +4,6 @@ import * as controller from "./user.controller";
 
 const router = Router();
 
-router.get("/current", expressHelpers(controller.current));
 router.get("/settings", expressHelpers(controller.user));
 
 export default router;

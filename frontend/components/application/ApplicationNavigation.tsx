@@ -1,5 +1,13 @@
 import { Navigation } from "@shopify/polaris";
-import { HomeMajor, OrdersMajor } from "@shopify/polaris-icons";
+import {
+  HomeMajor,
+  OrdersMajor,
+  SettingsMajor,
+  ProfileMajor,
+  CalendarMajor,
+  CalendarTickMajor,
+  ExitMajor,
+} from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 
 export const AppNavigation = () => {
@@ -7,7 +15,7 @@ export const AppNavigation = () => {
   return (
     <Navigation location="/">
       <Navigation.Section
-        title="Booking Application"
+        title="Booking"
         items={[
           {
             label: "Dashboard",
@@ -16,15 +24,34 @@ export const AppNavigation = () => {
           },
           {
             label: "Bookings",
-            icon: OrdersMajor,
+            icon: CalendarTickMajor,
             onClick: () => navigate("/dashboard/bookings"),
           },
+        ]}
+      />
+      <Navigation.Section
+        title="Staff"
+        items={[
           {
-            label: "Create new booking",
-            icon: OrdersMajor,
-            onClick: () => navigate("/dashboard/bookings/new"),
+            label: "Schedules",
+            icon: CalendarMajor,
+            onClick: () => navigate("/dashboard/schedules"),
           },
-          ,
+          {
+            label: "Min side",
+            icon: ProfileMajor,
+            onClick: () => navigate("/dashboard/staff"),
+          },
+          {
+            label: "Indstillinger",
+            icon: SettingsMajor,
+            onClick: () => navigate("/dashboard/user/settings"),
+          },
+          {
+            label: "Log af",
+            icon: ExitMajor,
+            onClick: () => navigate("/dashboard/user/settings"),
+          },
         ]}
       />
     </Navigation>

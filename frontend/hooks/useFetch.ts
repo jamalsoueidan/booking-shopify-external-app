@@ -60,7 +60,7 @@ export const useFetch = () => {
   );
 
   const get = useCallback(
-    async <T>(url: string): Promise<T> => {
+    async <T = any>(url: string): Promise<T> => {
       try {
         const response = await axios.get<any, AxiosResponse<T>>(
           createURL(`/api/${url}`)

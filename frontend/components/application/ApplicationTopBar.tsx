@@ -1,12 +1,12 @@
-import { usePosition } from "@hooks/usePosition";
-import { useStaff } from "@services/user";
+import { usePositions } from "@hooks";
+import { useStaff } from "@services/staff";
 import { TopBar } from "@shopify/polaris";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AppTopBar = ({ toggleNavigation }: any) => {
   const { data } = useStaff();
-  const { select } = usePosition();
+  const { select } = usePositions();
   const navigate = useNavigate();
   const [userMenuActive, setUserMenuActive] = useState(false);
 
@@ -25,10 +25,6 @@ export const AppTopBar = ({ toggleNavigation }: any) => {
   const userMenuActions = [
     {
       items: [
-        {
-          content: "Setting",
-          onAction: () => navigate("user/setting"),
-        },
         {
           content: "Log ud",
           onAction: () => {

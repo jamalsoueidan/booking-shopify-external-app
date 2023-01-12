@@ -7,6 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 
 const i18nManager = new I18nManager({
   locale: "da",
+  onError: (details) => {
+    console.log(details);
+  },
 });
 
 export default () => {

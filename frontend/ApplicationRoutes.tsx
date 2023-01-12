@@ -1,6 +1,8 @@
 import ApplicationFrame from "@components/application/ApplicationFrame";
 import BookingNew from "@pages/booking/booking.new";
 import Create from "@pages/create";
+import Schedules from "@pages/schedules";
+import Staff from "@pages/staff";
 import Setting from "@pages/user/setting";
 import { SaveBarProvider } from "@providers/saveBar";
 import { ToastProvider } from "@providers/toast";
@@ -34,7 +36,9 @@ export default () => {
       >
         <Route path="bookings" element={<Booking />} />
         <Route path="bookings/new" element={<BookingNew />} />
-        <Route path="user/setting" element={<Setting />} />
+        <Route path="schedules" element={<Schedules />} />
+        <Route path="staff" element={<Staff />} />
+        <Route path="user/settings" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
