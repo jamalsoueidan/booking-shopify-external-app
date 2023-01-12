@@ -27,11 +27,10 @@ interface CreateQuery {
 }
 
 export const create = async ({
-  query,
+  session,
   body,
 }: ControllerProps<CreateQuery, ScheduleBodyUpdateOrCreate>) => {
-  const { shop, staff } = query;
-
+  const { shop, staff } = session;
   return ScheduleServiceCreate({ shop, staff, schedules: body });
 };
 
@@ -89,16 +88,15 @@ export const updateGroup = async ({
 };
 
 interface DestroyGroupQuery extends ScheduleUpdateOrDestroyQuery {
-  shop: string;
   groupId: string;
 }
 
-interface DestroyGroupProps {
-  query: DestroyGroupQuery;
-}
-
-export const destroyGroup = async ({ query }: DestroyGroupProps) => {
-  const { shop, staff, schedule, groupId } = query;
+export const destroyGroup = async ({
+  query,
+  session,
+}: ControllerProps<DestroyGroupQuery>) => {
+  const { schedule, groupId } = query;
+  const { shop, staff } = session;
 
   const documents = await ScheduleModel.countDocuments({
     _id: schedule,

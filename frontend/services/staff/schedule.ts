@@ -18,7 +18,7 @@ export const useStaffSchedule = ({
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<Schedule>>>({
     queryKey: ["schedules", start, end],
-    queryFn: () => get(`/schedules?start=${start}&end=${end}`),
+    queryFn: () => get(`schedules?start=${start}&end=${end}`),
     enabled: !!start && !!end,
   });
 
@@ -34,7 +34,7 @@ export const useStaffScheduleCreate = () => {
   const { post, mutate } = useFetch();
   const create: UseStaffScheduleCreateFunction = useCallback(async (body) => {
     setIsCreating(true);
-    await post(`/schedules`, body);
+    await post(`schedules`, body);
     await mutate(["schedules"]);
     setIsCreating(false);
   }, []);
@@ -56,7 +56,7 @@ export const useStaffScheduleDestroy = ({
     async (body) => {
       setIsDestroying(true);
       await fetch.destroy(
-        `/schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`
+        `schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`
       );
       await fetch.mutate(["schedules"]);
       setIsDestroying(false);
@@ -81,7 +81,7 @@ export const useStaffScheduleUpdate = ({
     async (body) => {
       setIsUpdating(true);
       await put(
-        `/schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`,
+        `schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`,
         body
       );
       await mutate(["schedules"]);
