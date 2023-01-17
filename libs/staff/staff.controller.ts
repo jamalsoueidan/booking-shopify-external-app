@@ -2,7 +2,7 @@ import {
   StaffBodyUpdate,
   StaffServiceFindByIdAndUpdate,
   StaffServiceFindOne,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 import { matchedData } from "express-validator";
 
 export const get = ({ session }: ControllerProps) => {

@@ -1,4 +1,4 @@
-import { CustomerServiceFind } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { CustomerServiceFind } from "@jamalsoueidan/bsb.bsb-pkg";
 
 interface GetQuery {
   shop: string;

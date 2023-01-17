@@ -1,5 +1,5 @@
 import { beginningOfDay, closeOfDay } from "@helpers/date";
-import { BookingModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { BookingModel } from "@jamalsoueidan/bsb.bsb-pkg";
 import mongoose from "mongoose";
 
 interface GetBookingsProps

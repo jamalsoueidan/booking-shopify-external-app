@@ -1,5 +1,5 @@
 import { useDate, useTagOptions } from "@hooks";
-import { ScheduleBodyUpdate } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { ScheduleBodyUpdate } from "@jamalsoueidan/bsb.bsb-pkg";
 import { useToast } from "@providers/toast";
 import {
   useStaffScheduleDestroy,

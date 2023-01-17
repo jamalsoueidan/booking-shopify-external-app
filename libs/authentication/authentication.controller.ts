@@ -1,5 +1,5 @@
 import { createToken } from "@libs/jwt/jwt.helper";
-import { SmsApiSend } from "@jamalsoueidan/booking-shopify-backend.api.pkg";
+import { SmsApiSend } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
 

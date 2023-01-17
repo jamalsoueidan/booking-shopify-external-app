@@ -1,4 +1,4 @@
-import { ProductModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { ProductModel } from "@jamalsoueidan/bsb.bsb-pkg";
 
 interface GetProductsProps extends ShopQuery {
   staff: string;

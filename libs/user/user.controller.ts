@@ -1,4 +1,4 @@
-import { UserModel } from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+import { UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
 
 export const user = async ({
   session,

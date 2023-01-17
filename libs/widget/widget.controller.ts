@@ -10,7 +10,7 @@ import {
   WidgetServiceGetStaff,
   WidgetStaff,
   WidgetStaffQuery,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 
 export interface AvailabilityReturn extends WidgetSchedule {}
 

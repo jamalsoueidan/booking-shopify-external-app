@@ -10,7 +10,7 @@ import {
   ScheduleServiceUpdateGroup,
   ScheduleUpdateOrDestroyQuery,
   StaffServiceFindOne,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 
 export const get = async ({
   query,
