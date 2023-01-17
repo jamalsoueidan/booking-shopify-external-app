@@ -8,14 +8,12 @@ export default () => {
   const { data } = useGroup();
   const { pathname } = useLocation();
 
-  console.log(I18nContext, useContext(I18nContext));
-
   return pathname === "/dashboard" ? (
     <Page title="Dashboard">
       <Grid>
         <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
           <Card title="Dashboard" sectioned>
-            Hej med dig
+            <p>Welcome to dashboard</p>
           </Card>
         </Grid.Cell>
         <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>

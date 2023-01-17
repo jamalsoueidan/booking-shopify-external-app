@@ -1,8 +1,11 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useQueryClient } from "react-query";
 
 let shop = "testeriphone.myshopify.com";
+if (import.meta.env.PROD) {
+  shop = "bysistersdk.myshopify.com";
+}
 
 export const useFetch = () => {
   const queryClient = useQueryClient();
