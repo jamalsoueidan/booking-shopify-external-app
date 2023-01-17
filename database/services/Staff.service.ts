@@ -8,7 +8,7 @@ interface FindByProps {
 }
 
 export const findBy = (document: FindByProps) => {
-  return StaffModel.findOne({ ...document, active: true }).lean();
+  return StaffModel.findOne({ ...document, active: true });
 };
 interface getAllByGroup extends ShopQuery {
   group: string;
@@ -19,7 +19,7 @@ export const getAllByGroup = async ({ shop, group }: getAllByGroup) => {
     return null;
   }
 
-  return StaffModel.find({ shop, group }).lean();
+  return StaffModel.find({ shop, group });
 };
 
 interface GetIdsByGroup extends ShopQuery {
@@ -31,7 +31,7 @@ export const getIdsbyGroup = async ({ shop, group }: GetIdsByGroup) => {
     return null;
   }
 
-  const users = await StaffModel.find({ shop, group }, "").lean();
+  const users = await StaffModel.find({ shop, group }, "");
   return users.map((user) => user._id);
 };
 

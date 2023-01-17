@@ -16,6 +16,7 @@ export const receivePassword = async ({
     shop: query.shop,
     phone: body.phone,
   });
+
   if (staff) {
     const password = await UserService.createNewPassword(staff);
     if (process.env.NODE_ENV === "production") {
