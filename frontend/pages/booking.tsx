@@ -13,6 +13,7 @@ const StaffSelection = lazy(() =>
     default: module.BookingStaff,
   }))
 );
+
 export default () => {
   const navigate = useNavigate();
   const [info, setInfo] = useState(null);

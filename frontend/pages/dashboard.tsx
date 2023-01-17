@@ -1,27 +1,35 @@
+import ApplicationFrame from "@components/application/ApplicationFrame";
 import { DashboardGroup } from "@components/dashboard/Group";
+import { SaveBarProvider, ToastProvider } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useGroup } from "@services/group";
 import { Card, Grid, Page } from "@shopify/polaris";
-import { I18nContext } from "@shopify/react-i18n";
-import { useContext } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 export default () => {
   const { data } = useGroup();
   const { pathname } = useLocation();
 
-  return pathname === "/dashboard" ? (
-    <Page title="Dashboard">
-      <Grid>
-        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
-          <Card title="Dashboard" sectioned>
-            <p>Welcome to dashboard</p>
-          </Card>
-        </Grid.Cell>
-        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
-          <DashboardGroup data={data}></DashboardGroup>
-        </Grid.Cell>
-      </Grid>
-    </Page>
-  ) : (
-    <Outlet />
+  return (
+    <ApplicationFrame>
+      <SaveBarProvider>
+        <ToastProvider>
+          {pathname === "/dashboard" ? (
+            <Page title="Dashboard">
+              <Grid>
+                <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+                  <Card title="Dashboard" sectioned>
+                    <p>Welcome to dashboard</p>
+                  </Card>
+                </Grid.Cell>
+                <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+                  <DashboardGroup data={data}></DashboardGroup>
+                </Grid.Cell>
+              </Grid>
+            </Page>
+          ) : (
+            <Outlet />
+          )}
+        </ToastProvider>
+      </SaveBarProvider>
+    </ApplicationFrame>
   );
 };

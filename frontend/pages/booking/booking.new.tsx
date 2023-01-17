@@ -5,9 +5,9 @@ import {
   ScheduleStaffSelect,
   ScheduleTimerSelect,
 } from "@components/booking/booking-form";
-import { useExtendForm, useTranslation } from "@hooks";
+import { useTranslation } from "@hooks";
 import { notEmptyObject } from "@libs/validators/notEmptyObject";
-import { useToast } from "@providers/toast";
+import { useForm, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useBookingCreate } from "@services/booking";
 import {
   Card,
@@ -26,7 +26,7 @@ export default () => {
   const { show } = useToast();
   const { t } = useTranslation("bookings", { keyPrefix: "new" });
   //https://codesandbox.io/s/1wpxz?file=/src/MyForm.tsx:2457-2473
-  const { fields, submit, primaryAction } = useExtendForm({
+  const { fields, submit, primaryAction } = useForm({
     fields: {
       productId: useField<number>({
         value: undefined,

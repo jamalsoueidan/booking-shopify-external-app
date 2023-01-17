@@ -1,11 +1,8 @@
 import LoadingPage from "@components/LoadingPage";
-import ApplicationFrame from "@components/application/ApplicationFrame";
 import BookingNew from "@pages/booking/booking.new";
 import Schedules from "@pages/schedules";
 import Staff from "@pages/staff";
 import Setting from "@pages/user/setting";
-import { SaveBarProvider } from "@providers/saveBar";
-import { ToastProvider } from "@providers/toast";
 import NotFound from "pages/NotFound";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
@@ -26,13 +23,7 @@ export default () => {
         path="dashboard"
         element={
           <ProtectedRoute>
-            <ApplicationFrame>
-              <SaveBarProvider>
-                <ToastProvider>
-                  <Dashboard />
-                </ToastProvider>
-              </SaveBarProvider>
-            </ApplicationFrame>
+            <Dashboard />
           </ProtectedRoute>
         }
       >

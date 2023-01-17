@@ -1,4 +1,4 @@
-import { usePositions } from "@hooks";
+import { usePosition } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useStaff } from "@services/staff";
 import { TopBar } from "@shopify/polaris";
 import { useCallback, useState } from "react";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AppTopBar = ({ toggleNavigation }: any) => {
   const { data } = useStaff();
-  const { select } = usePositions();
+  const { select } = usePosition();
   const navigate = useNavigate();
   const [userMenuActive, setUserMenuActive] = useState(false);
 
@@ -36,16 +36,16 @@ export const AppTopBar = ({ toggleNavigation }: any) => {
     },
   ];
 
-  const userMenuMarkup = (
+  const userMenuMarkup = data ? (
     <TopBar.UserMenu
       actions={userMenuActions}
       name={data?.fullname}
-      detail={select(data?.position)}
+      detail={select(data?.position as any)}
       initials={data?.active ? "A" : "D"}
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
     />
-  );
+  ) : null;
 
   return (
     <TopBar

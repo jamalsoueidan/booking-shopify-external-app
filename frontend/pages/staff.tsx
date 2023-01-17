@@ -1,9 +1,14 @@
 import LoadingSpinner from "@components/LoadingSpinner";
 import Metadata from "@components/staff/Metadata";
-import { StaffForm } from "@components/staff/_form";
 import { useStaff, useStaffUpdate } from "@services/staff";
-import { Suspense, useCallback } from "react";
+import { Suspense, lazy, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+
+const StaffForm = lazy(() =>
+  import("@jamalsoueidan/bsf.bsf-pkg").then((module) => ({
+    default: module.StaffForm,
+  }))
+);
 
 export default () => {
   const navigate = useNavigate();
