@@ -5,7 +5,7 @@ import {
   WidgetStaff,
   WidgetDateQuery,
   WidgetSchedule,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 
 export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
   const { get, mutate } = useFetch();

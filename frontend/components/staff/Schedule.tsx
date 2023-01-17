@@ -2,7 +2,7 @@ import LoadingModal from "@components/LoadingModal";
 import LoadingSpinner from "@components/LoadingSpinner";
 import { EventClickArg } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
-import { Schedule as ScheduleEvent } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+import { Schedule as ScheduleEvent } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Card } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 

@@ -1,7 +1,8 @@
+import LoadingSpinner from "@components/LoadingSpinner";
 import Metadata from "@components/staff/Metadata";
 import { StaffForm } from "@components/staff/_form";
 import { useStaff, useStaffUpdate } from "@services/staff";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
@@ -22,11 +23,13 @@ export default () => {
   }
 
   return (
-    <StaffForm
-      data={staff}
-      action={submit}
-      titleMetadata={<Metadata active={staff.active} />}
-      disallowEditing={{ group: false, active: false }}
-    ></StaffForm>
+    <Suspense fallback={<LoadingSpinner />}>
+      <StaffForm
+        data={staff}
+        action={submit}
+        titleMetadata={<Metadata active={staff.active} />}
+        disallowEditing={{ group: false, active: false }}
+      ></StaffForm>
+    </Suspense>
   );
 };

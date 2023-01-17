@@ -4,6 +4,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
 
 const proxyOptions = {
   target: `http://127.0.0.1:8000`,
@@ -12,10 +13,27 @@ const proxyOptions = {
   ws: false,
 };
 
+let build = {};
+console.log(process.env.npm_lifecycle_event);
+if (process.env.npm_lifecycle_event === "build") {
+  build = {
+    rollupOptions: {
+      plugins: [dynamicImportVars({})],
+      output: {
+        manualChunks: {
+          react: ["react", "react-router-dom", "react-dom", "react-query"],
+          shopify: ["@shopify/polaris"],
+        },
+      },
+    },
+  };
+}
+
 export default defineConfig({
   root: path.join(__dirname, "."),
   build: {
-    sourcemap: true,
+    sourcemap: false,
+    ...build,
   },
   plugins: [
     react(),

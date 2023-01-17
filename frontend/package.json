@@ -15,8 +15,10 @@
     "@fullcalendar/list": "^6.0.2",
     "@fullcalendar/react": "^6.0.2",
     "@fullcalendar/timegrid": "^6.0.2",
-    "@shopify/polaris": "^10.16.1",
-    "@shopify/react-form": "^2.4.1",
+    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.4",
+    "@shopify/polaris": "^10.19.0",
+    "@shopify/polaris-icons": "^6.7.0",
+    "@shopify/react-form": "^2.5.0",
     "@shopify/react-i18n": "^7.5.1",
     "axios": "^1.2.2",
     "date-fns": "^2.29.3",
@@ -28,7 +30,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@jamalsoueidan/booking-shopify-backend.mongo.types": "^0.0.2",
+    "@jamalsoueidan/bsb.bsb-pkg": "^0.0.2",
     "@rollup/plugin-dynamic-import-vars": "^2.0.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",

@@ -6,7 +6,7 @@ import {
 } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { useDate, useTagOptions } from "@hooks";
-import { Schedule } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+import { Schedule } from "@jamalsoueidan/bsb.bsb-pkg";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
 

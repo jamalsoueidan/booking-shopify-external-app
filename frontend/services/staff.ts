@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks";
-import { StaffBodyUpdate } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+import { StaffBodyUpdate } from "@jamalsoueidan/bsb.bsb-pkg";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 

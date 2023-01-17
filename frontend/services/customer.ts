@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks";
-import { CustomerQuery } from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+import { CustomerQuery } from "@jamalsoueidan/bsb.bsb-pkg";
 
 export const useCustomer = () => {
   const { get } = useFetch();

@@ -3,11 +3,11 @@ import {
   ScheduleBodyUpdate,
   ScheduleBodyUpdateOrCreate,
   ScheduleGetQuery,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.pkg";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 import {
   Schedule,
   ScheduleUpdateOrDestroyQuery,
-} from "@jamalsoueidan/booking-shopify-backend.mongo.types";
+} from "@jamalsoueidan/bsb.bsb-pkg";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 

@@ -1,12 +1,11 @@
 import { Navigation } from "@shopify/polaris";
 import {
-  HomeMajor,
-  OrdersMajor,
-  SettingsMajor,
-  ProfileMajor,
   CalendarMajor,
   CalendarTickMajor,
   ExitMajor,
+  HomeMajor,
+  ProfileMajor,
+  SettingsMajor,
 } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -50,7 +49,10 @@ export const AppNavigation = () => {
           {
             label: "Log af",
             icon: ExitMajor,
-            onClick: () => navigate("/dashboard/user/settings"),
+            onClick: () => {
+              localStorage.clear();
+              return navigate("/");
+            },
           },
         ]}
       />
