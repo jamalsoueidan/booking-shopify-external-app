@@ -1,4 +1,4 @@
-import LoadingPage from "@components/LoadingPage";
+import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 import { checkLogin } from "@services/login";
 import { Navigate, useLocation } from "react-router-dom";
 

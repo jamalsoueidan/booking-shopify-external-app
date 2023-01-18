@@ -1,4 +1,4 @@
-import LoadingPage from "@components/LoadingPage";
+import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 import Metadata from "@components/staff/Metadata";
 import { Schedule } from "@components/staff/Schedule";
 import { useStaff } from "@services/staff";

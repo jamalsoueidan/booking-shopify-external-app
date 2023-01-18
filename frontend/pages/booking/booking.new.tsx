@@ -6,8 +6,7 @@ import {
   ScheduleTimerSelect,
 } from "@components/booking/booking-form";
 import { useTranslation } from "@hooks";
-import { notEmptyObject } from "@libs/validators/notEmptyObject";
-import { useForm, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useForm, useToast, Validators } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useBookingCreate } from "@services/booking";
 import {
   Card,
@@ -37,7 +36,7 @@ export default () => {
           customerId: undefined,
           fullName: undefined,
         },
-        validates: [notEmptyObject("Du mangler vælg kunde")],
+        validates: [Validators.notEmptyObject("Du mangler vælg kunde")],
       }),
       staff: useField<string>({
         value: undefined,
@@ -52,7 +51,7 @@ export default () => {
           start: undefined,
           end: undefined,
         },
-        validates: [notEmptyObject("Du mangler vælg tid")],
+        validates: [Validators.notEmptyObject("Du mangler vælg tid")],
       }),
     },
     onSubmit: async (fieldValues) => {

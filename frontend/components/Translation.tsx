@@ -1,9 +1,9 @@
-import LoadingPage from "@components/LoadingPage";
 import { useUserSetting } from "@services/user";
 import { I18nContext, I18nManager, useI18n } from "@shopify/react-i18n";
 import { useContext, useEffect, useMemo } from "react";
 import da from "../translations/da-DK.json";
 import en from "../translations/en-US.json";
+import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 
 export default ({ children }: { children: JSX.Element }) => {
   const { data } = useUserSetting();

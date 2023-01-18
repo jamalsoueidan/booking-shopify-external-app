@@ -1,4 +1,4 @@
-import LoadingSpinner from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { DatesSetArg, EventClickArg } from "@fullcalendar/core";
 import { padTo2Digits } from "@helpers/pad2Digits";
 import { useDate } from "@hooks/useDate";

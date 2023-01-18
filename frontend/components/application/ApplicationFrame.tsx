@@ -2,6 +2,7 @@ import { Frame } from "@shopify/polaris";
 import { AppNavigation } from "./ApplicationNavigation";
 import { AppTopBar } from "./ApplicationTopBar";
 import { useCallback, useState } from "react";
+import logo from "../../assets/logo.avif";
 
 export default ({ children }: any) => {
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
@@ -15,8 +16,8 @@ export default ({ children }: any) => {
   );
 
   const logoOptions = {
-    //width: 124,
-    //topBarSource: logo,
+    width: 124,
+    topBarSource: logo,
     //contextualSaveBarSource: data?.avatar,
     //url: "http://jadedpixel.com",
     //accessibilityLabel: data?.fullname,

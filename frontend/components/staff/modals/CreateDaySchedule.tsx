@@ -6,7 +6,7 @@ import da from "date-fns/locale/da";
 import { forwardRef, useImperativeHandle } from "react";
 import { useParams } from "react-router-dom";
 import { CreateScheduleForm } from "./_createScheduleForm";
-import { useToast } from "@providers/toast";
+import { useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useStaffScheduleCreate } from "@services/staff/schedule";
 
 interface CreateDayScheduleProps {

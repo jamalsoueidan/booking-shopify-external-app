@@ -1,6 +1,6 @@
 import { useDate, useTagOptions } from "@hooks";
 import { ScheduleBodyUpdate } from "@jamalsoueidan/bsb.bsb-pkg";
-import { useToast } from "@providers/toast";
+import { useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import {
   useStaffScheduleDestroy,
   useStaffScheduleUpdate,

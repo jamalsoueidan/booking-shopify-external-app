@@ -1,4 +1,4 @@
-import LoadingPage from "@components/LoadingPage";
+import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 import BookingNew from "@pages/booking/booking.new";
 import Schedules from "@pages/schedules";
 import Staff from "@pages/staff";

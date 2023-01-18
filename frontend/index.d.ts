@@ -5,7 +5,6 @@
 /// <reference path="../@types/booking.d.ts" />
 /// <reference path="../@types/product.d.ts" />
 
-declare module "*";
 declare module "*.svg" {
   import * as React from "react";
 

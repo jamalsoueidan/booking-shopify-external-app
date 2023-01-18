@@ -1,5 +1,5 @@
 import LoadingModal from "@components/LoadingModal";
-import LoadingSpinner from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { EventClickArg } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { Schedule as ScheduleEvent } from "@jamalsoueidan/bsb.bsb-pkg";

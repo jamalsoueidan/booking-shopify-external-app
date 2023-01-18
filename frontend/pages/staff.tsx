@@ -1,4 +1,4 @@
-import LoadingSpinner from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import Metadata from "@components/staff/Metadata";
 import { useStaff, useStaffUpdate } from "@services/staff";
 import { Suspense, lazy, useCallback } from "react";

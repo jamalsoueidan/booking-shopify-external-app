@@ -1,4 +1,4 @@
-import LoadingSpinner from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import Calendar from "@components/booking/Calendar";
 import { useFulfillment } from "@hooks/useFulfillment";
 import { useTranslation } from "@hooks/useTranslation";

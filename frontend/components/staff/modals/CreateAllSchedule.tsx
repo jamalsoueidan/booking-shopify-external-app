@@ -1,5 +1,4 @@
 import { useDate, useTagOptions } from "@hooks";
-import isSelectedDays from "@libs/validators/isSelectedDays";
 import { DatePicker, Layout, Modal } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import {
@@ -14,7 +13,7 @@ import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SelectDays } from "./SelectDays";
 import { CreateScheduleForm } from "./_createScheduleForm";
-import { useToast } from "@providers/toast";
+import { useToast, Validators } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useStaffScheduleCreate } from "@services/staff/schedule";
 
 interface CreateDayScheduleProps {
@@ -44,7 +43,9 @@ export default forwardRef(({ date, close }: CreateDayScheduleProps, ref) => {
     fields: {
       days: useField({
         value: [format(new Date(date), "EEEE").toLowerCase()],
-        validates: [isSelectedDays("You must select atleast one day")],
+        validates: [
+          Validators.isSelectedDays("You must select atleast one day"),
+        ],
       }),
       startTime: useField({
         value: "09:00",

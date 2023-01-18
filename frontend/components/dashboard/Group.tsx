@@ -1,4 +1,4 @@
-import LoadingSpinner from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { Avatar, Card, ResourceList, Text } from "@shopify/polaris";
 import { memo, useMemo } from "react";
 
