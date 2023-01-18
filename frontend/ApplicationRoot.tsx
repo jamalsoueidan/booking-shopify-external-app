@@ -1,28 +1,20 @@
-import Translation from "@components/Translation";
-import { I18nContext, I18nManager } from "@shopify/react-i18n";
+import { ApplicationTranslations } from "@components/application/ApplicationTranslations";
+import { useSetting } from "@hooks/useSetting";
+import { I18nContext } from "@shopify/react-i18n";
 import ApplicationRoutes from "ApplicationRoutes";
 import { PolarisProvider } from "providers/PolarisProvider";
-import { QueryProvider } from "providers/QueryProvider";
 import { BrowserRouter } from "react-router-dom";
 
-const i18nManager = new I18nManager({
-  locale: "da",
-  onError: (details) => {
-    console.log(details);
-  },
-});
-
 export default () => {
+  const i18nManager = useSetting();
   return (
     <I18nContext.Provider value={i18nManager}>
       <BrowserRouter>
-        <QueryProvider>
-          <PolarisProvider>
-            <Translation>
-              <ApplicationRoutes />
-            </Translation>
-          </PolarisProvider>
-        </QueryProvider>
+        <PolarisProvider>
+          <ApplicationTranslations>
+            <ApplicationRoutes />
+          </ApplicationTranslations>
+        </PolarisProvider>
       </BrowserRouter>
     </I18nContext.Provider>
   );

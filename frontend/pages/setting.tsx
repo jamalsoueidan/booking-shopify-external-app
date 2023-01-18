@@ -18,32 +18,35 @@ import {
 } from "@shopify/polaris";
 import { useField } from "@shopify/react-form";
 
-const locales = [
-  {
-    title: "Indstillinger",
-    loading: "Henter indstillinger",
-    user_settings: {
-      title: "Bruger indstillinger",
-      subtitle: "Ændre udefra din preference",
-    },
-    toast: "Ændringer er blevet opdateret",
+const da = {
+  title: "Indstillinger",
+  loading: "Henter indstillinger",
+  user_settings: {
+    title: "Bruger indstillinger",
+    subtitle: "Ændre udefra din preference",
   },
-  {
-    title: "Settings",
-    loading: "Loading settings",
-    user_settings: {
-      title: "User Settings",
-      subtitle: "Change to whatever you like",
-    },
-    toast: "Changes is updated",
+  toast: "Ændringer er blevet opdateret",
+};
+
+const en: typeof da = {
+  title: "Settings",
+  loading: "Loading settings",
+  user_settings: {
+    title: "User Settings",
+    subtitle: "Change to whatever you like",
   },
-];
+  toast: "Changes is updated",
+};
 
 export default () => {
   const { data } = useUserSetting();
   const { update } = useUserSettingUpdate();
 
-  const { t } = useTranslation({ id: "settings", locales });
+  const { t } = useTranslation({
+    id: "settings",
+    locales: { da, en },
+  });
+
   const { show } = useToast();
 
   //https://codesandbox.io/s/1wpxz?file=/src/MyForm.tsx:2457-2473

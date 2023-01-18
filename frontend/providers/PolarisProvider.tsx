@@ -12,6 +12,11 @@ export const PolarisProvider = ({ children }: any) => {
       return locale === "en" ? en : da;
     },
   });
-
-  return <AppProvider i18n={i18n.translations[0]}>{children}</AppProvider>;
+  return (
+    <AppProvider
+      i18n={i18n.locale === "da" ? i18n.translations[0] : i18n.translations[1]}
+    >
+      {children}
+    </AppProvider>
+  );
 };
