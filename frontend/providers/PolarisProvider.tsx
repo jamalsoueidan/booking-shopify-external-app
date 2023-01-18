@@ -7,9 +7,9 @@ import { useI18n } from "@shopify/react-i18n";
 export const PolarisProvider = ({ children }: any) => {
   const [i18n] = useI18n({
     id: "Polaris",
-    fallback: en,
+    fallback: da,
     async translations(locale) {
-      return locale === "en-US" ? en : da;
+      return locale === "en" ? en : da;
     },
   });
 

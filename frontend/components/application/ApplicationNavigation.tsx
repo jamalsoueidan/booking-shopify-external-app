@@ -44,7 +44,7 @@ export const AppNavigation = () => {
           {
             label: "Indstillinger",
             icon: SettingsMajor,
-            onClick: () => navigate("/dashboard/user/settings"),
+            onClick: () => navigate("/dashboard/settings"),
           },
           {
             label: "Log af",

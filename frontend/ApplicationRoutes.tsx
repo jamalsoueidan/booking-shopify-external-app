@@ -2,7 +2,7 @@ import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 import BookingNew from "@pages/booking/booking.new";
 import Schedules from "@pages/schedules";
 import Staff from "@pages/staff";
-import Setting from "@pages/user/setting";
+import Setting from "@pages/setting";
 import NotFound from "pages/NotFound";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
@@ -38,7 +38,7 @@ export default () => {
         <Route path="bookings/new" element={<BookingNew />} />
         <Route path="schedules" element={<Schedules />} />
         <Route path="staff" element={<Staff />} />
-        <Route path="user/settings" element={<Setting />} />
+        <Route path="settings" element={<Setting />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -1,0 +1,1116 @@
+{
+	"info": {
+		"_postman_id": "a249a1c9-cd64-4a2a-a990-279680e260d4",
+		"name": "shopify-external-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23763337"
+	},
+	"item": [
+		{
+			"name": "staff",
+			"item": [
+				{
+					"name": "schedules",
+					"item": [
+						{
+							"name": "schedule create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"start\":\"2022-12-15T08:00:00.000Z\",\"end\":\"2022-12-12T15:00:00.000Z\",\"tag\":\"#235284\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/schedules?shop={{shop}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"schedules"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "635178240736f6b114395135",
+											"disabled": true
+										},
+										{
+											"key": "shop",
+											"value": "{{shop}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "schedule delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start\": \"2022-10-23T10:30:00Z\", \n    \"end\": \"2022-10-23T19:30:00Z\", \n    \"tag\": \"blue\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/schedules/63518e7e63ead7d2c754d5f1?shop={{shop}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"schedules",
+										"63518e7e63ead7d2c754d5f1"
+									],
+									"query": [
+										{
+											"key": "shop",
+											"value": "{{shop}}"
+										},
+										{
+											"key": "id",
+											"value": "635178240736f6b114395135",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "schedule update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"groupId\": \"1666480648590\",\n    \"start\": \"2022-10-04T09:00:00.000Z\", \n    \"end\": \"2022-10-04T18:00:00.000Z\", \n    \"tag\": \"asd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/schedules/63547a08a3aadc36a9df218e?shop={{shop}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"schedules",
+										"63547a08a3aadc36a9df218e"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "635178240736f6b114395135",
+											"disabled": true
+										},
+										{
+											"key": "shop",
+											"value": "{{shop}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "schedule update groupid",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"start\": \"2022-10-22T09:52:41.682Z\", \n    \"end\": \"2022-10-22T20:52:41.682Z\", \n    \"tag\": \"asd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/admin/schedules/63547a08a3aadc36a9df218e/group/1666480648590?shop={{shop}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"schedules",
+										"63547a08a3aadc36a9df218e",
+										"group",
+										"1666480648590"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "635178240736f6b114395135",
+											"disabled": true
+										},
+										{
+											"key": "shop",
+											"value": "{{shop}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "schedule list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{jwt}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/admin/schedules?shop={{shop}}&start=2022-11-30&end=2022-12-12",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"schedules"
+									],
+									"query": [
+										{
+											"key": "shop",
+											"value": "{{shop}}"
+										},
+										{
+											"key": "start",
+											"value": "2022-11-30"
+										},
+										{
+											"key": "end",
+											"value": "2022-12-12"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "staff get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Shopify-Access-Token",
+								"value": "shpua_e7362500a3939ff163314ffee79cc395",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/staff?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"staff"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "date",
+									"value": "2022-10-19",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "staff update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Shopify-Access-Token",
+								"value": "shpua_e7362500a3939ff163314ffee79cc395",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullname\": \"jamal soueidan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/staff?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"staff"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-10-19",
+									"disabled": true
+								},
+								{
+									"key": "userId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "get customers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Shopify-Access-Token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/customers?shop={{shop}}&name=soue",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "name",
+									"value": "soue"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking",
+			"item": [
+				{
+					"name": "get bookings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/bookings?shop={{shop}}&start=2022-11-01&end=2023-10-10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "start",
+									"value": "2022-11-01"
+								},
+								{
+									"key": "end",
+									"value": "2023-10-10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get booking by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/bookings/63bb72606bc93da9252b66c9?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"63bb72606bc93da9252b66c9"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get bookings for staff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/bookings?shop={{shop}}&start=2022-11-01&end=2023-10-10&staff=63bb71c898f50e4f24c883a8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "start",
+									"value": "2022-11-01"
+								},
+								{
+									"key": "end",
+									"value": "2023-10-10"
+								},
+								{
+									"key": "staff",
+									"value": "63bb71c898f50e4f24c883a8"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "settings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/settings?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "settings Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"language\": \"da\",\n    \"timeZone\": \"Europe/Andorra\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/settings?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "group",
+			"item": [
+				{
+					"name": "get staff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/group?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"group"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "get products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/products?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "widget",
+			"item": [
+				{
+					"name": "widget staff",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/widget/staff?shop={{shop}}&productId=7961951273277",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"staff"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "productId",
+									"value": "7961951273277"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "widget create cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"staffId\": \"636b75a18f6e30e6f8686c63\",\n    \"start\": \"2022-11-17T08:00:00.000Z\",\n    \"end\": \"2022-11-17T09:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/widget/cart?shop={{shop}}&productId=7961951273277",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "productId",
+									"value": "7961951273277"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "widget delete cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"staffId\": \"636b75a18f6e30e6f8686c63\",\n    \"start\": \"2022-11-17T08:00:00.000Z\",\n    \"end\": \"2022-11-17T09:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/widget/cart?shop={{shop}}&productId=7961951273277",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "productId",
+									"value": "7961951273277"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "widget availability (staff)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/widget/availability-range?shop={{shop}}&start=2022-12-02&end=2023-12-08&staff=63835ea7eead8d1319828518&productId=7961951273277",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"availability-range"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "start",
+									"value": "2022-12-02"
+								},
+								{
+									"key": "end",
+									"value": "2023-12-08"
+								},
+								{
+									"key": "staff",
+									"value": "63835ea7eead8d1319828518"
+								},
+								{
+									"key": "productId",
+									"value": "7961951273277"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "widget availability (any)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/widget/availability-range?shop={{shop}}&start=2022-12-02&end=2023-12-08&productId=7961951273277",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"availability-range"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								},
+								{
+									"key": "start",
+									"value": "2022-12-02"
+								},
+								{
+									"key": "end",
+									"value": "2023-12-08"
+								},
+								{
+									"key": "productId",
+									"value": "7961951273277"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "settings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/widget/settings?shop={{shop}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"widget",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "shop",
+									"value": "{{shop}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "receive password phone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone\": \"4531317428\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/password-phone?shop={{shop}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"password-phone"
+					],
+					"query": [
+						{
+							"key": "shop",
+							"value": "{{shop}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identification\": \"4531317428\",\n    \"password\": \"hxtry1tl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/login?shop={{shop}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "shop",
+							"value": "{{shop}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

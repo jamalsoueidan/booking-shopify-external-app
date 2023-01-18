@@ -32,3 +32,5 @@ interface SettingsResponse {
   language: string;
   timeZone: string;
 }
+
+interface SettingsUpdateBodyRequest extends Omit<SettingsResponse, "_id"> {}
