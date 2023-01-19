@@ -21,22 +21,6 @@ const Footer = styled.div`
   text-align: center;
 `;
 
-const Center = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  padding-left: 32px;
-  padding-right: 32px;
-`;
-
-const Flex = styled.div`
-  width: 90%;
-  @media only screen and (min-width: 768px) {
-    width: 400px;
-  }
-`;
-
 const logoOptions = {
   width: 124,
   topBarSource: logo,
@@ -45,12 +29,11 @@ const logoOptions = {
   accessibilityLabel: "Logo",
 };
 
-interface LoginFrameProps {
-  title: string;
+interface AuthFrameProps {
   children: ReactNode;
 }
 
-export const LoginFrame = ({ title, children }: LoginFrameProps) => {
+export const AuthFrame = ({ children }: AuthFrameProps) => {
   const { update } = useSettings();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
@@ -114,16 +97,7 @@ export const LoginFrame = ({ title, children }: LoginFrameProps) => {
         />
       }
     >
-      <Center>
-        <Flex>
-          <TextContainer spacing="loose">
-            <Text variant="heading2xl" as="h1">
-              <center>{title}</center>
-            </Text>
-            {children}
-          </TextContainer>
-        </Flex>
-      </Center>
+      {children}
       <Footer>
         <p>
           Alle rettigheder forbeholdt{" "}

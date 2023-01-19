@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
 import generator from "generate-password";
+import mongoose from "mongoose";
 
 export const createNewPassword = async (staff: Staff) => {
   const password = generator.generate({
@@ -11,15 +12,18 @@ export const createNewPassword = async (staff: Staff) => {
   });
 
   // user not exists
-  let user = await UserModel.findOne({ staff: staff._id });
+  let user = await UserModel.findOne({
+    staff: staff._id,
+  });
+
   if (!user) {
     user = new UserModel();
     user.shop = staff.shop;
     user.staff = staff._id;
-    user.phone = staff.phone;
-    user.email = staff.email;
   }
 
+  user.phone = staff.phone;
+  user.email = staff.email;
   user.password = password;
   user.save();
   return password;
@@ -39,11 +43,11 @@ export const findUser = async ({
     shop,
     $or: [{ phone: identification }, { email: identification }],
   });
+
   if (user) {
     const correctPassword = await bcrypt.compare(password, user.password);
     if (correctPassword) {
       return user;
     }
   }
-  return false;
 };

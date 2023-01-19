@@ -4,21 +4,19 @@ import Schedules from "@pages/schedules";
 import Setting from "@pages/setting";
 import Staff from "@pages/staff";
 import NotFound from "pages/NotFound";
-import Login from "pages/auth/Login";
-import Phone from "pages/auth/Phone";
+import Login from "@pages/auth/login";
+import Phone from "@pages/auth/phone";
 import Dashboard from "pages/dashboard";
 import { ProtectedRoute } from "providers/Protected";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
+import Auth from "@pages/auth/auth";
 
 const Booking = lazy(() => import("pages/booking"));
 
 export default () => {
   return (
     <Routes>
-      <Route index element={<Login />} />
-      <Route path="login" element={<Login />} />
-      <Route path="phone" element={<Phone />} />
       <Route
         path="dashboard"
         element={
@@ -39,6 +37,10 @@ export default () => {
         <Route path="schedules" element={<Schedules />} />
         <Route path="staff" element={<Staff />} />
         <Route path="settings" element={<Setting />} />
+      </Route>
+      <Route path="/" element={<Auth />}>
+        <Route index element={<Login />} />
+        <Route path="phone" element={<Phone />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

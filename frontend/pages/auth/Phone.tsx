@@ -1,4 +1,4 @@
-import { LoginFrame } from "@components/application/LoginFrame";
+import { AuthPage } from "@components/auth/AuthPage";
 import { FormErrors } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useReceivePassword } from "@services/login";
 import {
@@ -34,12 +34,12 @@ export default () => {
           errors: [{ field: ["phone"], message: "bad form data" }],
         };
       }
-      navigate("/login", { state: { message: "login" } });
+      navigate("/", { state: { message: "login" } });
     },
   });
 
   return (
-    <LoginFrame title="Receive password by phone">
+    <AuthPage title="password">
       <FormErrors errors={submitErrors} />
       <Card sectioned>
         <Form onSubmit={submit}>
@@ -50,11 +50,11 @@ export default () => {
               <Text variant="bodyMd" as="span">
                 or
               </Text>
-              <Link url="/login">Login</Link>
+              <Link url="/">Login</Link>
             </Stack>
           </FormLayout>
         </Form>
       </Card>
-    </LoginFrame>
+    </AuthPage>
   );
 };

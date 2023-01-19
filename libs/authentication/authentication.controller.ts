@@ -46,9 +46,11 @@ export const login = async ({
   body,
 }: LoginProps): Promise<LoginResponse> => {
   const user = await UserService.findUser({
-    ...query,
-    ...body,
+    shop: query.shop,
+    identification: body.identification,
+    password: body.password,
   });
+
   if (user) {
     // check if staff is still active
     const staff = await StaffService.findBy({

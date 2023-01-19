@@ -1,4 +1,4 @@
-import { LoginFrame } from "@components/application/LoginFrame";
+import { AuthPage } from "@components/auth/AuthPage";
 import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useLogin } from "@services/login";
 import {
@@ -10,7 +10,6 @@ import {
   Link,
   Stack,
   Text,
-  TextContainer,
   TextField,
 } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
@@ -43,18 +42,21 @@ export default () => {
     },
     onSubmit: async (fieldValues) => {
       const response = await login(fieldValues);
-      if (response.error) {
+      if (!response.success) {
         return {
           status: "fail",
-          errors: [{ field: ["phone"], message: "bad form data" }],
+          errors: [
+            { field: ["phone"], message: "Wrong email/phone or password!" },
+          ],
         };
+      } else {
+        navigate("/dashboard");
       }
-      navigate("/dashboard");
     },
   });
 
   return (
-    <LoginFrame title="Log ind">
+    <AuthPage title="login">
       <Card sectioned>
         {location.state?.message && (
           <>
@@ -90,6 +92,6 @@ export default () => {
           </FormLayout>
         </Form>
       </Card>
-    </LoginFrame>
+    </AuthPage>
   );
 };
