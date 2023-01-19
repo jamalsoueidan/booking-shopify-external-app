@@ -1,5 +1,5 @@
 import { AuthPage } from "@components/auth/AuthPage";
-import { FormErrors } from "@jamalsoueidan/bsf.bsf-pkg";
+import { FormErrors, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useReceivePassword } from "@services/login";
 import {
   Button,
@@ -14,9 +14,34 @@ import {
 import { useField, useForm } from "@shopify/react-form";
 import { useNavigate } from "react-router-dom";
 
+const locales = {
+  da: {
+    title: "Modtag adgangskode på mobil",
+    send_submit: "Send mig adgangskode!",
+    login: "Log ind",
+    or: "eller",
+    phone: {
+      label: "Indtast mobilnummer",
+    },
+    error: "Forkert email/mobilnummer eller adgangskode!",
+  },
+  en: {
+    title: "Receive password on phone",
+    send_submit: "Send me password!",
+    login: "Login",
+    or: "or",
+    phone: {
+      label: "Enter your phonenumber",
+    },
+    error: "Wrong email/phone or password!",
+  },
+};
+
 export default () => {
   const navigate = useNavigate();
   const { receivePassword } = useReceivePassword();
+
+  const { t } = useTranslation({ id: "password", locales });
 
   const {
     fields: { phone },
@@ -31,7 +56,7 @@ export default () => {
       if (!response.success) {
         return {
           status: "fail",
-          errors: [{ field: ["phone"], message: "bad form data" }],
+          errors: [{ field: ["phone"], message: t("error") }],
         };
       }
       navigate("/", { state: { message: "login" } });
@@ -39,18 +64,22 @@ export default () => {
   });
 
   return (
-    <AuthPage title="password">
+    <AuthPage title={t("title")}>
       <FormErrors errors={submitErrors} />
       <Card sectioned>
         <Form onSubmit={submit}>
           <FormLayout>
-            <TextField label="Phone" autoComplete="phone" {...phone} />
+            <TextField
+              label={t("phone.label")}
+              autoComplete="phone"
+              {...phone}
+            />
             <Stack alignment="center" spacing="tight">
-              <Button submit>Receive password</Button>
+              <Button submit>{t("send_submit")}</Button>
               <Text variant="bodyMd" as="span">
-                or
+                {t("or")}
               </Text>
-              <Link url="/">Login</Link>
+              <Link url="/">{t("login")}</Link>
             </Stack>
           </FormLayout>
         </Form>

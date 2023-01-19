@@ -1,5 +1,5 @@
 import { AuthPage } from "@components/auth/AuthPage";
-import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { FormErrors, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useLogin } from "@services/login";
 import {
   Banner,
@@ -17,10 +17,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const locales = {
   da: {
-    receive: "Modtag kode på mobil",
+    title: "Log ind på BySisters",
+    receive_action: "Modtag kode på mobil",
+    received_msg: "Indtast det adgangskode du har modtaget på din mobil",
+    login_submit: "Log ind",
+    or: "eller",
+    login: {
+      label: "E-mail eller mobilnummer",
+    },
+    password: {
+      label: "Adgangskode",
+    },
+    error: "Forkert email/mobilnummer eller adgangskode!",
   },
   en: {
-    receive: "Receive code on phone",
+    title: "Login on BySisters",
+    receive_action: "Receive code on phone",
+    received_msg: "Please type the password you received on your mobile.",
+    login_submit: "Login",
+    or: "or",
+    login: {
+      label: "Email or Phone",
+    },
+    password: {
+      label: "Password",
+    },
+    error: "Wrong email/phone or password!",
   },
 };
 
@@ -45,9 +67,7 @@ export default () => {
       if (!response.success) {
         return {
           status: "fail",
-          errors: [
-            { field: ["phone"], message: "Wrong email/phone or password!" },
-          ],
+          errors: [{ field: ["phone"], message: t("error") }],
         };
       } else {
         navigate("/dashboard");
@@ -56,38 +76,40 @@ export default () => {
   });
 
   return (
-    <AuthPage title="login">
+    <AuthPage title={t("title")}>
       <Card sectioned>
         {location.state?.message && (
           <>
             <Banner onDismiss={() => {}}>
-              <p>Please type the password you received on your mobile.</p>
+              <p>{t("received_msg")}</p>
             </Banner>
             <br />
           </>
         )}
 
+        <FormErrors errors={submitErrors} />
+
         <Form onSubmit={submit}>
           <FormLayout>
             <TextField
-              label="Email or Phone"
+              label={t("login.label")}
               autoComplete="email"
               {...identification}
             />
 
             <TextField
-              label="Password"
+              label={t("password.label")}
               type="password"
               autoComplete="false"
               {...password}
             />
 
             <Stack alignment="center" spacing="tight">
-              <Button submit>Login</Button>
+              <Button submit>{t("login_submit")}</Button>
               <Text variant="bodyMd" as="span">
-                or
+                {t("or")}
               </Text>
-              <Link url="phone">{t("receive")}</Link>
+              <Link url="phone">{t("receive_action")}</Link>
             </Stack>
           </FormLayout>
         </Form>

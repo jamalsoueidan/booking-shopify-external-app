@@ -10,7 +10,7 @@ import { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.avif";
 import { LanguageMinor } from "@shopify/polaris-icons";
-import { useSettings } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useSettings, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 
 const Footer = styled.div`
   position: absolute;
@@ -35,6 +35,24 @@ interface AuthFrameProps {
 
 export const AuthFrame = ({ children }: AuthFrameProps) => {
   const { update } = useSettings();
+
+  const { t } = useTranslation({
+    id: "topbar",
+    locales: {
+      da: {
+        change_language: "Skift sprog",
+        danish: "Dansk",
+        english: "Engelsk",
+        rights: "Alle rettigheder forbeholdt",
+      },
+      en: {
+        change_language: "Change language",
+        danish: "Danish",
+        english: "English",
+        rights: "All rights reserved",
+      },
+    },
+  });
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
@@ -58,7 +76,7 @@ export const AuthFrame = ({ children }: AuthFrameProps) => {
         <span>
           <Icon source={LanguageMinor} />
           <Text variant="bodySm" as="span" visuallyHidden>
-            Change Language
+            {t("change_language")}
           </Text>
         </span>
       }
@@ -69,13 +87,13 @@ export const AuthFrame = ({ children }: AuthFrameProps) => {
         {
           items: [
             {
-              content: "Dansk",
+              content: t("danish"),
               onAction: () => {
                 update({ language: "da" });
               },
             },
             {
-              content: "English",
+              content: t("english"),
               onAction: () => {
                 update({ language: "en" });
               },
@@ -100,8 +118,8 @@ export const AuthFrame = ({ children }: AuthFrameProps) => {
       {children}
       <Footer>
         <p>
-          Alle rettigheder forbeholdt{" "}
-          <Link url="https://wwww.by-sisters.dk">BySisters</Link> ©
+          {t("rights")} <Link url="https://wwww.by-sisters.dk">BySisters</Link>{" "}
+          ©
         </p>
         <p>Version 1.0.1</p>
       </Footer>
