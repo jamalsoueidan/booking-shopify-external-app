@@ -9,8 +9,8 @@ import { ProtectedRoute } from "providers/Protected";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Auth from "pages/auth/auth";
-import Login from "pages/auth/login";
-import Phone from "pages/auth/phone";
+import Login from "@pages/auth/login";
+import Phone from "@pages/auth/phone";
 
 const Booking = lazy(() => import("pages/booking"));
 
