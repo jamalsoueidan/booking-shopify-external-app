@@ -60,8 +60,12 @@ export const destroy = ({
   session,
 }: ControllerProps<ScheduleUpdateOrDestroyQuery>) => {
   const { schedule } = query;
-  const { shop } = session;
-  return ScheduleServiceDestroy({ schedule, shop });
+  const { shop, staff } = session;
+  return ScheduleServiceDestroy({
+    schedule,
+    staff,
+    shop,
+  });
 };
 
 interface UpdateGroupQuery extends ScheduleUpdateOrDestroyQuery {

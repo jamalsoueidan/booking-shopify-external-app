@@ -1,21 +1,17 @@
 import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
 import BookingNew from "@pages/booking/booking.new";
 import Schedules from "@pages/schedules";
-import Staff from "@pages/staff";
 import Setting from "@pages/setting";
+import Staff from "@pages/staff";
 import NotFound from "pages/NotFound";
 import Login from "pages/auth/Login";
 import Phone from "pages/auth/Phone";
 import Dashboard from "pages/dashboard";
 import { ProtectedRoute } from "providers/Protected";
-import { Suspense, lazy, useContext } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 const Booking = lazy(() => import("pages/booking"));
-
-import da from "./translations/da-DK.json";
-import en from "./translations/en-US.json";
-import { I18nContext, useI18n } from "@shopify/react-i18n";
 
 export default () => {
   return (
