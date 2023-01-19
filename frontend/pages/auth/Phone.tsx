@@ -59,7 +59,7 @@ export default () => {
           errors: [{ field: ["phone"], message: t("error") }],
         };
       }
-      navigate("/", { state: { message: "login" } });
+      navigate("/login", { state: { message: "login" } });
     },
   });
 
@@ -79,7 +79,7 @@ export default () => {
               <Text variant="bodyMd" as="span">
                 {t("or")}
               </Text>
-              <Link url="/">{t("login")}</Link>
+              <Link onClick={() => navigate("/login")}>{t("login")}</Link>
             </Stack>
           </FormLayout>
         </Form>

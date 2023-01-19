@@ -39,7 +39,7 @@ export default () => {
         <Route path="settings" element={<Setting />} />
       </Route>
       <Route path="/" element={<Auth />}>
-        <Route index element={<Login />} />
+        <Route path="login" element={<Login />} />
         <Route path="phone" element={<Phone />} />
       </Route>
       <Route path="*" element={<NotFound />} />

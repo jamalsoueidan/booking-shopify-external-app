@@ -109,7 +109,9 @@ export default () => {
               <Text variant="bodyMd" as="span">
                 {t("or")}
               </Text>
-              <Link url="phone">{t("receive_action")}</Link>
+              <Link onClick={() => navigate("/phone")}>
+                {t("receive_action")}
+              </Link>
             </Stack>
           </FormLayout>
         </Form>
