@@ -4,9 +4,15 @@
   <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/bookings.png?raw=true" width="600"/>
 </p>
 
-The supervisor use another application embedded in shopify: [Booking Shopify Embedded Application](https://github.com/jamalsoueidan/booking-shopify-embed-app)
+I have developed two different applications for appointment scheduling.
 
-We use the [Booking Shopify Framework](https://github.com/jamalsoueidan/booking-shopify-framework) inside this repos to save ourself from duplicating code from the [Booking Shopify Embedded Application](https://github.com/jamalsoueidan/booking-shopify-embed-app).
+[The embedded application](https://github.com/jamalsoueidan/booking-shopify-embed-app) and the external application(this repo).
+
+The supervisor uses [the embedded application](https://github.com/jamalsoueidan/booking-shopify-embed-app) in the Shopify admin to view all bookings for all staff, as well as to create new staff members and add them to various groups, etc.
+
+This external application gives each member of staff access to their own bookings, schedule etc., allows them to edit their own bookings, schedule their time-work, and so on. Also see other members of the group bookings.
+
+Both applications use [the booking shopify framework](https://github.com/jamalsoueidan/booking-shopify-framework) to save ourself from duplicating code.
 
 <a href="https://bit.cloud/jamalsoueidan/bsd" target="_blank">Bit.dev Backend Documentation</a><br />
 

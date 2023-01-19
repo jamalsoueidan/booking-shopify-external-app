@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import ApplicationRoot from "./ApplicationRoot";
+import ApplicationRoot from "./Application";
 
 import { QueryProvider } from "@providers/QueryProvider";
 import "@shopify/polaris/build/esm/styles.css";

@@ -1,7 +1,16 @@
-import { Frame, Link, Text, TextContainer, TopBar } from "@shopify/polaris";
+import {
+  Frame,
+  Icon,
+  Link,
+  Text,
+  TextContainer,
+  TopBar,
+} from "@shopify/polaris";
 import { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.avif";
+import { LanguageMinor } from "@shopify/polaris-icons";
+import { useSettings } from "@jamalsoueidan/bsf.bsf-pkg";
 
 const Footer = styled.div`
   position: absolute;
@@ -28,12 +37,21 @@ const Flex = styled.div`
   }
 `;
 
+const logoOptions = {
+  width: 124,
+  topBarSource: logo,
+  contextualSaveBarSource: "asd",
+  url: "/",
+  accessibilityLabel: "Logo",
+};
+
 interface LoginFrameProps {
   title: string;
   children: ReactNode;
 }
 
 export const LoginFrame = ({ title, children }: LoginFrameProps) => {
+  const { update } = useSettings();
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
@@ -44,13 +62,46 @@ export const LoginFrame = ({ title, children }: LoginFrameProps) => {
     [mobileNavigationActive]
   );
 
-  const logoOptions = {
-    width: 124,
-    topBarSource: logo,
-    contextualSaveBarSource: "asd",
-    url: "/",
-    accessibilityLabel: "Logo",
-  };
+  const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
+
+  const toggleIsSecondaryMenuOpen = useCallback(
+    () => setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen),
+    []
+  );
+
+  const secondaryMenuMarkup = (
+    <TopBar.Menu
+      activatorContent={
+        <span>
+          <Icon source={LanguageMinor} />
+          <Text variant="bodySm" as="span" visuallyHidden>
+            Change Language
+          </Text>
+        </span>
+      }
+      open={isSecondaryMenuOpen}
+      onOpen={toggleIsSecondaryMenuOpen}
+      onClose={toggleIsSecondaryMenuOpen}
+      actions={[
+        {
+          items: [
+            {
+              content: "Dansk",
+              onAction: () => {
+                update({ language: "da" });
+              },
+            },
+            {
+              content: "English",
+              onAction: () => {
+                update({ language: "en" });
+              },
+            },
+          ],
+        },
+      ]}
+    />
+  );
 
   return (
     <Frame
@@ -58,7 +109,7 @@ export const LoginFrame = ({ title, children }: LoginFrameProps) => {
       topBar={
         <TopBar
           showNavigationToggle
-          userMenu={null}
+          secondaryMenu={secondaryMenuMarkup}
           onNavigationToggle={toggleMobileNavigationActive}
         />
       }

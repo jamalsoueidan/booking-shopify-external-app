@@ -1,6 +1,6 @@
-import { useDate, useTagOptions } from "@hooks";
+import { useDate } from "@hooks";
 import { ScheduleBodyUpdate } from "@jamalsoueidan/bsb.bsb-pkg";
-import { useToast } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useTag, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import {
   useStaffScheduleDestroy,
   useStaffScheduleUpdate,
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default ({ info, setInfo }: Props) => {
-  const { options } = useTagOptions();
+  const { options } = useTag();
   const params = useParams();
   const { show } = useToast();
   const toggleActive = () => setInfo(null);

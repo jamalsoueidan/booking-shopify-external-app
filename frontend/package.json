@@ -15,7 +15,7 @@
     "@fullcalendar/list": "^6.0.2",
     "@fullcalendar/react": "^6.0.2",
     "@fullcalendar/timegrid": "^6.0.2",
-    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.15",
+    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.22",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",
     "@shopify/react-form": "^2.5.0",

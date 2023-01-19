@@ -1,4 +1,4 @@
-import { useDate, useTagOptions } from "@hooks";
+import { useDate } from "@hooks";
 import { Card, Layout, Modal } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { format } from "date-fns";
@@ -6,7 +6,7 @@ import da from "date-fns/locale/da";
 import { forwardRef, useImperativeHandle } from "react";
 import { useParams } from "react-router-dom";
 import { CreateScheduleForm } from "./_createScheduleForm";
-import { useToast } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useTag, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useStaffScheduleCreate } from "@services/staff/schedule";
 
 interface CreateDayScheduleProps {
@@ -15,7 +15,7 @@ interface CreateDayScheduleProps {
 }
 
 export default forwardRef(({ date, close }: CreateDayScheduleProps, ref) => {
-  const { options } = useTagOptions();
+  const { options } = useTag();
   const { show } = useToast();
   const params = useParams();
   const { toUtc } = useDate();

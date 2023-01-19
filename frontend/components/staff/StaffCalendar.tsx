@@ -5,8 +5,9 @@ import {
   EventContentArg,
 } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
-import { useDate, useTagOptions } from "@hooks";
+import { useDate } from "@hooks";
 import { Schedule } from "@jamalsoueidan/bsb.bsb-pkg";
+import { useTag } from "@jamalsoueidan/bsf.bsf-pkg";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
 
@@ -19,7 +20,7 @@ interface StaffCalendarProps {
 
 export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
   const { toTimeZone } = useDate();
-  const { select: selectTag } = useTagOptions();
+  const { select: selectTag } = useTag();
 
   const [date, setDate] = useState<CalendarDateChangeProps>();
 
@@ -68,7 +69,7 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
         }}
       >
         <div>{hour}</div>
-        <div>{selectTag(schedule.tag)} </div>
+        <div>{selectTag(schedule.tag as any)} </div>
         {schedule.groupId && (
           <div
             style={{

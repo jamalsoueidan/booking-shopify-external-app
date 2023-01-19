@@ -1,4 +1,5 @@
 import { LoginFrame } from "@components/application/LoginFrame";
+import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useLogin } from "@services/login";
 import {
   Banner,
@@ -15,10 +16,21 @@ import {
 import { useField, useForm } from "@shopify/react-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const locales = {
+  da: {
+    receive: "Modtag kode på mobil",
+  },
+  en: {
+    receive: "Receive code on phone",
+  },
+};
+
 export default () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { login } = useLogin();
+
+  const { t } = useTranslation({ id: "login", locales });
 
   const {
     fields: { identification, password },
@@ -73,7 +85,7 @@ export default () => {
               <Text variant="bodyMd" as="span">
                 or
               </Text>
-              <Link url="phone">Receive code on phone</Link>
+              <Link url="phone">{t("receive")}</Link>
             </Stack>
           </FormLayout>
         </Form>
