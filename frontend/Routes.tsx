@@ -1,16 +1,16 @@
 import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
-import BookingNew from "@pages/booking/booking.new";
-import Schedules from "@pages/schedules";
-import Setting from "@pages/setting";
-import Staff from "@pages/staff";
+import BookingNew from "pages/booking/booking.new";
+import Schedules from "pages/schedules";
+import Setting from "pages/setting";
+import Staff from "pages/staff";
 import NotFound from "pages/NotFound";
-import Login from "@pages/auth/login";
-import Phone from "@pages/auth/phone";
 import Dashboard from "pages/dashboard";
 import { ProtectedRoute } from "providers/Protected";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Auth from "@pages/auth/auth";
+import Auth from "pages/auth/auth";
+import Login from "pages/auth/login";
+import Phone from "pages/auth/phone";
 
 const Booking = lazy(() => import("pages/booking"));
 
