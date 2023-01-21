@@ -1,11 +1,24 @@
 import { Modal, Tabs } from "@shopify/polaris";
-import { useCallback, useRef, useState } from "react";
-import { CreateManyShiftsModal } from "./create-many-shifts-modal";
-import { CreateOneShiftModal } from "./create-one-shift-modal";
+import { Suspense, lazy, useCallback, useRef, useState } from "react";
+import { CreateManyShiftsModal } from "./create-many-shifts-form";
+import { CreateOneShiftModal } from "./create-one-shift-form";
 import {
   CreateManyShiftsRefMethod,
   CreateOneShiftRefMethod,
+  LoadingSpinner,
 } from "@jamalsoueidan/bsf.bsf-pkg";
+
+const CreateManyShiftsForm = lazy(() =>
+  import("./create-many-shifts-form").then((module) => ({
+    default: module.CreateManyShiftsModal,
+  }))
+);
+
+const CreateOneShiftForm = lazy(() =>
+  import("./create-one-shift-form").then((module) => ({
+    default: module.CreateOneShiftModal,
+  }))
+);
 
 export default ({ info, setInfo }: any) => {
   const ref = useRef<CreateManyShiftsRefMethod | CreateOneShiftRefMethod>();
@@ -57,15 +70,13 @@ export default ({ info, setInfo }: any) => {
       <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
         <Modal.Section>
           {tabs[selected].id === "create-day" ? (
-            <CreateOneShiftModal
-              ref={ref}
-              date={info.dateStr}
-            ></CreateOneShiftModal>
+            <Suspense fallback={<LoadingSpinner />}>
+              <CreateOneShiftForm ref={ref} date={info.dateStr} />
+            </Suspense>
           ) : (
-            <CreateManyShiftsModal
-              ref={ref}
-              date={info.dateStr}
-            ></CreateManyShiftsModal>
+            <Suspense fallback={<LoadingSpinner />}>
+              <CreateManyShiftsForm ref={ref} date={info.dateStr} />
+            </Suspense>
           )}
         </Modal.Section>
       </Tabs>

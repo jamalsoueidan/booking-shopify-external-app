@@ -24,6 +24,7 @@ if (process.env.npm_lifecycle_event === "build") {
           react: ["react", "react-router-dom", "react-dom", "react-query"],
           shopify: ["@shopify/polaris"],
           date: ["date-fns-tz", "date-fns"],
+          axios: ["axios"],
         },
       },
     },
