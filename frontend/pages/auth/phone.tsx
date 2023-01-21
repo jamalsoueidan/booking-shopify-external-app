@@ -64,7 +64,6 @@ export default () => {
 
   return (
     <AuthPage title={t("title")}>
-      <FormErrors errors={submitErrors} />
       <Card sectioned>
         <Form onSubmit={submit}>
           <FormLayout>

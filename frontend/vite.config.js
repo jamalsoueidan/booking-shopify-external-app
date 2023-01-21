@@ -23,6 +23,7 @@ if (process.env.npm_lifecycle_event === "build") {
         manualChunks: {
           react: ["react", "react-router-dom", "react-dom", "react-query"],
           shopify: ["@shopify/polaris"],
+          date: ["date-fns-tz", "date-fns"],
         },
       },
     },

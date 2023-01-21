@@ -1,14 +1,14 @@
-import { Modal, Tabs } from '@shopify/polaris';
-import { useCallback, useRef, useState } from 'react';
-import CreateAllSchedule from './CreateAllSchedule';
-import CreateDaySchedule from './CreateDaySchedule';
-
-interface RefMethod {
-  submit: () => boolean;
-}
+import { Modal, Tabs } from "@shopify/polaris";
+import { useCallback, useRef, useState } from "react";
+import { CreateManyShiftsModal } from "./create-many-shifts-modal";
+import { CreateOneShiftModal } from "./create-one-shift-modal";
+import {
+  CreateManyShiftsRefMethod,
+  CreateOneShiftRefMethod,
+} from "@jamalsoueidan/bsf.bsf-pkg";
 
 export default ({ info, setInfo }: any) => {
-  const ref = useRef<RefMethod>();
+  const ref = useRef<CreateManyShiftsRefMethod | CreateOneShiftRefMethod>();
   const toggleActive = useCallback(() => setInfo(null), []);
   const [loading, setLoading] = useState<boolean>(false);
   const [selected, setSelected] = useState(0);
@@ -19,16 +19,20 @@ export default ({ info, setInfo }: any) => {
   );
 
   const submit = useCallback(() => {
-    setLoading(ref.current.submit());
+    const noErrors = ref.current.submit().length === 0;
+    setLoading(true);
+    if (noErrors) {
+      setInfo(null);
+    }
   }, [ref]);
 
   const tabs = [
     {
-      id: 'create-all',
-      content: 'Create for range',
+      id: "create-all",
+      content: "Create for range",
     },
     {
-      id: 'create-day',
+      id: "create-day",
       content: `Create for day`,
     },
   ];
@@ -45,22 +49,25 @@ export default ({ info, setInfo }: any) => {
       }}
       secondaryActions={[
         {
-          content: 'Luk',
+          content: "Luk",
           onAction: toggleActive,
         },
-      ]}>
+      ]}
+    >
       <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
-        {tabs[selected].id === 'create-day' ? (
-          <CreateDaySchedule
-            ref={ref}
-            date={info.dateStr}
-            close={setInfo}></CreateDaySchedule>
-        ) : (
-          <CreateAllSchedule
-            ref={ref}
-            date={info.dateStr}
-            close={setInfo}></CreateAllSchedule>
-        )}
+        <Modal.Section>
+          {tabs[selected].id === "create-day" ? (
+            <CreateOneShiftModal
+              ref={ref}
+              date={info.dateStr}
+            ></CreateOneShiftModal>
+          ) : (
+            <CreateManyShiftsModal
+              ref={ref}
+              date={info.dateStr}
+            ></CreateManyShiftsModal>
+          )}
+        </Modal.Section>
       </Tabs>
     </Modal>
   );

@@ -66,7 +66,7 @@ export default () => {
       if (!response.success) {
         return {
           status: "fail",
-          errors: [{ field: ["phone"], message: t("error") }],
+          errors: [{ field: ["identification"], message: t("error") }],
         };
       } else {
         navigate("/dashboard");
@@ -85,8 +85,6 @@ export default () => {
             <br />
           </>
         )}
-
-        <FormErrors errors={submitErrors} />
 
         <Form onSubmit={submit}>
           <FormLayout>
