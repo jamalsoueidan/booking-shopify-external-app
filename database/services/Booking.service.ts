@@ -27,7 +27,7 @@ export const getBookings = ({ shop, start, end, staff }: GetBookingsProps) => {
 };
 
 interface GetBookingByIdProps extends ShopQuery {
-  id?: string;
+  id: string;
   staff?: string[];
 }
 
