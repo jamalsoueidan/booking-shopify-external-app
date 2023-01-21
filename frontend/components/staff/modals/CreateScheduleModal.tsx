@@ -1,12 +1,10 @@
-import { Modal, Tabs } from "@shopify/polaris";
-import { Suspense, lazy, useCallback, useRef, useState } from "react";
-import { CreateManyShiftsModal } from "./create-many-shifts-form";
-import { CreateOneShiftModal } from "./create-one-shift-form";
 import {
   CreateManyShiftsRefMethod,
   CreateOneShiftRefMethod,
   LoadingSpinner,
 } from "@jamalsoueidan/bsf.bsf-pkg";
+import { Modal, Tabs } from "@shopify/polaris";
+import { Suspense, lazy, useCallback, useRef, useState } from "react";
 
 const CreateManyShiftsForm = lazy(() =>
   import("./create-many-shifts-form").then((module) => ({
