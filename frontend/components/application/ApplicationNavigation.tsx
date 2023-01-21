@@ -19,12 +19,12 @@ export const AppNavigation = () => {
           {
             label: "Dashboard",
             icon: HomeMajor,
-            onClick: () => navigate("/dashboard"),
+            onClick: () => navigate("/admin/dashboard"),
           },
           {
             label: "Bookings",
             icon: CalendarTickMajor,
-            onClick: () => navigate("/dashboard/bookings"),
+            onClick: () => navigate("/admin/bookings"),
           },
         ]}
       />
@@ -34,17 +34,17 @@ export const AppNavigation = () => {
           {
             label: "Schedules",
             icon: CalendarMajor,
-            onClick: () => navigate("/dashboard/schedules"),
+            onClick: () => navigate("/admin/schedules"),
           },
           {
             label: "Min side",
             icon: ProfileMajor,
-            onClick: () => navigate("/dashboard/staff"),
+            onClick: () => navigate("/admin/staff"),
           },
           {
             label: "Indstillinger",
             icon: SettingsMajor,
-            onClick: () => navigate("/dashboard/settings"),
+            onClick: () => navigate("/admin/settings"),
           },
           {
             label: "Log af",

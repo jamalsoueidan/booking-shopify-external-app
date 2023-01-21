@@ -1,5 +1,5 @@
 import { AuthPage } from "@components/auth/AuthPage";
-import { FormErrors, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useLogin } from "@services/login";
 import {
   Banner,
@@ -69,7 +69,7 @@ export default () => {
           errors: [{ field: ["identification"], message: t("error") }],
         };
       } else {
-        navigate("/dashboard");
+        navigate("/admin/");
       }
     },
   });

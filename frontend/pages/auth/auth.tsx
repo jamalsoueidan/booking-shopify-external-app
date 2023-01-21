@@ -1,10 +1,11 @@
 import { AuthFrame } from "@components/auth/AuthFrame";
 import { Box, Button, Image, Text, TextContainer } from "@shopify/polaris";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import bookings from "../../assets/bookings.png";
 import schedule from "../../assets/schedule.png";
-import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { LoadingPage, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { Suspense, lazy } from "react";
 
 const Center = styled.div`
   display: flex;
@@ -36,6 +37,9 @@ const locales = {
     login: "Login",
   },
 };
+
+const Login = lazy(() => import("./login"));
+const Phone = lazy(() => import("./phone"));
 
 export default () => {
   const { pathname } = useLocation();
@@ -76,7 +80,12 @@ export default () => {
           </Flex>
         </Center>
       ) : (
-        <Outlet />
+        <Suspense fallback={<LoadingPage title="Loading page..." />}>
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="phone" element={<Phone />} />
+          </Routes>
+        </Suspense>
       )}
     </AuthFrame>
   );
