@@ -16,7 +16,7 @@ const Auth = lazy(() => import("pages/auth/auth"));
 
 export default () => {
   return (
-    <Suspense fallback={<LoadingPage title="Loading bookings" />}>
+    <Suspense fallback={<LoadingPage title="Loading page..." />}>
       <Routes>
         <Route
           path="dashboard"
