@@ -28,8 +28,8 @@ export default () => {
           <Suspense fallback={<LoadingPage title="Loading page..." />}>
             <Routes>
               <Route index element={<Dashboard />} />
-              <Route path="bookings" element={<Booking />} />
               <Route path="bookings/new" element={<BookingNew />} />
+              <Route path="bookings/*" element={<Booking />} />
               <Route path="schedules" element={<Schedules />} />
               <Route path="staff" element={<Staff />} />
               <Route path="settings" element={<Setting />} />

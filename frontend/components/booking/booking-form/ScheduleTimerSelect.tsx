@@ -1,4 +1,4 @@
-import { useDate } from "@hooks/useDate";
+import { useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useWidgetDate } from "@services/widget";
 import { Select, SelectOption } from "@shopify/polaris";
 import { Field } from "@shopify/react-form";

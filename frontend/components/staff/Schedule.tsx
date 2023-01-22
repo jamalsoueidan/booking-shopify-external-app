@@ -7,9 +7,7 @@ import { Card } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 
 const StaffCalendar = lazy(() => import("./StaffCalendar"));
-
 const CreateScheduleModal = lazy(() => import("./modals/CreateScheduleModal"));
-
 const EditScheduleModal = lazy(() => import("./modals/EditScheduleModal"));
 
 interface ScheduleProps {

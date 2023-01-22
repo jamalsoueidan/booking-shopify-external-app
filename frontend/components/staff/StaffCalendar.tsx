@@ -1,11 +1,10 @@
-import Calendar from "@components/BaseCalendar";
 import {
   DatesSetArg,
   EventClickArg,
   EventContentArg,
 } from "@fullcalendar/core";
+import { Calendar, useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { DateClickArg } from "@fullcalendar/interaction";
-import { useDate } from "@hooks";
 import { Schedule } from "@jamalsoueidan/bsb.bsb-pkg";
 import { useTag } from "@jamalsoueidan/bsf.bsf-pkg";
 import { format } from "date-fns";
