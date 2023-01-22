@@ -1,4 +1,5 @@
 import LoadingModal from "@components/LoadingModal";
+import { BookingModal } from "@components/booking/booking-modal/booking-modal";
 import {
   BookingCalendarEvent,
   LoadingSpinner,
@@ -28,13 +29,13 @@ const locales = {
   },
 };
 
-const BookingModal = lazy(() =>
+/*const BookingModal = lazy(() =>
   import("../components/booking/booking-modal/booking-modal").then(
     (module) => ({
       default: module.BookingModal,
     })
   )
-);
+);*/
 
 const StaffSelection = lazy(() =>
   import("@jamalsoueidan/bsf.bsf-pkg").then((module) => ({

@@ -1,4 +1,4 @@
-import { BookingFulfillmentStatus } from "@jamalsoueidan/bsb.bsb-pkg";
+import { BookingFulfillmentStatus } from "@jamalsoueidan/bsb.mongodb.types";
 import { useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useModal } from "@providers/modal";
 import { Banner, Link, Modal, TextContainer } from "@shopify/polaris";

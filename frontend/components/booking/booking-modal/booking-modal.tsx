@@ -1,4 +1,7 @@
-import { BookingCalendarEvent } from "@jamalsoueidan/bsf.bsf-pkg";
+import {
+  BookingCalendarEvent,
+  LoadingSpinner,
+} from "@jamalsoueidan/bsf.bsf-pkg";
 import { ModalProvider } from "@providers/modal";
 import { useBookingGet } from "@services/booking";
 import { Card, Tabs } from "@shopify/polaris";
@@ -60,10 +63,14 @@ export const BookingModal = () => {
     <ModalProvider large open={true} onClose={onClose} title={data?.title}>
       <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
-          <Routes>
-            <Route index element={<BookingDetailsView booking={data} />} />
-            <Route path="notifications" element={<BookingDetailsEdit />} />
-          </Routes>
+          {!data ? (
+            <LoadingSpinner />
+          ) : (
+            <Routes>
+              <Route index element={<BookingDetailsView booking={data} />} />
+              <Route path="notifications" element={<BookingDetailsEdit />} />
+            </Routes>
+          )}
         </Tabs>
       </Card>
     </ModalProvider>

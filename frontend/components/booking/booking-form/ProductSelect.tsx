@@ -1,4 +1,4 @@
-import { Product } from "@jamalsoueidan/bsb.bsb-pkg";
+import { Product } from "@jamalsoueidan/bsb.mongodb.types";
 import { useProducts } from "@services/product";
 import { Select, SelectOption } from "@shopify/polaris";
 import { Field } from "@shopify/react-form";

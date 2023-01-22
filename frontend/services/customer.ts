@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks";
-import { CustomerQuery } from "@jamalsoueidan/bsb.bsb-pkg";
+import { CustomerQuery } from "@jamalsoueidan/bsb.mongodb.types";
 
 export const useCustomer = () => {
   const { get } = useFetch();

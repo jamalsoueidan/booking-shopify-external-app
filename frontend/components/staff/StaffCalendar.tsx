@@ -5,7 +5,7 @@ import {
 } from "@fullcalendar/core";
 import { Calendar, useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { DateClickArg } from "@fullcalendar/interaction";
-import { Schedule } from "@jamalsoueidan/bsb.bsb-pkg";
+import { Schedule } from "@jamalsoueidan/bsb.mongodb.types";
 import { useTag } from "@jamalsoueidan/bsf.bsf-pkg";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";

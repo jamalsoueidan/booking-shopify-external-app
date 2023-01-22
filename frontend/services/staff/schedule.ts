@@ -3,11 +3,11 @@ import {
   ScheduleBodyUpdate,
   ScheduleBodyUpdateOrCreate,
   ScheduleGetQuery,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+} from "@jamalsoueidan/bsb.mongodb.types";
 import {
   Schedule,
   ScheduleUpdateOrDestroyQuery,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+} from "@jamalsoueidan/bsb.mongodb.types";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 

@@ -5,7 +5,7 @@ import {
   WidgetStaff,
   WidgetDateQuery,
   WidgetSchedule,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+} from "@jamalsoueidan/bsb.mongodb.types";
 
 export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
   const { get, mutate } = useFetch();
