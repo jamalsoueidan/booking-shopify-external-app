@@ -7,6 +7,7 @@ export const useGroup = () => {
   const { data, isLoading } = useQuery<ApiResponse<Array<Staff>>>({
     queryKey: ["group"],
     queryFn: () => get(`group`),
+    suspense: true,
   });
 
   return {

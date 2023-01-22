@@ -14,8 +14,6 @@ const Schedules = lazy(() => import("pages/schedules"));
 const BookingNew = lazy(() => import("pages/booking/booking.new"));
 const Setting = lazy(() => import("pages/setting"));
 const Staff = lazy(() => import("pages/staff"));
-const Login = lazy(() => import("pages/auth/login"));
-const Phone = lazy(() => import("pages/auth/phone"));
 
 export default () => {
   // force fetching userSetting so application change language! until another solution

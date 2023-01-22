@@ -12,10 +12,6 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
     plural: "staff",
   };
 
-  if (!data) {
-    return <LoadingSpinner />;
-  }
-
   return (
     <Card title="Medarbejder">
       <ResourceList

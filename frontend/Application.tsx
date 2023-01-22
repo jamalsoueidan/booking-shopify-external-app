@@ -1,4 +1,3 @@
-import { ApplicationTranslations } from "@components/application/ApplicationTranslations";
 import { SettingsProvider } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useUserSetting } from "@services/user";
 import ApplicationRoutes from "Routes";
@@ -19,9 +18,7 @@ export default () => {
   return (
     <SettingsProvider value={value}>
       <BrowserRouter>
-        <ApplicationTranslations>
-          <ApplicationRoutes />
-        </ApplicationTranslations>
+        <ApplicationRoutes />
       </BrowserRouter>
     </SettingsProvider>
   );
