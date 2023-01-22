@@ -14,7 +14,6 @@ const proxyOptions = {
 };
 
 let build = {};
-console.log(process.env.npm_lifecycle_event);
 if (process.env.npm_lifecycle_event === "build") {
   build = {
     rollupOptions: {

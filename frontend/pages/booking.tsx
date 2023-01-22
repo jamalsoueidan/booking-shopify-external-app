@@ -1,4 +1,4 @@
-import { BookingModal } from "@components/booking/booking-modal/booking-modal";
+import LoadingModal from "@components/LoadingModal";
 import {
   BookingCalendarEvent,
   LoadingSpinner,
@@ -28,6 +28,14 @@ const locales = {
   },
 };
 
+const BookingModal = lazy(() =>
+  import("../components/booking/booking-modal/booking-modal").then(
+    (module) => ({
+      default: module.BookingModal,
+    })
+  )
+);
+
 const StaffSelection = lazy(() =>
   import("@jamalsoueidan/bsf.bsf-pkg").then((module) => ({
     default: module.BookingStaff,
@@ -42,8 +50,6 @@ const BookingCalendar = lazy(() =>
 
 export default () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
   const [staff, setStaff] = useState<Staff>();
   const [date, setDate] = useState<Pick<GetBookingsRequest, "start" | "end">>();
 
@@ -59,8 +65,8 @@ export default () => {
 
   const badges = useMemo(
     () =>
-      options.map((o) => (
-        <Badge key={o.label} status={o.bannerStatus} progress="complete">
+      options.map((o, _) => (
+        <Badge key={_} status={o.bannerStatus} progress="complete">
           {o.label
             ? o.label.charAt(0).toUpperCase() + o.label.slice(1)
             : t("in_progress")}
@@ -83,7 +89,14 @@ export default () => {
       }}
     >
       <Routes>
-        <Route path="/:id/*" element={<BookingModal />} />
+        <Route
+          path="/:id/*"
+          element={
+            <Suspense fallback={<LoadingModal />}>
+              <BookingModal />
+            </Suspense>
+          }
+        />
       </Routes>
       <Card sectioned>
         <Card.Section title={badges}>

@@ -31,8 +31,12 @@ interface GetBookingByIdProps extends ShopQuery {
   staff?: string[];
 }
 
-export const getBookingById = ({ id, shop, staff }: GetBookingByIdProps) => {
-  return BookingModel.aggregate([
+export const getBookingById = async ({
+  id,
+  shop,
+  staff,
+}: GetBookingByIdProps) => {
+  const bookings = await BookingModel.aggregate([
     {
       $match: {
         _id: new mongoose.Types.ObjectId(id),
@@ -42,6 +46,8 @@ export const getBookingById = ({ id, shop, staff }: GetBookingByIdProps) => {
     },
     ...lookupBooking,
   ]);
+
+  return bookings.length > 0 ? bookings[0] : null;
 };
 
 const lookupBooking = [

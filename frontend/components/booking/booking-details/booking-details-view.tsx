@@ -1,24 +1,23 @@
 import { BookingFulfillmentStatus } from "@jamalsoueidan/bsb.bsb-pkg";
-import { BookingCalendarEvent, useDate } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useModal } from "@providers/modal";
 import { Banner, Link, Modal, TextContainer } from "@shopify/polaris";
 import { differenceInHours, format, formatRelative, isAfter } from "date-fns";
 import da from "date-fns/locale/da";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const BookingDetailsView = ({
-  info,
-  toggle,
+  booking,
 }: {
-  info: BookingCalendarEvent;
-  toggle: any;
+  booking: GetBookingsResponse;
 }) => {
-  const { booking, event } = info;
   const orderUrl =
     "https://" + booking.shop + "/admin/orders/" + booking.orderId;
   const productUrl =
     "https://" + booking.shop + "/admin/products/" + booking.productId;
 
+  const navigate = useNavigate();
   const { toTimeZone } = useDate();
   const { setSecondaryActions } = useModal();
 
@@ -30,7 +29,9 @@ export const BookingDetailsView = ({
       setSecondaryActions([
         {
           content: "Ændre dato/tid",
-          onAction: toggle,
+          onAction() {
+            navigate("edit");
+          },
         },
       ]);
     }
@@ -38,7 +39,7 @@ export const BookingDetailsView = ({
     return () => {
       setSecondaryActions(null);
     };
-  }, [setSecondaryActions, info, toggle]);
+  }, [setSecondaryActions, booking]);
 
   return (
     <>
@@ -111,12 +112,12 @@ export const BookingDetailsView = ({
       <Modal.Section>
         <TextContainer>
           <strong>Dato:</strong>{" "}
-          {format(toTimeZone(event.start), "d. MMM yyyy", {
+          {format(toTimeZone(booking.start), "d. MMM yyyy", {
             locale: da,
           })}{" "}
           <i>
             (
-            {formatRelative(toTimeZone(event.start), new Date(), {
+            {formatRelative(toTimeZone(booking.start), new Date(), {
               locale: da,
             })}
             )
@@ -126,8 +127,9 @@ export const BookingDetailsView = ({
 
       <Modal.Section>
         <TextContainer>
-          <strong>Tidspunkt:</strong> {format(toTimeZone(event.start), "HH:mm")}{" "}
-          - {format(toTimeZone(event.end), "HH:mm")} (
+          <strong>Tidspunkt:</strong>{" "}
+          {format(toTimeZone(booking.start), "HH:mm")} -{" "}
+          {format(toTimeZone(booking.end), "HH:mm")} (
           <i>
             {differenceInHours(new Date(booking.end), new Date(booking.start))}{" "}
             time)

@@ -3,6 +3,7 @@ import {
   BookingBodyUpdate,
   BookingModel,
   BookingServiceCreate,
+  BookingServiceGetById,
   BookingServiceUpdate,
 } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as BookingService from "@services/Booking.service";
@@ -14,12 +15,10 @@ export const getBookings = async ({
   query,
   session,
 }: ControllerProps<GetBookingsQuery>) => {
-  let allStaff = await StaffService.getIdsbyGroup({
-    shop: session.shop,
-    group: session.group,
-  });
+  let allStaff;
 
   const { staff } = query;
+  // if picked one staff from booking-staff instead of all staff.
   if (staff) {
     const isAllowed = await StaffService.isAllowed({
       ...session, // session includes staff, so must be first
@@ -30,9 +29,19 @@ export const getBookings = async ({
       throw new Error("not allowed");
     }
     allStaff = [staff];
+  } else {
+    // if picked to see all events for all staff
+    allStaff = await StaffService.getIdsbyGroup({
+      shop: session.shop,
+      group: session.group,
+    });
   }
 
-  return BookingService.getBookings({ ...query, staff: allStaff });
+  return BookingService.getBookings({
+    ...query,
+    shop: session.shop,
+    staff: allStaff,
+  });
 };
 
 interface GetBookingByIdQuery extends ShopQuery {
@@ -41,8 +50,18 @@ interface GetBookingByIdQuery extends ShopQuery {
 
 export const getBookingById = async ({
   query,
+  session,
 }: ControllerProps<GetBookingByIdQuery>) => {
-  return BookingService.getBookingById({ ...query });
+  let allStaff = await StaffService.getIdsbyGroup({
+    shop: session.shop,
+    group: session.group,
+  });
+
+  return BookingService.getBookingById({
+    id: query.id,
+    shop: session.shop,
+    staff: allStaff,
+  });
 };
 
 export const create = ({
@@ -65,12 +84,12 @@ export const update = ({
   //TODO: handle supervisor
   // if session.roles > 1, then
   const booking = BookingModel.findOne({ _id: id, shop, staff });
-  if (booking) {
-    return BookingServiceUpdate({
-      filter: { shop, _id: id },
-      body: { ...body, staff },
-    });
-  } else {
+  if (!booking) {
     throw new Error("not allowed");
   }
+
+  return BookingServiceUpdate({
+    filter: { shop, _id: id },
+    body: { ...body, staff },
+  });
 };

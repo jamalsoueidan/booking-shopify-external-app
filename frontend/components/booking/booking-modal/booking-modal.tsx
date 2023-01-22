@@ -1,4 +1,6 @@
+import { BookingCalendarEvent } from "@jamalsoueidan/bsf.bsf-pkg";
 import { ModalProvider } from "@providers/modal";
+import { useBookingGet } from "@services/booking";
 import { Card, Tabs } from "@shopify/polaris";
 import { useCallback, useMemo } from "react";
 import {
@@ -8,14 +10,15 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import { BookingDetails } from "../booking-details/booking-details";
 import { BookingDetailsEdit } from "../booking-details/booking-details-edit";
-import { BookingCalendarEvent } from "@jamalsoueidan/bsf.bsf-pkg";
+import { BookingDetailsView } from "../booking-details/booking-details-view";
 
 export const BookingModal = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const params = useParams();
+  const params = useParams<{ id: string; "*": string }>();
+
+  const { data } = useBookingGet({ id: params.id });
   const info: BookingCalendarEvent = location.state;
 
   const onClose = useCallback(() => {
@@ -53,14 +56,12 @@ export const BookingModal = () => {
     [location]
   );
 
-  console.log(params);
-
   return (
-    <ModalProvider large open={true} onClose={onClose} title={"ok"}>
+    <ModalProvider large open={true} onClose={onClose} title={data?.title}>
       <Card>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
           <Routes>
-            <Route index element={<BookingDetails />} />
+            <Route index element={<BookingDetailsView booking={data} />} />
             <Route path="notifications" element={<BookingDetailsEdit />} />
           </Routes>
         </Tabs>
