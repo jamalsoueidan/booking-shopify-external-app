@@ -68,7 +68,14 @@ export const BookingModal = () => {
           ) : (
             <Routes>
               <Route index element={<BookingDetailsView booking={data} />} />
-              <Route path="notifications" element={<BookingDetailsEdit />} />
+              <Route
+                path="edit"
+                element={<BookingDetailsEdit booking={data} />}
+              />
+              <Route
+                path="notifications"
+                element={<BookingDetailsEdit booking={data} />}
+              />
             </Routes>
           )}
         </Tabs>

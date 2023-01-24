@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.33",
+    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.44",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",
     "@shopify/react-form": "^2.5.0",
@@ -24,7 +24,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@jamalsoueidan/bsb.mongodb.types": "^0.0.3",
+    "@jamalsoueidan/bsb.mongodb.types": "^0.0.5",
     "@rollup/plugin-dynamic-import-vars": "^2.0.2",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",

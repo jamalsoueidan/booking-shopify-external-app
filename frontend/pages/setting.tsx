@@ -1,8 +1,8 @@
 import {
   FormErrors,
-  LanguageInput,
+  InputLanguage,
   LoadingPage,
-  TimeZoneInput,
+  InputTimeZone,
   useForm,
   useToast,
   useTranslation,
@@ -83,8 +83,8 @@ export default () => {
           >
             <Card sectioned>
               <FormLayout>
-                <TimeZoneInput {...fields.timeZone} />
-                <LanguageInput {...fields.language} />
+                <InputTimeZone {...fields.timeZone} />
+                <InputLanguage {...fields.language} />
               </FormLayout>
             </Card>
           </Layout.AnnotatedSection>

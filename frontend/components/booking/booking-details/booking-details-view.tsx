@@ -3,7 +3,6 @@ import { useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useModal } from "@providers/modal";
 import { Banner, Link, Modal, TextContainer } from "@shopify/polaris";
 import { differenceInHours, format, formatRelative, isAfter } from "date-fns";
-import da from "date-fns/locale/da";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -111,17 +110,8 @@ export const BookingDetailsView = ({
 
       <Modal.Section>
         <TextContainer>
-          <strong>Dato:</strong>{" "}
-          {format(toTimeZone(booking.start), "d. MMM yyyy", {
-            locale: da,
-          })}{" "}
-          <i>
-            (
-            {formatRelative(toTimeZone(booking.start), new Date(), {
-              locale: da,
-            })}
-            )
-          </i>
+          <strong>Dato:</strong> {format(toTimeZone(booking.start), "PPP")}{" "}
+          <i>({formatRelative(toTimeZone(booking.start), new Date())})</i>
         </TextContainer>
       </Modal.Section>
 

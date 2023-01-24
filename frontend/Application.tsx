@@ -1,6 +1,8 @@
 import { SettingsProvider } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useUserSetting } from "@services/user";
 import ApplicationRoutes from "Routes";
+import { setDefaultOptions } from "date-fns";
+import da from "date-fns/locale/da";
 import { useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,6 +16,8 @@ export default () => {
     }),
     [data]
   );
+
+  setDefaultOptions({ locale: value.language === "da" ? da : undefined });
 
   return (
     <SettingsProvider value={value}>
