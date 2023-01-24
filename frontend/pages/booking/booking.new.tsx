@@ -136,7 +136,11 @@ export default () => {
                   mode="inline"
                   onMonthChange={dateChange}
                 />
-                <InputTimer {...fields.time} data={selectedDate?.hours} />
+                <InputTimer
+                  {...fields.time}
+                  data={selectedDate?.hours}
+                  mode="inline"
+                />
               </FormLayout>
             </Card>
           </Layout.AnnotatedSection>

@@ -1,10 +1,7 @@
 import { Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { useModal } from "@providers/modal";
-import { useEffect, useMemo, useState } from "react";
-import { useWidgetDate, useWidgetStaff } from "@services/widget";
-import { useBookingUpdate } from "@services/booking";
+import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
 import {
   FormErrors,
   InputDate,
@@ -16,7 +13,12 @@ import {
   useToast,
   useTranslation,
 } from "@jamalsoueidan/bsf.bsf-pkg";
-import { endOfMonth, format, isSameDay, startOfMonth } from "date-fns";
+import { useModal } from "@providers/modal";
+import { useBookingUpdate } from "@services/booking";
+import { useWidgetDate, useWidgetStaff } from "@services/widget";
+import { isSameDay } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const locales = {
   da: {
@@ -39,6 +41,7 @@ export const BookingDetailsEdit = ({
     end: new Date(),
   });
 
+  const navigate = useNavigate();
   const { update } = useBookingUpdate({ id: booking._id });
   const { t } = useTranslation({ id: "bookings-edit", locales });
   const { show } = useToast();
@@ -53,7 +56,7 @@ export const BookingDetailsEdit = ({
       {
         content: "Annullere",
         onAction: () => {
-          //navigate
+          navigate("../");
         },
       },
     ]);
@@ -102,7 +105,7 @@ export const BookingDetailsEdit = ({
     end: end.toJSON(),
   });
 
-  const hours = useMemo(() => {
+  const hours: WidgetHourRange[] = useMemo(() => {
     const bookingDefault = {
       start: booking.start,
       end: booking.end,
@@ -151,7 +154,7 @@ export const BookingDetailsEdit = ({
             mode="inline"
             onMonthChange={dateChange}
           />
-          <InputTimer {...fields.time} data={hours as any} />
+          <InputTimer {...fields.time} data={hours} mode="inline" />
           <Text variant="bodyMd" as="p" color="critical">
             ATTENTION: When you update this booking it will get deattached from
             shopify order.

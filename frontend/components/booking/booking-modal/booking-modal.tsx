@@ -13,8 +13,10 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { BookingCustomer } from "../booking-details/booking-customer";
 import { BookingDetailsEdit } from "../booking-details/booking-details-edit";
 import { BookingDetailsView } from "../booking-details/booking-details-view";
+import { BookingNotifications } from "../booking-details/booking-notifications";
 
 export const BookingModal = () => {
   const navigate = useNavigate();
@@ -50,7 +52,7 @@ export const BookingModal = () => {
   const handleTabChange = useCallback((selectedTabIndex: number) => {
     navigate(tabs[selectedTabIndex].id, {
       relative: "route",
-      state: tabs[selectedTabIndex].id,
+      state: tabs[selectedTabIndex].id || "",
     });
   }, []);
 
@@ -73,8 +75,12 @@ export const BookingModal = () => {
                 element={<BookingDetailsEdit booking={data} />}
               />
               <Route
+                path="customer"
+                element={<BookingCustomer booking={data} />}
+              />
+              <Route
                 path="notifications"
-                element={<BookingDetailsEdit booking={data} />}
+                element={<BookingNotifications booking={data} />}
               />
             </Routes>
           )}
