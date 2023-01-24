@@ -39,7 +39,7 @@ export const availability = async ({
   query,
 }: {
   query: AvailabilityQuery;
-}): Promise<Array<WidgetSchedule>> => {
+}): Promise<Array<WidgetSchedule<Date>>> => {
   const { staff, start, end, shop, productId } = query;
 
   const product = await WidgetServiceGetProduct({
