@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.45",
+    "@jamalsoueidan/bsf.bsf-pkg": "^0.0.46",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",
     "@shopify/react-form": "^2.5.0",

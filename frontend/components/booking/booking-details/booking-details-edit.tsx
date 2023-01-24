@@ -1,4 +1,11 @@
-import { Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
+import {
+  Columns,
+  Form,
+  FormLayout,
+  Modal,
+  Range,
+  Text,
+} from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
 import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
@@ -19,13 +26,6 @@ import { useWidgetDate, useWidgetStaff } from "@services/widget";
 import { isSameDay } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const locales = {
-  da: {
-    toast: "a",
-  },
-  en: {},
-};
 
 export const BookingDetailsEdit = ({
   booking,
@@ -49,12 +49,12 @@ export const BookingDetailsEdit = ({
 
   useEffect(() => {
     setPrimaryAction({
-      content: "Ændre dato/tid",
+      content: t("submit.primary_button"),
       onAction: submit,
     });
     setSecondaryActions([
       {
-        content: "Annullere",
+        content: t("submit.secondary_button"),
         onAction: () => {
           navigate("../");
         },
@@ -71,18 +71,18 @@ export const BookingDetailsEdit = ({
     fields: {
       staff: useField<string>({
         value: booking.staff._id || "",
-        validates: [notEmpty("staff is required")],
+        validates: [notEmpty(t("staff.error_select"))],
       }),
       date: useField<Date>({
         value: new Date(booking.start) || undefined,
-        validates: [notEmpty("date is required")],
+        validates: [notEmpty(t("date.error_select"))],
       }),
       time: useField<InputTimerFieldType>({
         value: {
           start: booking.start,
           end: booking.end,
         },
-        validates: [notEmpty("time is required")],
+        validates: [notEmpty(t("time.error_select"))],
       }),
     },
     onSubmit: async (fieldValues: any) => {
@@ -91,8 +91,8 @@ export const BookingDetailsEdit = ({
         end: fieldValues.time.end,
         staff: fieldValues.staff,
       });
-      //toggle();
-      show({ content: t("toast") });
+      navigate("../");
+      show({ content: t("submit.sucess") });
       return { status: "success" };
     },
     enableSaveBar: false,
@@ -134,8 +134,7 @@ export const BookingDetailsEdit = ({
     return (
       <Modal.Section>
         <Text variant="bodyMd" as="p">
-          Der er ingen medarbejder længere tilknyttet til dette produkt, gå til
-          produkt og tilføj medarbejder.
+          {t("staff.error_empty")}
         </Text>
       </Modal.Section>
     );
@@ -147,20 +146,67 @@ export const BookingDetailsEdit = ({
         <FormLayout>
           {isSubmitted && !isValid && <FormErrors errors={submitErrors} />}
           <InputStaff {...fields.staff} data={staffOptions} />
-          <InputDate
-            {...fields.date}
-            label="Vælge dato"
-            data={schedules}
-            mode="inline"
-            onMonthChange={dateChange}
-          />
-          <InputTimer {...fields.time} data={hours} mode="inline" />
-          <Text variant="bodyMd" as="p" color="critical">
-            ATTENTION: When you update this booking it will get deattached from
-            shopify order.
-          </Text>
+          <Columns columns={{ xs: 2 }}>
+            <InputDate
+              {...fields.date}
+              label="Vælge dato"
+              data={schedules}
+              mode="inline"
+              onMonthChange={dateChange}
+            />
+            <InputTimer {...fields.time} data={hours} mode="inline" />
+          </Columns>
+          {!booking.isSelfBooked ? (
+            <Text variant="bodyMd" as="p" color="critical">
+              {t("shopify")}
+            </Text>
+          ) : null}
         </FormLayout>
       </Modal.Section>
     </Form>
   );
+};
+
+const locales = {
+  da: {
+    title: "Opret en ",
+    staff: {
+      error_empty:
+        "Der er ingen medarbejder længere tilknyttet til dette produkt, gå til produkt og tilføj medarbejder.",
+      error_select: "Du mangler vælg medarbejder",
+    },
+    date: {
+      error_select: "Du mangler vælg dato",
+    },
+    time: {
+      error_select: "Du mangler vælg tid",
+    },
+    submit: {
+      primary_button: "Ændre dato/tid",
+      secondary_button: "Anulllere",
+      sucess: "Behandlingstid opdateret",
+    },
+    shopify:
+      "ATTENTION: Når du opdatere dette behandlingstid, så bliver den afkoblet fra shopify!",
+  },
+  en: {
+    title: "Bookings",
+    staff: {
+      error_empty: "No staff belong to this product yet!",
+      error_select: "You didn't pick a staff",
+    },
+    date: {
+      error_select: "You didn't pick a date",
+    },
+    time: {
+      error_select: "You didn't pick time",
+    },
+    submit: {
+      primary_button: "Change time",
+      secondary_button: "Cancel",
+      sucess: "Booking updated",
+    },
+    shopify:
+      "ATTENTION: When you update this booking it will get deattached from shopify order.",
+  },
 };

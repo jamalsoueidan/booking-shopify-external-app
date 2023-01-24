@@ -130,7 +130,6 @@ export default () => {
               <FormLayout>
                 <InputStaff {...fields.staff} data={staffOptions} />
                 <InputDate
-                  label="Vælge dato"
                   {...fields.date}
                   data={schedules}
                   mode="inline"
