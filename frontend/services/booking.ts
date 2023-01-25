@@ -76,6 +76,7 @@ export const useBookingUpdate = ({ id }: UseBookingUpdateProps) => {
   const update: UseBookingUpdateFetch = useCallback(
     async (body) => {
       await put("bookings/" + id, body);
+      await mutate(["bookings"]);
       await mutate(["booking", id]);
       await mutate(["widget", "availability"]);
     },

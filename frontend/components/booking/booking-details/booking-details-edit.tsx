@@ -9,6 +9,7 @@ import {
 import { notEmpty, useField } from "@shopify/react-form";
 
 import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
+
 import {
   FormErrors,
   InputDate,
@@ -23,7 +24,7 @@ import {
 import { useModal } from "@providers/modal";
 import { useBookingUpdate } from "@services/booking";
 import { useWidgetDate, useWidgetStaff } from "@services/widget";
-import { isSameDay } from "date-fns";
+import { endOfMonth, isSameDay, startOfMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,8 +38,8 @@ export const BookingDetailsEdit = ({
   });
 
   const [{ start, end }, dateChange] = useState<Range>({
-    start: new Date(),
-    end: new Date(),
+    start: startOfMonth(new Date(booking.start)),
+    end: endOfMonth(new Date(booking.end)),
   });
 
   const navigate = useNavigate();
@@ -122,7 +123,7 @@ export const BookingDetailsEdit = ({
     return [bookingDefault, ...schedule.hours];
   }, [schedules, fields.date.value]);
 
-  if (!staffOptions || !schedules) {
+  if (!staffOptions) {
     return (
       <Modal.Section>
         <LoadingSpinner />
