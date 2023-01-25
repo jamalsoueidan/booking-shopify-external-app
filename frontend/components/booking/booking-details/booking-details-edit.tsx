@@ -116,7 +116,7 @@ export const BookingDetailsEdit = ({
     );
 
     if (!schedule) {
-      return [bookingDefault];
+      return [];
     }
 
     return [bookingDefault, ...schedule.hours];

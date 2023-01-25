@@ -12,7 +12,7 @@
     "serve": "cross-env NODE_ENV=production TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/index.js"
   },
   "dependencies": {
-    "@jamalsoueidan/bsb.bsb-pkg": "^0.0.14",
+    "@jamalsoueidan/bsb.bsb-pkg": "^0.0.15",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",

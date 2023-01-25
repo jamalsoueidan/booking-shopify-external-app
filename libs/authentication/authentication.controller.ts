@@ -1,5 +1,5 @@
 import { createToken } from "@libs/jwt/jwt.helper";
-import { SmsApiSend } from "@jamalsoueidan/bsb.bsb-pkg";
+import { SmsApiSend, testEnv } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
 
@@ -19,14 +19,13 @@ export const receivePassword = async ({
 
   if (staff) {
     const password = await UserService.createNewPassword(staff);
-    if (process.env.NODE_ENV === "production") {
-      SmsApiSend({
-        receiver: staff.phone,
-        message: `Din adgangskode: ${password}`,
-      });
-    } else {
-      console.log("password", password);
-    }
+
+    SmsApiSend({
+      receiver: staff.phone,
+      message: `Din adgangskode: ${password}`,
+    });
+
+    console.log("password", password);
 
     return {
       message: "Check your phone",
