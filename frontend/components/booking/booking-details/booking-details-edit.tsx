@@ -122,7 +122,7 @@ export const BookingDetailsEdit = ({
     return [bookingDefault, ...schedule.hours];
   }, [schedules, fields.date.value]);
 
-  if (!staffOptions) {
+  if (!staffOptions || !schedules) {
     return (
       <Modal.Section>
         <LoadingSpinner />
