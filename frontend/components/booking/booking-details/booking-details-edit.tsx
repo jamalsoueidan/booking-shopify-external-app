@@ -155,7 +155,7 @@ export const BookingDetailsEdit = ({
               mode="inline"
               onMonthChange={dateChange}
             />
-            <InputTimer {...fields.time} data={hours} mode="inline" />
+            <InputTimer {...fields.time} data={hours} mode="list" />
           </Columns>
           {!booking.isSelfBooked ? (
             <Text variant="bodyMd" as="p" color="critical">

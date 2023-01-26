@@ -138,7 +138,7 @@ export default () => {
                 <InputTimer
                   {...fields.time}
                   data={selectedDate?.hours}
-                  mode="inline"
+                  mode="list"
                 />
               </FormLayout>
             </Card>
