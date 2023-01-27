@@ -41,9 +41,9 @@ export const BookingModal = () => {
 
   const handleTabChange = useCallback(
     (selectedTabIndex: number) => {
-      navigate(tabs[selectedTabIndex].id, {
+      navigate(tabs[selectedTabIndex].id || "", {
         relative: "route",
-        state: tabs[selectedTabIndex].id || "",
+        state: tabs[selectedTabIndex].id,
       });
     },
     [navigate, tabs],
