@@ -1,16 +1,9 @@
-import {
-  Frame,
-  Icon,
-  Link,
-  Text,
-  TextContainer,
-  TopBar,
-} from "@shopify/polaris";
+import { useSettings, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { Frame, Icon, Link, Text, TopBar } from "@shopify/polaris";
+import { LanguageMinor } from "@shopify/polaris-icons";
 import { ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import logo from "../../assets/logo.avif";
-import { LanguageMinor } from "@shopify/polaris-icons";
-import { useSettings, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 
 const Footer = styled.div`
   position: absolute;
@@ -53,21 +46,18 @@ export const AuthFrame = ({ children }: AuthFrameProps) => {
       },
     },
   });
-  const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
+  const [, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
-    () =>
-      setMobileNavigationActive(
-        (mobileNavigationActive) => !mobileNavigationActive
-      ),
-    [mobileNavigationActive]
+    () => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive),
+    [],
   );
 
   const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
 
   const toggleIsSecondaryMenuOpen = useCallback(
     () => setIsSecondaryMenuOpen((isSecondaryMenuOpen) => !isSecondaryMenuOpen),
-    []
+    [],
   );
 
   const secondaryMenuMarkup = (
@@ -118,8 +108,7 @@ export const AuthFrame = ({ children }: AuthFrameProps) => {
       {children}
       <Footer>
         <p>
-          {t("rights")} <Link url="https://wwww.by-sisters.dk">BySisters</Link>{" "}
-          ©
+          {t("rights")} <Link url="https://wwww.by-sisters.dk">BySisters</Link> ©
         </p>
         <p>Version 1.0.1</p>
       </Footer>

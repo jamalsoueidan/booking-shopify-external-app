@@ -1,14 +1,22 @@
 import LoadingModal from "@components/LoadingModal";
-import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { EventClickArg } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { Schedule as ScheduleEvent } from "@jamalsoueidan/bsb.mongodb.types";
+import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { Card } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 
 const StaffCalendar = lazy(() => import("./StaffCalendar"));
-const CreateScheduleModal = lazy(() => import("./modals/CreateScheduleModal"));
-const EditScheduleModal = lazy(() => import("./modals/EditScheduleModal"));
+const CreateScheduleModal = lazy(() =>
+  import("./modals/create-shift-modal").then((module) => ({
+    default: module.CreateShiftModal,
+  })),
+);
+const EditScheduleModal = lazy(() =>
+  import("./modals/edit-shift-modal").then((module) => ({
+    default: module.EditShiftModal,
+  })),
+);
 
 interface ScheduleProps {
   events: ScheduleEvent[];
@@ -19,15 +27,9 @@ export const Schedule = ({ events, onChangeDate }: ScheduleProps) => {
   const [showCreate, setShowCreate] = useState(null);
   const [showEdit, setShowEdit] = useState(null);
 
-  const createSchedule = useCallback(
-    (info: DateClickArg) => setShowCreate(info),
-    []
-  );
+  const createSchedule = useCallback((info: DateClickArg) => setShowCreate(info), []);
 
-  const editSchedule = useCallback(
-    (info: EventClickArg) => setShowEdit(info),
-    []
-  );
+  const editSchedule = useCallback((info: EventClickArg) => setShowEdit(info), []);
 
   return (
     <>
@@ -43,12 +45,7 @@ export const Schedule = ({ events, onChangeDate }: ScheduleProps) => {
       )}
       <Card sectioned>
         <Suspense fallback={<LoadingSpinner />}>
-          <StaffCalendar
-            onChangeDate={onChangeDate}
-            data={events}
-            create={createSchedule}
-            edit={editSchedule}
-          />
+          <StaffCalendar onChangeDate={onChangeDate} data={events} create={createSchedule} edit={editSchedule} />
         </Suspense>
       </Card>
     </>

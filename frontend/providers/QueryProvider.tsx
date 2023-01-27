@@ -1,11 +1,7 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  QueryCache,
-  MutationCache,
-} from "react-query";
+import { ReactNode } from "react";
+import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "react-query";
 
-export function QueryProvider({ children }: any) {
+export function QueryProvider({ children }: { children: ReactNode }) {
   const client = new QueryClient({
     queryCache: new QueryCache(),
     mutationCache: new MutationCache(),

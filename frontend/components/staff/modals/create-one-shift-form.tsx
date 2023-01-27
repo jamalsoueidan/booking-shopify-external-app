@@ -16,13 +16,10 @@ interface CreateDayScheduleProps {
 const CreateOneShift = lazy(() =>
   import("@jamalsoueidan/bsf.bsf-pkg").then((module) => ({
     default: module.CreateOneShift,
-  }))
+  })),
 );
 
-export const CreateOneShiftModal = forwardRef<
-  CreateOneShiftRefMethod,
-  CreateDayScheduleProps
->(({ date }, ref) => {
+export const CreateOneShiftModal = forwardRef<CreateOneShiftRefMethod, CreateDayScheduleProps>(({ date }, ref) => {
   const { show } = useToast();
   const { t } = useTranslation({ id: "create-many-shifts-modal", locales });
   const { create } = useStaffScheduleCreate();
@@ -33,7 +30,7 @@ export const CreateOneShiftModal = forwardRef<
       show({ content: t("success") });
       return { status: "success" };
     },
-    []
+    [create, show, t],
   );
 
   return (

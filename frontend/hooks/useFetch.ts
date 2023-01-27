@@ -29,11 +29,11 @@ export const useFetch = () => {
   }, []);
 
   const put = useCallback(
-    async (url: string, body?: any) => {
+    async (url: string, body?: unknown) => {
       const response = await axios.put(createURL(`/api/${url}`), body);
       return response.data;
     },
-    [axios, createURL]
+    [createURL],
   );
 
   const destroy = useCallback(
@@ -41,36 +41,31 @@ export const useFetch = () => {
       const response = await axios.delete(createURL(`/api/${url}`));
       return response.data;
     },
-    [axios, createURL]
+    [createURL],
   );
 
   const post = useCallback(
-    async <T>(url: string, body?: any): Promise<T> => {
+    async <T>(url: string, body?: unknown): Promise<T> => {
       try {
-        const response = await axios.post<any, AxiosResponse<T>>(
-          createURL(`/api/${url}`),
-          body
-        );
+        const response = await axios.post<unknown, AxiosResponse<T>>(createURL(`/api/${url}`), body);
         return response.data;
       } catch (error) {
         return error.response.data;
       }
     },
-    [axios, createURL]
+    [createURL],
   );
 
   const get = useCallback(
-    async <T = any>(url: string): Promise<T> => {
+    async <T = unknown>(url: string): Promise<T> => {
       try {
-        const response = await axios.get<any, AxiosResponse<T>>(
-          createURL(`/api/${url}`)
-        );
+        const response = await axios.get<unknown, AxiosResponse<T>>(createURL(`/api/${url}`));
         return response.data;
       } catch (error) {
         return error.response.data;
       }
     },
-    [axios, createURL]
+    [createURL],
   );
 
   return {
@@ -79,6 +74,6 @@ export const useFetch = () => {
     post,
     destroy,
     get,
-    mutate: (key: any) => queryClient.invalidateQueries(key),
+    mutate: (key: unknown) => queryClient.invalidateQueries(key),
   };
 };

@@ -1,7 +1,4 @@
-import {
-  CustomerAutocomplete,
-  ProductSelect,
-} from "@components/booking/booking-form";
+import { CustomerAutocomplete, ProductSelect } from "@components/booking/booking-form";
 import {
   InputDate,
   InputStaff,
@@ -14,15 +11,7 @@ import {
 } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useBookingCreate } from "@services/booking";
 import { useWidgetDate, useWidgetStaff } from "@services/widget";
-import {
-  Card,
-  Form,
-  FormLayout,
-  Layout,
-  Page,
-  PageActions,
-  Range,
-} from "@shopify/polaris";
+import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 import { isSameDay } from "date-fns";
 import { useMemo, useState } from "react";
@@ -70,8 +59,8 @@ export default () => {
         productId: fieldValues.productId,
         customerId: fieldValues.customer.customerId,
         staff: fieldValues.staff,
-        start: fieldValues.time.start as any,
-        end: fieldValues.time.end as any,
+        start: fieldValues.time.start as string,
+        end: fieldValues.time.end as string,
       });
       show({ content: t("submit.sucess") });
       navigate(`/admin/bookings`);
@@ -95,9 +84,7 @@ export default () => {
       return;
     }
 
-    return schedules?.find((s) =>
-      isSameDay(new Date(s.date), new Date(fields.date.value))
-    );
+    return schedules?.find((s) => isSameDay(new Date(s.date), new Date(fields.date.value)));
   }, [schedules, fields.date.value]);
 
   return (
@@ -105,9 +92,7 @@ export default () => {
       <Page
         fullWidth
         title={t("title")}
-        breadcrumbs={[
-          { content: "Bookings", onAction: () => navigate("/admin/bookings") },
-        ]}
+        breadcrumbs={[{ content: "Bookings", onAction: () => navigate("/admin/bookings") }]}
       >
         <Layout>
           <Layout.AnnotatedSection title={t("product.title")}>
@@ -122,24 +107,12 @@ export default () => {
               <CustomerAutocomplete {...fields.customer}></CustomerAutocomplete>
             </Card>
           </Layout.AnnotatedSection>
-          <Layout.AnnotatedSection
-            title={t("staff.title")}
-            description={t("staff.desc")}
-          >
+          <Layout.AnnotatedSection title={t("staff.title")} description={t("staff.desc")}>
             <Card sectioned>
               <FormLayout>
                 <InputStaff {...fields.staff} data={staffOptions} />
-                <InputDate
-                  {...fields.date}
-                  data={schedules}
-                  mode="inline"
-                  onMonthChange={dateChange}
-                />
-                <InputTimer
-                  {...fields.time}
-                  data={selectedDate?.hours}
-                  mode="list"
-                />
+                <InputDate {...fields.date} data={schedules} mode="inline" onMonthChange={dateChange} />
+                <InputTimer {...fields.time} data={selectedDate?.hours} mode="list" />
               </FormLayout>
             </Card>
           </Layout.AnnotatedSection>

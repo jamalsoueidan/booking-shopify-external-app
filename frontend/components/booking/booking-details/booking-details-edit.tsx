@@ -1,11 +1,4 @@
-import {
-  Columns,
-  Form,
-  FormLayout,
-  Modal,
-  Range,
-  Text,
-} from "@shopify/polaris";
+import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
 import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
@@ -28,11 +21,7 @@ import { endOfMonth, isSameDay, startOfMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const BookingDetailsEdit = ({
-  booking,
-}: {
-  booking: GetBookingsResponse;
-}) => {
+export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }) => {
   const { data: staffOptions } = useWidgetStaff({
     productId: booking.productId,
   });
@@ -47,26 +36,6 @@ export const BookingDetailsEdit = ({
   const { t } = useTranslation({ id: "bookings-edit", locales });
   const { show } = useToast();
   const { setPrimaryAction, setSecondaryActions } = useModal();
-
-  useEffect(() => {
-    setPrimaryAction({
-      content: t("submit.primary_button"),
-      onAction: submit,
-    });
-    setSecondaryActions([
-      {
-        content: t("submit.secondary_button"),
-        onAction: () => {
-          navigate("../");
-        },
-      },
-    ]);
-
-    return () => {
-      setSecondaryActions(null);
-      setPrimaryAction(null);
-    };
-  }, [setPrimaryAction, setPrimaryAction]);
 
   const { fields, submit, submitErrors, isSubmitted, isValid } = useForm({
     fields: {
@@ -99,6 +68,26 @@ export const BookingDetailsEdit = ({
     enableSaveBar: false,
   });
 
+  useEffect(() => {
+    setPrimaryAction({
+      content: t("submit.primary_button"),
+      onAction: submit,
+    });
+    setSecondaryActions([
+      {
+        content: t("submit.secondary_button"),
+        onAction: () => {
+          navigate("../");
+        },
+      },
+    ]);
+
+    return () => {
+      setSecondaryActions(null);
+      setPrimaryAction(null);
+    };
+  }, [setPrimaryAction, setSecondaryActions, navigate, t, submit]);
+
   const { data: schedules } = useWidgetDate({
     productId: booking.productId,
     staff: fields.staff.value,
@@ -112,16 +101,14 @@ export const BookingDetailsEdit = ({
       end: booking.end,
     };
 
-    const schedule = schedules?.find((s) =>
-      isSameDay(new Date(s.date), fields.date.value)
-    );
+    const schedule = schedules?.find((s) => isSameDay(new Date(s.date), fields.date.value));
 
     if (!schedule) {
       return [];
     }
 
     return [bookingDefault, ...schedule.hours];
-  }, [schedules, fields.date.value]);
+  }, [schedules, fields.date.value, booking.end, booking.start]);
 
   if (!staffOptions) {
     return (
@@ -148,13 +135,7 @@ export const BookingDetailsEdit = ({
           {isSubmitted && !isValid && <FormErrors errors={submitErrors} />}
           <InputStaff {...fields.staff} data={staffOptions} />
           <Columns columns={{ xs: 2 }}>
-            <InputDate
-              {...fields.date}
-              label="Vælge dato"
-              data={schedules}
-              mode="inline"
-              onMonthChange={dateChange}
-            />
+            <InputDate {...fields.date} label="Vælge dato" data={schedules} mode="inline" onMonthChange={dateChange} />
             <InputTimer {...fields.time} data={hours} mode="list" />
           </Columns>
           {!booking.isSelfBooked ? (
@@ -187,8 +168,7 @@ const locales = {
       secondary_button: "Anulllere",
       sucess: "Behandlingstid opdateret",
     },
-    shopify:
-      "ATTENTION: Når du opdatere dette behandlingstid, så bliver den afkoblet fra shopify!",
+    shopify: "ATTENTION: Når du opdatere dette behandlingstid, så bliver den afkoblet fra shopify!",
   },
   en: {
     title: "Bookings",
@@ -207,7 +187,6 @@ const locales = {
       secondary_button: "Cancel",
       sucess: "Booking updated",
     },
-    shopify:
-      "ATTENTION: When you update this booking it will get deattached from shopify order.",
+    shopify: "ATTENTION: When you update this booking it will get deattached from shopify order.",
   },
 };

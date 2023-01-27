@@ -5,23 +5,24 @@ import { CustomerPlusMajor } from "@shopify/polaris-icons";
 import { Field } from "@shopify/react-form";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-export const CustomerAutocomplete = (
-  field: Field<{ customerId: number; fullName: string }>
-) => {
+export const CustomerAutocomplete = (field: Field<{ customerId: number; fullName: string }>) => {
   const { find } = useCustomer();
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const setNewOptions = useCallback(async (value: string) => {
-    const results = await find(value);
-    setOptions(
-      results?.map((r: Customer) => ({
-        label: `${r.firstName} ${r.lastName}`,
-        value: r.customerId.toString(),
-      }))
-    );
-  }, []);
+  const setNewOptions = useCallback(
+    async (value: string) => {
+      const results = await find(value);
+      setOptions(
+        results?.map((r: Customer) => ({
+          label: `${r.firstName} ${r.lastName}`,
+          value: r.customerId.toString(),
+        })),
+      );
+    },
+    [find],
+  );
 
   const updateText = useCallback(
     async (value: string) => {
@@ -40,7 +41,7 @@ export const CustomerAutocomplete = (
       setNewOptions(value);
       setLoading(false);
     },
-    [loading]
+    [loading, setNewOptions],
   );
 
   const updateSelection = useCallback(
@@ -57,18 +58,18 @@ export const CustomerAutocomplete = (
       });
       setInputValue(selectedText[0]);
     },
-    [field.onChange, options]
+    [field, options],
   );
 
   useEffect(() => {
     setNewOptions("a");
-  }, []);
+  }, [setNewOptions]);
 
   useEffect(() => {
     if (!field.dirty) {
       setInputValue(field.defaultValue?.fullName);
     }
-  }, [field.dirty]);
+  }, [field.defaultValue?.fullName, field.dirty]);
 
   const textField = useMemo(
     () => (
@@ -81,7 +82,7 @@ export const CustomerAutocomplete = (
         autoComplete="off"
       />
     ),
-    [inputValue, updateText]
+    [inputValue, updateText],
   );
 
   return (
@@ -93,12 +94,7 @@ export const CustomerAutocomplete = (
         loading={loading}
         textField={textField}
       />
-      {field.error ? (
-        <InlineError
-          message={field.error}
-          fieldID="errorCustomerAutoComplete"
-        />
-      ) : null}
+      {field.error ? <InlineError message={field.error} fieldID="errorCustomerAutoComplete" /> : null}
       <div style={{ marginTop: "var(--p-space-1)" }}>
         <Text variant="bodyMd" as="p" color="subdued">
           Start med at udfylde feltet, så kommer der valgmuligheder frem.

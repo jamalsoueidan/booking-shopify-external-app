@@ -1,40 +1,26 @@
 import { ScheduleBodyUpdate } from "@jamalsoueidan/bsb.mongodb.types";
 import { useDate, useTag, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
-import {
-  useStaffScheduleDestroy,
-  useStaffScheduleUpdate,
-} from "@services/staff/schedule";
-import {
-  Button,
-  Checkbox,
-  Layout,
-  Modal,
-  Select,
-  TextField,
-} from "@shopify/polaris";
+import { useStaffScheduleDestroy, useStaffScheduleUpdate } from "@services/staff/schedule";
+import { Button, Checkbox, Layout, Modal, Select, TextField } from "@shopify/polaris";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
 
-interface Props {
-  info: any;
-  setInfo: any;
+interface EditShiftModalProps {
+  info: {
+    event: Record<string, any>;
+  };
+  setInfo: (value: object | null) => void;
 }
 
-export default ({ info, setInfo }: Props) => {
+export const EditShiftModal = ({ info, setInfo }: EditShiftModalProps) => {
   const { options } = useTag();
-  const params = useParams();
   const { show } = useToast();
-  const toggleActive = () => setInfo(null);
+  const toggleActive = useCallback(() => setInfo(null), [setInfo]);
   const { toTimeZone, toUtc } = useDate();
 
   const extendedProps = info.event._def.extendedProps;
-  const [startTime, setStartTime] = useState<string>(
-    format(toTimeZone(extendedProps.start), "HH:mm")
-  );
-  const [endTime, setEndTime] = useState<string>(
-    format(toTimeZone(extendedProps.end), "HH:mm")
-  );
+  const [startTime, setStartTime] = useState<string>(format(toTimeZone(extendedProps.start), "HH:mm"));
+  const [endTime, setEndTime] = useState<string>(format(toTimeZone(extendedProps.end), "HH:mm"));
   const [tag, setTag] = useState(extendedProps.tag || options[0].value);
   const [available, setAvailable] = useState(extendedProps.available || false);
 
@@ -42,26 +28,21 @@ export default ({ info, setInfo }: Props) => {
     schedule: extendedProps._id,
   });
 
-  const { isUpdating: isUpdatingAll, update: updateScheduleAll } =
-    useStaffScheduleUpdate({
-      schedule: extendedProps._id,
-    });
+  const { isUpdating: isUpdatingAll, update: updateScheduleAll } = useStaffScheduleUpdate({
+    schedule: extendedProps._id,
+  });
 
   const { isDestroying, destroy: destroySchedule } = useStaffScheduleDestroy({
     schedule: extendedProps._id,
   });
 
-  const { isDestroying: isDestroyingAll, destroy: destroyScheduleAll } =
-    useStaffScheduleDestroy({
-      schedule: extendedProps._id,
-    });
+  const { isDestroying: isDestroyingAll, destroy: destroyScheduleAll } = useStaffScheduleDestroy({
+    schedule: extendedProps._id,
+  });
 
   const handleStart = useCallback((value: string) => setStartTime(value), []);
   const handleTag = useCallback((value: string) => setTag(value), []);
-  const handleAvailable = useCallback(
-    (newChecked: boolean) => setAvailable(newChecked),
-    []
-  );
+  const handleAvailable = useCallback((newChecked: boolean) => setAvailable(newChecked), []);
   const handleEnd = useCallback((value: string) => setEndTime(value), []);
 
   const updateDate = useCallback(
@@ -79,13 +60,22 @@ export default ({ info, setInfo }: Props) => {
       type == "all" ? updateScheduleAll(body) : updateSchedule(body);
       setInfo(null);
       show({
-        content:
-          type === "all"
-            ? "Schedules has been updated"
-            : "Schedule has been updated",
+        content: type === "all" ? "Schedules has been updated" : "Schedule has been updated",
       });
     },
-    [toUtc, updateSchedule, updateScheduleAll, setInfo]
+    [
+      toUtc,
+      extendedProps.start,
+      extendedProps.end,
+      extendedProps.groupId,
+      startTime,
+      endTime,
+      tag,
+      updateScheduleAll,
+      updateSchedule,
+      setInfo,
+      show,
+    ],
   );
 
   const deleteDate = useCallback(
@@ -97,11 +87,10 @@ export default ({ info, setInfo }: Props) => {
       type == "all" ? destroyScheduleAll(body) : destroySchedule(body);
       setInfo(null);
       show({
-        content:
-          type === "all" ? "Schedules is deleted" : "Schedule is deleted",
+        content: type === "all" ? "Schedules is deleted" : "Schedule is deleted",
       });
     },
-    [destroyScheduleAll, destroySchedule, setInfo]
+    [extendedProps.groupId, destroyScheduleAll, destroySchedule, setInfo, show],
   );
 
   const formatDate = format(new Date(extendedProps.start), "MM/dd/yyyy");
@@ -113,7 +102,7 @@ export default ({ info, setInfo }: Props) => {
         onAction: toggleActive,
       },
     ],
-    [toggleActive]
+    [toggleActive],
   );
 
   const onClose = useCallback(() => toggleActive(), [toggleActive]);
@@ -124,48 +113,21 @@ export default ({ info, setInfo }: Props) => {
   const deleteDateAll = useCallback(() => deleteDate("all"), [deleteDate]);
 
   return (
-    <Modal
-      small
-      open={true}
-      onClose={onClose}
-      title="Edit availability"
-      secondaryActions={secondaryActions}
-    >
+    <Modal small open={true} onClose={onClose} title="Edit availability" secondaryActions={secondaryActions}>
       <Modal.Section>{formatDate}</Modal.Section>
       <Modal.Section>
         <Layout>
           <Layout.Section oneThird>
-            <TextField
-              label="Tid fra"
-              value={startTime}
-              type="time"
-              onChange={handleStart}
-              autoComplete="off"
-            />
+            <TextField label="Tid fra" value={startTime} type="time" onChange={handleStart} autoComplete="off" />
           </Layout.Section>
           <Layout.Section>
-            <TextField
-              label="Tid til"
-              value={endTime}
-              type="time"
-              onChange={handleEnd}
-              autoComplete="off"
-            />
+            <TextField label="Tid til" value={endTime} type="time" onChange={handleEnd} autoComplete="off" />
           </Layout.Section>
           <Layout.Section>
-            <Checkbox
-              label="Available"
-              checked={available}
-              onChange={handleAvailable}
-            />
+            <Checkbox label="Available" checked={available} onChange={handleAvailable} />
           </Layout.Section>
           <Layout.Section>
-            <Select
-              label="Tag"
-              options={options}
-              onChange={handleTag}
-              value={tag}
-            />
+            <Select label="Tag" options={options} onChange={handleTag} value={tag} />
           </Layout.Section>
           <Layout.Section>
             <Button primary onClick={updateDateOne} loading={isUpdating}>
@@ -186,11 +148,7 @@ export default ({ info, setInfo }: Props) => {
           )}
           {extendedProps.groupId && (
             <Layout.Section>
-              <Button
-                destructive
-                onClick={deleteDateAll}
-                loading={isDestroyingAll}
-              >
+              <Button destructive onClick={deleteDateAll} loading={isDestroyingAll}>
                 Slet alle
               </Button>
             </Layout.Section>

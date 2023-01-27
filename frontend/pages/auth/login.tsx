@@ -1,17 +1,7 @@
 import { AuthPage } from "@components/auth/AuthPage";
 import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useLogin } from "@services/login";
-import {
-  Banner,
-  Button,
-  Card,
-  Form,
-  FormLayout,
-  Link,
-  Stack,
-  Text,
-  TextField,
-} from "@shopify/polaris";
+import { Banner, Button, Card, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -55,7 +45,6 @@ export default () => {
   const {
     fields: { identification, password },
     submit,
-    submitErrors,
   } = useForm({
     fields: {
       identification: useField("4531317428"),
@@ -79,7 +68,7 @@ export default () => {
       <Card sectioned>
         {location.state?.message && (
           <>
-            <Banner onDismiss={() => {}}>
+            <Banner onDismiss={() => void undefined}>
               <p>{t("received_msg")}</p>
             </Banner>
             <br />
@@ -88,27 +77,16 @@ export default () => {
 
         <Form onSubmit={submit}>
           <FormLayout>
-            <TextField
-              label={t("login.label")}
-              autoComplete="email"
-              {...identification}
-            />
+            <TextField label={t("login.label")} autoComplete="email" {...identification} />
 
-            <TextField
-              label={t("password.label")}
-              type="password"
-              autoComplete="false"
-              {...password}
-            />
+            <TextField label={t("password.label")} type="password" autoComplete="false" {...password} />
 
             <Stack alignment="center" spacing="tight">
               <Button submit>{t("login_submit")}</Button>
               <Text variant="bodyMd" as="span">
                 {t("or")}
               </Text>
-              <Link onClick={() => navigate("/phone")}>
-                {t("receive_action")}
-              </Link>
+              <Link onClick={() => navigate("/phone")}>{t("receive_action")}</Link>
             </Stack>
           </FormLayout>
         </Form>

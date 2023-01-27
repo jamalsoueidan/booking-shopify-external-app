@@ -1,9 +1,10 @@
 import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
-import { checkLogin } from "@services/login";
+import { useCheckLogin } from "@services/login";
+import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-export const ProtectedRoute = ({ children }: any) => {
-  const { isLoggedIn, isFetching } = checkLogin();
+export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const { isLoggedIn, isFetching } = useCheckLogin();
 
   const token = localStorage.getItem("token");
   const location = useLocation();
@@ -17,5 +18,5 @@ export const ProtectedRoute = ({ children }: any) => {
     return <Navigate to="/" replace state={{ from: location }} />;
   }
 
-  return children;
+  return <>{children}</>;
 };

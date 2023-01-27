@@ -4,7 +4,7 @@ import { useFetch } from "../hooks/useFetch";
 
 export const useUserSetting = () => {
   const { get } = useFetch();
-  const { data, isLoading, refetch } = useQuery<ApiResponse<SettingsResponse>>({
+  const { data, isLoading } = useQuery<ApiResponse<SettingsResponse>>({
     queryKey: ["settings"],
     queryFn: () => get(`settings`),
     enabled: !!localStorage.getItem("token"),
@@ -16,23 +16,18 @@ export const useUserSetting = () => {
   };
 };
 
-type UseUserSettingUpdateFetch = (
-  body: SettingsUpdateBodyRequest
-) => Promise<ApiResponse<SettingsResponse>>;
+type UseUserSettingUpdateFetch = (body: SettingsUpdateBodyRequest) => Promise<ApiResponse<SettingsResponse>>;
 
 export const useUserSettingUpdate = () => {
   const { put, mutate } = useFetch();
 
   const update: UseUserSettingUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<SettingsResponse> = await put(
-        "settings",
-        body
-      );
+      const response: ApiResponse<SettingsResponse> = await put("settings", body);
       await mutate(["settings"]);
       return response;
     },
-    [put, mutate]
+    [put, mutate],
   );
 
   return {

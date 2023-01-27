@@ -6,14 +6,12 @@ import { useQuery } from "react-query";
 export const useStaff = () => {
   const { get } = useFetch();
 
-  const { data } = useQuery<ApiResponse<Staff>>(["staff"], () => get("staff"));
+  const { data } = useQuery<ApiResponse<Staff>>(["staff"], () => get<ApiResponse<Staff>>("staff"));
 
   return { data: data?.payload };
 };
 
-type UseStaffUpdateFetch = (
-  body: StaffBodyUpdate
-) => Promise<ApiResponse<Staff>>;
+type UseStaffUpdateFetch = (body: StaffBodyUpdate) => Promise<ApiResponse<Staff>>;
 
 export const useStaffUpdate = () => {
   const { put, mutate } = useFetch();
@@ -24,7 +22,7 @@ export const useStaffUpdate = () => {
       await mutate(["staff"]);
       return response;
     },
-    [put, mutate]
+    [put, mutate],
   );
 
   return {

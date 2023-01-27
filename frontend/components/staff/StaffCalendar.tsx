@@ -1,12 +1,7 @@
-import {
-  DatesSetArg,
-  EventClickArg,
-  EventContentArg,
-} from "@fullcalendar/core";
-import { Calendar, useDate } from "@jamalsoueidan/bsf.bsf-pkg";
+import { DatesSetArg, EventClickArg, EventContentArg } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { Schedule } from "@jamalsoueidan/bsb.mongodb.types";
-import { useTag } from "@jamalsoueidan/bsf.bsf-pkg";
+import { Calendar, useDate, useTag } from "@jamalsoueidan/bsf.bsf-pkg";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
 
@@ -35,7 +30,7 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
         onChangeDate(newDate);
       }
     },
-    [date, onChangeDate]
+    [date, onChangeDate],
   );
 
   const events = useMemo(
@@ -47,41 +42,44 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
         backgroundColor: extendedProps.tag,
         color: extendedProps.tag,
       })) || [],
-    [data]
+    [data, toTimeZone],
   );
 
-  const eventContent = useCallback((arg: EventContentArg) => {
-    const schedule: Schedule = arg.event.extendedProps as Schedule;
-    const hour = (
-      <i>
-        {format(arg.event.start, "HH:mm")} - {format(arg.event.end, "HH:mm")}
-      </i>
-    );
+  const eventContent = useCallback(
+    (arg: EventContentArg) => {
+      const schedule: Schedule = arg.event.extendedProps as Schedule;
+      const hour = (
+        <i>
+          {format(arg.event.start, "HH:mm")} - {format(arg.event.end, "HH:mm")}
+        </i>
+      );
 
-    return (
-      <div
-        style={{
-          cursor: "pointer",
-          padding: "5px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <div>{hour}</div>
-        <div>{selectTag(schedule.tag as any)} </div>
-        {schedule.groupId && (
-          <div
-            style={{
-              marginTop: "4px",
-              width: "15px",
-              height: "15px",
-              backgroundColor: "#" + schedule.groupId.slice(-6),
-            }}
-          ></div>
-        )}
-      </div>
-    );
-  }, []);
+      return (
+        <div
+          style={{
+            cursor: "pointer",
+            padding: "5px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div>{hour}</div>
+          <div>{selectTag(schedule.tag as never)} </div>
+          {schedule.groupId && (
+            <div
+              style={{
+                marginTop: "4px",
+                width: "15px",
+                height: "15px",
+                backgroundColor: "#" + schedule.groupId.slice(-6),
+              }}
+            ></div>
+          )}
+        </div>
+      );
+    },
+    [selectTag],
+  );
 
   const validRange = useCallback((start: Date) => {
     return { start };

@@ -1,20 +1,15 @@
 import { useFetch } from "@hooks";
 import {
+  Schedule,
   ScheduleBodyUpdate,
   ScheduleBodyUpdateOrCreate,
   ScheduleGetQuery,
-} from "@jamalsoueidan/bsb.mongodb.types";
-import {
-  Schedule,
   ScheduleUpdateOrDestroyQuery,
 } from "@jamalsoueidan/bsb.mongodb.types";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 
-export const useStaffSchedule = ({
-  start,
-  end,
-}: Omit<ScheduleGetQuery, "staff">) => {
+export const useStaffSchedule = ({ start, end }: Omit<ScheduleGetQuery, "staff">) => {
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<Schedule>>>({
     queryKey: ["schedules", start, end],
@@ -25,19 +20,20 @@ export const useStaffSchedule = ({
   return { data: data?.payload || [] };
 };
 
-type UseStaffScheduleCreateFunction = (
-  body: ScheduleBodyUpdateOrCreate
-) => void;
+type UseStaffScheduleCreateFunction = (body: ScheduleBodyUpdateOrCreate) => void;
 
 export const useStaffScheduleCreate = () => {
   const [isCreating, setIsCreating] = useState<boolean>();
   const { post, mutate } = useFetch();
-  const create: UseStaffScheduleCreateFunction = useCallback(async (body) => {
-    setIsCreating(true);
-    await post(`schedules`, body);
-    await mutate(["schedules"]);
-    setIsCreating(false);
-  }, []);
+  const create: UseStaffScheduleCreateFunction = useCallback(
+    async (body) => {
+      setIsCreating(true);
+      await post(`schedules`, body);
+      await mutate(["schedules"]);
+      setIsCreating(false);
+    },
+    [mutate, post],
+  );
 
   return {
     isCreating,
@@ -47,21 +43,17 @@ export const useStaffScheduleCreate = () => {
 
 type UseStaffScheduleDestroyFetch = (body: Pick<Schedule, "groupId">) => void;
 
-export const useStaffScheduleDestroy = ({
-  schedule,
-}: Omit<ScheduleUpdateOrDestroyQuery, "staff">) => {
+export const useStaffScheduleDestroy = ({ schedule }: Omit<ScheduleUpdateOrDestroyQuery, "staff">) => {
   const [isDestroying, setIsDestroying] = useState<boolean>();
   const fetch = useFetch();
   const destroy: UseStaffScheduleDestroyFetch = useCallback(
     async (body) => {
       setIsDestroying(true);
-      await fetch.destroy(
-        `schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`
-      );
+      await fetch.destroy(`schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`);
       await fetch.mutate(["schedules"]);
       setIsDestroying(false);
     },
-    [setIsDestroying, fetch]
+    [fetch, schedule],
   );
 
   return {
@@ -72,22 +64,17 @@ export const useStaffScheduleDestroy = ({
 
 type UseStaffScheduleUpdateFetch = (body: ScheduleBodyUpdate) => void;
 
-export const useStaffScheduleUpdate = ({
-  schedule,
-}: Omit<ScheduleUpdateOrDestroyQuery, "staff">) => {
+export const useStaffScheduleUpdate = ({ schedule }: Omit<ScheduleUpdateOrDestroyQuery, "staff">) => {
   const [isUpdating, setIsUpdating] = useState<boolean>();
   const { put, mutate } = useFetch();
   const update: UseStaffScheduleUpdateFetch = useCallback(
     async (body) => {
       setIsUpdating(true);
-      await put(
-        `schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`,
-        body
-      );
+      await put(`schedules/${schedule}${body.groupId ? "/group/" + body.groupId : ""}`, body);
       await mutate(["schedules"]);
       setIsUpdating(false);
     },
-    [setIsUpdating, mutate, put]
+    [put, schedule, mutate],
   );
 
   return {

@@ -1,16 +1,7 @@
 import { AuthPage } from "@components/auth/AuthPage";
-import { FormErrors, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useReceivePassword } from "@services/login";
-import {
-  Button,
-  Card,
-  Form,
-  FormLayout,
-  Link,
-  Stack,
-  Text,
-  TextField,
-} from "@shopify/polaris";
+import { Button, Card, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +36,6 @@ export default () => {
   const {
     fields: { phone },
     submit,
-    submitErrors,
   } = useForm({
     fields: {
       phone: useField("4531317428"),
@@ -67,11 +57,7 @@ export default () => {
       <Card sectioned>
         <Form onSubmit={submit}>
           <FormLayout>
-            <TextField
-              label={t("phone.label")}
-              autoComplete="phone"
-              {...phone}
-            />
+            <TextField label={t("phone.label")} autoComplete="phone" {...phone} />
             <Stack alignment="center" spacing="tight">
               <Button submit>{t("send_submit")}</Button>
               <Text variant="bodyMd" as="span">

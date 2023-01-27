@@ -3,8 +3,9 @@ import "@shopify/polaris/build/esm/styles.css";
 import da from "@shopify/polaris/locales/da.json";
 import en from "@shopify/polaris/locales/en.json";
 import { useI18n } from "@shopify/react-i18n";
+import { ReactNode } from "react";
 
-export const PolarisProvider = ({ children }: any) => {
+export const PolarisProvider = ({ children }: { children: ReactNode }) => {
   const [i18n] = useI18n({
     id: "Polaris",
     fallback: da,
@@ -13,10 +14,6 @@ export const PolarisProvider = ({ children }: any) => {
     },
   });
   return (
-    <AppProvider
-      i18n={i18n.locale === "da" ? i18n.translations[0] : i18n.translations[1]}
-    >
-      {children}
-    </AppProvider>
+    <AppProvider i18n={i18n.locale === "da" ? i18n.translations[0] : i18n.translations[1]}>{children}</AppProvider>
   );
 };

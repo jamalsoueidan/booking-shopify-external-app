@@ -1,18 +1,15 @@
 import { Frame } from "@shopify/polaris";
 import { AppNavigation } from "./ApplicationNavigation";
 import { AppTopBar } from "./ApplicationTopBar";
-import { useCallback, useState } from "react";
+import { ReactNode, useCallback, useState } from "react";
 import logo from "../../assets/logo.avif";
 
-export default ({ children }: any) => {
+export default ({ children }: { children: ReactNode }) => {
   const [mobileNavigationActive, setMobileNavigationActive] = useState(false);
 
   const toggleMobileNavigationActive = useCallback(
-    () =>
-      setMobileNavigationActive(
-        (mobileNavigationActive) => !mobileNavigationActive
-      ),
-    []
+    () => setMobileNavigationActive((mobileNavigationActive) => !mobileNavigationActive),
+    [],
   );
 
   const logoOptions = {

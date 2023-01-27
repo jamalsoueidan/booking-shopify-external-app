@@ -13,23 +13,21 @@ const locales = {
   },
 };
 
-export const AppTopBar = ({ toggleNavigation }: any) => {
+interface AppTopBarProps {
+  toggleNavigation: (value: unknown) => void;
+}
+
+export const AppTopBar = ({ toggleNavigation }: AppTopBarProps) => {
   const { data } = useStaff();
   const { t } = useTranslation({ id: "app-topbar", locales });
   const { select } = usePosition();
   const navigate = useNavigate();
   const [userMenuActive, setUserMenuActive] = useState(false);
 
-  const toggleUserMenuActive = useCallback(
-    () => setUserMenuActive((userMenuActive) => !userMenuActive),
-    []
-  );
+  const toggleUserMenuActive = useCallback(() => setUserMenuActive((userMenuActive) => !userMenuActive), []);
   const toggleMobileNavigationActive = useCallback(
-    () =>
-      toggleNavigation(
-        (mobileNavigationActive: boolean) => !mobileNavigationActive
-      ),
-    []
+    () => toggleNavigation((mobileNavigationActive: boolean) => !mobileNavigationActive),
+    [toggleNavigation],
   );
 
   const userMenuActions = [
@@ -50,18 +48,12 @@ export const AppTopBar = ({ toggleNavigation }: any) => {
     <TopBar.UserMenu
       actions={userMenuActions}
       name={data?.fullname.split(" ").map(Text.titlize).join(" ")}
-      detail={select(data?.position as any)}
+      detail={select(data?.position as never)}
       initials={data?.active ? "A" : "D"}
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
     />
   ) : null;
 
-  return (
-    <TopBar
-      showNavigationToggle
-      userMenu={userMenuMarkup}
-      onNavigationToggle={toggleMobileNavigationActive}
-    />
-  );
+  return <TopBar showNavigationToggle userMenu={userMenuMarkup} onNavigationToggle={toggleMobileNavigationActive} />;
 };

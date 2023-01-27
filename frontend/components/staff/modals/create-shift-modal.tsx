@@ -1,33 +1,33 @@
-import {
-  CreateManyShiftsRefMethod,
-  CreateOneShiftRefMethod,
-  LoadingSpinner,
-} from "@jamalsoueidan/bsf.bsf-pkg";
+import { CreateManyShiftsRefMethod, CreateOneShiftRefMethod, LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { Modal, Tabs } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useRef, useState } from "react";
 
 const CreateManyShiftsForm = lazy(() =>
   import("./create-many-shifts-form").then((module) => ({
     default: module.CreateManyShiftsModal,
-  }))
+  })),
 );
 
 const CreateOneShiftForm = lazy(() =>
   import("./create-one-shift-form").then((module) => ({
     default: module.CreateOneShiftModal,
-  }))
+  })),
 );
 
-export default ({ info, setInfo }: any) => {
+interface CreateShiftModalProps {
+  info: {
+    dateStr: string;
+  };
+  setInfo: (value: object | null) => void;
+}
+
+export const CreateShiftModal = ({ info, setInfo }: CreateShiftModalProps) => {
   const ref = useRef<CreateManyShiftsRefMethod | CreateOneShiftRefMethod>();
-  const toggleActive = useCallback(() => setInfo(null), []);
+  const toggleActive = useCallback(() => setInfo(null), [setInfo]);
   const [loading, setLoading] = useState<boolean>(false);
   const [selected, setSelected] = useState(0);
 
-  const handleTabChange = useCallback(
-    (selectedTabIndex: number) => setSelected(selectedTabIndex),
-    []
-  );
+  const handleTabChange = useCallback((selectedTabIndex: number) => setSelected(selectedTabIndex), []);
 
   const submit = useCallback(() => {
     const noErrors = ref.current.submit().length === 0;
@@ -35,7 +35,7 @@ export default ({ info, setInfo }: any) => {
     if (noErrors) {
       setInfo(null);
     }
-  }, [ref]);
+  }, [setInfo]);
 
   const tabs = [
     {
