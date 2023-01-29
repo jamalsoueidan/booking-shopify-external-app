@@ -1,6 +1,6 @@
 import { CustomerAutocomplete, ProductSelect } from "@components/booking/booking-form";
 import {
-  InputDate,
+  InputDateDrop,
   InputStaff,
   InputTimer,
   InputTimerFieldType,
@@ -110,8 +110,8 @@ export default () => {
           <Layout.AnnotatedSection title={t("staff.title")} description={t("staff.desc")}>
             <Card sectioned>
               <FormLayout>
-                <InputStaff {...fields.staff} data={staffOptions} />
-                <InputDate {...fields.date} data={schedules} mode="inline" onMonthChange={dateChange} />
+                <InputStaff field={fields.staff} data={staffOptions} />
+                <InputDateDrop field={fields.date} data={schedules} onMonthChange={dateChange} />
                 <InputTimer {...fields.time} data={selectedDate?.hours} mode="list" />
               </FormLayout>
             </Card>

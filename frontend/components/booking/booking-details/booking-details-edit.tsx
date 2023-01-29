@@ -5,7 +5,7 @@ import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
 
 import {
   FormErrors,
-  InputDate,
+  InputDateFlat,
   InputStaff,
   InputTimer,
   InputTimerFieldType,
@@ -133,9 +133,9 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
       <Modal.Section>
         <FormLayout>
           {isSubmitted && !isValid && <FormErrors errors={submitErrors} />}
-          <InputStaff {...fields.staff} data={staffOptions} />
+          <InputStaff field={fields.staff} data={staffOptions} />
           <Columns columns={{ xs: 2 }}>
-            <InputDate {...fields.date} label="Vælge dato" data={schedules} mode="inline" onMonthChange={dateChange} />
+            <InputDateFlat field={fields.date} data={schedules} onMonthChange={dateChange} />
             <InputTimer {...fields.time} data={hours} mode="list" />
           </Columns>
           {!booking.isSelfBooked ? (

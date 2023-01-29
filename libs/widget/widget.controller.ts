@@ -11,6 +11,7 @@ import {
   WidgetStaff,
   WidgetStaffQuery,
 } from "@jamalsoueidan/bsb.bsb-pkg";
+import { Aggregate } from "mongoose";
 
 export interface AvailabilityReturn extends WidgetSchedule {}
 
@@ -22,7 +23,7 @@ export const staff = ({
   query,
 }: {
   query: StaffQuery;
-}): Promise<Array<WidgetStaff>> => {
+}): Aggregate<Array<WidgetStaff>> => {
   const { productId, shop } = query;
   return WidgetServiceGetStaff({
     shop,
