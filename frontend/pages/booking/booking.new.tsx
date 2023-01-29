@@ -2,8 +2,8 @@ import { CustomerAutocomplete, ProductSelect } from "@components/booking/booking
 import {
   InputDateDrop,
   InputStaff,
-  InputTimer,
-  InputTimerFieldType,
+  InputTimerDivider,
+  InputTimerDividerFieldType,
   Validators,
   useForm,
   useToast,
@@ -49,7 +49,7 @@ export default () => {
         value: undefined,
         validates: [notEmpty(t("date.error_select"))],
       }),
-      time: useField<InputTimerFieldType>({
+      time: useField<InputTimerDividerFieldType>({
         value: undefined,
         validates: [Validators.notEmptyObject(t("time.error_select"))],
       }),
@@ -112,7 +112,7 @@ export default () => {
               <FormLayout>
                 <InputStaff field={fields.staff} data={staffOptions} />
                 <InputDateDrop field={fields.date} data={schedules} onMonthChange={dateChange} />
-                <InputTimer {...fields.time} data={selectedDate?.hours} mode="list" />
+                <InputTimerDivider field={fields.time} data={selectedDate?.hours} />
               </FormLayout>
             </Card>
           </Layout.AnnotatedSection>

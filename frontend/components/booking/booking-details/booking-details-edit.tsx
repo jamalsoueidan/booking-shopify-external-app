@@ -7,8 +7,8 @@ import {
   FormErrors,
   InputDateFlat,
   InputStaff,
-  InputTimer,
-  InputTimerFieldType,
+  InputTimerDivider,
+  InputTimerDividerFieldType,
   LoadingSpinner,
   useForm,
   useToast,
@@ -47,7 +47,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
         value: new Date(booking.start) || undefined,
         validates: [notEmpty(t("date.error_select"))],
       }),
-      time: useField<InputTimerFieldType>({
+      time: useField<InputTimerDividerFieldType>({
         value: {
           start: booking.start,
           end: booking.end,
@@ -136,7 +136,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
           <InputStaff field={fields.staff} data={staffOptions} />
           <Columns columns={{ xs: 2 }}>
             <InputDateFlat field={fields.date} data={schedules} onMonthChange={dateChange} />
-            <InputTimer {...fields.time} data={hours} mode="list" />
+            <InputTimerDivider field={fields.time} data={hours} />
           </Columns>
           {!booking.isSelfBooked ? (
             <Text variant="bodyMd" as="p" color="critical">
