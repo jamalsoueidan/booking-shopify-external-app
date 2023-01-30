@@ -87,6 +87,7 @@ export default () => {
     return schedules?.find((s) => isSameDay(new Date(s.date), new Date(fields.date.value)));
   }, [schedules, fields.date.value]);
 
+  console.log(fields.staff.value);
   return (
     <Form onSubmit={submit}>
       <Page
@@ -111,7 +112,12 @@ export default () => {
             <Card sectioned>
               <FormLayout>
                 <InputStaff field={fields.staff} data={staffOptions} />
-                <InputDateDrop field={fields.date} data={schedules} onMonthChange={dateChange} />
+                <InputDateDrop
+                  field={fields.date}
+                  data={schedules}
+                  input={{ disabled: true }}
+                  onMonthChange={dateChange}
+                />
                 <InputTimerDivider field={fields.time} data={selectedDate?.hours} />
               </FormLayout>
             </Card>

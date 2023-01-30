@@ -1,27 +1,21 @@
 import { Product } from "@jamalsoueidan/bsb.mongodb.types";
 import { useProducts } from "@services/product";
-import { Select, SelectOption } from "@shopify/polaris";
+import { Select } from "@shopify/polaris";
 import { Field } from "@shopify/react-form";
 import { useCallback, useMemo } from "react";
-
-const defaultOption: SelectOption = {
-  label: "Vælg produkt",
-  value: undefined,
-};
-
 export const ProductSelect = (field: Field<number>) => {
   const { data } = useProducts();
 
-  const productOptions = useMemo(() => {
-    const all =
+  const productOptions = useMemo(
+    () =>
       data?.map((o: Product) => ({
         key: o._id,
         label: o.title,
         value: o.productId.toString(),
-      })) || [];
+      })) || [],
 
-    return [defaultOption, ...all];
-  }, [data]);
+    [data],
+  );
 
   const onChange = useCallback(
     (selected: string) => {
@@ -33,6 +27,7 @@ export const ProductSelect = (field: Field<number>) => {
   return (
     <Select
       label="Vælg produkt"
+      placeholder="Vælg produkt"
       options={productOptions}
       value={field.value?.toString()}
       disabled={productOptions.length === 1}
