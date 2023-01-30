@@ -2,6 +2,7 @@ import { CustomerAutocomplete, ProductSelect } from "@components/booking/booking
 import {
   InputDateDrop,
   InputStaff,
+  InputStaffFieldType,
   InputTimerDivider,
   InputTimerDividerFieldType,
   Validators,
@@ -41,7 +42,7 @@ export default () => {
         },
         validates: [Validators.notEmptyObject(t("customer.error_select"))],
       }),
-      staff: useField<string>({
+      staff: useField<InputStaffFieldType>({
         value: undefined,
         validates: [notEmpty(t("staff.error_select"))],
       }),
@@ -58,7 +59,7 @@ export default () => {
       await create({
         productId: fieldValues.productId,
         customerId: fieldValues.customer.customerId,
-        staff: fieldValues.staff,
+        staff: fieldValues.staff.staff,
         start: fieldValues.time.start as string,
         end: fieldValues.time.end as string,
       });
@@ -74,7 +75,7 @@ export default () => {
 
   const { data: schedules } = useWidgetDate({
     productId: fields.productId.value,
-    staff: fields.staff.value,
+    staff: fields.staff.value?.staff,
     start: start.toJSON(),
     end: end.toJSON(),
   });
@@ -87,7 +88,6 @@ export default () => {
     return schedules?.find((s) => isSameDay(new Date(s.date), new Date(fields.date.value)));
   }, [schedules, fields.date.value]);
 
-  console.log(fields.staff.value);
   return (
     <Form onSubmit={submit}>
       <Page

@@ -62,8 +62,9 @@ export const CustomerAutocomplete = (field: Field<{ customerId: number; fullName
   );
 
   useEffect(() => {
+    // just first time to initialize customers
     setNewOptions("a");
-  }, [setNewOptions]);
+  }, []);
 
   useEffect(() => {
     if (!field.dirty) {

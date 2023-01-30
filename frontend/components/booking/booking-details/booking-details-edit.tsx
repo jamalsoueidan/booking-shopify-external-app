@@ -7,6 +7,7 @@ import {
   FormErrors,
   InputDateFlat,
   InputStaff,
+  InputStaffFieldType,
   InputTimerDivider,
   InputTimerDividerFieldType,
   LoadingSpinner,
@@ -39,8 +40,10 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
 
   const { fields, submit, submitErrors, isSubmitted, isValid } = useForm({
     fields: {
-      staff: useField<string>({
-        value: booking.staff._id || "",
+      staff: useField<InputStaffFieldType>({
+        value: booking.staff
+          ? { staff: booking.staff._id, tag: "", avatar: booking.staff.avatar, fullname: booking.staff.fullname }
+          : undefined,
         validates: [notEmpty(t("staff.error_select"))],
       }),
       date: useField<Date>({
@@ -90,7 +93,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
 
   const { data: schedules } = useWidgetDate({
     productId: booking.productId,
-    staff: fields.staff.value,
+    staff: fields.staff.value?.staff,
     start: start.toJSON(),
     end: end.toJSON(),
   });
