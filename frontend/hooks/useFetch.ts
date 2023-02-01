@@ -69,11 +69,11 @@ export const useFetch = () => {
   );
 
   return {
-    fetch,
-    put,
-    post,
     destroy,
+    fetch,
     get,
     mutate: (key: unknown) => queryClient.invalidateQueries(key),
+    post,
+    put,
   };
 };

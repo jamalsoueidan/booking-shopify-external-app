@@ -1,8 +1,7 @@
-import LoadingModal from "@components/LoadingModal";
 import { EventClickArg } from "@fullcalendar/core";
 import { DateClickArg } from "@fullcalendar/interaction";
 import { Schedule as ScheduleEvent } from "@jamalsoueidan/bsb.mongodb.types";
-import { LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
+import { LoadingModal, LoadingSpinner } from "@jamalsoueidan/bsf.bsf-pkg";
 import { Card } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 

@@ -1,3 +1,1 @@
-export default () => {
-  return <>Not Found</>;
-};
+export default () => <>Not Found</>;

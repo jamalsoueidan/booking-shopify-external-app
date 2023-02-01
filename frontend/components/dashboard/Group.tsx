@@ -7,8 +7,8 @@ interface DashboardGroupProps {
 
 export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
   const resourceName = {
-    singular: "staff",
     plural: "staff",
+    singular: "staff",
   };
 
   return (

@@ -23,7 +23,7 @@ export default () => {
       data={staff}
       action={submit}
       titleMetadata={<Metadata active={staff.active} />}
-      disallowEditing={{ group: false, active: false }}
-    ></StaffForm>
+      disallowEditing={{ active: false, group: false }}
+    />
   );
 };

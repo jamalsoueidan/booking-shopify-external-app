@@ -15,11 +15,11 @@ const Footer = styled.div`
 `;
 
 const logoOptions = {
-  width: 124,
-  topBarSource: logo,
-  contextualSaveBarSource: "asd",
-  url: "/",
   accessibilityLabel: "Logo",
+  contextualSaveBarSource: "asd",
+  topBarSource: logo,
+  url: "/",
+  width: 124,
 };
 
 interface AuthFrameProps {

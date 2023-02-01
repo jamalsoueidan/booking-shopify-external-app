@@ -6,8 +6,8 @@ export const useProducts = () => {
   const { get } = useFetch();
 
   const { data } = useQuery<ApiResponse<Array<Product>>>({
-    queryKey: ["products"],
     queryFn: () => get("products"),
+    queryKey: ["products"],
   });
 
   return {

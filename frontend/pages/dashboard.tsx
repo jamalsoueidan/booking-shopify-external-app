@@ -9,14 +9,14 @@ export default () => {
   return (
     <Page title="Dashboard">
       <Grid>
-        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+        <Grid.Cell columnSpan={{ lg: 6, md: 3, sm: 6, xl: 6, xs: 6 }}>
           <Card title="Dashboard" sectioned>
             <p>Welcome to dashboard</p>
           </Card>
         </Grid.Cell>
-        <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 3, lg: 6, xl: 6 }}>
+        <Grid.Cell columnSpan={{ lg: 6, md: 3, sm: 6, xl: 6, xs: 6 }}>
           <Suspense fallback={<LoadingSpinner />}>
-            <DashboardGroup data={group}></DashboardGroup>
+            <DashboardGroup data={group} />
           </Suspense>
         </Grid.Cell>
       </Grid>

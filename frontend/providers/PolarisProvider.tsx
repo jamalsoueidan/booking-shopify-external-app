@@ -7,8 +7,8 @@ import { ReactNode } from "react";
 
 export const PolarisProvider = ({ children }: { children: ReactNode }) => {
   const [i18n] = useI18n({
-    id: "Polaris",
     fallback: da,
+    id: "Polaris",
     async translations(locale) {
       return locale === "en" ? en : da;
     },

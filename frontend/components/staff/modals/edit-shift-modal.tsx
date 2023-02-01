@@ -51,8 +51,8 @@ export const EditShiftModal = ({ info, setInfo }: EditShiftModalProps) => {
       const end = toUtc(`${extendedProps.end.substr(0, 10)} ${endTime}`);
 
       const body: ScheduleBodyUpdate = {
-        start: start.toISOString(),
         end: end.toISOString(),
+        start: start.toISOString(),
         tag,
         ...(type === "all" ? { groupId: extendedProps.groupId } : null),
       };

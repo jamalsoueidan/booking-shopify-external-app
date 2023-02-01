@@ -7,24 +7,24 @@ import { useNavigate } from "react-router-dom";
 
 const locales = {
   da: {
-    title: "Modtag adgangskode på mobil",
-    send_submit: "Send mig adgangskode!",
+    error: "Forkert email/mobilnummer eller adgangskode!",
     login: "Log ind",
     or: "eller",
     phone: {
       label: "Indtast mobilnummer",
     },
-    error: "Forkert email/mobilnummer eller adgangskode!",
+    send_submit: "Send mig adgangskode!",
+    title: "Modtag adgangskode på mobil",
   },
   en: {
-    title: "Receive password on phone",
-    send_submit: "Send me password!",
+    error: "Wrong email/phone or password!",
     login: "Login",
     or: "or",
     phone: {
       label: "Enter your phonenumber",
     },
-    error: "Wrong email/phone or password!",
+    send_submit: "Send me password!",
+    title: "Receive password on phone",
   },
 };
 
@@ -44,8 +44,8 @@ export default () => {
       const response = await receivePassword(fieldValues);
       if (!response.success) {
         return {
-          status: "fail",
           errors: [{ field: ["phone"], message: t("error") }],
+          status: "fail",
         };
       }
       navigate("/login", { state: { message: "login" } });

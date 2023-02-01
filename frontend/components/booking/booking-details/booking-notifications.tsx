@@ -7,8 +7,8 @@ import { useCallback } from "react";
 
 export const BookingNotifications = ({ booking }: { booking: GetBookingsResponse }) => {
   const { data } = useNotification({
-    orderId: booking.orderId,
     lineItemId: booking.lineItemId,
+    orderId: booking.orderId,
   });
 
   const { resend } = useResendNotification();

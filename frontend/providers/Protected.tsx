@@ -10,7 +10,7 @@ export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
   if (isFetching) {
-    return <LoadingPage title="Checking authentication"></LoadingPage>;
+    return <LoadingPage title="Checking authentication" />;
   }
 
   if (!token || !isLoggedIn) {

@@ -23,16 +23,16 @@ export const BookingModal = () => {
   const tabs = useMemo(() => {
     const t = [
       {
-        id: null,
         content: "Behandling",
+        id: null,
       },
       {
-        id: "customer",
         content: "Kunde",
+        id: "customer",
       },
       {
-        id: "notifications",
         content: "Meddelelser",
+        id: "notifications",
       },
     ];
 

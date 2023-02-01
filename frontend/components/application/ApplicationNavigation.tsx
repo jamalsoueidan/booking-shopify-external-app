@@ -13,30 +13,30 @@ import { useNavigate } from "react-router-dom";
 const locales = {
   da: {
     booking: {
-      title: "Applikation",
-      dashboard: "Dashboard",
       bookings: "Behandlingstider",
+      dashboard: "Dashboard",
+      title: "Applikation",
     },
     staff: {
-      title: "Profil",
-      schedules: "Vagtplan",
       account: "Konto",
-      settings: "Indstillinger",
       logout: "Log ud",
+      schedules: "Vagtplan",
+      settings: "Indstillinger",
+      title: "Profil",
     },
   },
   en: {
     booking: {
-      title: "Application",
-      dashboard: "Dashboard",
       bookings: "Bookings",
+      dashboard: "Dashboard",
+      title: "Application",
     },
     staff: {
-      title: "Profile",
-      schedules: "My shift",
       account: "My account",
-      settings: "My settings",
       logout: "Logout",
+      schedules: "My shift",
+      settings: "My settings",
+      title: "Profile",
     },
   },
 };
@@ -50,13 +50,13 @@ export const AppNavigation = () => {
         title={t("booking.title")}
         items={[
           {
-            label: t("booking.dashboard"),
             icon: HomeMajor,
+            label: t("booking.dashboard"),
             onClick: () => navigate("/admin"),
           },
           {
-            label: t("booking.bookings"),
             icon: CalendarTickMajor,
+            label: t("booking.bookings"),
             onClick: () => navigate("/admin/bookings"),
           },
         ]}
@@ -65,23 +65,23 @@ export const AppNavigation = () => {
         title={t("staff.title")}
         items={[
           {
-            label: t("staff.schedules"),
             icon: CalendarMajor,
+            label: t("staff.schedules"),
             onClick: () => navigate("/admin/schedules"),
           },
           {
-            label: t("staff.account"),
             icon: ProfileMajor,
+            label: t("staff.account"),
             onClick: () => navigate("/admin/staff"),
           },
           {
-            label: t("staff.settings"),
             icon: SettingsMajor,
+            label: t("staff.settings"),
             onClick: () => navigate("/admin/settings"),
           },
           {
-            label: t("staff.logout"),
             icon: ExitMajor,
+            label: t("staff.logout"),
             onClick: () => {
               localStorage.clear();
               return navigate("/");

@@ -39,12 +39,12 @@ export const CreateShiftModal = ({ info, setInfo }: CreateShiftModalProps) => {
 
   const tabs = [
     {
-      id: "create-all",
       content: "Create for range",
+      id: "create-all",
     },
     {
-      id: "create-day",
       content: `Create for day`,
+      id: "create-day",
     },
   ];
 
@@ -55,8 +55,8 @@ export const CreateShiftModal = ({ info, setInfo }: CreateShiftModalProps) => {
       title="New availability"
       primaryAction={{
         content: `${tabs[selected].content}`,
-        onAction: submit,
         loading,
+        onAction: submit,
       }}
       secondaryActions={[
         {

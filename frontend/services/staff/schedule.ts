@@ -12,9 +12,9 @@ import { useQuery } from "react-query";
 export const useStaffSchedule = ({ start, end }: Omit<ScheduleGetQuery, "staff">) => {
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<Schedule>>>({
-    queryKey: ["schedules", start, end],
-    queryFn: () => get(`schedules?start=${start}&end=${end}`),
     enabled: !!start && !!end,
+    queryFn: () => get(`schedules?start=${start}&end=${end}`),
+    queryKey: ["schedules", start, end],
   });
 
   return { data: data?.payload || [] };
@@ -36,8 +36,8 @@ export const useStaffScheduleCreate = () => {
   );
 
   return {
-    isCreating,
     create,
+    isCreating,
   };
 };
 
@@ -78,7 +78,7 @@ export const useStaffScheduleUpdate = ({ schedule }: Omit<ScheduleUpdateOrDestro
   );
 
   return {
-    update,
     isUpdating,
+    update,
   };
 };

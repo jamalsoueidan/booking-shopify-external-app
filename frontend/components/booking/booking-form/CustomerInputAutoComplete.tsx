@@ -35,6 +35,7 @@ export const CustomerInputAutoComplete = ({ field }: CustomerAutoCompleteProps) 
 
   useEffect(() => {
     convertToOptions("a");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSelect = useCallback(
@@ -47,11 +48,17 @@ export const CustomerInputAutoComplete = ({ field }: CustomerAutoCompleteProps) 
     [field],
   );
 
-  const onSearch = useCallback((value: string | null) => {
-    convertToOptions(value || "a");
-  }, []);
+  const onSearch = useCallback(
+    (value: string | null) => {
+      convertToOptions(value || "a");
+    },
+    [convertToOptions],
+  );
 
-  const selectedOption = useMemo(() => options.find((o) => o.value === field.value?.customerId?.toString()), [field]);
+  const selectedOption = useMemo(
+    () => options.find((o) => o.value === field.value?.customerId?.toString()),
+    [field.value?.customerId, options],
+  );
 
   return (
     <InputAutoComplete
@@ -59,7 +66,7 @@ export const CustomerInputAutoComplete = ({ field }: CustomerAutoCompleteProps) 
       onSelect={onSelect}
       onSearch={onSearch}
       selectedOption={selectedOption}
-      input={{ loading, error: field.error, icon: <Icon source={CustomersMajor} color="base" /> }}
+      input={{ error: field.error, icon: <Icon source={CustomersMajor} color="base" />, loading }}
     />
   );
 };

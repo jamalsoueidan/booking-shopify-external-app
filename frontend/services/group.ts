@@ -5,8 +5,8 @@ export const useGroup = () => {
   const { get } = useFetch();
 
   const { data, isLoading } = useQuery<ApiResponse<Array<Staff>>>({
-    queryKey: ["group"],
     queryFn: () => get(`group`),
+    queryKey: ["group"],
     suspense: true,
   });
 

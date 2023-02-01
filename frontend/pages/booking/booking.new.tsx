@@ -25,44 +25,44 @@ export default () => {
   const { show } = useToast();
   const { t } = useTranslation({ id: "booking-new", locales });
   const [{ start, end }, dateChange] = useState<Range>({
-    start: new Date(),
     end: endOfMonth(new Date()),
+    start: new Date(),
   });
 
   //https://codesandbox.io/s/1wpxz?file=/src/MyForm.tsx:2457-2473
   const { fields, submit, primaryAction } = useForm({
     fields: {
-      productId: useField<number>({
-        value: undefined,
-        validates: [notEmpty(t("product.error_empty"))],
-      }),
       customer: useField<{ customerId: number; fullName: string }>({
+        validates: [Validators.notEmptyObject(t("customer.error_select"))],
         value: {
           customerId: undefined,
           fullName: undefined,
         },
-        validates: [Validators.notEmptyObject(t("customer.error_select"))],
-      }),
-      staff: useField<InputStaffField>({
-        value: undefined,
-        validates: [notEmpty(t("staff.error_select"))],
       }),
       date: useField<Date>({
-        value: undefined,
         validates: [notEmpty(t("date.error_select"))],
+        value: undefined,
+      }),
+      productId: useField<number>({
+        validates: [notEmpty(t("product.error_empty"))],
+        value: undefined,
+      }),
+      staff: useField<InputStaffField>({
+        validates: [notEmpty(t("staff.error_select"))],
+        value: undefined,
       }),
       time: useField<InputTimerDividerFieldType>({
-        value: undefined,
         validates: [Validators.notEmptyObject(t("time.error_select"))],
+        value: undefined,
       }),
     },
     onSubmit: async (fieldValues) => {
       await create({
-        productId: fieldValues.productId,
         customerId: fieldValues.customer.customerId,
+        end: fieldValues.time.end as string,
+        productId: fieldValues.productId,
         staff: fieldValues.staff.staff,
         start: fieldValues.time.start as string,
-        end: fieldValues.time.end as string,
       });
       show({ content: t("submit.sucess") });
       navigate(`/admin/bookings`);
@@ -75,10 +75,10 @@ export default () => {
   });
 
   const { data: schedules } = useWidgetDate({
+    end: end.toJSON(),
     productId: fields.productId.value,
     staff: fields.staff.value?.staff,
     start: start.toJSON(),
-    end: end.toJSON(),
   });
 
   const selectedDate = useMemo(() => {
@@ -133,57 +133,57 @@ export default () => {
 
 const locales = {
   da: {
-    title: "Opret en ny behandlingstid",
-    product: {
-      title: "1. Vælg et product",
-      desc: "Efter  du har valgt et produkt, har du mulighed for at vælg medarbejder.",
-      error_empty: "Der er ikke valgt produkt",
-    },
     customer: {
-      title: "2. Vælg en kunde",
       desc: "Hvem er behandlingen til?",
       error_select: "Du mangler vælg kunde",
-    },
-    staff: {
-      title: "3. Vælg medarbejder, dato og tid.",
-      desc: "Når du har valgt medarbejder kan du vælge dato og efterfølgende tid.",
-      error_select: "Du mangler vælg medarbejder",
+      title: "2. Vælg en kunde",
     },
     date: {
       error_select: "Du mangler vælg dato",
     },
-    time: {
-      error_select: "Du mangler vælg tid",
+    product: {
+      desc: "Efter  du har valgt et produkt, har du mulighed for at vælg medarbejder.",
+      error_empty: "Der er ikke valgt produkt",
+      title: "1. Vælg et product",
+    },
+    staff: {
+      desc: "Når du har valgt medarbejder kan du vælge dato og efterfølgende tid.",
+      error_select: "Du mangler vælg medarbejder",
+      title: "3. Vælg medarbejder, dato og tid.",
     },
     submit: {
       sucess: "Behandlingstid oprettet",
     },
+    time: {
+      error_select: "Du mangler vælg tid",
+    },
+    title: "Opret en ny behandlingstid",
   },
   en: {
-    title: "Bookings",
-    product: {
-      title: "1. Choose a Product",
-      desc: "Choose a product so staff, date and time gets enabled.",
-      error_empty: "You didn't pick a product",
-    },
     customer: {
-      title: "2. Choose a Customer",
       desc: "Assign customer to booking.",
       error_select: "You didn't pick a customer",
-    },
-    staff: {
-      title: "3. Choose staff, then date and afterwards time.",
-      desc: "When you select staff the date will be enabled and then pick date to get time",
-      error_select: "You didn't pick a staff",
+      title: "2. Choose a Customer",
     },
     date: {
       error_select: "You didn't pick a date",
     },
-    time: {
-      error_select: "You didn't pick time",
+    product: {
+      desc: "Choose a product so staff, date and time gets enabled.",
+      error_empty: "You didn't pick a product",
+      title: "1. Choose a Product",
+    },
+    staff: {
+      desc: "When you select staff the date will be enabled and then pick date to get time",
+      error_select: "You didn't pick a staff",
+      title: "3. Choose staff, then date and afterwards time.",
     },
     submit: {
       sucess: "Booking created",
     },
+    time: {
+      error_select: "You didn't pick time",
+    },
+    title: "Bookings",
   },
 };

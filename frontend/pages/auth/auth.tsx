@@ -1,11 +1,11 @@
 import { AuthFrame } from "@components/auth/AuthFrame";
+import { LoadingPage, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
 import { Box, Button, Image, Text, TextContainer } from "@shopify/polaris";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import bookings from "../../assets/bookings.png";
 import schedule from "../../assets/schedule.png";
-import { LoadingPage, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
-import { Suspense, lazy } from "react";
 
 const Center = styled.div`
   display: flex;
@@ -25,16 +25,16 @@ const Flex = styled.div`
 
 const locales = {
   da: {
-    title: "BySisters selvbetjening",
+    login: "Log ind",
     subtitle: "Lige ved hånden.",
     text: "Med BySisters Selvbetjening kan du nemt få overblik over dine bookinger, holde styr på hvilken behandlinger du har hverdag og booke selv din tider, samt se informationer om din kunder.",
-    login: "Log ind",
+    title: "BySisters selvbetjening",
   },
   en: {
-    title: "BySisters self-service",
+    login: "Login",
     subtitle: "Right by your hand.",
     text: "Using our BySisters app, you can view all of your reservations, select the hours you will be working, view all of your customers' details, and modify your settings to suit your needs.",
-    login: "Login",
+    title: "BySisters self-service",
   },
 };
 

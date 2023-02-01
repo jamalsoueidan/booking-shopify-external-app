@@ -23,17 +23,15 @@ interface LoginFrameProps {
   children: ReactNode;
 }
 
-export const AuthPage = ({ title, children }: LoginFrameProps) => {
-  return (
-    <Center>
-      <Flex>
-        <TextContainer spacing="loose">
-          <Text variant="heading2xl" as="h1">
-            <center>{title}</center>
-          </Text>
-          {children}
-        </TextContainer>
-      </Flex>
-    </Center>
-  );
-};
+export const AuthPage = ({ title, children }: LoginFrameProps) => (
+  <Center>
+    <Flex>
+      <TextContainer spacing="loose">
+        <Text variant="heading2xl" as="h1">
+          <center>{title}</center>
+        </Text>
+        {children}
+      </TextContainer>
+    </Flex>
+  </Center>
+);

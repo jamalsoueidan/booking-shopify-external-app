@@ -1,41 +1,34 @@
 import {
   FormErrors,
   InputLanguage,
-  LoadingPage,
   InputTimeZone,
+  LoadingPage,
   useForm,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useUserSetting, useUserSettingUpdate } from "@services/user";
-import {
-  Card,
-  Form,
-  FormLayout,
-  Layout,
-  Page,
-  PageActions,
-} from "@shopify/polaris";
+import { Card, Form, FormLayout, Layout, Page, PageActions } from "@shopify/polaris";
 import { useField } from "@shopify/react-form";
 
 const da = {
-  title: "Indstillinger",
   loading: "Henter indstillinger",
-  user_settings: {
-    title: "Bruger indstillinger",
-    subtitle: "Ændre udefra din preference",
-  },
+  title: "Indstillinger",
   toast: "Ændringer er blevet opdateret",
+  user_settings: {
+    subtitle: "Ændre udefra din preference",
+    title: "Bruger indstillinger",
+  },
 };
 
 const en: typeof da = {
-  title: "Settings",
   loading: "Loading settings",
-  user_settings: {
-    title: "User Settings",
-    subtitle: "Change to whatever you like",
-  },
+  title: "Settings",
   toast: "Changes is updated",
+  user_settings: {
+    subtitle: "Change to whatever you like",
+    title: "User Settings",
+  },
 };
 
 export default () => {
@@ -52,13 +45,13 @@ export default () => {
   //https://codesandbox.io/s/1wpxz?file=/src/MyForm.tsx:2457-2473
   const { fields, submit, submitErrors, primaryAction } = useForm({
     fields: {
-      timeZone: useField<string>({
-        value: data?.timeZone,
-        validates: [],
-      }),
       language: useField<string>({
-        value: data?.language || "da",
         validates: [],
+        value: data?.language || "da",
+      }),
+      timeZone: useField<string>({
+        validates: [],
+        value: data?.timeZone,
       }),
     },
     onSubmit: async (fieldValues) => {
@@ -77,10 +70,7 @@ export default () => {
       <Page fullWidth title={t("title")}>
         <Layout>
           <FormErrors errors={submitErrors} />
-          <Layout.AnnotatedSection
-            title={t("user_settings.title")}
-            description={t("user_settings.subtitle")}
-          >
+          <Layout.AnnotatedSection title={t("user_settings.title")} description={t("user_settings.subtitle")}>
             <Card sectioned>
               <FormLayout>
                 <InputTimeZone {...fields.timeZone} />

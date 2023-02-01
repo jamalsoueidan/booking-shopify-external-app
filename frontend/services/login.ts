@@ -20,9 +20,9 @@ export const useReceivePassword = () => {
   );
 
   return {
-    receivePassword,
-    isFetching,
     isFetched,
+    isFetching,
+    receivePassword,
   };
 };
 
@@ -47,9 +47,9 @@ export const useLogin = () => {
   );
 
   return {
-    login,
-    isFetching,
     isFetched,
+    isFetching,
+    login,
   };
 };
 
@@ -74,7 +74,7 @@ export const useCheckLogin = () => {
   }, [get]);
 
   return {
-    isLoggedIn,
     isFetching,
+    isLoggedIn,
   };
 };

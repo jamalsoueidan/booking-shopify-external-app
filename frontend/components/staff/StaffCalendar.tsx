@@ -21,8 +21,8 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
   const dateChanged = useCallback(
     ({ start, end }: DatesSetArg) => {
       const newDate = {
-        start: start.toISOString().slice(0, 10),
         end: end.toISOString().slice(0, 10),
+        start: start.toISOString().slice(0, 10),
       };
 
       if (newDate.start !== date?.start || newDate.end !== date?.end) {
@@ -36,11 +36,11 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
   const events = useMemo(
     () =>
       data?.map((extendedProps) => ({
-        extendedProps,
-        start: toTimeZone(extendedProps.start),
-        end: toTimeZone(extendedProps.end),
         backgroundColor: extendedProps.tag,
         color: extendedProps.tag,
+        end: toTimeZone(extendedProps.end),
+        extendedProps,
+        start: toTimeZone(extendedProps.start),
       })) || [],
     [data, toTimeZone],
   );
@@ -58,9 +58,9 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
         <div
           style={{
             cursor: "pointer",
-            padding: "5px",
             display: "flex",
             flexDirection: "column",
+            padding: "5px",
           }}
         >
           <div>{hour}</div>
@@ -68,12 +68,12 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
           {schedule.groupId && (
             <div
               style={{
+                backgroundColor: "#" + schedule.groupId.slice(-6),
+                height: "15px",
                 marginTop: "4px",
                 width: "15px",
-                height: "15px",
-                backgroundColor: "#" + schedule.groupId.slice(-6),
               }}
-            ></div>
+            />
           )}
         </div>
       );
@@ -81,9 +81,7 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
     [selectTag],
   );
 
-  const validRange = useCallback((start: Date) => {
-    return { start };
-  }, []);
+  const validRange = useCallback((start: Date) => ({ start }), []);
 
   return (
     <Calendar
@@ -91,8 +89,8 @@ export default ({ create, edit, data, onChangeDate }: StaffCalendarProps) => {
       eventContent={eventContent}
       datesSet={dateChanged}
       headerToolbar={{
-        left: "today prev,next",
         center: "title",
+        left: "today prev,next",
         right: null,
       }}
       dateClick={create}

@@ -5,9 +5,9 @@ import { useFetch } from "../hooks/useFetch";
 export const useUserSetting = () => {
   const { get } = useFetch();
   const { data, isLoading } = useQuery<ApiResponse<SettingsResponse>>({
-    queryKey: ["settings"],
-    queryFn: () => get(`settings`),
     enabled: !!localStorage.getItem("token"),
+    queryFn: () => get(`settings`),
+    queryKey: ["settings"],
   });
 
   return {

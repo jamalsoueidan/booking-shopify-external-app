@@ -1,5 +1,10 @@
-import LoadingModal from "@components/LoadingModal";
-import { BookingCalendarEvent, LoadingSpinner, useFulfillment, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import {
+  BookingCalendarEvent,
+  LoadingModal,
+  LoadingSpinner,
+  useFulfillment,
+  useTranslation,
+} from "@jamalsoueidan/bsf.bsf-pkg";
 import { useBookings } from "@services/booking";
 import { useGroup } from "@services/group";
 import { Badge, Card, FooterHelp, Page } from "@shopify/polaris";
@@ -8,16 +13,16 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 
 const locales = {
   da: {
-    title: "Behandlinger",
     create: "Opret en ny behandlingstid",
-    in_progress: "I process",
     footer_help: "Kan ikke ændre i bookinger der er refunderet eller oprettet tidligere end dagens dato.",
+    in_progress: "I process",
+    title: "Behandlinger",
   },
   en: {
-    title: "Bookings",
     create: "Create new booking",
-    in_progress: "In progress",
     footer_help: "You can't edit bookings that are refunded or created before today.",
+    in_progress: "In progress",
+    title: "Bookings",
   },
 };
 
@@ -49,9 +54,9 @@ export default () => {
   const { options } = useFulfillment();
   const { data: staffier } = useGroup();
   const { data: bookings, isLoading } = useBookings({
-    start: date?.start,
     end: date?.end,
     staff: staff?._id,
+    start: date?.start,
   });
 
   const badges = useMemo(
@@ -93,12 +98,7 @@ export default () => {
       <Card sectioned>
         <Card.Section title={badges}>
           <Suspense fallback={<LoadingSpinner />}>
-            <StaffSelection
-              isLoadingBookings={isLoading}
-              data={staffier}
-              selected={staff}
-              onSelect={setStaff}
-            ></StaffSelection>
+            <StaffSelection isLoadingBookings={isLoading} data={staffier} selected={staff} onSelect={setStaff} />
           </Suspense>
         </Card.Section>
         <Card.Section>

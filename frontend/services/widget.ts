@@ -1,43 +1,29 @@
 import { useFetch } from "@hooks";
+import { WidgetDateQuery, WidgetSchedule, WidgetStaff, WidgetStaffQuery } from "@jamalsoueidan/bsb.mongodb.types";
 import { useQuery } from "react-query";
-import {
-  WidgetStaffQuery,
-  WidgetStaff,
-  WidgetDateQuery,
-  WidgetSchedule,
-} from "@jamalsoueidan/bsb.mongodb.types";
 
 export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
   const { get, mutate } = useFetch();
 
   const { data } = useQuery<ApiResponse<Array<WidgetStaff>>>({
-    queryKey: ["widget", "staff", productId],
+    enabled: productId > 0,
     queryFn: async () => {
       mutate(["widget", "availability"]);
       return get(`widget/staff?productId=${productId}`);
     },
-    enabled: productId > 0,
+    queryKey: ["widget", "staff", productId],
   });
 
   return { data: data?.payload };
 };
 
-export const useWidgetDate = ({
-  staff,
-  productId,
-  start,
-  end,
-}: WidgetDateQuery) => {
+export const useWidgetDate = ({ staff, productId, start, end }: WidgetDateQuery) => {
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<WidgetSchedule>>>({
-    queryKey: ["widget", "availability", staff, start, end, productId],
-    queryFn: () =>
-      get(
-        `widget/availability?productId=${productId}&start=${start}&end=${end}${
-          staff ? `&staff=${staff}` : ""
-        }`
-      ),
     enabled: !!staff && !!productId && !!start && !!end,
+    queryFn: () =>
+      get(`widget/availability?productId=${productId}&start=${start}&end=${end}${staff ? `&staff=${staff}` : ""}`),
+    queryKey: ["widget", "availability", staff, start, end, productId],
   });
 
   return { data: data?.payload };

@@ -6,9 +6,9 @@ export const useBookings = ({ start, end, staff }: GetBookingsRequest) => {
   const { get } = useFetch();
 
   const { data, isLoading } = useQuery<ApiResponse<Array<GetBookingsResponse>>>({
-    queryKey: ["bookings", { start, end, staff }],
-    queryFn: () => get(`bookings?start=${start}&end=${end}${staff ? "&staff=" + staff : ""}`),
     enabled: !!start && !!end,
+    queryFn: () => get(`bookings?start=${start}&end=${end}${staff ? "&staff=" + staff : ""}`),
+    queryKey: ["bookings", { end, staff, start }],
   });
 
   return {
@@ -25,8 +25,8 @@ export const useBookingGet = ({ id }: UseBookingGetProps) => {
   const { get } = useFetch();
 
   const { data } = useQuery<ApiResponse<GetBookingsResponse>>({
-    queryKey: ["booking", id],
     queryFn: () => get(`bookings/${id}`),
+    queryKey: ["booking", id],
   });
 
   return {

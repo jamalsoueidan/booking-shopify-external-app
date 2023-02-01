@@ -3,8 +3,8 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "rea
 
 export function QueryProvider({ children }: { children: ReactNode }) {
   const client = new QueryClient({
-    queryCache: new QueryCache(),
     mutationCache: new MutationCache(),
+    queryCache: new QueryCache(),
   });
 
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;

@@ -28,8 +28,8 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
   });
 
   const [{ start, end }, dateChange] = useState<Range>({
-    start: startOfMonth(new Date(booking.start)),
     end: endOfMonth(new Date(booking.end)),
+    start: startOfMonth(new Date(booking.start)),
   });
 
   const navigate = useNavigate();
@@ -39,36 +39,36 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
   const { setPrimaryAction, setSecondaryActions } = useModal();
 
   const { fields, submit, submitErrors, isSubmitted, isValid } = useForm({
+    enableSaveBar: false,
     fields: {
-      staff: useField<InputStaffField>({
-        value: booking.staff
-          ? { staff: booking.staff._id, tag: "", avatar: booking.staff.avatar, fullname: booking.staff.fullname }
-          : undefined,
-        validates: [notEmpty(t("staff.error_select"))],
-      }),
       date: useField<Date>({
-        value: new Date(booking.start) || undefined,
         validates: [notEmpty(t("date.error_select"))],
+        value: new Date(booking.start) || undefined,
+      }),
+      staff: useField<InputStaffField>({
+        validates: [notEmpty(t("staff.error_select"))],
+        value: booking.staff
+          ? { avatar: booking.staff.avatar, fullname: booking.staff.fullname, staff: booking.staff._id, tag: "" }
+          : undefined,
       }),
       time: useField<InputTimerDividerFieldType>({
-        value: {
-          start: booking.start,
-          end: booking.end,
-        },
         validates: [notEmpty(t("time.error_select"))],
+        value: {
+          end: booking.end,
+          start: booking.start,
+        },
       }),
     },
     onSubmit: async (fieldValues: any) => {
       update({
-        start: fieldValues.time.start,
         end: fieldValues.time.end,
         staff: fieldValues.staff,
+        start: fieldValues.time.start,
       });
       navigate("../");
       show({ content: t("submit.sucess") });
       return { status: "success" };
     },
-    enableSaveBar: false,
   });
 
   useEffect(() => {
@@ -92,16 +92,16 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
   }, [setPrimaryAction, setSecondaryActions, navigate, t, submit]);
 
   const { data: schedules } = useWidgetDate({
+    end: end.toJSON(),
     productId: booking.productId,
     staff: fields.staff.value?.staff,
     start: start.toJSON(),
-    end: end.toJSON(),
   });
 
   const hours: WidgetHourRange[] = useMemo(() => {
     const bookingDefault = {
-      start: booking.start,
       end: booking.end,
+      start: booking.start,
     };
 
     const schedule = schedules?.find((s) => isSameDay(new Date(s.date), fields.date.value));
@@ -154,42 +154,42 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
 
 const locales = {
   da: {
-    title: "Opret en ",
+    date: {
+      error_select: "Du mangler vælg dato",
+    },
+    shopify: "ATTENTION: Når du opdatere dette behandlingstid, så bliver den afkoblet fra shopify!",
     staff: {
       error_empty:
         "Der er ingen medarbejder længere tilknyttet til dette produkt, gå til produkt og tilføj medarbejder.",
       error_select: "Du mangler vælg medarbejder",
-    },
-    date: {
-      error_select: "Du mangler vælg dato",
-    },
-    time: {
-      error_select: "Du mangler vælg tid",
     },
     submit: {
       primary_button: "Ændre dato/tid",
       secondary_button: "Anulllere",
       sucess: "Behandlingstid opdateret",
     },
-    shopify: "ATTENTION: Når du opdatere dette behandlingstid, så bliver den afkoblet fra shopify!",
+    time: {
+      error_select: "Du mangler vælg tid",
+    },
+    title: "Opret en ",
   },
   en: {
-    title: "Bookings",
-    staff: {
-      error_empty: "No staff belong to this product yet!",
-      error_select: "You didn't pick a staff",
-    },
     date: {
       error_select: "You didn't pick a date",
     },
-    time: {
-      error_select: "You didn't pick time",
+    shopify: "ATTENTION: When you update this booking it will get deattached from shopify order.",
+    staff: {
+      error_empty: "No staff belong to this product yet!",
+      error_select: "You didn't pick a staff",
     },
     submit: {
       primary_button: "Change time",
       secondary_button: "Cancel",
       sucess: "Booking updated",
     },
-    shopify: "ATTENTION: When you update this booking it will get deattached from shopify order.",
+    time: {
+      error_select: "You didn't pick time",
+    },
+    title: "Bookings",
   },
 };
