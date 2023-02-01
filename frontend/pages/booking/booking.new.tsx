@@ -5,7 +5,7 @@ import {
   InputStaff,
   InputStaffField,
   InputTimerDivider,
-  InputTimerDividerFieldType,
+  InputTimerDividerField,
   Validators,
   useForm,
   useToast,
@@ -51,7 +51,7 @@ export default () => {
         validates: [notEmpty(t("staff.error_select"))],
         value: undefined,
       }),
-      time: useField<InputTimerDividerFieldType>({
+      time: useField<InputTimerDividerField>({
         validates: [Validators.notEmptyObject(t("time.error_select"))],
         value: undefined,
       }),

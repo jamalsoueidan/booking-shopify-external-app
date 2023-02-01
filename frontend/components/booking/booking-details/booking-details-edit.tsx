@@ -9,7 +9,7 @@ import {
   InputStaff,
   InputStaffField,
   InputTimerDivider,
-  InputTimerDividerFieldType,
+  InputTimerDividerField,
   LoadingSpinner,
   useForm,
   useToast,
@@ -51,7 +51,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
           ? { avatar: booking.staff.avatar, fullname: booking.staff.fullname, staff: booking.staff._id, tag: "" }
           : undefined,
       }),
-      time: useField<InputTimerDividerFieldType>({
+      time: useField<InputTimerDividerField>({
         validates: [notEmpty(t("time.error_select"))],
         value: {
           end: booking.end,
