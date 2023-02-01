@@ -7,7 +7,7 @@ import {
   FormErrors,
   InputDateFlat,
   InputStaff,
-  InputStaffFieldType,
+  InputStaffField,
   InputTimerDivider,
   InputTimerDividerFieldType,
   LoadingSpinner,
@@ -40,7 +40,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }
 
   const { fields, submit, submitErrors, isSubmitted, isValid } = useForm({
     fields: {
-      staff: useField<InputStaffFieldType>({
+      staff: useField<InputStaffField>({
         value: booking.staff
           ? { staff: booking.staff._id, tag: "", avatar: booking.staff.avatar, fullname: booking.staff.fullname }
           : undefined,

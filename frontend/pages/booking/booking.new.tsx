@@ -1,8 +1,9 @@
-import { CustomerAutocomplete, ProductSelect } from "@components/booking/booking-form";
+import { CustomerInputAutoComplete } from "@components/booking/booking-form/CustomerInputAutoComplete";
+import { ProductSelect } from "@components/booking/booking-form/ProductSelect";
 import {
   InputDateDrop,
   InputStaff,
-  InputStaffFieldType,
+  InputStaffField,
   InputTimerDivider,
   InputTimerDividerFieldType,
   Validators,
@@ -14,7 +15,7 @@ import { useBookingCreate } from "@services/booking";
 import { useWidgetDate, useWidgetStaff } from "@services/widget";
 import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
-import { isSameDay } from "date-fns";
+import { endOfMonth, isSameDay } from "date-fns";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +26,7 @@ export default () => {
   const { t } = useTranslation({ id: "booking-new", locales });
   const [{ start, end }, dateChange] = useState<Range>({
     start: new Date(),
-    end: new Date(),
+    end: endOfMonth(new Date()),
   });
 
   //https://codesandbox.io/s/1wpxz?file=/src/MyForm.tsx:2457-2473
@@ -42,7 +43,7 @@ export default () => {
         },
         validates: [Validators.notEmptyObject(t("customer.error_select"))],
       }),
-      staff: useField<InputStaffFieldType>({
+      staff: useField<InputStaffField>({
         value: undefined,
         validates: [notEmpty(t("staff.error_select"))],
       }),
@@ -96,26 +97,26 @@ export default () => {
         breadcrumbs={[{ content: "Bookings", onAction: () => navigate("/admin/bookings") }]}
       >
         <Layout>
-          <Layout.AnnotatedSection title={t("product.title")}>
+          <Layout.AnnotatedSection title={t("product.title")} description={t("product.desc")}>
             <Card sectioned>
               <FormLayout>
                 <ProductSelect {...fields.productId} />
               </FormLayout>
             </Card>
           </Layout.AnnotatedSection>
-          <Layout.AnnotatedSection title={t("customer.title")}>
+          <Layout.AnnotatedSection title={t("customer.title")} description={t("customer.desc")}>
             <Card sectioned>
-              <CustomerAutocomplete {...fields.customer}></CustomerAutocomplete>
+              <CustomerInputAutoComplete field={fields.customer} />
             </Card>
           </Layout.AnnotatedSection>
           <Layout.AnnotatedSection title={t("staff.title")} description={t("staff.desc")}>
             <Card sectioned>
               <FormLayout>
-                <InputStaff field={fields.staff} data={staffOptions} />
+                <InputStaff field={fields.staff} data={staffOptions} input={{ disabled: !staffOptions }} />
                 <InputDateDrop
                   field={fields.date}
                   data={schedules}
-                  input={{ disabled: true }}
+                  input={{ disabled: !schedules }}
                   onMonthChange={dateChange}
                 />
                 <InputTimerDivider field={fields.time} data={selectedDate?.hours} />
@@ -134,16 +135,18 @@ const locales = {
   da: {
     title: "Opret en ny behandlingstid",
     product: {
-      title: "Produkt",
+      title: "1. Vælg et product",
+      desc: "Efter  du har valgt et produkt, har du mulighed for at vælg medarbejder.",
       error_empty: "Der er ikke valgt produkt",
     },
     customer: {
-      title: "Kunde",
+      title: "2. Vælg en kunde",
+      desc: "Hvem er behandlingen til?",
       error_select: "Du mangler vælg kunde",
     },
     staff: {
-      title: "Tidsbestilling",
-      desc: "Vælg medarbejder, dato og tid",
+      title: "3. Vælg medarbejder, dato og tid.",
+      desc: "Når du har valgt medarbejder kan du vælge dato og efterfølgende tid.",
       error_select: "Du mangler vælg medarbejder",
     },
     date: {
@@ -159,16 +162,18 @@ const locales = {
   en: {
     title: "Bookings",
     product: {
-      title: "Product",
+      title: "1. Choose a Product",
+      desc: "Choose a product so staff, date and time gets enabled.",
       error_empty: "You didn't pick a product",
     },
     customer: {
-      title: "Customer",
+      title: "2. Choose a Customer",
+      desc: "Assign customer to booking.",
       error_select: "You didn't pick a customer",
     },
     staff: {
-      title: "Tidsbestilling",
-      desc: "Vælg medarbejder, dato og tid",
+      title: "3. Choose staff, then date and afterwards time.",
+      desc: "When you select staff the date will be enabled and then pick date to get time",
       error_select: "You didn't pick a staff",
     },
     date: {
