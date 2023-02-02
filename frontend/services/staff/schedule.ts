@@ -1,4 +1,5 @@
 import { useFetch } from "@hooks";
+import { ApiResponse } from "@jamalsoueidan/bsb.bsb-pkg";
 import {
   Schedule,
   ScheduleBodyUpdate,

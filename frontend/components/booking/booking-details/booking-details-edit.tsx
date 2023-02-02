@@ -1,7 +1,7 @@
 import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingResponse, WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
 
 import {
   FormErrors,
@@ -22,7 +22,7 @@ import { endOfMonth, isSameDay, startOfMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const BookingDetailsEdit = ({ booking }: { booking: GetBookingsResponse }) => {
+export const BookingDetailsEdit = ({ booking }: { booking: BookingResponse }) => {
   const { data: staffOptions } = useWidgetStaff({
     productId: booking.productId,
   });

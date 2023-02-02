@@ -1,11 +1,11 @@
-import { Notification } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingResponse, Notification } from "@jamalsoueidan/bsb.mongodb.types";
 import { useToast } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useNotification, useResendNotification } from "@services/notification";
 import { Badge, EmptyState, ResourceItem, ResourceList, Text } from "@shopify/polaris";
 import { format } from "date-fns";
 import { useCallback } from "react";
 
-export const BookingNotifications = ({ booking }: { booking: GetBookingsResponse }) => {
+export const BookingNotifications = ({ booking }: { booking: BookingResponse }) => {
   const { data } = useNotification({
     lineItemId: booking.lineItemId,
     orderId: booking.orderId,

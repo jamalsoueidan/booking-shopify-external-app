@@ -1,4 +1,4 @@
-import { BookingFulfillmentStatus } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingFulfillmentStatus, BookingResponse } from "@jamalsoueidan/bsb.mongodb.types";
 import { useDate } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useModal } from "@providers/modal";
 import { Banner, Link, Modal, TextContainer } from "@shopify/polaris";
@@ -6,7 +6,7 @@ import { differenceInHours, format, formatRelative, isAfter } from "date-fns";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const BookingDetailsView = ({ booking }: { booking: GetBookingsResponse }) => {
+export const BookingDetailsView = ({ booking }: { booking: BookingResponse }) => {
   const orderUrl = "https://" + booking.shop + "/admin/orders/" + booking.orderId;
   const productUrl = "https://" + booking.shop + "/admin/products/" + booking.productId;
 

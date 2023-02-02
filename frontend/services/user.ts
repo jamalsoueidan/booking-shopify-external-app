@@ -1,10 +1,11 @@
+import { ApiResponse, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.mongodb.types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 import { useFetch } from "../hooks/useFetch";
 
 export const useUserSetting = () => {
   const { get } = useFetch();
-  const { data, isLoading } = useQuery<ApiResponse<SettingsResponse>>({
+  const { data, isLoading } = useQuery<ApiResponse<UserSettingsResponse>>({
     enabled: !!localStorage.getItem("token"),
     queryFn: () => get(`settings`),
     queryKey: ["settings"],
@@ -16,14 +17,14 @@ export const useUserSetting = () => {
   };
 };
 
-type UseUserSettingUpdateFetch = (body: SettingsUpdateBodyRequest) => Promise<ApiResponse<SettingsResponse>>;
+type UseUserSettingUpdateFetch = (body: UserSettingsUpdateBodyRequest) => Promise<ApiResponse<UserSettingsResponse>>;
 
 export const useUserSettingUpdate = () => {
   const { put, mutate } = useFetch();
 
   const update: UseUserSettingUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<SettingsResponse> = await put("settings", body);
+      const response: ApiResponse<UserSettingsResponse> = await put("settings", body);
       await mutate(["settings"]);
       return response;
     },

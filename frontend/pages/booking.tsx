@@ -1,3 +1,4 @@
+import { BookingRequest, Staff } from "@jamalsoueidan/bsb.mongodb.types";
 import {
   BookingCalendarEvent,
   LoadingModal,
@@ -47,7 +48,7 @@ const BookingCalendar = lazy(() =>
 export default () => {
   const navigate = useNavigate();
   const [staff, setStaff] = useState<Staff>();
-  const [date, setDate] = useState<Pick<GetBookingsRequest, "start" | "end">>();
+  const [date, setDate] = useState<Pick<BookingRequest, "start" | "end">>();
 
   const { t } = useTranslation({ id: "bookings", locales });
 

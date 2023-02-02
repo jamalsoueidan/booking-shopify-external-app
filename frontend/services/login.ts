@@ -1,7 +1,8 @@
+import { ApiResponse, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.mongodb.types";
 import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 
-type UseReceivePasswordPhoneFetch = ({ phone }: ReceivePasswordBody) => Promise<ApiResponse<ReceivePasswordResponse>>;
+type UseReceivePasswordPhoneFetch = ({ phone }: UserReceivePasswordBodyRequest) => Promise<ApiResponse<UserReceivePasswordResponse>>;
 
 export const useReceivePassword = () => {
   const { post } = useFetch();
@@ -11,7 +12,7 @@ export const useReceivePassword = () => {
   const receivePassword: UseReceivePasswordPhoneFetch = useCallback(
     async ({ phone }) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<ReceivePasswordResponse>>("password-phone", { phone });
+      const response = await post<ApiResponse<UserReceivePasswordResponse>>("password-phone", { phone });
       setIsFetching(false);
       setIsFetched(true);
       return response;
@@ -26,7 +27,7 @@ export const useReceivePassword = () => {
   };
 };
 
-type UseLoginFetch = ({ identification, password }: LoginBody) => Promise<ApiResponse<LoginResponse>>;
+type UseLoginFetch = ({ identification, password }: UserLoginBodyRequest) => Promise<ApiResponse<UserLoginResponse>>;
 
 export const useLogin = () => {
   const { post } = useFetch();
@@ -36,7 +37,7 @@ export const useLogin = () => {
   const login: UseLoginFetch = useCallback(
     async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<LoginResponse>>("login", body);
+      const response = await post<ApiResponse<UserLoginResponse>>("login", body);
       setIsFetching(false);
       setIsFetched(true);
       const token = response.payload.token;
@@ -61,7 +62,7 @@ export const useCheckLogin = () => {
   useEffect(() => {
     const login = async () => {
       try {
-        const response = await get<ApiResponse<LoginResponse>>("settings");
+        const response = await get<ApiResponse<UserLoginResponse>>("settings");
         setIsFetching(false);
         setIsLoggedIn(response.success);
       } catch (error) {

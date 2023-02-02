@@ -1,8 +1,9 @@
+import { BookingResponse } from "@jamalsoueidan/bsb.mongodb.types";
 import { Link, Modal, TextContainer } from "@shopify/polaris";
 import { memo } from "react";
 
 export const BookingCustomer = memo(
-  ({ booking }: { booking: GetBookingsResponse }) => {
+  ({ booking }: { booking: BookingResponse }) => {
     const url =
       "https://testeriphone.myshopify.com/admin/customers/" +
       booking.customerId;
