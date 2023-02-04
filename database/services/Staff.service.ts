@@ -1,4 +1,4 @@
-import { StaffModel } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ShopQuery, StaffModel } from "@jamalsoueidan/bsb.bsb-pkg";
 
 interface FindByProps {
   shop: string;

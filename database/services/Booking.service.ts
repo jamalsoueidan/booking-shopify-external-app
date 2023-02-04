@@ -1,10 +1,10 @@
 import { beginningOfDay, closeOfDay } from "@helpers/date";
-import { BookingModel } from "@jamalsoueidan/bsb.bsb-pkg";
+import { BookingModel, BookingRequest, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
 import mongoose from "mongoose";
 
 interface GetBookingsProps
   extends ShopQuery,
-    Omit<GetBookingsRequest, "staff"> {
+    Omit<BookingRequest, "staff"> {
   staff?: string[];
 }
 

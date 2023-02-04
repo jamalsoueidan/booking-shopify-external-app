@@ -1,7 +1,6 @@
+import { ShopQuery, Staff, UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
 import bcrypt from "bcryptjs";
-import { UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
 import generator from "generate-password";
-import mongoose from "mongoose";
 
 export const createNewPassword = async (staff: Staff) => {
   const password = generator.generate({
