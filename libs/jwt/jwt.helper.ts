@@ -1,3 +1,5 @@
+import { User } from "@jamalsoueidan/bsb.bsb-pkg";
+import { Session } from "index.types";
 import jwt from "jsonwebtoken";
 
 export const createToken = (user: User, group: string) => {

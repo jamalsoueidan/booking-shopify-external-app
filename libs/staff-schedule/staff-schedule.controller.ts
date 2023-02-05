@@ -11,6 +11,7 @@ import {
   ScheduleUpdateOrDestroyQuery,
   StaffServiceFindOne,
 } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ControllerProps } from "index.types";
 
 export const get = async ({
   query,

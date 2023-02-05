@@ -1,11 +1,12 @@
-import { UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ShopQuery, UserModel, UserReceivePasswordBodyRequest, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ControllerProps } from "index.types";
 
 export const user = async ({
   session,
 }: ControllerProps<
   ShopQuery,
-  ReceivePasswordBody
->): Promise<SettingsResponse> => {
+  UserReceivePasswordBodyRequest
+>): Promise<UserSettingsResponse> => {
   return UserModel.findById(session._id, "_id language timeZone");
 };
 
@@ -14,8 +15,8 @@ export const update = async ({
   session,
 }: ControllerProps<
   ShopQuery,
-  SettingsUpdateBodyRequest
->): Promise<SettingsResponse> => {
+  UserSettingsUpdateBodyRequest
+>): Promise<UserSettingsResponse> => {
   return UserModel.findByIdAndUpdate(
     { _id: session._id },
     {

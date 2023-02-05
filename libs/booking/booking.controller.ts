@@ -1,15 +1,17 @@
 import {
-  BookingBodyCreate,
-  BookingBodyUpdate,
+  BookingBodyCreateRequest,
+  BookingBodyUpdateRequest,
   BookingModel,
+  BookingRequest,
   BookingServiceCreate,
-  BookingServiceGetById,
   BookingServiceUpdate,
+  ShopQuery
 } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
+import { ControllerProps } from "index.types";
 
-interface GetBookingsQuery extends ShopQuery, GetBookingsRequest {}
+interface GetBookingsQuery extends ShopQuery, BookingRequest {}
 
 export const getBookings = async ({
   query,
@@ -67,7 +69,7 @@ export const getBookingById = async ({
 export const create = ({
   body,
   session,
-}: ControllerProps<any, BookingBodyCreate>) => {
+}: ControllerProps<any, BookingBodyCreateRequest>) => {
   const { staff, shop } = session;
   //TODO: handle supervisor
   // if session.roles > 1, then
@@ -78,7 +80,7 @@ export const update = ({
   query,
   body,
   session,
-}: ControllerProps<{ id: string }, BookingBodyUpdate>) => {
+}: ControllerProps<{ id: string }, BookingBodyUpdateRequest>) => {
   const { id } = query;
   const { staff, shop } = session;
   //TODO: handle supervisor

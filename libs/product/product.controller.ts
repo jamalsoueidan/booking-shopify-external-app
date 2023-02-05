@@ -1,4 +1,6 @@
+import { ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as ProductService from "@services/Product.service";
+import { ControllerProps } from "index.types";
 
 interface GetBookingQuery extends ShopQuery {}
 

@@ -1,14 +1,14 @@
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
   success: boolean;
   error?: string;
   payload?: T;
 }
 
-interface ShopQuery {
+export interface ShopQuery {
   shop: string;
 }
 
-interface Session {
+export interface Session {
   _id: string;
   staff: string;
   shop: string;
@@ -18,7 +18,7 @@ interface Session {
   exp?: number;
 }
 
-interface ControllerProps<Q = any, B = any> {
+export interface ControllerProps<Q = any, B = any> {
   query: Q;
   body: B;
   session: Session;
