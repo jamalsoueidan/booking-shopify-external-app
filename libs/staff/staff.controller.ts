@@ -3,7 +3,7 @@ import {
   StaffServiceFindByIdAndUpdate,
   StaffServiceFindOne,
 } from "@jamalsoueidan/bsb.bsb-pkg";
-import { matchedData } from "express-validator";
+import { ControllerProps } from "index.types";
 
 export const get = ({ session }: ControllerProps) => {
   const { staff, shop } = session;

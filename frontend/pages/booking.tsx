@@ -1,6 +1,5 @@
-import { BookingRequest, Staff } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingRequest, BookingResponse, Staff } from "@jamalsoueidan/bsb.mongodb.types";
 import {
-  BookingCalendarEvent,
   LoadingModal,
   LoadingSpinner,
   useFulfillment,
@@ -63,7 +62,7 @@ export default () => {
   const badges = useMemo(
     () =>
       options.map((o, _) => (
-        <Badge key={_} status={o.bannerStatus} progress="complete">
+        <Badge key={_} status={o.bannerStatus as any} progress="complete">
           {o.label ? o.label.charAt(0).toUpperCase() + o.label.slice(1) : t("in_progress")}
         </Badge>
       )),
@@ -71,8 +70,8 @@ export default () => {
   );
 
   const onClickBooking = useCallback(
-    (state: BookingCalendarEvent) => {
-      navigate(state.booking._id);
+    (booking: BookingResponse) => {
+      navigate(booking._id);
     },
     [navigate],
   );

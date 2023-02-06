@@ -10,7 +10,7 @@ import { useStaffScheduleCreate } from "@services/staff/schedule";
 import { Suspense, forwardRef, lazy, useCallback } from "react";
 
 interface CreateDayScheduleProps {
-  date: string;
+  date: Date;
 }
 
 const CreateManyShifts = lazy(() =>

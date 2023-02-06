@@ -8,6 +8,7 @@ import {
 } from "@jamalsoueidan/bsb.bsb-pkg";
 
 import * as NotificationService from "@services/Notification.service";
+import { ControllerProps } from "index.types";
 
 export enum ControllerMethods {
   get = "get",

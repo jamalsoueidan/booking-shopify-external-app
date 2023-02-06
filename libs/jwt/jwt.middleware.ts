@@ -1,4 +1,5 @@
-import { Response, Request } from "express";
+import { Response } from "express";
+import { Session } from "index.types";
 import jwt from "jsonwebtoken";
 
 export const jwtMiddleware = (req, res: Response, next) => {
