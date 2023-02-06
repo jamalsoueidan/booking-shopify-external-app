@@ -1,4 +1,4 @@
-import { Staff } from "@jamalsoueidan/bsb.mongodb.types";
+import { Staff } from "@jamalsoueidan/bsb.types";
 import { Avatar, Card, ResourceList, Text } from "@shopify/polaris";
 import { memo } from "react";
 

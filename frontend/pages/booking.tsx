@@ -1,9 +1,9 @@
-import { BookingRequest, BookingResponse, Staff } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingRequest, BookingResponse, Staff } from "@jamalsoueidan/bsb.types";
 import {
-  LoadingModal,
-  LoadingSpinner,
-  useFulfillment,
-  useTranslation,
+    LoadingModal,
+    LoadingSpinner,
+    useFulfillment,
+    useTranslation,
 } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useBookings } from "@services/booking";
 import { useGroup } from "@services/group";

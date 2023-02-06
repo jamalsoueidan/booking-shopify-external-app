@@ -1,5 +1,5 @@
 import Metadata from "@components/staff/Metadata";
-import { Schedule } from "@jamalsoueidan/bsb.mongodb.types";
+import { Schedule } from "@jamalsoueidan/bsb.types";
 import { LoadingModal, LoadingPage, LoadingSpinner, ScheduleCalendarDateState } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useStaff } from "@services/staff";
 import { useStaffSchedule } from "@services/staff/schedule";

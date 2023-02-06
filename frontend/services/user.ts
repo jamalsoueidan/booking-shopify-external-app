@@ -1,4 +1,4 @@
-import { ApiResponse, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.mongodb.types";
+import { ApiResponse, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 import { useFetch } from "../hooks/useFetch";

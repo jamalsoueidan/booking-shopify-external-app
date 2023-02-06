@@ -1,6 +1,7 @@
 import { ShopQuery, Staff, UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
 import bcrypt from "bcryptjs";
 import generator from "generate-password";
+import mongoose from "mongoose";
 
 export const createNewPassword = async (staff: Staff) => {
   const password = generator.generate({
@@ -18,7 +19,7 @@ export const createNewPassword = async (staff: Staff) => {
   if (!user) {
     user = new UserModel();
     user.shop = staff.shop;
-    user.staff = staff._id;
+    user.staff = new mongoose.Types.ObjectId(staff._id);
   }
 
   user.phone = staff.phone;

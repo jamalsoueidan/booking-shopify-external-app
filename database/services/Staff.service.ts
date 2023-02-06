@@ -10,6 +10,7 @@ interface FindByProps {
 export const findBy = (document: FindByProps) => {
   return StaffModel.findOne({ ...document, active: true });
 };
+
 interface getAllByGroup extends ShopQuery {
   group: string;
 }

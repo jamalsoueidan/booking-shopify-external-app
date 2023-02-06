@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks";
-import { ApiResponse, WidgetDateQuery, WidgetSchedule, WidgetStaff, WidgetStaffQuery } from "@jamalsoueidan/bsb.mongodb.types";
+import { ApiResponse, WidgetDateQuery, WidgetSchedule, WidgetStaff, WidgetStaffQuery } from "@jamalsoueidan/bsb.types";
 import { useQuery } from "react-query";
 
 export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {

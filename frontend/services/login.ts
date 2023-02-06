@@ -1,4 +1,4 @@
-import { ApiResponse, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.mongodb.types";
+import { ApiResponse, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.types";
 import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 

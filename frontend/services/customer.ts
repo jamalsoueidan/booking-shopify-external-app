@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks";
-import { ApiResponse, CustomerQuery } from "@jamalsoueidan/bsb.mongodb.types";
+import { ApiResponse, CustomerQuery } from "@jamalsoueidan/bsb.types";
 
 export const useCustomer = () => {
   const { get } = useFetch();

@@ -1,4 +1,4 @@
-import { ShopQuery, SmsApiSend, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ShopQuery, SmsDkApiSend, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.bsb-pkg";
 import { createToken } from "@libs/jwt/jwt.helper";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
@@ -20,7 +20,7 @@ export const receivePassword = async ({
   if (staff) {
     const password = await UserService.createNewPassword(staff);
 
-    SmsApiSend({
+    SmsDkApiSend({
       receiver: staff.phone,
       message: `Din adgangskode: ${password}`,
     });
@@ -54,8 +54,8 @@ export const login = async ({
     // check if staff is still active
     const staff = await StaffService.findBy({
       shop: query.shop,
-      _id: user.staff,
-    });
+      _id: user.staff.toString(),
+    })
     if (staff) {
       return { token: createToken(user, staff.group) };
     }

@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks/useFetch";
-import { ApiResponse, BookingBodyCreateRequest, BookingBodyUpdateRequest, BookingRequest, BookingResponse } from "@jamalsoueidan/bsb.mongodb.types";
+import { ApiResponse, BookingBodyCreateRequest, BookingBodyUpdateRequest, BookingRequest, BookingResponse } from "@jamalsoueidan/bsb.types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 

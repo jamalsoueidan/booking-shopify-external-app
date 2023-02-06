@@ -1,19 +1,19 @@
 import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { BookingResponse, WidgetHourRange } from "@jamalsoueidan/bsb.mongodb.types";
+import { BookingResponse, WidgetHourRange } from "@jamalsoueidan/bsb.types";
 
 import {
-  FormErrors,
-  InputDateFlat,
-  InputStaff,
-  InputStaffField,
-  InputTimerDivider,
-  InputTimerDividerField,
-  LoadingSpinner,
-  useForm,
-  useToast,
-  useTranslation,
+    FormErrors,
+    InputDateFlat,
+    InputStaff,
+    InputStaffField,
+    InputTimerDivider,
+    InputTimerDividerField,
+    LoadingSpinner,
+    useForm,
+    useToast,
+    useTranslation,
 } from "@jamalsoueidan/bsf.bsf-pkg";
 import { useModal } from "@providers/modal";
 import { useBookingUpdate } from "@services/booking";
