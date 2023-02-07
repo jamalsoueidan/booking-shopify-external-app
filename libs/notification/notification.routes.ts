@@ -1,6 +1,6 @@
+import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
 import { body, check, query } from "express-validator";
-import { expressHelpers } from "@libs/express-helpers/handle-route";
 import * as controller from "./notification.controller";
 
 const router = Router();
@@ -11,7 +11,7 @@ router.get(
   query("orderId").isDecimal(),
   query("lineItemId").notEmpty(),
   query("lineItemId").isDecimal(),
-  expressHelpers(controller.get)
+  handleController(controller.get)
 );
 
 router.post(
@@ -23,19 +23,19 @@ router.post(
   body("message").notEmpty(),
   body("to").notEmpty(),
   body("to").isIn(["customer", "staff"]),
-  expressHelpers(controller.sendCustom)
+  handleController(controller.sendCustom)
 );
 
 router.post(
   "/notifications/:id",
   check("id").notEmpty(),
-  expressHelpers(controller.resend)
+  handleController(controller.resend)
 );
 
 router.delete(
   "/notifications/:id",
   check("id").notEmpty(),
-  expressHelpers(controller.cancel)
+  handleController(controller.cancel)
 );
 
 export default router;

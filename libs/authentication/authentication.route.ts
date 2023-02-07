@@ -1,4 +1,4 @@
-import { expressHelpers } from "@libs/express-helpers/handle-route";
+import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
 import { body } from "express-validator";
 import * as controller from "./authentication.controller";
@@ -8,14 +8,14 @@ const router = Router();
 router.post(
   "/password-phone",
   body("phone").notEmpty(),
-  expressHelpers(controller.receivePassword)
+  handleController(controller.receivePassword)
 );
 
 router.post(
   "/login",
   body("identification").notEmpty(),
   body("password").notEmpty(),
-  expressHelpers(controller.login)
+  handleController(controller.login)
 );
 
 export default router;

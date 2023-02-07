@@ -1,4 +1,5 @@
 import {
+  AppControllerProps,
   ScheduleBodyUpdate,
   ScheduleBodyUpdateOrCreate,
   ScheduleGetQuery,
@@ -11,12 +12,12 @@ import {
   ScheduleUpdateOrDestroyQuery,
   StaffServiceFindOne,
 } from "@jamalsoueidan/bsb.bsb-pkg";
-import { ControllerProps } from "index.types";
+
 
 export const get = async ({
   query,
   session,
-}: ControllerProps<Omit<ScheduleGetQuery, "staff">>) => {
+}: AppControllerProps<Omit<ScheduleGetQuery, "staff">>) => {
   const { start, end } = query;
   const { shop, staff } = session;
   return await ScheduleServiceGetByDateRange({ shop, staff, start, end });
@@ -30,7 +31,7 @@ interface CreateQuery {
 export const create = async ({
   session,
   body,
-}: ControllerProps<CreateQuery, ScheduleBodyUpdateOrCreate>) => {
+}: AppControllerProps<CreateQuery, ScheduleBodyUpdateOrCreate>) => {
   const { shop, staff } = session;
   return ScheduleServiceCreate({ shop, staff, schedules: body });
 };
@@ -43,7 +44,7 @@ export const update = async ({
   query,
   body,
   session,
-}: ControllerProps<UpdateQuery, ScheduleBodyUpdate>) => {
+}: AppControllerProps<UpdateQuery, ScheduleBodyUpdate>) => {
   const { schedule } = query;
   const { shop, staff } = session;
 
@@ -59,7 +60,7 @@ export const update = async ({
 export const destroy = ({
   query,
   session,
-}: ControllerProps<ScheduleUpdateOrDestroyQuery>) => {
+}: AppControllerProps<ScheduleUpdateOrDestroyQuery>) => {
   const { schedule } = query;
   const { shop, staff } = session;
   return ScheduleServiceDestroy({
@@ -77,7 +78,7 @@ export const updateGroup = async ({
   query,
   body,
   session,
-}: ControllerProps<UpdateGroupQuery, ScheduleBodyUpdate>) => {
+}: AppControllerProps<UpdateGroupQuery, ScheduleBodyUpdate>) => {
   const { schedule, groupId } = query;
   const { staff, shop } = session;
 
@@ -99,7 +100,7 @@ interface DestroyGroupQuery extends ScheduleUpdateOrDestroyQuery {
 export const destroyGroup = async ({
   query,
   session,
-}: ControllerProps<DestroyGroupQuery>) => {
+}: AppControllerProps<DestroyGroupQuery>) => {
   const { schedule, groupId } = query;
   const { shop, staff } = session;
 

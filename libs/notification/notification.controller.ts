@@ -1,4 +1,5 @@
 import {
+  AppControllerProps,
   NotificationBody,
   NotificationQuery,
   NotificationServiceCancel,
@@ -8,7 +9,6 @@ import {
 } from "@jamalsoueidan/bsb.bsb-pkg";
 
 import * as NotificationService from "@services/Notification.service";
-import { ControllerProps } from "index.types";
 
 export enum ControllerMethods {
   get = "get",
@@ -19,7 +19,7 @@ export enum ControllerMethods {
 
 interface GetQuery extends NotificationQuery {}
 
-export const get = ({ query, session }: ControllerProps<GetQuery>) => {
+export const get = ({ query, session }: AppControllerProps<GetQuery>) => {
   return NotificationServiceGet({ ...query, shop: session.shop });
 };
 
@@ -29,7 +29,7 @@ export const sendCustom = async ({
   query,
   body,
   session,
-}: ControllerProps<SendCustomProps, NotificationBody>) => {
+}: AppControllerProps<SendCustomProps, NotificationBody>) => {
   const canModify = await NotificationService.canModifiy({
     orderId: query.orderId,
     lineItemId: query.lineItemId,
@@ -50,7 +50,7 @@ export const sendCustom = async ({
 export const resend = async ({
   query,
   session,
-}: ControllerProps<{ id: string }>) => {
+}: AppControllerProps<{ id: string }>) => {
   const canModify = await NotificationService.canModifiy({
     id: query.id,
     ...session,
@@ -66,7 +66,7 @@ export const resend = async ({
 export const cancel = async ({
   query,
   session,
-}: ControllerProps<{ id: string }>) => {
+}: AppControllerProps<{ id: string }>) => {
   const canModify = await NotificationService.canModifiy({
     id: query.id,
     ...session,

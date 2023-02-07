@@ -1,18 +1,18 @@
-import { expressHelpers } from "@libs/express-helpers/handle-route";
+import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
-import * as controller from "./staff.controller";
 import { body } from "express-validator";
+import * as controller from "./staff.controller";
 
 const router = Router();
 
-router.get("/staff", expressHelpers(controller.get));
+router.get("/staff", handleController(controller.get));
 
 router.put(
   "/staff",
   body("group").not().exists(),
   body("shop").not().exists(),
   body("active").not().exists(),
-  expressHelpers(controller.update)
+  handleController(controller.update)
 );
 
 export default router;

@@ -1,4 +1,5 @@
 import {
+  AppControllerProps,
   BookingBodyCreateRequest,
   BookingBodyUpdateRequest,
   BookingModel,
@@ -9,14 +10,14 @@ import {
 } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
-import { ControllerProps } from "index.types";
+
 
 interface GetBookingsQuery extends ShopQuery, BookingRequest {}
 
 export const getBookings = async ({
   query,
   session,
-}: ControllerProps<GetBookingsQuery>) => {
+}: AppControllerProps<GetBookingsQuery>) => {
   let allStaff;
 
   const { staff } = query;
@@ -53,7 +54,7 @@ interface GetBookingByIdQuery extends ShopQuery {
 export const getBookingById = async ({
   query,
   session,
-}: ControllerProps<GetBookingByIdQuery>) => {
+}: AppControllerProps<GetBookingByIdQuery>) => {
   let allStaff = await StaffService.getIdsbyGroup({
     shop: session.shop,
     group: session.group,
@@ -69,7 +70,7 @@ export const getBookingById = async ({
 export const create = ({
   body,
   session,
-}: ControllerProps<any, BookingBodyCreateRequest>) => {
+}: AppControllerProps<any, BookingBodyCreateRequest>) => {
   const { staff, shop } = session;
   //TODO: handle supervisor
   // if session.roles > 1, then
@@ -80,7 +81,7 @@ export const update = ({
   query,
   body,
   session,
-}: ControllerProps<{ id: string }, BookingBodyUpdateRequest>) => {
+}: AppControllerProps<{ id: string }, BookingBodyUpdateRequest>) => {
   const { id } = query;
   const { staff, shop } = session;
   //TODO: handle supervisor

@@ -1,5 +1,4 @@
-import { IUserDocument } from "@jamalsoueidan/bsb.bsb-pkg";
-import { Session } from "index.types";
+import { AppSession, IUserDocument } from "@jamalsoueidan/bsb.bsb-pkg";
 import jwt from "jsonwebtoken";
 
 export const createToken = (user: IUserDocument, group: string) => {
@@ -10,7 +9,7 @@ export const createToken = (user: IUserDocument, group: string) => {
       shop: user.shop,
       role: user.role,
       group,
-    } as Session,
+    } as AppSession,
     process.env.TOKEN_SECRET,
     { expiresIn: "1h" }
   );

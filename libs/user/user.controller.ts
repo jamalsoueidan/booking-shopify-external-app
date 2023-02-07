@@ -1,9 +1,9 @@
-import { ShopQuery, UserModel, UserReceivePasswordBodyRequest, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.bsb-pkg";
-import { ControllerProps } from "index.types";
+import { AppControllerProps, ShopQuery, UserModel, UserReceivePasswordBodyRequest, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.bsb-pkg";
+
 
 export const user = async ({
   session,
-}: ControllerProps<
+}: AppControllerProps<
   ShopQuery,
   UserReceivePasswordBodyRequest
 >): Promise<UserSettingsResponse> => {
@@ -13,7 +13,7 @@ export const user = async ({
 export const update = async ({
   body,
   session,
-}: ControllerProps<
+}: AppControllerProps<
   ShopQuery,
   UserSettingsUpdateBodyRequest
 >): Promise<UserSettingsResponse> => {

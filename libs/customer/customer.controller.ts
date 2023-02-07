@@ -1,11 +1,10 @@
-import { CustomerServiceFind } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppControllerProps, CustomerServiceFind, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
 
-interface GetQuery {
-  shop: string;
+interface GetQuery extends ShopQuery{
   name: string;
 }
 
-export const get = ({ query }: { query: GetQuery }) => {
+export const get = ({ query }: AppControllerProps<GetQuery>) => {
   const { shop, name } = query;
   return CustomerServiceFind({ shop, name });
 };

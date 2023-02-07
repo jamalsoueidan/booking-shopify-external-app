@@ -1,4 +1,5 @@
 import {
+  AppControllerProps,
   BookingServiceGetForWidget,
   CartServiceGetByStaff,
   ScheduleServiceGetByStaffAndTag,
@@ -13,17 +14,13 @@ import {
 } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Aggregate } from "mongoose";
 
-export interface AvailabilityReturn extends WidgetSchedule {}
-
 interface StaffQuery extends WidgetStaffQuery {
   shop: string;
 }
 
 export const staff = ({
   query,
-}: {
-  query: StaffQuery;
-}): Aggregate<Array<WidgetStaff>> => {
+}: AppControllerProps<StaffQuery>): Aggregate<Array<WidgetStaff>> => {
   const { productId, shop } = query;
   return WidgetServiceGetStaff({
     shop,
@@ -38,9 +35,7 @@ interface AvailabilityQuery extends Omit<WidgetDateQuery, "staff"> {
 
 export const availability = async ({
   query,
-}: {
-  query: AvailabilityQuery;
-}): Promise<Array<WidgetSchedule<Date>>> => {
+}: AppControllerProps<AvailabilityQuery>): Promise<Array<WidgetSchedule<Date>>> => {
   const { staff, start, end, shop, productId } = query;
 
   const product = await WidgetServiceGetProduct({

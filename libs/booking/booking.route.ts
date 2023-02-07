@@ -1,12 +1,12 @@
-import { expressHelpers } from "@libs/express-helpers/handle-route";
+import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
-import * as controller from "./booking.controller";
 import { body } from "express-validator";
+import * as controller from "./booking.controller";
 
 const router = Router();
 
-router.get("/bookings", expressHelpers(controller.getBookings));
-router.get("/bookings/:id", expressHelpers(controller.getBookingById));
+router.get("/bookings", handleController(controller.getBookings));
+router.get("/bookings/:id", handleController(controller.getBookingById));
 
 router.post(
   "/bookings",
@@ -15,7 +15,7 @@ router.post(
   body("start").notEmpty(),
   body("end").notEmpty(),
   //body("staff").notEmpty(),
-  expressHelpers(controller.create)
+  handleController(controller.create)
 );
 
 router.put(
@@ -23,7 +23,7 @@ router.put(
   body("start").notEmpty(),
   body("end").notEmpty(),
   //body("staff").notEmpty(),
-  expressHelpers(controller.update)
+  handleController(controller.update)
 );
 
 export default router;

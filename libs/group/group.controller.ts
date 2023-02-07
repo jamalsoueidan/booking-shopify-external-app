@@ -1,7 +1,7 @@
+import { AppControllerProps, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as StaffService from "@services/Staff.service";
-import { ControllerProps } from "index.types";
 
-export const getStaff = ({ query, session }: ControllerProps) => {
+export const getStaff = ({ query, session }: AppControllerProps<ShopQuery>) => {
   return StaffService.getAllByGroup({
     shop: query.shop,
     group: session.group,
