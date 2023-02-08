@@ -1,6 +1,6 @@
-import { AppControllerProps, CustomerServiceFind, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppControllerProps, CustomerServiceFind } from "@jamalsoueidan/bsb.bsb-pkg";
 
-interface GetQuery extends ShopQuery{
+interface GetQuery {
   name: string;
 }
 

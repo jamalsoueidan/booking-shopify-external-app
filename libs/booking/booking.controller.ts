@@ -5,19 +5,16 @@ import {
   BookingModel,
   BookingRequest,
   BookingServiceCreate,
-  BookingServiceUpdate,
-  ShopQuery
+  BookingServiceUpdate
 } from "@jamalsoueidan/bsb.bsb-pkg";
 import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
 
 
-interface GetBookingsQuery extends ShopQuery, BookingRequest {}
-
 export const getBookings = async ({
   query,
   session,
-}: AppControllerProps<GetBookingsQuery>) => {
+}: AppControllerProps<BookingRequest>) => {
   let allStaff;
 
   const { staff } = query;
@@ -47,7 +44,7 @@ export const getBookings = async ({
   });
 };
 
-interface GetBookingByIdQuery extends ShopQuery {
+interface GetBookingByIdQuery  {
   id: string;
 }
 

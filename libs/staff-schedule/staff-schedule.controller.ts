@@ -36,15 +36,11 @@ export const create = async ({
   return ScheduleServiceCreate({ shop, staff, schedules: body });
 };
 
-interface UpdateQuery extends ScheduleUpdateOrDestroyQuery {
-  shop: string;
-}
-
 export const update = async ({
   query,
   body,
   session,
-}: AppControllerProps<UpdateQuery, ScheduleBodyUpdate>) => {
+}: AppControllerProps<ScheduleUpdateOrDestroyQuery, ScheduleBodyUpdate>) => {
   const { schedule } = query;
   const { shop, staff } = session;
 

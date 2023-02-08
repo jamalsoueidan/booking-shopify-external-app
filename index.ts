@@ -1,15 +1,15 @@
+import { mongodb } from "@jamalsoueidan/bsb.bsb-pkg";
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import bookingRoutes from "@libs/booking/booking.route";
-import groupRoutes from "@libs/group/group.routes";
-import productRoutes from "@libs/product/product.route";
 import customerRoutes from "@libs/customer/customer.route";
-import widgetRoutes from "@libs/widget/widget.route";
-import staffRoutes from "@libs/staff/staff.routes";
-import schedulesRoutes from "@libs/staff-schedule/staff-schedule.routes";
-import notificationRoutes from "@libs/notification/notification.routes";
+import groupRoutes from "@libs/group/group.routes";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
+import notificationRoutes from "@libs/notification/notification.routes";
+import productRoutes from "@libs/product/product.route";
+import schedulesRoutes from "@libs/staff-schedule/staff-schedule.routes";
+import staffRoutes from "@libs/staff/staff.routes";
 import userRoutes from "@libs/user/user.route";
-import { connection } from "database/connection";
+import widgetRoutes from "@libs/widget/widget.route";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -22,7 +22,7 @@ const { PORT = 8000 } = process.env;
 const DEV_INDEX_PATH = `${process.cwd()}/frontend/`;
 const PROD_INDEX_PATH = `${process.cwd()}/frontend/dist/`;
 
-connection();
+mongodb.connect(null);
 
 export async function createServer(
   root = process.cwd(),

@@ -1,4 +1,4 @@
-import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
+import { handleRoute } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
 import { query } from "express-validator";
 import * as controller from "./staff-schedule.controller";
@@ -9,23 +9,23 @@ router.get(
   "/schedules",
   query("start").notEmpty(),
   query("end").notEmpty(),
-  handleController(controller.get)
+  handleRoute(controller.get)
 );
 
-router.post("/schedules", handleController(controller.create));
+router.post("/schedules", handleRoute(controller.create));
 
-router.put("/schedules", handleController(controller.update));
+router.put("/schedules", handleRoute(controller.update));
 
-router.delete("/schedules/:schedule", handleController(controller.destroy));
+router.delete("/schedules/:schedule", handleRoute(controller.destroy));
 
 router.put(
   "/schedules/:schedule/group/:groupId",
-  handleController(controller.updateGroup)
+  handleRoute(controller.updateGroup)
 );
 
 router.delete(
   "/schedules/:schedule/group/:groupId",
-  handleController(controller.destroyGroup)
+  handleRoute(controller.destroyGroup)
 );
 
 export default router;

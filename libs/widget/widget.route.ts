@@ -1,12 +1,12 @@
 
-import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
+import { handleRoute } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
 import { checkSchema } from "express-validator";
 import * as controller from "./widget.controller";
 
 const router = Router();
 
-router.get("/widget/staff", handleController(controller.staff));
+router.get("/widget/staff", handleRoute(controller.staff));
 
 router.get(
   "/widget/availability",
@@ -15,9 +15,9 @@ router.get(
     end: { notEmpty: true },
     productId: { notEmpty: true },
   }),
-  handleController(controller.availability)
+  handleRoute(controller.availability)
 );
 
-router.get("/widget/settings", handleController(controller.settings));
+router.get("/widget/settings", handleRoute(controller.settings));
 
 export default router;

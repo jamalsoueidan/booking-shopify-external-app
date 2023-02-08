@@ -13,7 +13,7 @@ export const get = ({ session }: AppControllerProps) => {
 export const update = ({
   body,
   session,
-}: AppControllerProps<any, StaffBodyUpdate>) => {
+}: AppControllerProps<never, StaffBodyUpdate>) => {
   const id = session.staff;
   delete body.group;
   delete body.active;

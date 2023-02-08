@@ -1,4 +1,4 @@
-import { handleController } from "@jamalsoueidan/bsb.bsb-pkg";
+import { handleRoute } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
 import { query } from "express-validator";
 import * as controller from "./customer.controller";
@@ -8,7 +8,7 @@ const router = Router();
 router.get(
   "/customers",
   query("name").notEmpty(),
-  handleController(controller.get)
+  handleRoute(controller.get)
 );
 
 export default router;

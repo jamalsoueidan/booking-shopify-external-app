@@ -10,26 +10,16 @@ import {
 
 import * as NotificationService from "@services/Notification.service";
 
-export enum ControllerMethods {
-  get = "get",
-  sendCustom = "sendCustom",
-  resend = "resend",
-  cancel = "cancel",
-}
-
-interface GetQuery extends NotificationQuery {}
-
-export const get = ({ query, session }: AppControllerProps<GetQuery>) => {
+export const get = ({ query, session }: AppControllerProps<NotificationQuery>) => {
   return NotificationServiceGet({ ...query, shop: session.shop });
 };
 
-interface SendCustomProps extends NotificationQuery, NotificationBody {}
 
 export const sendCustom = async ({
   query,
   body,
   session,
-}: AppControllerProps<SendCustomProps, NotificationBody>) => {
+}: AppControllerProps<NotificationQuery, NotificationBody>) => {
   const canModify = await NotificationService.canModifiy({
     orderId: query.orderId,
     lineItemId: query.lineItemId,
