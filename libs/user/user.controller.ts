@@ -1,4 +1,4 @@
-import { AppControllerProps, UserModel, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppControllerProps, UserModel, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/pkg.bsb";
 
 
 export const user = async ({

@@ -1,4 +1,4 @@
-import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useStaff } from "@services/staff";
 import { TopBar } from "@shopify/polaris";
 import { useCallback, useState } from "react";
@@ -20,7 +20,7 @@ interface AppTopBarProps {
 export const AppTopBar = ({ toggleNavigation }: AppTopBarProps) => {
   const { data } = useStaff();
   const { t } = useTranslation({ id: "app-topbar", locales });
-  const { select } = usePosition();
+  const { selectPosition } = usePosition();
   const navigate = useNavigate();
   const [userMenuActive, setUserMenuActive] = useState(false);
 
@@ -48,7 +48,7 @@ export const AppTopBar = ({ toggleNavigation }: AppTopBarProps) => {
     <TopBar.UserMenu
       actions={userMenuActions}
       name={data?.fullname.split(" ").map(HelperText.titlize).join(" ")}
-      detail={select(data?.position as never)}
+      detail={selectPosition(data?.position)}
       initials={data?.active ? "A" : "D"}
       open={userMenuActive}
       onToggle={toggleUserMenuActive}

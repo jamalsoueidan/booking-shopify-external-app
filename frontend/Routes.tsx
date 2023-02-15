@@ -1,4 +1,4 @@
-import { LoadingPage } from "@jamalsoueidan/bsf.bsf-pkg";
+import { LoadingPage } from "@jamalsoueidan/pkg.bsf";
 import NotFound from "pages/NotFound";
 import { ProtectedRoute } from "providers/Protected";
 import { Suspense, lazy } from "react";

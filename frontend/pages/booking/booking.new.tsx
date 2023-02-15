@@ -10,7 +10,7 @@ import {
   useForm,
   useToast,
   useTranslation,
-} from "@jamalsoueidan/bsf.bsf-pkg";
+} from "@jamalsoueidan/pkg.bsf";
 import { useBookingCreate } from "@services/booking";
 import { useWidgetDate, useWidgetStaff } from "@services/widget";
 import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
@@ -59,10 +59,10 @@ export default () => {
     onSubmit: async (fieldValues) => {
       await create({
         customerId: fieldValues.customer.customerId,
-        end: fieldValues.time.end as string,
+        end: fieldValues.time.end,
         productId: fieldValues.productId,
         staff: fieldValues.staff.staff,
-        start: fieldValues.time.start as string,
+        start: fieldValues.time.start,
       });
       show({ content: t("submit.sucess") });
       navigate(`/admin/bookings`);
@@ -75,10 +75,10 @@ export default () => {
   });
 
   const { data: schedules } = useWidgetDate({
-    end: end.toJSON(),
+    end: end,
     productId: fields.productId.value,
     staff: fields.staff.value?.staff,
-    start: start.toJSON(),
+    start: start,
   });
 
   const selectedDate = useMemo(() => {

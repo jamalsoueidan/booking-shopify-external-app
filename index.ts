@@ -1,4 +1,4 @@
-import { mongodb } from "@jamalsoueidan/bsb.bsb-pkg";
+import { mongodb } from "@jamalsoueidan/pkg.bsb";
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import bookingRoutes from "@libs/booking/booking.route";
 import customerRoutes from "@libs/customer/customer.route";

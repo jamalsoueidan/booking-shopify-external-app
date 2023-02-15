@@ -1,4 +1,4 @@
-import { AppSession } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppSession } from "@jamalsoueidan/pkg.bsb";
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 
@@ -8,20 +8,16 @@ export const jwtMiddleware = (req, res: Response, next) => {
 
   if (token == null) return res.sendStatus(401);
 
-  jwt.verify(
-    token,
-    process.env.TOKEN_SECRET as string,
-    (err: any, token: AppSession) => {
-      if (err) {
-        return res.status(403).send({ success: false, error: "denied access" });
-      }
-
-      req.query.shop = token.shop;
-      req.session = {
-        ...token,
-      };
-
-      next();
+  jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, token: AppSession) => {
+    if (err) {
+      return res.status(403).send({ success: false, error: "denied access" });
     }
-  );
+
+    req.query.shop = token.shop;
+    req.session = {
+      ...token,
+    };
+
+    next();
+  });
 };

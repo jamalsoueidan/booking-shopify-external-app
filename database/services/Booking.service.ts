@@ -1,41 +1,12 @@
-import { beginningOfDay, closeOfDay } from "@helpers/date";
-import { BookingModel, BookingRequest, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
+import { BookingModel, ShopQuery } from "@jamalsoueidan/pkg.bsb";
 import mongoose from "mongoose";
-
-interface GetBookingsProps
-  extends ShopQuery,
-    Omit<BookingRequest, "staff"> {
-  staff?: string[];
-}
-
-export const getBookings = ({ shop, start, end, staff }: GetBookingsProps) => {
-  return BookingModel.aggregate([
-    {
-      $match: {
-        shop,
-        start: {
-          $gte: beginningOfDay(start),
-        },
-        end: {
-          $lt: closeOfDay(end),
-        },
-        staff: { $in: staff.map((s) => new mongoose.Types.ObjectId(s)) },
-      },
-    },
-    ...lookupBooking,
-  ]);
-};
 
 interface GetBookingByIdProps extends ShopQuery {
   id: string;
   staff?: string[];
 }
 
-export const getBookingById = async ({
-  id,
-  shop,
-  staff,
-}: GetBookingByIdProps) => {
+export const getBookingById = async ({ id, shop, staff }: GetBookingByIdProps) => {
   const bookings = await BookingModel.aggregate([
     {
       $match: {

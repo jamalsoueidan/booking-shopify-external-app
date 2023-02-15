@@ -1,5 +1,5 @@
 import Metadata from "@components/staff/Metadata";
-import { StaffForm } from "@jamalsoueidan/bsf.bsf-pkg";
+import { StaffForm } from "@jamalsoueidan/pkg.bsf";
 import { useStaff, useStaffUpdate } from "@services/staff";
 import { useCallback } from "react";
 

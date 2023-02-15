@@ -1,20 +1,20 @@
 import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { BookingResponse, WidgetHourRange } from "@jamalsoueidan/bsb.types";
+import { Booking, WidgetHourRange } from "@jamalsoueidan/bsb.types";
 
 import {
-    FormErrors,
-    InputDateFlat,
-    InputStaff,
-    InputStaffField,
-    InputTimerDivider,
-    InputTimerDividerField,
-    LoadingSpinner,
-    useForm,
-    useToast,
-    useTranslation,
-} from "@jamalsoueidan/bsf.bsf-pkg";
+  FormErrors,
+  InputDateFlat,
+  InputStaff,
+  InputStaffField,
+  InputTimerDivider,
+  InputTimerDividerField,
+  LoadingSpinner,
+  useForm,
+  useToast,
+  useTranslation,
+} from "@jamalsoueidan/pkg.bsf";
 import { useModal } from "@providers/modal";
 import { useBookingUpdate } from "@services/booking";
 import { useWidgetDate, useWidgetStaff } from "@services/widget";
@@ -22,7 +22,7 @@ import { endOfMonth, isSameDay, startOfMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const BookingDetailsEdit = ({ booking }: { booking: BookingResponse }) => {
+export const BookingDetailsEdit = ({ booking }: { booking: Booking }) => {
   const { data: staffOptions } = useWidgetStaff({
     productId: booking.productId,
   });
@@ -92,10 +92,10 @@ export const BookingDetailsEdit = ({ booking }: { booking: BookingResponse }) =>
   }, [setPrimaryAction, setSecondaryActions, navigate, t, submit]);
 
   const { data: schedules } = useWidgetDate({
-    end: end.toJSON(),
+    end: end,
     productId: booking.productId,
     staff: fields.staff.value?.staff,
-    start: start.toJSON(),
+    start: start,
   });
 
   const hours: WidgetHourRange[] = useMemo(() => {

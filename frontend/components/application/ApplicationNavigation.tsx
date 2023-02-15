@@ -1,12 +1,12 @@
-import { useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Navigation } from "@shopify/polaris";
 import {
-  CalendarMajor,
-  CalendarTickMajor,
-  ExitMajor,
-  HomeMajor,
-  ProfileMajor,
-  SettingsMajor,
+    CalendarMajor,
+    CalendarTickMajor,
+    ExitMajor,
+    HomeMajor,
+    ProfileMajor,
+    SettingsMajor,
 } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 

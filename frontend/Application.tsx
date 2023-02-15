@@ -1,4 +1,4 @@
-import { SettingsProvider } from "@jamalsoueidan/bsf.bsf-pkg";
+import { SettingsProvider } from "@jamalsoueidan/pkg.bsf";
 import { useUserSetting } from "@services/user";
 import ApplicationRoutes from "Routes";
 import { setDefaultOptions } from "date-fns";

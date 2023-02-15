@@ -1,13 +1,13 @@
 import Metadata from "@components/staff/Metadata";
 import { Schedule } from "@jamalsoueidan/bsb.types";
-import { LoadingModal, LoadingPage, LoadingSpinner, ScheduleCalendarDateState } from "@jamalsoueidan/bsf.bsf-pkg";
+import { CalendarDateState, LoadingModal, LoadingPage, LoadingSpinner } from "@jamalsoueidan/pkg.bsf";
 import { useStaff } from "@services/staff";
 import { useStaffSchedule } from "@services/staff/schedule";
 import { Card, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 
 const ScheduleCalendar = lazy(() =>
-  import("@jamalsoueidan/bsf.bsf-pkg").then((module) => ({
+  import("@jamalsoueidan/pkg.bsf").then((module) => ({
     default: module.ScheduleCalendar,
   })),
 );
@@ -24,7 +24,7 @@ const EditScheduleModal = lazy(() =>
 );
 
 export default () => {
-  const [rangeDate, setRangeDate] = useState<ScheduleCalendarDateState>();
+  const [rangeDate, setRangeDate] = useState<CalendarDateState>();
   const [date, setDate] = useState<Date>();
   const [schedule, setSchedule] = useState<Schedule>();
 

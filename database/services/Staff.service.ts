@@ -1,4 +1,4 @@
-import { ShopQuery, StaffModel } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ShopQuery, StaffModel } from "@jamalsoueidan/pkg.bsb";
 
 interface FindByProps {
   shop: string;
@@ -27,7 +27,7 @@ interface GetIdsByGroup extends ShopQuery {
   group: string;
 }
 
-export const getIdsbyGroup = async ({ shop, group }: GetIdsByGroup) => {
+export const getStaffIdsbyGroup = async ({ shop, group }: GetIdsByGroup) => {
   if (!group) {
     return null;
   }
@@ -41,6 +41,6 @@ interface isAllowed extends GetIdsByGroup {
 }
 
 export const isAllowed = async ({ shop, group, staff }: isAllowed) => {
-  const allStaff = await getIdsbyGroup({ shop, group });
+  const allStaff = await getStaffIdsbyGroup({ shop, group });
   return !!allStaff.find((s) => s.toString() === staff);
 };

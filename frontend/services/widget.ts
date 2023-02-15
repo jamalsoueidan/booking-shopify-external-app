@@ -1,8 +1,8 @@
 import { useFetch } from "@hooks";
-import { ApiResponse, WidgetDateQuery, WidgetSchedule, WidgetStaff, WidgetStaffQuery } from "@jamalsoueidan/bsb.types";
+import { ApiResponse, WidgetSchedule, WidgetServiceAvailabilityProps, WidgetServiceGetStaffProps, WidgetStaff } from "@jamalsoueidan/bsb.types";
 import { useQuery } from "react-query";
 
-export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
+export const useWidgetStaff = ({ productId }: WidgetServiceGetStaffProps) => {
   const { get, mutate } = useFetch();
 
   const { data } = useQuery<ApiResponse<Array<WidgetStaff>>>({
@@ -17,7 +17,7 @@ export const useWidgetStaff = ({ productId }: WidgetStaffQuery) => {
   return { data: data?.payload };
 };
 
-export const useWidgetDate = ({ staff, productId, start, end }: WidgetDateQuery) => {
+export const useWidgetDate = ({ staff, productId, start, end }: WidgetServiceAvailabilityProps) => {
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<WidgetSchedule>>>({
     enabled: !!staff && !!productId && !!start && !!end,

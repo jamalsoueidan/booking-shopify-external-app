@@ -1,6 +1,6 @@
-import { Schedule, ScheduleBodyUpdate } from "@jamalsoueidan/bsb.types";
-import { useDate, useTag, useToast } from "@jamalsoueidan/bsf.bsf-pkg";
-import { useStaffScheduleDestroy, useStaffScheduleUpdate } from "@services/staff/schedule";
+import { Schedule } from "@jamalsoueidan/bsb.types";
+import { useDate, useTag, useToast } from "@jamalsoueidan/pkg.bsf";
+import { useStaffScheduleDestroy, useStaffScheduleDestroyGroup, useStaffScheduleUpdate, useStaffScheduleUpdateGroup } from "@services/staff/schedule";
 import { Button, Layout, Modal, Select, TextField } from "@shopify/polaris";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
@@ -19,74 +19,74 @@ export const EditShiftModal = ({ schedule, close }: EditShiftModalProps) => {
   const [endTime, setEndTime] = useState<string>(format(toTimeZone(schedule.end), "HH:mm"));
   const [tag, setTag] = useState(schedule.tag || options[0].value);
 
-  const { isUpdating, update: updateSchedule } = useStaffScheduleUpdate({
+  const { isUpdating, update } = useStaffScheduleUpdate({
     schedule: schedule._id,
   });
 
-  const { isUpdating: isUpdatingAll, update: updateScheduleAll } = useStaffScheduleUpdate({
+  const { isUpdating: isUpdatingAll, updateGroup } =
+    useStaffScheduleUpdateGroup({
+      groupId: schedule.groupId,
+    });
+
+  const { isDestroying, destroy } = useStaffScheduleDestroy({
     schedule: schedule._id,
   });
 
-  const { isDestroying, destroy: destroySchedule } = useStaffScheduleDestroy({
-    schedule: schedule._id,
-  });
-
-  const { isDestroying: isDestroyingAll, destroy: destroyScheduleAll } = useStaffScheduleDestroy({
-    schedule: schedule._id,
-  });
+  const { isDestroying: isDestroyingAll, destroyGroup } =
+    useStaffScheduleDestroyGroup({
+      groupId: schedule.groupId,
+    });
 
   const handleStart = useCallback((value: string) => setStartTime(value), []);
   const handleTag = useCallback((value: string) => setTag(value), []);
   const handleEnd = useCallback((value: string) => setEndTime(value), []);
 
   const updateDate = useCallback(
-    async (type: "all" | null) => {
-      const start = toUtc(
-        `${schedule.start.toJSON().substr(0, 10)} ${startTime}`,
+    async (type: "group" | null) => {
+      const start = new Date(
+        `${format(schedule.start, "yyyy-MM-dd")} ${startTime}`,
       );
-      const end = toUtc(`${schedule.end.toJSON().substr(0, 10)} ${endTime}`);
+      const end = new Date(`${format(schedule.end, "yyyy-MM-dd")} ${endTime}`);
+      type == "group"
+        ? updateGroup({
+            end,
+            start,
+            tag,
+          })
+        : update({
+            end,
+            start,
+          });
 
-      const body: ScheduleBodyUpdate = {
-        end: end.toISOString(),
-        start: start.toISOString(),
-        tag,
-        ...(type === "all" ? { groupId: schedule.groupId } : null),
-      };
-
-      type == "all" ? updateScheduleAll(body) : updateSchedule(body);
       close();
       show({
-        content: type === "all" ? "Schedules has been updated" : "Schedule has been updated",
+        content:
+          type === "group"
+            ? "Schedules has been updated"
+            : "Schedule has been updated",
       });
     },
     [
       toUtc,
-      schedule.start,
-      schedule.end,
-      schedule.groupId,
+      schedule,
       startTime,
       endTime,
       tag,
-      updateScheduleAll,
-      updateSchedule,
       close,
       show,
     ],
   );
 
   const deleteDate = useCallback(
-    (type: "all" | null) => {
-      const body = {
-        ...(type === "all" ? { groupId: schedule.groupId } : null),
-      };
-
-      type == "all" ? destroyScheduleAll(body) : destroySchedule(body);
+    (type: "group" | null) => {
+      type == "group" ? destroyGroup() : destroy();
       close();
       show({
-        content: type === "all" ? "Schedules is deleted" : "Schedule is deleted",
+        content:
+          type === "group" ? "Schedules is deleted" : "Schedule is deleted",
       });
     },
-    [schedule.groupId, destroyScheduleAll, destroySchedule, close, show],
+    [destroyGroup, destroy, close, show],
   );
 
   const formatDate = format(new Date(schedule.start), "MM/dd/yyyy");
@@ -103,8 +103,8 @@ export const EditShiftModal = ({ schedule, close }: EditShiftModalProps) => {
 
   const updateDateOne = useCallback(() => updateDate(null), [updateDate]);
   const deleteDateOne = useCallback(() => deleteDate(null), [deleteDate]);
-  const updateDateAll = useCallback(() => updateDate("all"), [updateDate]);
-  const deleteDateAll = useCallback(() => deleteDate("all"), [deleteDate]);
+  const updateDateAll = useCallback(() => updateDate("group"), [updateDate]);
+  const deleteDateAll = useCallback(() => deleteDate("group"), [deleteDate]);
 
   return (
     <Modal small open={true} onClose={close} title="Edit availability" secondaryActions={secondaryActions}>

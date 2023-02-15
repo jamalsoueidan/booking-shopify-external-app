@@ -1,10 +1,6 @@
-import { AppControllerProps, CustomerServiceFind } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppControllerProps, CustomerServiceSearch, CustomerServiceSearchProps } from "@jamalsoueidan/pkg.bsb";
 
-interface GetQuery {
-  name: string;
-}
-
-export const get = ({ query }: AppControllerProps<GetQuery>) => {
+export const get = ({ query }: AppControllerProps<CustomerServiceSearchProps>) => {
   const { shop, name } = query;
-  return CustomerServiceFind({ shop, name });
+  return CustomerServiceSearch({ shop, name });
 };

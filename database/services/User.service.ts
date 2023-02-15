@@ -1,4 +1,4 @@
-import { ShopQuery, Staff, UserModel } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ShopQuery, Staff, UserModel } from "@jamalsoueidan/pkg.bsb";
 import bcrypt from "bcryptjs";
 import generator from "generate-password";
 import mongoose from "mongoose";

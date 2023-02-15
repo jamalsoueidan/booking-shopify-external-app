@@ -1,4 +1,4 @@
-import { AppSession } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppSession } from "@jamalsoueidan/pkg.bsb";
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 

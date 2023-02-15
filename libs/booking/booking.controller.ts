@@ -1,28 +1,29 @@
 import {
   AppControllerProps,
-  BookingBodyCreateRequest,
-  BookingBodyUpdateRequest,
   BookingModel,
-  BookingRequest,
   BookingServiceCreate,
-  BookingServiceUpdate
-} from "@jamalsoueidan/bsb.bsb-pkg";
+  BookingServiceCreateProps,
+  BookingServiceGetAll,
+  BookingServiceGetAllProps,
+  BookingServiceUpdate,
+  BookingServiceUpdateBodyProps,
+} from "@jamalsoueidan/pkg.bsb";
 import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
-
 
 export const getBookings = async ({
   query,
   session,
-}: AppControllerProps<BookingRequest>) => {
+}: AppControllerProps<Omit<BookingServiceGetAllProps, "staff"> & { staff: string }>) => {
   let allStaff;
 
   const { staff } = query;
   // if picked one staff from booking-staff instead of all staff.
   if (staff) {
     const isAllowed = await StaffService.isAllowed({
-      ...session, // session includes staff, so must be first
-      staff,
+      shop: session.shop,
+      group: session.group,
+      staff, // we need staff from query
     });
 
     if (!isAllowed) {
@@ -31,28 +32,25 @@ export const getBookings = async ({
     allStaff = [staff];
   } else {
     // if picked to see all events for all staff
-    allStaff = await StaffService.getIdsbyGroup({
+    allStaff = await StaffService.getStaffIdsbyGroup({
       shop: session.shop,
       group: session.group,
     });
   }
 
-  return BookingService.getBookings({
+  return BookingServiceGetAll({
     ...query,
     shop: session.shop,
     staff: allStaff,
   });
 };
 
-interface GetBookingByIdQuery  {
+interface GetBookingByIdQuery {
   id: string;
 }
 
-export const getBookingById = async ({
-  query,
-  session,
-}: AppControllerProps<GetBookingByIdQuery>) => {
-  let allStaff = await StaffService.getIdsbyGroup({
+export const getBookingById = async ({ query, session }: AppControllerProps<GetBookingByIdQuery>) => {
+  let allStaff = await StaffService.getStaffIdsbyGroup({
     shop: session.shop,
     group: session.group,
   });
@@ -64,21 +62,14 @@ export const getBookingById = async ({
   });
 };
 
-export const create = ({
-  body,
-  session,
-}: AppControllerProps<any, BookingBodyCreateRequest>) => {
+export const create = ({ body, session }: AppControllerProps<any, BookingServiceCreateProps>) => {
   const { staff, shop } = session;
   //TODO: handle supervisor
   // if session.roles > 1, then
   return BookingServiceCreate({ ...body, staff, shop });
 };
 
-export const update = ({
-  query,
-  body,
-  session,
-}: AppControllerProps<{ id: string }, BookingBodyUpdateRequest>) => {
+export const update = ({ query, body, session }: AppControllerProps<{ id: string }, BookingServiceUpdateBodyProps>) => {
   const { id } = query;
   const { staff, shop } = session;
   //TODO: handle supervisor
@@ -88,8 +79,5 @@ export const update = ({
     throw new Error("not allowed");
   }
 
-  return BookingServiceUpdate({
-    filter: { shop, _id: id },
-    body: { ...body, staff },
-  });
+  return BookingServiceUpdate({ shop, _id: id }, { ...body, staff });
 };

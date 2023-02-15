@@ -1,12 +1,12 @@
 import { useFetch } from "@hooks/useFetch";
-import { ApiResponse, BookingBodyCreateRequest, BookingBodyUpdateRequest, BookingRequest, BookingResponse } from "@jamalsoueidan/bsb.types";
+import { ApiResponse, Booking, BookingServiceCreateProps, BookingServiceGetAllProps, BookingServiceUpdateProps } from "@jamalsoueidan/bsb.types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 
-export const useBookings = ({ start, end, staff }: BookingRequest) => {
+export const useBookings = ({ start, end, staff }: BookingServiceGetAllProps) => {
   const { get } = useFetch();
 
-  const { data, isLoading } = useQuery<ApiResponse<Array<BookingResponse>>>({
+  const { data, isLoading } = useQuery<ApiResponse<Array<Booking>>>({
     enabled: !!start && !!end,
     queryFn: () => get(`bookings?start=${start}&end=${end}${staff ? "&staff=" + staff : ""}`),
     queryKey: ["bookings", { end, staff, start }],
@@ -25,7 +25,7 @@ interface UseBookingGetProps {
 export const useBookingGet = ({ id }: UseBookingGetProps) => {
   const { get } = useFetch();
 
-  const { data } = useQuery<ApiResponse<BookingResponse>>({
+  const { data } = useQuery<ApiResponse<Booking>>({
     queryFn: () => get(`bookings/${id}`),
     queryKey: ["booking", id],
   });
@@ -35,37 +35,15 @@ export const useBookingGet = ({ id }: UseBookingGetProps) => {
   };
 };
 
-type UseBookingCreateFetch = (body: BookingBodyCreateRequest) => Promise<ApiResponse<BookingResponse>>;
 
-export const useBookingCreate = () => {
-  const { post, mutate } = useFetch();
 
-  const create: UseBookingCreateFetch = useCallback(
-    async (body) => {
-      const response: ApiResponse<BookingResponse> = await post("bookings", body);
-      await mutate(["bookings"]);
-      await mutate(["widget", "availability"]);
-      return response;
-    },
-    [post, mutate],
-  );
-
-  return {
-    create,
-  };
-};
-
-interface UseBookingUpdateProps {
-  id: string;
-}
-
-type UseBookingUpdateFetch = (body: BookingBodyUpdateRequest) => void;
-
-export const useBookingUpdate = ({ id }: UseBookingUpdateProps) => {
+export const useBookingUpdate = ({ id }: {
+  id: BookingServiceUpdateProps["query"]["_id"];
+}) => {
   const { put, mutate } = useFetch();
 
-  const update: UseBookingUpdateFetch = useCallback(
-    async (body) => {
+  const update = useCallback(
+    async (body:BookingServiceUpdateProps["body"]) => {
       await put("bookings/" + id, body);
       await mutate(["bookings"]);
       await mutate(["booking", id]);
@@ -76,5 +54,22 @@ export const useBookingUpdate = ({ id }: UseBookingUpdateProps) => {
 
   return {
     update,
+  };
+};
+
+export const useBookingCreate = () => {
+  const { post, mutate } = useFetch();
+
+  const create = useCallback(
+    async (body:BookingServiceCreateProps) => {
+      await post("bookings", body);
+      await mutate(["bookings"]);
+      await mutate(["widget", "availability"]);
+    },
+    [post, mutate],
+  );
+
+  return {
+    create,
   };
 };

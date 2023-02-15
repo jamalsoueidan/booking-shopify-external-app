@@ -1,4 +1,4 @@
-import { useSettings, useTranslation } from "@jamalsoueidan/bsf.bsf-pkg";
+import { useSettings, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Frame, Icon, Link, Text, TopBar } from "@shopify/polaris";
 import { LanguageMinor } from "@shopify/polaris-icons";
 import { ReactNode, useCallback, useState } from "react";

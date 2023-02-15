@@ -1,31 +1,94 @@
-import { handleRoute } from "@jamalsoueidan/bsb.bsb-pkg";
 import { Router } from "express";
-import { query } from "express-validator";
+import { CustomValidator, Schema, body, checkSchema, param } from "express-validator";
+
+import { ScheduleServiceCreateGroupBodyProps, handleRoute } from "@jamalsoueidan/pkg.bsb";
+import { ValidatorsSchema } from "express-validator/src/middlewares/schema";
+import { isValidObjectId } from "mongoose";
 import * as controller from "./staff-schedule.controller";
 
 const router = Router();
 
+const isValidObject: ValidatorsSchema["custom"] = {
+  options: (value: CustomValidator) => isValidObjectId(value),
+  errorMessage: "not valid objectId",
+};
+
+const scheduleSchema: Schema = {
+  schedule: {
+    in: ["params"],
+    notEmpty: true,
+    custom: isValidObject,
+  },
+};
+
+const groupSchema: Schema = {
+  groupId: {
+    in: ["params"],
+    notEmpty: true,
+  },
+};
+
 router.get(
   "/schedules",
-  query("start").notEmpty(),
-  query("end").notEmpty(),
-  handleRoute(controller.get)
+  checkSchema({
+    start: {
+      in: ["query"],
+      notEmpty: true,
+      toDate: true,
+    },
+    end: {
+      in: ["query"],
+      notEmpty: true,
+      toDate: true,
+    },
+  }),
+  handleRoute(controller.get),
 );
 
-router.post("/schedules", handleRoute(controller.create));
-
-router.put("/schedules", handleRoute(controller.update));
-
-router.delete("/schedules/:schedule", handleRoute(controller.destroy));
+router.post(
+  "/schedules/group",
+  body()
+    .isArray({ min: 1 })
+    .customSanitizer((value: ScheduleServiceCreateGroupBodyProps) =>
+      value.map((v) => ({
+        ...v,
+        start: new Date(v.start),
+        end: new Date(v.end),
+      })),
+    ),
+  handleRoute(controller.createGroup),
+);
 
 router.put(
-  "/schedules/:schedule/group/:groupId",
-  handleRoute(controller.updateGroup)
+  "/schedules/group/:groupId",
+  checkSchema(scheduleSchema),
+  checkSchema(groupSchema),
+  body("id")
+    .custom((value) => isValidObjectId(value))
+    .withMessage("not valid objectId"),
+  handleRoute(controller.updateGroup),
 );
 
-router.delete(
-  "/schedules/:schedule/group/:groupId",
-  handleRoute(controller.destroyGroup)
+router.delete("/schedules/group/:groupId", checkSchema(groupSchema), handleRoute(controller.destroyGroup));
+
+router.post(
+  "/schedules",
+  body("start").notEmpty().toDate(),
+  body("end").notEmpty().toDate(),
+  handleRoute(controller.create),
 );
+
+router.put(
+  "/schedules/:schedule",
+  param("schedule")
+    .notEmpty()
+    .custom((value: CustomValidator) => isValidObjectId(value))
+    .withMessage("invalid objectid"),
+  body("start").notEmpty().toDate(),
+  body("end").notEmpty().toDate(),
+  handleRoute(controller.update),
+);
+
+router.delete("/schedules/:schedule", checkSchema(scheduleSchema), handleRoute(controller.destroy));
 
 export default router;

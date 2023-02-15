@@ -1,4 +1,4 @@
-import { AppControllerProps, ShopQuery } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppControllerProps, ShopQuery } from "@jamalsoueidan/pkg.bsb";
 import * as StaffService from "@services/Staff.service";
 
 export const getStaff = ({ query, session }: AppControllerProps<ShopQuery>) => {

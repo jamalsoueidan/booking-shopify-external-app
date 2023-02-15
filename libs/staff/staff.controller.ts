@@ -1,9 +1,9 @@
 import {
-  AppControllerProps,
-  StaffBodyUpdate,
-  StaffServiceFindByIdAndUpdate,
-  StaffServiceFindOne,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+    AppControllerProps,
+    StaffBodyUpdate,
+    StaffServiceFindByIdAndUpdate,
+    StaffServiceFindOne,
+} from "@jamalsoueidan/pkg.bsb";
 
 export const get = ({ session }: AppControllerProps) => {
   const { staff, shop } = session;

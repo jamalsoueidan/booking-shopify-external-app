@@ -1,64 +1,47 @@
 import {
   AppControllerProps,
-  ScheduleBodyUpdate,
-  ScheduleBodyUpdateOrCreate,
-  ScheduleGetQuery,
-  ScheduleModel,
   ScheduleServiceCreate,
+  ScheduleServiceCreateGroup,
+  ScheduleServiceCreateGroupProps,
+  ScheduleServiceCreateProps,
   ScheduleServiceDestroy,
-  ScheduleServiceFindByIdAndUpdate,
-  ScheduleServiceGetByDateRange,
+  ScheduleServiceDestroyGroup,
+  ScheduleServiceDestroyGroupProps,
+  ScheduleServiceDestroyProps,
+  ScheduleServiceGetAll,
+  ScheduleServiceGetAllProps,
+  ScheduleServiceUpdate,
   ScheduleServiceUpdateGroup,
-  ScheduleUpdateOrDestroyQuery,
+  ScheduleServiceUpdateGroupBodyProps,
+  ScheduleServiceUpdateGroupQueryProps,
+  ScheduleServiceUpdateProps,
   StaffServiceFindOne,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+} from "@jamalsoueidan/pkg.bsb";
 
-
-export const get = async ({
-  query,
-  session,
-}: AppControllerProps<Omit<ScheduleGetQuery, "staff">>) => {
-  const { start, end } = query;
-  const { shop, staff } = session;
-  return await ScheduleServiceGetByDateRange({ shop, staff, start, end });
+export const get = ({ query, session }: AppControllerProps<Omit<ScheduleServiceGetAllProps, "staff">>) => {
+  const { shop, start, end } = query;
+  const { staff } = session;
+  return ScheduleServiceGetAll({ shop, staff, start, end });
 };
 
-interface CreateQuery {
-  shop: string;
-  staff: string;
-}
-
-export const create = async ({
-  session,
-  body,
-}: AppControllerProps<CreateQuery, ScheduleBodyUpdateOrCreate>) => {
-  const { shop, staff } = session;
-  return ScheduleServiceCreate({ shop, staff, schedules: body });
-};
+export const create = ({ body, session }: AppControllerProps<null, ScheduleServiceCreateProps["body"]>) =>
+  ScheduleServiceCreate(session, body);
 
 export const update = async ({
   query,
   body,
   session,
-}: AppControllerProps<ScheduleUpdateOrDestroyQuery, ScheduleBodyUpdate>) => {
-  const { schedule } = query;
-  const { shop, staff } = session;
-
-  const exists = await StaffServiceFindOne({ _id: staff, shop });
+}: AppControllerProps<null, ScheduleServiceUpdateProps["body"]>) => {
+  const exists = await StaffServiceFindOne({ _id: session.staff, shop: session.shop });
   if (exists) {
-    return await ScheduleServiceFindByIdAndUpdate(schedule, {
-      groupId: null,
-      ...body,
-    });
+    return ScheduleServiceUpdate(query, body);
   }
 };
 
-export const destroy = ({
-  query,
-  session,
-}: AppControllerProps<ScheduleUpdateOrDestroyQuery>) => {
-  const { schedule } = query;
-  const { shop, staff } = session;
+export const destroy = ({ query, session }: AppControllerProps<Omit<ScheduleServiceDestroyProps, "staff">>) => {
+  const { shop, schedule } = query;
+  const { staff } = session;
+  console.log("delete", query);
   return ScheduleServiceDestroy({
     schedule,
     staff,
@@ -66,50 +49,24 @@ export const destroy = ({
   });
 };
 
-interface UpdateGroupQuery extends ScheduleUpdateOrDestroyQuery {
-  groupId: string;
-}
+export const createGroup = ({ body, session }: AppControllerProps<null, ScheduleServiceCreateGroupProps["body"]>) =>
+  ScheduleServiceCreateGroup(session, body);
 
 export const updateGroup = async ({
   query,
   body,
   session,
-}: AppControllerProps<UpdateGroupQuery, ScheduleBodyUpdate>) => {
-  const { schedule, groupId } = query;
-  const { staff, shop } = session;
-
-  ScheduleServiceUpdateGroup({
-    filter: {
-      schedule,
-      groupId,
-      staff,
-      shop,
+}: AppControllerProps<Omit<ScheduleServiceUpdateGroupQueryProps, "staff">, ScheduleServiceUpdateGroupBodyProps>) =>
+  ScheduleServiceUpdateGroup(
+    {
+      groupId: query.groupId,
+      ...session,
     },
     body,
-  });
-};
-
-interface DestroyGroupQuery extends ScheduleUpdateOrDestroyQuery {
-  groupId: string;
-}
+  );
 
 export const destroyGroup = async ({
   query,
   session,
-}: AppControllerProps<DestroyGroupQuery>) => {
-  const { schedule, groupId } = query;
-  const { shop, staff } = session;
-
-  const documents = await ScheduleModel.countDocuments({
-    _id: schedule,
-    staff,
-    groupId,
-    shop,
-  });
-
-  if (documents > 0) {
-    return await ScheduleModel.deleteMany({ groupId, shop });
-  } else {
-    throw new Error("Groupid doesn't exist");
-  }
-};
+}: AppControllerProps<Omit<ScheduleServiceDestroyGroupProps, "staff">>) =>
+  ScheduleServiceDestroyGroup({ ...query, ...session });

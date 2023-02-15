@@ -1,9 +1,9 @@
 import ApplicationFrame from "@components/application/ApplicationFrame";
 import {
-  LoadingPage,
-  SaveBarProvider,
-  ToastProvider,
-} from "@jamalsoueidan/bsf.bsf-pkg";
+    LoadingPage,
+    SaveBarProvider,
+    ToastProvider,
+} from "@jamalsoueidan/pkg.bsf";
 import { useUserSetting } from "@services/user";
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";

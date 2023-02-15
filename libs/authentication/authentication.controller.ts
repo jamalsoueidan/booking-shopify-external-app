@@ -1,4 +1,4 @@
-import { ControllerProps, ShopQuery, SmsDkApiSend, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.bsb-pkg";
+import { ControllerProps, ShopQuery, SmsDkApiSend, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/pkg.bsb";
 import { createToken } from "@libs/jwt/jwt.helper";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";

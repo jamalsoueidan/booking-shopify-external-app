@@ -1,12 +1,12 @@
 import {
-  AppControllerProps,
-  NotificationBody,
-  NotificationQuery,
-  NotificationServiceCancel,
-  NotificationServiceGet,
-  NotificationServiceResend,
-  NotificationServiceSendCustom,
-} from "@jamalsoueidan/bsb.bsb-pkg";
+    AppControllerProps,
+    NotificationBody,
+    NotificationQuery,
+    NotificationServiceCancel,
+    NotificationServiceGet,
+    NotificationServiceResend,
+    NotificationServiceSendCustom,
+} from "@jamalsoueidan/pkg.bsb";
 
 import * as NotificationService from "@services/Notification.service";
 

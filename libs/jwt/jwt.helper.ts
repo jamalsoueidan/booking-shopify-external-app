@@ -1,4 +1,4 @@
-import { AppSession, IUserDocument } from "@jamalsoueidan/bsb.bsb-pkg";
+import { AppSession, IUserDocument } from "@jamalsoueidan/pkg.bsb";
 import jwt from "jsonwebtoken";
 
 export const createToken = (user: IUserDocument, group: string) => {

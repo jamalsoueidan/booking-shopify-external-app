@@ -1,5 +1,5 @@
 import { Customer } from "@jamalsoueidan/bsb.types";
-import { InputAutoComplete, InputAutoCompleteInput, InputAutoCompleteOption } from "@jamalsoueidan/bsf.bsf-pkg";
+import { InputAutoComplete, InputAutoCompleteInput, InputAutoCompleteOption } from "@jamalsoueidan/pkg.bsf";
 import { useCustomer } from "@services/customer";
 import { Icon } from "@shopify/polaris";
 import { CustomersMajor } from "@shopify/polaris-icons";
