@@ -1,4 +1,4 @@
-import { useFetch } from "@hooks";
+import { useFetch } from "@hooks/use-fetch";
 import { ApiResponse, Staff, StaffBodyUpdate } from "@jamalsoueidan/bsb.types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";

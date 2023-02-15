@@ -1,8 +1,16 @@
-import { ApiResponse, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/bsb.types";
+import {
+  ApiResponse,
+  UserLoginBodyRequest,
+  UserLoginResponse,
+  UserReceivePasswordBodyRequest,
+  UserReceivePasswordResponse,
+} from "@jamalsoueidan/bsb.types";
 import { useCallback, useEffect, useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../hooks/use-fetch";
 
-type UseReceivePasswordPhoneFetch = ({ phone }: UserReceivePasswordBodyRequest) => Promise<ApiResponse<UserReceivePasswordResponse>>;
+type UseReceivePasswordPhoneFetch = ({
+  phone,
+}: UserReceivePasswordBodyRequest) => Promise<ApiResponse<UserReceivePasswordResponse>>;
 
 export const useReceivePassword = () => {
   const { post } = useFetch();

@@ -1,4 +1,4 @@
-import { useFetch } from "@hooks/useFetch";
+import { useFetch } from "@hooks/use-fetch";
 import {
   ApiResponse,
   Schedule,
@@ -9,23 +9,17 @@ import {
   ScheduleServiceUpdateBodyProps,
   ScheduleServiceUpdateGroupBodyProps,
   ScheduleServiceUpdateGroupQueryProps,
-  ScheduleServiceUpdateQueryProps
+  ScheduleServiceUpdateQueryProps,
 } from "@jamalsoueidan/bsb.types";
 import { ScheduleServiceDestroyGroupProps } from "@jamalsoueidan/pkg.bsb";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 
-export const useStaffSchedule = ({
-  start,
-  end,
-}: Omit<ScheduleServiceGetAllProps, 'staff'>) => {
+export const useStaffSchedule = ({ start, end }: Omit<ScheduleServiceGetAllProps, "staff">) => {
   const { get } = useFetch();
   const { data } = useQuery<ApiResponse<Array<Schedule>>>({
     enabled: !!start && !!end,
-    queryFn: () =>
-      get(
-        `schedules?start=${start.toJSON()}&end=${end.toJSON()}`,
-      ),
+    queryFn: () => get(`schedules?start=${start.toJSON()}&end=${end.toJSON()}`),
     queryKey: ["staff", "schedules", start?.toJSON(), end?.toJSON()],
   });
 
@@ -36,7 +30,7 @@ export const useStaffScheduleCreate = () => {
   const [isCreating, setIsCreating] = useState<boolean>();
   const { post, mutate } = useFetch();
   const create = useCallback(
-    async (body: ScheduleServiceCreateProps['body']) => {
+    async (body: ScheduleServiceCreateProps["body"]) => {
       setIsCreating(true);
       await post(`schedules`, body);
       await mutate(["staff"]);
@@ -51,9 +45,7 @@ export const useStaffScheduleCreate = () => {
   };
 };
 
-export const useStaffScheduleDestroy = ({
-  schedule,
-}: Omit<ScheduleServiceDestroyProps, 'staff'>) => {
+export const useStaffScheduleDestroy = ({ schedule }: Omit<ScheduleServiceDestroyProps, "staff">) => {
   const [isDestroying, setIsDestroying] = useState<boolean>();
   const fetch = useFetch();
   const destroy = useCallback(async () => {
@@ -68,9 +60,7 @@ export const useStaffScheduleDestroy = ({
   };
 };
 
-export const useStaffScheduleUpdate = ({
-  schedule,
-}: Omit<ScheduleServiceUpdateQueryProps, 'staff'>) => {
+export const useStaffScheduleUpdate = ({ schedule }: Omit<ScheduleServiceUpdateQueryProps, "staff">) => {
   const [isUpdating, setIsUpdating] = useState<boolean>();
   const { put, mutate } = useFetch();
   const update = useCallback(
@@ -89,9 +79,7 @@ export const useStaffScheduleUpdate = ({
   };
 };
 
-export const useStaffScheduleDestroyGroup = ({
-  groupId,
-}: Omit<ScheduleServiceDestroyGroupProps, 'staff'>) => {
+export const useStaffScheduleDestroyGroup = ({ groupId }: Omit<ScheduleServiceDestroyGroupProps, "staff">) => {
   const [isDestroying, setIsDestroying] = useState<boolean>();
   const fetch = useFetch();
   const destroyGroup = useCallback(async () => {
@@ -126,9 +114,7 @@ export const useStaffScheduleCreateGroup = () => {
   };
 };
 
-export const useStaffScheduleUpdateGroup = ({
-  groupId,
-}: Omit<ScheduleServiceUpdateGroupQueryProps, 'staff'>) => {
+export const useStaffScheduleUpdateGroup = ({ groupId }: Omit<ScheduleServiceUpdateGroupQueryProps, "staff">) => {
   const [isUpdating, setIsUpdating] = useState<boolean>();
   const { put, mutate } = useFetch();
   const updateGroup = useCallback(

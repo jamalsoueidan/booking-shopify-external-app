@@ -1,4 +1,4 @@
-import { useFetch } from "@hooks";
+import { useFetch } from "@hooks/use-fetch";
 import { ApiResponse, CustomerQuery } from "@jamalsoueidan/bsb.types";
 
 export const useCustomer = () => {
@@ -6,9 +6,7 @@ export const useCustomer = () => {
 
   return {
     find: async (value: string) => {
-      const response: ApiResponse<Array<CustomerQuery>> = await get(
-        `customers?name=${value}`
-      );
+      const response: ApiResponse<Array<CustomerQuery>> = await get(`customers?name=${value}`);
       return response.payload;
     },
   };
