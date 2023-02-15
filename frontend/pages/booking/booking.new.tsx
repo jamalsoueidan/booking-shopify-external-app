@@ -117,6 +117,7 @@ export default () => {
                   field={fields.date}
                   data={schedules}
                   input={{ disabled: !schedules }}
+                  disableDates
                   onMonthChange={dateChange}
                 />
                 <InputTimerDivider field={fields.time} data={selectedDate?.hours} />

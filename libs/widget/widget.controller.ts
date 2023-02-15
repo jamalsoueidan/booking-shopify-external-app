@@ -15,8 +15,10 @@ export const staff = ({ query }: AppControllerProps<WidgetServiceGetStaffProps>)
   });
 };
 
-export const availability = ({ query, session }: AppControllerProps<Omit<WidgetServiceAvailabilityProps, "staff">>) =>
-  WidgetServiceAvailability({ ...query, staff: session.staff });
+export const availability = ({ query, session }: AppControllerProps<Omit<WidgetServiceAvailabilityProps, "staff">>) => {
+  console.log(query, session);
+  return WidgetServiceAvailability({ ...query, staff: session.staff });
+};
 
 export const settings = () => {
   return UserModel.findOne({}, "language status timeZone");

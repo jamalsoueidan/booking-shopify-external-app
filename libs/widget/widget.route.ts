@@ -1,4 +1,3 @@
-
 import { handleRoute } from "@jamalsoueidan/pkg.bsb";
 import { Router } from "express";
 import { checkSchema } from "express-validator";
@@ -13,9 +12,9 @@ router.get(
   checkSchema({
     start: { notEmpty: true, isISO8601: true, toDate: true },
     end: { notEmpty: true, isISO8601: true, toDate: true },
-    productId: { notEmpty: true },
+    productId: { notEmpty: true, isInt: true, toInt: true },
   }),
-  handleRoute(controller.availability)
+  handleRoute(controller.availability),
 );
 
 router.get("/widget/settings", handleRoute(controller.settings));
