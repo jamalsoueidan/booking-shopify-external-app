@@ -1,6 +1,5 @@
-import Metadata from "@components/staff/Metadata";
 import { Schedule } from "@jamalsoueidan/bsb.types";
-import { CalendarDateState, LoadingModal, LoadingPage, LoadingSpinner } from "@jamalsoueidan/pkg.bsf";
+import { CalendarDate, LoadingModal, LoadingPage, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useStaff } from "@services/staff";
 import { useStaffSchedule } from "@services/staff/schedule";
 import { Card, Page } from "@shopify/polaris";
@@ -17,6 +16,7 @@ const CreateScheduleModal = lazy(() =>
     default: module.CreateShiftModal,
   })),
 );
+
 const EditScheduleModal = lazy(() =>
   import("../components/staff/modals/edit-shift-modal").then((module) => ({
     default: module.EditShiftModal,
@@ -24,7 +24,8 @@ const EditScheduleModal = lazy(() =>
 );
 
 export default () => {
-  const [rangeDate, setRangeDate] = useState<CalendarDateState>();
+  const { t } = useTranslation({ id: "schedules", locales });
+  const [rangeDate, setRangeDate] = useState<CalendarDate>();
   const [date, setDate] = useState<Date>();
   const [schedule, setSchedule] = useState<Schedule>();
 
@@ -41,13 +42,11 @@ export default () => {
   });
 
   if (!staff || !calendar) {
-    return <LoadingPage title={!staff ? "Loading staff data..." : "Loading schedules data..."} />;
+    return <LoadingPage title={!staff ? t("loading.staff") : t("loading.data")} />;
   }
 
-  const { fullname, active } = staff;
-
   return (
-    <Page fullWidth title={fullname} titleMetadata={<Metadata active={active} />}>
+    <Page fullWidth title={t("title")} primaryAction={{ content: t("create"), onAction: () => setDate(new Date()) }}>
       <Card sectioned>
         {date && (
           <Suspense fallback={<LoadingModal />}>
@@ -60,17 +59,34 @@ export default () => {
           </Suspense>
         )}
 
-        <Card sectioned>
-          <Suspense fallback={<LoadingSpinner />}>
-            <ScheduleCalendar
-              onChangeDate={setRangeDate}
-              data={calendar}
-              onClick={setDate}
-              onClickSchedule={setSchedule}
-            />
-          </Suspense>
-        </Card>
+        <Suspense fallback={<LoadingSpinner />}>
+          <ScheduleCalendar
+            onChangeDate={setRangeDate}
+            data={calendar}
+            onClick={setDate}
+            onClickSchedule={setSchedule}
+          />
+        </Suspense>
       </Card>
     </Page>
   );
+};
+
+const locales = {
+  da: {
+    title: "Min vagtplan",
+    create: "Opret vagtplan",
+    loading: {
+      staff: "Henter din data",
+      data: "Henter din vagtplan",
+    },
+  },
+  en: {
+    title: "My Shifts",
+    create: "Create shift",
+    loading: {
+      staff: "Loading your data",
+      data: "Loading your shifts",
+    },
+  },
 };
