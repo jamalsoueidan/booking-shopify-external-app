@@ -1,7 +1,7 @@
 import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { Booking, WidgetHourRange } from "@jamalsoueidan/bsb.types";
+import { Booking, Tag, WidgetHourRange } from "@jamalsoueidan/bsb.types";
 
 import {
   FormErrors,
@@ -48,7 +48,12 @@ export const BookingDetailsEdit = ({ booking }: { booking: Booking }) => {
       staff: useField<InputStaffField>({
         validates: [notEmpty(t("staff.error_select"))],
         value: booking.staff
-          ? { avatar: booking.staff.avatar, fullname: booking.staff.fullname, staff: booking.staff._id, tag: "" }
+          ? {
+              avatar: booking.staff.avatar,
+              fullname: booking.staff.fullname,
+              staff: booking.staff._id,
+              tag: Tag.end_of_week,
+            }
           : undefined,
       }),
       time: useField<InputTimerDividerField>({

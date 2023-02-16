@@ -1,6 +1,11 @@
-import { Schedule } from "@jamalsoueidan/bsb.types";
+import { Schedule, Tag } from "@jamalsoueidan/bsb.types";
 import { useDate, useTag, useToast } from "@jamalsoueidan/pkg.bsf";
-import { useStaffScheduleDestroy, useStaffScheduleDestroyGroup, useStaffScheduleUpdate, useStaffScheduleUpdateGroup } from "@services/staff/schedule";
+import {
+  useStaffScheduleDestroy,
+  useStaffScheduleDestroyGroup,
+  useStaffScheduleUpdate,
+  useStaffScheduleUpdateGroup,
+} from "@services/staff/schedule";
 import { Button, Layout, Modal, Select, TextField } from "@shopify/polaris";
 import { format } from "date-fns";
 import { useCallback, useMemo, useState } from "react";
@@ -23,29 +28,25 @@ export const EditShiftModal = ({ schedule, close }: EditShiftModalProps) => {
     schedule: schedule._id,
   });
 
-  const { isUpdating: isUpdatingAll, updateGroup } =
-    useStaffScheduleUpdateGroup({
-      groupId: schedule.groupId,
-    });
+  const { isUpdating: isUpdatingAll, updateGroup } = useStaffScheduleUpdateGroup({
+    groupId: schedule.groupId,
+  });
 
   const { isDestroying, destroy } = useStaffScheduleDestroy({
     schedule: schedule._id,
   });
 
-  const { isDestroying: isDestroyingAll, destroyGroup } =
-    useStaffScheduleDestroyGroup({
-      groupId: schedule.groupId,
-    });
+  const { isDestroying: isDestroyingAll, destroyGroup } = useStaffScheduleDestroyGroup({
+    groupId: schedule.groupId,
+  });
 
   const handleStart = useCallback((value: string) => setStartTime(value), []);
-  const handleTag = useCallback((value: string) => setTag(value), []);
+  const handleTag = useCallback((value: Tag) => setTag(value), []);
   const handleEnd = useCallback((value: string) => setEndTime(value), []);
 
   const updateDate = useCallback(
     async (type: "group" | null) => {
-      const start = new Date(
-        `${format(schedule.start, "yyyy-MM-dd")} ${startTime}`,
-      );
+      const start = new Date(`${format(schedule.start, "yyyy-MM-dd")} ${startTime}`);
       const end = new Date(`${format(schedule.end, "yyyy-MM-dd")} ${endTime}`);
       type == "group"
         ? updateGroup({
@@ -60,21 +61,10 @@ export const EditShiftModal = ({ schedule, close }: EditShiftModalProps) => {
 
       close();
       show({
-        content:
-          type === "group"
-            ? "Schedules has been updated"
-            : "Schedule has been updated",
+        content: type === "group" ? "Schedules has been updated" : "Schedule has been updated",
       });
     },
-    [
-      toUtc,
-      schedule,
-      startTime,
-      endTime,
-      tag,
-      close,
-      show,
-    ],
+    [toUtc, schedule, startTime, endTime, tag, close, show],
   );
 
   const deleteDate = useCallback(
@@ -82,8 +72,7 @@ export const EditShiftModal = ({ schedule, close }: EditShiftModalProps) => {
       type == "group" ? destroyGroup() : destroy();
       close();
       show({
-        content:
-          type === "group" ? "Schedules is deleted" : "Schedule is deleted",
+        content: type === "group" ? "Schedules is deleted" : "Schedule is deleted",
       });
     },
     [destroyGroup, destroy, close, show],
