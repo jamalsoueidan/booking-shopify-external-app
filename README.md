@@ -45,6 +45,22 @@ The frontend of this application uses vite/react/typescript while the backend us
   </tr>
   <tr>
     <td>
+      <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/create-shift.png?raw=true" width="400" />
+    </td>
+    <td>
+      <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/shifts.png?raw=true" width="400" />
+    </td>
+  </tr>
+    <tr>
+    <td>
+      <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/settings.png?raw=true" width="400" />
+    </td>
+    <td>
+      <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/account.png?raw=true" width="400" />
+    </td>
+  </tr>
+  <tr>
+    <td>
       <img src="https://github.com/jamalsoueidan/booking-shopify-external-app/blob/main/screens/login.png?raw=true" width="400" />
     </td>
     <td>
