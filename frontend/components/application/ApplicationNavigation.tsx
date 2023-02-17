@@ -1,40 +1,40 @@
 import { useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Navigation } from "@shopify/polaris";
 import {
-    CalendarMajor,
-    CalendarTickMajor,
-    ExitMajor,
-    HomeMajor,
-    ProfileMajor,
-    SettingsMajor,
+  CalendarMajor,
+  CalendarTickMajor,
+  ExitMajor,
+  HomeMajor,
+  ProfileMajor,
+  SettingsMajor,
 } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
 
 const locales = {
   da: {
     booking: {
-      bookings: "Behandlingstider",
+      bookings: "Min tider",
       dashboard: "Dashboard",
       title: "Applikation",
     },
     staff: {
-      account: "Konto",
+      account: "Min konto",
       logout: "Log ud",
-      schedules: "Vagtplan",
+      schedules: "Min vagtplan",
       settings: "Indstillinger",
       title: "Profil",
     },
   },
   en: {
     booking: {
-      bookings: "Bookings",
+      bookings: "My bookings",
       dashboard: "Dashboard",
       title: "Application",
     },
     staff: {
       account: "My account",
       logout: "Logout",
-      schedules: "My shift",
+      schedules: "My shifts",
       settings: "My settings",
       title: "Profile",
     },

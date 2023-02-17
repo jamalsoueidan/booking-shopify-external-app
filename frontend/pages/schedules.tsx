@@ -65,6 +65,7 @@ export default () => {
             data={calendar}
             onClick={setDate}
             onClickSchedule={setSchedule}
+            initialView="dayGridMonth"
           />
         </Suspense>
       </Card>

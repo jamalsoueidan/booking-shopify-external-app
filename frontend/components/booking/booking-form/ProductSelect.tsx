@@ -30,7 +30,6 @@ export const ProductSelect = (field: Field<number>) => {
       placeholder="Vælg produkt"
       options={productOptions}
       value={field.value?.toString()}
-      disabled={productOptions.length === 1}
       onChange={onChange}
       onBlur={field.onBlur}
       error={field.error}

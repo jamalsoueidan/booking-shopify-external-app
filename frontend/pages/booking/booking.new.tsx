@@ -2,11 +2,11 @@ import { CustomerInputAutoComplete } from "@components/booking/booking-form/Cust
 import { ProductSelect } from "@components/booking/booking-form/ProductSelect";
 import {
   InputDateDrop,
-  InputStaff,
-  InputStaffField,
   InputTimerDivider,
   InputTimerDividerField,
   Validators,
+  WidgetInputStaff,
+  WidgetInputStaffField,
   useForm,
   useToast,
   useTranslation,
@@ -47,7 +47,7 @@ export default () => {
         validates: [notEmpty(t("product.error_empty"))],
         value: undefined,
       }),
-      staff: useField<InputStaffField>({
+      staff: useField<WidgetInputStaffField>({
         validates: [notEmpty(t("staff.error_select"))],
         value: undefined,
       }),
@@ -112,7 +112,7 @@ export default () => {
           <Layout.AnnotatedSection title={t("staff.title")} description={t("staff.desc")}>
             <Card sectioned>
               <FormLayout>
-                <InputStaff field={fields.staff} data={staffOptions} input={{ disabled: !staffOptions }} />
+                <WidgetInputStaff field={fields.staff} data={staffOptions} input={{ disabled: !staffOptions }} />
                 <InputDateDrop
                   field={fields.date}
                   data={schedules}
