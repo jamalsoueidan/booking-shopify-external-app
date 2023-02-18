@@ -5,38 +5,17 @@ import {
   BookingServiceCreateProps,
   BookingServiceGetAll,
   BookingServiceGetAllProps,
+  BookingServiceGetById,
   BookingServiceUpdate,
   BookingServiceUpdateBodyProps,
 } from "@jamalsoueidan/pkg.bsb";
-import * as BookingService from "@services/Booking.service";
 import * as StaffService from "@services/Staff.service";
 
-export const getBookings = async ({
-  query,
-  session,
-}: AppControllerProps<Omit<BookingServiceGetAllProps, "staff"> & { staff: string }>) => {
-  let allStaff;
-
-  const { staff } = query;
-  // if picked one staff from booking-staff instead of all staff.
-  if (staff) {
-    const isAllowed = await StaffService.isAllowed({
-      shop: session.shop,
-      group: session.group,
-      staff, // we need staff from query
-    });
-
-    if (!isAllowed) {
-      throw new Error("not allowed");
-    }
-    allStaff = [staff];
-  } else {
-    // if picked to see all events for all staff
-    allStaff = await StaffService.getStaffIdsbyGroup({
-      shop: session.shop,
-      group: session.group,
-    });
-  }
+export const getBookings = async ({ query, session }: AppControllerProps<Omit<BookingServiceGetAllProps, "staff">>) => {
+  const allStaff = await StaffService.getStaffIdsbyGroup({
+    shop: session.shop,
+    group: session.group,
+  });
 
   return BookingServiceGetAll({
     ...query,
@@ -55,8 +34,8 @@ export const getBookingById = async ({ query, session }: AppControllerProps<GetB
     group: session.group,
   });
 
-  return BookingService.getBookingById({
-    id: query.id,
+  return BookingServiceGetById({
+    _id: query.id,
     shop: session.shop,
     staff: allStaff,
   });
