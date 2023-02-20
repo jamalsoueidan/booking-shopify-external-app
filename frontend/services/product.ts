@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks/use-fetch";
-import { ApiResponse, Product } from "@jamalsoueidan/bsb.types";
+import { ApiResponse, Product } from "@jamalsoueidan/pkg.bsb-types";
 import { useQuery } from "react-query";
 
 export const useProducts = () => {

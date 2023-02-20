@@ -1,7 +1,7 @@
 import { Columns, Form, FormLayout, Modal, Range, Text } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 
-import { Booking, Tag, WidgetHourRange } from "@jamalsoueidan/bsb.types";
+import { Booking, Tag, WidgetHourRange } from "@jamalsoueidan/pkg.bsb-types";
 
 import {
   FormErrors,

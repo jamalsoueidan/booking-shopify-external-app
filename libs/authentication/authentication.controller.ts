@@ -1,13 +1,20 @@
-import { ControllerProps, ShopQuery, SmsDkApiSend, UserLoginBodyRequest, UserLoginResponse, UserReceivePasswordBodyRequest, UserReceivePasswordResponse } from "@jamalsoueidan/pkg.bsb";
+import {
+  ControllerProps,
+  ShopQuery,
+  SmsDkApiSend,
+  StaffUserLoginBodyRequest,
+  StaffUserLoginResponse,
+  StaffUserReceivePasswordBodyRequest,
+  StaffUserReceivePasswordResponse,
+} from "@jamalsoueidan/pkg.bsb";
 import { createToken } from "@libs/jwt/jwt.helper";
 import * as StaffService from "@services/Staff.service";
 import * as UserService from "@services/User.service";
 
-
 export const receivePassword = async ({
   query,
   body,
-}: ControllerProps<ShopQuery, UserReceivePasswordBodyRequest>): Promise<UserReceivePasswordResponse> => {
+}: ControllerProps<ShopQuery, StaffUserReceivePasswordBodyRequest>): Promise<StaffUserReceivePasswordResponse> => {
   const staff = await StaffService.findBy({
     shop: query.shop,
     phone: body.phone,
@@ -31,26 +38,19 @@ export const receivePassword = async ({
   }
 };
 
-
 export const login = async ({
   query,
   body,
-}: ControllerProps<ShopQuery, UserLoginBodyRequest>): Promise<UserLoginResponse> => {
-  const user = await UserService.findUser({
+}: ControllerProps<ShopQuery, StaffUserLoginBodyRequest>): Promise<StaffUserLoginResponse> => {
+  const staff = await UserService.findUser({
     shop: query.shop,
     identification: body.identification,
     password: body.password,
   });
 
-  if (user) {
+  if (staff) {
     // check if staff is still active
-    const staff = await StaffService.findBy({
-      shop: query.shop,
-      _id: user.staff.toString(),
-    })
-    if (staff) {
-      return { token: createToken(user, staff.group) };
-    }
+    return { token: createToken(staff) };
   }
   throw new Error("your information is wrong");
 };

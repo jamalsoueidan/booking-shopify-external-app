@@ -1,16 +1,15 @@
-import { AppSession, IUserDocument } from "@jamalsoueidan/pkg.bsb";
+import { AppSession, IStaffDocument } from "@jamalsoueidan/pkg.bsb";
 import jwt from "jsonwebtoken";
 
-export const createToken = (user: IUserDocument, group: string) => {
+export const createToken = (staff: IStaffDocument) => {
   return jwt.sign(
     {
-      _id: user._id,
-      staff: user.staff.toString(),
-      shop: user.shop,
-      role: user.role,
-      group,
+      _id: staff._id,
+      shop: staff.shop,
+      role: staff.user.role,
+      group: staff.group,
     } as AppSession,
     process.env.TOKEN_SECRET,
-    { expiresIn: "1h" }
+    { expiresIn: "1h" },
   );
 };

@@ -1,28 +1,30 @@
-import { AppControllerProps, UserModel, UserSettingsResponse, UserSettingsUpdateBodyRequest } from "@jamalsoueidan/pkg.bsb";
+import {
+  AppControllerProps,
+  StaffModel,
+  StaffUserSettingsResponse,
+  StaffUserSettingsUpdateBodyRequest,
+} from "@jamalsoueidan/pkg.bsb";
 
-
-export const user = async ({
-  session,
-}: AppControllerProps<
-  never,
-  never
->): Promise<UserSettingsResponse> => {
-  return UserModel.findById(session._id, "_id language timeZone");
+export const user = async ({ session }: AppControllerProps<never, never>): Promise<StaffUserSettingsResponse> => {
+  const staff = await StaffModel.findById(session._id, "_id language timeZone");
+  return {
+    timeZone: staff.user.timeZone,
+    language: staff.user.language,
+  };
 };
 
 export const update = async ({
   body,
   session,
-}: AppControllerProps<
-  never,
-  UserSettingsUpdateBodyRequest
->): Promise<UserSettingsResponse> => {
-  return UserModel.findByIdAndUpdate(
+}: AppControllerProps<never, StaffUserSettingsUpdateBodyRequest>): Promise<StaffUserSettingsResponse> => {
+  return StaffModel.findByIdAndUpdate(
     { _id: session._id },
     {
-      timeZone: body.timeZone,
-      language: body.language,
+      user: {
+        timeZone: body.timeZone,
+        language: body.language,
+      },
     },
-    { new: true, fields: "_id language timeZone" }
+    { new: true, fields: "_id user.language user.timeZone" },
   );
 };

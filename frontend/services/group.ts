@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks/use-fetch";
-import { ApiResponse, Staff } from "@jamalsoueidan/bsb.types";
+import { ApiResponse, Staff } from "@jamalsoueidan/pkg.bsb-types";
 import { useQuery } from "react-query";
 
 export const useGroup = () => {

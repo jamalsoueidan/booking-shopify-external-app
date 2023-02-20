@@ -1,5 +1,5 @@
 import { useFetch } from "@hooks/use-fetch";
-import { ApiResponse, NotificationBody, NotificationQuery } from "@jamalsoueidan/bsb.types";
+import { ApiResponse, NotificationBody, NotificationQuery } from "@jamalsoueidan/pkg.bsb-types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 

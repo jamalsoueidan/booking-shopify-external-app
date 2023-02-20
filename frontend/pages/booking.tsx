@@ -1,4 +1,4 @@
-import { Booking } from "@jamalsoueidan/bsb.types";
+import { Booking } from "@jamalsoueidan/pkg.bsb-types";
 import { LoadingModal, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useBookings } from "@services/booking";
 import { useGroup } from "@services/group";

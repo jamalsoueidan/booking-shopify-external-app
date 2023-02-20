@@ -1,4 +1,4 @@
-import { Schedule } from "@jamalsoueidan/bsb.types";
+import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
 import { CalendarDate, LoadingModal, LoadingPage, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useStaff } from "@services/staff";
 import { useStaffSchedule } from "@services/staff/schedule";
