@@ -4,9 +4,9 @@ import jwt from "jsonwebtoken";
 export const createToken = (staff: IStaffDocument) => {
   return jwt.sign(
     {
-      _id: staff._id,
+      staff: staff._id.toString(),
       shop: staff.shop,
-      role: staff.user.role,
+      role: staff.role,
       group: staff.group,
     } as AppSession,
     process.env.TOKEN_SECRET,

@@ -1,4 +1,4 @@
-import { AppSession } from "@jamalsoueidan/pkg.bsb";
+import { AppSession, StaffRole } from "@jamalsoueidan/pkg.bsb";
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 
@@ -16,6 +16,8 @@ export const jwtMiddleware = (req, res: Response, next) => {
     req.query.shop = token.shop;
     req.session = {
       ...token,
+      isAdmin: token.role === StaffRole.admin,
+      isUser: token.role === StaffRole.user,
     };
 
     next();

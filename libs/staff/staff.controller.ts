@@ -1,8 +1,8 @@
 import {
-    AppControllerProps,
-    StaffBodyUpdate,
-    StaffServiceFindByIdAndUpdate,
-    StaffServiceFindOne,
+  AppControllerProps,
+  StaffBodyUpdate,
+  StaffServiceFindByIdAndUpdate,
+  StaffServiceFindOne,
 } from "@jamalsoueidan/pkg.bsb";
 
 export const get = ({ session }: AppControllerProps) => {
@@ -10,10 +10,7 @@ export const get = ({ session }: AppControllerProps) => {
   return StaffServiceFindOne({ _id: staff, shop });
 };
 
-export const update = ({
-  body,
-  session,
-}: AppControllerProps<never, StaffBodyUpdate>) => {
+export const update = ({ body, session }: AppControllerProps<never, StaffBodyUpdate>) => {
   const id = session.staff;
   delete body.group;
   delete body.active;

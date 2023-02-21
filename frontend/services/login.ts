@@ -1,16 +1,16 @@
 import {
   ApiResponse,
-  StaffUserLoginBodyRequest,
-  StaffUserLoginResponse,
-  StaffUserReceivePasswordBodyRequest,
-  StaffUserReceivePasswordResponse,
+  StaffLoginBodyRequest,
+  StaffLoginResponse,
+  StaffReceivePasswordBodyRequest,
+  StaffReceivePasswordResponse,
 } from "@jamalsoueidan/pkg.bsb-types";
 import { useCallback, useEffect, useState } from "react";
 import { useFetch } from "../hooks/use-fetch";
 
 type UseReceivePasswordPhoneFetch = ({
   phone,
-}: StaffUserReceivePasswordBodyRequest) => Promise<ApiResponse<StaffUserReceivePasswordResponse>>;
+}: StaffReceivePasswordBodyRequest) => Promise<ApiResponse<StaffReceivePasswordResponse>>;
 
 export const useReceivePassword = () => {
   const { post } = useFetch();
@@ -20,7 +20,7 @@ export const useReceivePassword = () => {
   const receivePassword: UseReceivePasswordPhoneFetch = useCallback(
     async ({ phone }) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<StaffUserReceivePasswordResponse>>("password-phone", { phone });
+      const response = await post<ApiResponse<StaffReceivePasswordResponse>>("password-phone", { phone });
       setIsFetching(false);
       setIsFetched(true);
       return response;
@@ -35,10 +35,7 @@ export const useReceivePassword = () => {
   };
 };
 
-type UseLoginFetch = ({
-  identification,
-  password,
-}: StaffUserLoginBodyRequest) => Promise<ApiResponse<StaffUserLoginResponse>>;
+type UseLoginFetch = ({ identification, password }: StaffLoginBodyRequest) => Promise<ApiResponse<StaffLoginResponse>>;
 
 export const useLogin = () => {
   const { post } = useFetch();
@@ -48,7 +45,7 @@ export const useLogin = () => {
   const login: UseLoginFetch = useCallback(
     async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<StaffUserLoginResponse>>("login", body);
+      const response = await post<ApiResponse<StaffLoginResponse>>("login", body);
       setIsFetching(false);
       setIsFetched(true);
       const token = response.payload.token;
@@ -73,7 +70,7 @@ export const useCheckLogin = () => {
   useEffect(() => {
     const login = async () => {
       try {
-        const response = await get<ApiResponse<StaffUserLoginResponse>>("settings");
+        const response = await get<ApiResponse<StaffLoginResponse>>("settings");
         setIsFetching(false);
         setIsLoggedIn(response.success);
       } catch (error) {

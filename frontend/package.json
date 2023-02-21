@@ -10,8 +10,8 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@jamalsoueidan/pkg.bsf": "^0.0.49",
-    "@jamalsoueidan/pkg.bsb-types": "^0.0.2",
+    "@jamalsoueidan/pkg.bsf": "^0.0.53",
+    "@jamalsoueidan/pkg.bsb-types": "^0.0.5",
     "@jamalsoueidan/bsf.polyfills.json": "^0.0.2",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",
@@ -19,7 +19,7 @@
     "@shopify/react-i18n": "^7.5.1",
     "axios": "^1.2.2",
     "date-fns": "^2.29.3",
-    "date-fns-tz": "^1.3.7",
+    "date-fns-tz": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",

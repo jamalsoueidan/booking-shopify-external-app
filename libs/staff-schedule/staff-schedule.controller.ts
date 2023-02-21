@@ -41,7 +41,6 @@ export const update = async ({
 export const destroy = ({ query, session }: AppControllerProps<Omit<ScheduleServiceDestroyProps, "staff">>) => {
   const { shop, schedule } = query;
   const { staff } = session;
-  console.log("delete", query);
   return ScheduleServiceDestroy({
     schedule,
     staff,

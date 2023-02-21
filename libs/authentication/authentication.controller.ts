@@ -2,26 +2,27 @@ import {
   ControllerProps,
   ShopQuery,
   SmsDkApiSend,
-  StaffUserLoginBodyRequest,
-  StaffUserLoginResponse,
-  StaffUserReceivePasswordBodyRequest,
-  StaffUserReceivePasswordResponse,
+  StaffLoginBodyRequest,
+  StaffLoginResponse,
+  StaffReceivePasswordBodyRequest,
+  StaffReceivePasswordResponse,
+  StaffServiceCreateNewPassword,
+  StaffServiceLogin,
 } from "@jamalsoueidan/pkg.bsb";
 import { createToken } from "@libs/jwt/jwt.helper";
 import * as StaffService from "@services/Staff.service";
-import * as UserService from "@services/User.service";
 
 export const receivePassword = async ({
   query,
   body,
-}: ControllerProps<ShopQuery, StaffUserReceivePasswordBodyRequest>): Promise<StaffUserReceivePasswordResponse> => {
+}: ControllerProps<ShopQuery, StaffReceivePasswordBodyRequest>): Promise<StaffReceivePasswordResponse> => {
   const staff = await StaffService.findBy({
     shop: query.shop,
     phone: body.phone,
   });
 
   if (staff) {
-    const password = await UserService.createNewPassword(staff);
+    const password = await StaffServiceCreateNewPassword(staff);
 
     SmsDkApiSend({
       receiver: staff.phone,
@@ -41,8 +42,8 @@ export const receivePassword = async ({
 export const login = async ({
   query,
   body,
-}: ControllerProps<ShopQuery, StaffUserLoginBodyRequest>): Promise<StaffUserLoginResponse> => {
-  const staff = await UserService.findUser({
+}: ControllerProps<ShopQuery, StaffLoginBodyRequest>): Promise<StaffLoginResponse> => {
+  const staff = await StaffServiceLogin({
     shop: query.shop,
     identification: body.identification,
     password: body.password,

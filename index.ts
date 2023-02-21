@@ -1,6 +1,6 @@
 import { mongodb } from "@jamalsoueidan/pkg.bsb";
+import { bookingRouter, widgetRouter } from "@jamalsoueidan/pkg.bsb-routes";
 import authenticationRoutes from "@libs/authentication/authentication.route";
-import bookingRoutes from "@libs/booking/booking.route";
 import customerRoutes from "@libs/customer/customer.route";
 import groupRoutes from "@libs/group/group.routes";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
@@ -9,7 +9,6 @@ import productRoutes from "@libs/product/product.route";
 import schedulesRoutes from "@libs/staff-schedule/staff-schedule.routes";
 import staffRoutes from "@libs/staff/staff.routes";
 import userRoutes from "@libs/user/user.route";
-import widgetRoutes from "@libs/widget/widget.route";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -24,19 +23,12 @@ const PROD_INDEX_PATH = `${process.cwd()}/frontend/dist/`;
 
 mongodb.connect(null);
 
-export async function createServer(
-  root = process.cwd(),
-  isProd = process.env.NODE_ENV === "production"
-) {
+export async function createServer(root = process.cwd(), isProd = process.env.NODE_ENV === "production") {
   const app = express();
 
   if (isProd) {
-    const compression = await import("compression").then(
-      ({ default: fn }) => fn
-    );
-    const serveStatic = await import("serve-static").then(
-      ({ default: fn }) => fn
-    );
+    const compression = await import("compression").then(({ default: fn }) => fn);
+    const serveStatic = await import("serve-static").then(({ default: fn }) => fn);
     app.use(compression());
     app.use(serveStatic(PROD_INDEX_PATH, { index: false }));
   } else {
@@ -52,20 +44,18 @@ export async function createServer(
   // All endpoints after this point will require an active session
   app.use("/api/*", jwtMiddleware);
 
-  app.use("/api", bookingRoutes);
+  app.use("/api", bookingRouter);
   app.use("/api", productRoutes);
   app.use("/api", userRoutes);
   app.use("/api", groupRoutes);
   app.use("/api", customerRoutes);
-  app.use("/api", widgetRoutes);
+  app.use("/api", widgetRouter);
   app.use("/api", notificationRoutes);
   app.use("/api", staffRoutes);
   app.use("/api", schedulesRoutes);
 
   app.get("/*", (_req, res) => {
-    const htmlFile = path.join(
-      isProd ? PROD_INDEX_PATH + "index.html" : DEV_INDEX_PATH + "dev.html"
-    );
+    const htmlFile = path.join(isProd ? PROD_INDEX_PATH + "index.html" : DEV_INDEX_PATH + "dev.html");
 
     res.sendFile(htmlFile);
   });
@@ -79,5 +69,5 @@ createServer().then(({ app }) =>
     console.log(`  App running in port ${PORT}`);
     console.log();
     console.log(`  > Local: \x1b[36mhttp://localhost:\x1b[1m${PORT}/\x1b[0m`);
-  })
+  }),
 );

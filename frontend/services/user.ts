@@ -1,15 +1,11 @@
-import {
-  ApiResponse,
-  StaffUserSettingsResponse,
-  StaffUserSettingsUpdateBodyRequest,
-} from "@jamalsoueidan/pkg.bsb-types";
+import { ApiResponse, StaffSettingsResponse, StaffSettingsUpdateBodyRequest } from "@jamalsoueidan/pkg.bsb-types";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 import { useFetch } from "../hooks/use-fetch";
 
 export const useUserSetting = () => {
   const { get } = useFetch();
-  const { data, isLoading } = useQuery<ApiResponse<StaffUserSettingsResponse>>({
+  const { data, isLoading } = useQuery<ApiResponse<StaffSettingsResponse>>({
     enabled: !!localStorage.getItem("token"),
     queryFn: () => get(`settings`),
     queryKey: ["settings"],
@@ -21,16 +17,14 @@ export const useUserSetting = () => {
   };
 };
 
-type UseUserSettingUpdateFetch = (
-  body: StaffUserSettingsUpdateBodyRequest,
-) => Promise<ApiResponse<StaffUserSettingsResponse>>;
+type UseUserSettingUpdateFetch = (body: StaffSettingsUpdateBodyRequest) => Promise<ApiResponse<StaffSettingsResponse>>;
 
 export const useUserSettingUpdate = () => {
   const { put, mutate } = useFetch();
 
   const update: UseUserSettingUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<StaffUserSettingsResponse> = await put("settings", body);
+      const response: ApiResponse<StaffSettingsResponse> = await put("settings", body);
       await mutate(["settings"]);
       return response;
     },
