@@ -33,7 +33,7 @@ export const useStaffScheduleCreate = () => {
     async (body: ScheduleServiceCreateProps["body"]) => {
       setIsCreating(true);
       await post(`schedules`, body);
-      await mutate(["staff"]);
+      await mutate(["staff", "schedules"]);
       setIsCreating(false);
     },
     [mutate, post],
@@ -51,6 +51,7 @@ export const useStaffScheduleDestroy = ({ schedule }: Omit<ScheduleServiceDestro
   const destroy = useCallback(async () => {
     setIsDestroying(true);
     await fetch.destroy(`schedules/${schedule}`);
+    await fetch.mutate(["staff", "schedules"]);
     setIsDestroying(false);
   }, [fetch, schedule]);
 
@@ -67,7 +68,7 @@ export const useStaffScheduleUpdate = ({ schedule }: Omit<ScheduleServiceUpdateQ
     async (body: ScheduleServiceUpdateBodyProps) => {
       setIsUpdating(true);
       await put(`schedules/${schedule}`, body);
-      await mutate(["staff"]);
+      await mutate(["staff", "schedules"]);
       setIsUpdating(false);
     },
     [put, schedule, mutate],
@@ -85,7 +86,7 @@ export const useStaffScheduleDestroyGroup = ({ groupId }: Omit<ScheduleServiceDe
   const destroyGroup = useCallback(async () => {
     setIsDestroying(true);
     await fetch.destroy(`schedules/group/${groupId}`);
-    await fetch.mutate(["staff"]);
+    await fetch.mutate(["staff", "schedules"]);
     setIsDestroying(false);
   }, [fetch, groupId]);
 
@@ -102,7 +103,7 @@ export const useStaffScheduleCreateGroup = () => {
     async (body: ScheduleServiceCreateGroupBodyProps) => {
       setIsCreating(true);
       await post(`schedules/group`, body);
-      await mutate(["staff"]);
+      await mutate(["staff", "schedules"]);
       setIsCreating(false);
     },
     [mutate, post],
@@ -121,7 +122,7 @@ export const useStaffScheduleUpdateGroup = ({ groupId }: Omit<ScheduleServiceUpd
     async (body: ScheduleServiceUpdateGroupBodyProps) => {
       setIsUpdating(true);
       await put(`schedules/group/${groupId}`, body);
-      await mutate(["staff"]);
+      await mutate(["staff", "schedules"]);
       setIsUpdating(false);
     },
     [put, groupId, mutate],

@@ -17,9 +17,15 @@ const CreateScheduleModal = lazy(() =>
   })),
 );
 
-const EditScheduleModal = lazy(() =>
-  import("../components/staff/modals/edit-shift-modal").then((module) => ({
-    default: module.EditShiftModal,
+const EditOneScheduleModal = lazy(() =>
+  import("../components/staff/modals/edit-one-shift-modal").then((module) => ({
+    default: module.EditOneShiftModal,
+  })),
+);
+
+const EditManyScheduleModal = lazy(() =>
+  import("../components/staff/modals/edit-many-shifts-modal").then((module) => ({
+    default: module.EditManyShiftsModal,
   })),
 );
 
@@ -27,13 +33,22 @@ export default () => {
   const { t } = useTranslation({ id: "schedules", locales });
   const [rangeDate, setRangeDate] = useState<CalendarDate>();
   const [date, setDate] = useState<Date>();
-  const [schedule, setSchedule] = useState<Schedule>();
+  const [editOneSchedule, setEditOneSchedule] = useState<Schedule>();
+  const [editManySchedule, setEditManySchedule] = useState<Schedule>();
 
   const close = useCallback(() => {
     setDate(null);
-    setSchedule(null);
+    setEditManySchedule(null);
+    setEditOneSchedule(null);
   }, []);
 
+  const edit = useCallback((schedule: Schedule) => {
+    if (schedule.groupId) {
+      setEditManySchedule(schedule);
+    } else {
+      setEditOneSchedule(schedule);
+    }
+  }, []);
   const { data: staff } = useStaff();
 
   const { data: calendar } = useStaffSchedule({
@@ -53,18 +68,22 @@ export default () => {
             <CreateScheduleModal selectedDate={date} close={close} />
           </Suspense>
         )}
-        {schedule && (
+        {editOneSchedule && (
           <Suspense fallback={<LoadingModal />}>
-            <EditScheduleModal schedule={schedule} close={close} />
+            <EditOneScheduleModal schedule={editOneSchedule} close={close} />
           </Suspense>
         )}
-
+        {editManySchedule && (
+          <Suspense fallback={<LoadingModal />}>
+            <EditManyScheduleModal schedule={editManySchedule} close={close} />
+          </Suspense>
+        )}
         <Suspense fallback={<LoadingSpinner />}>
           <ScheduleCalendar
             onChangeDate={setRangeDate}
             data={calendar}
             onClick={setDate}
-            onClickSchedule={setSchedule}
+            onClickSchedule={edit}
             initialView="dayGridMonth"
           />
         </Suspense>
