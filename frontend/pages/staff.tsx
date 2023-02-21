@@ -18,12 +18,5 @@ export default () => {
     return <></>;
   }
 
-  return (
-    <StaffForm
-      data={staff}
-      action={submit}
-      titleMetadata={<Metadata active={staff.active} />}
-      disallowEditing={{ active: false, group: false }}
-    />
-  );
+  return <StaffForm data={staff} action={submit} titleMetadata={<Metadata active={staff.active} />} />;
 };

@@ -6,6 +6,7 @@ import { Suspense } from "react";
 
 export default () => {
   const { data: group } = useGroup();
+
   return (
     <Page title="Dashboard">
       <Grid>

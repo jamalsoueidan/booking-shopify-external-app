@@ -73,6 +73,10 @@ router.put(
       notEmpty: true,
       toDate: true,
     },
+    tag: {
+      in: ["body"],
+      notEmpty: true,
+    },
   }),
   handleRoute(controller.updateGroup),
 );

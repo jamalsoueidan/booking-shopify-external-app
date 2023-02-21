@@ -12,7 +12,9 @@ router.put(
   body("group").not().exists(),
   body("shop").not().exists(),
   body("active").not().exists(),
-  handleRoute(controller.update)
+  body("role").not().exists(),
+  body("password").not().exists(),
+  handleRoute(controller.update),
 );
 
 export default router;
