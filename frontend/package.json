@@ -10,8 +10,8 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@jamalsoueidan/pkg.bsf": "^0.0.58",
-    "@jamalsoueidan/pkg.bsb-types": "^0.0.6",
+    "@jamalsoueidan/pkg.bsf": "^0.0.59",
+    "@jamalsoueidan/pkg.bsb-types": "^0.0.7",
     "@jamalsoueidan/bsf.polyfills.json": "^0.0.2",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CustomValidator, Schema, body, checkSchema, param } from "express-validator";
 
-import { ScheduleServiceCreateGroupBodyProps, handleRoute } from "@jamalsoueidan/pkg.bsb";
+import { ScheduleServiceCreateGroupBodyProps, handleController } from "@jamalsoueidan/pkg.bsb";
 import { ValidatorsSchema } from "express-validator/src/middlewares/schema";
 import { isValidObjectId } from "mongoose";
 import * as controller from "./staff-schedule.controller";
@@ -42,7 +42,7 @@ router.get(
       toDate: true,
     },
   }),
-  handleRoute(controller.get),
+  handleController(controller.get),
 );
 
 router.post(
@@ -56,7 +56,7 @@ router.post(
         end: new Date(v.end),
       })),
     ),
-  handleRoute(controller.createGroup),
+  handleController(controller.createGroup),
 );
 
 router.put(
@@ -78,15 +78,15 @@ router.put(
       notEmpty: true,
     },
   }),
-  handleRoute(controller.updateGroup),
+  handleController(controller.updateGroup),
 );
-router.delete("/schedules/group/:groupId", checkSchema(groupSchema), handleRoute(controller.destroyGroup));
+router.delete("/schedules/group/:groupId", checkSchema(groupSchema), handleController(controller.destroyGroup));
 
 router.post(
   "/schedules",
   body("start").notEmpty().toDate(),
   body("end").notEmpty().toDate(),
-  handleRoute(controller.create),
+  handleController(controller.create),
 );
 
 router.put(
@@ -97,9 +97,9 @@ router.put(
     .withMessage("invalid objectid"),
   body("start").notEmpty().toDate(),
   body("end").notEmpty().toDate(),
-  handleRoute(controller.update),
+  handleController(controller.update),
 );
 
-router.delete("/schedules/:schedule", checkSchema(scheduleSchema), handleRoute(controller.destroy));
+router.delete("/schedules/:schedule", checkSchema(scheduleSchema), handleController(controller.destroy));
 
 export default router;

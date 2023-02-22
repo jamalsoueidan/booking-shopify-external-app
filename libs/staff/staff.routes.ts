@@ -1,11 +1,11 @@
-import { handleRoute } from "@jamalsoueidan/pkg.bsb";
+import { handleController } from "@jamalsoueidan/pkg.bsb";
 import { Router } from "express";
 import { body } from "express-validator";
 import * as controller from "./staff.controller";
 
 const router = Router();
 
-router.get("/staff", handleRoute(controller.get));
+router.get("/staff", handleController(controller.get));
 
 router.put(
   "/staff",
@@ -14,7 +14,7 @@ router.put(
   body("active").not().exists(),
   body("role").not().exists(),
   body("password").not().exists(),
-  handleRoute(controller.update),
+  handleController(controller.update),
 );
 
 export default router;
