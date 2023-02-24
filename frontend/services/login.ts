@@ -5,8 +5,8 @@ import {
   StaffReceivePasswordBodyRequest,
   StaffReceivePasswordResponse,
 } from "@jamalsoueidan/pkg.bsb-types";
+import { useFetch } from "@jamalsoueidan/pkg.bsf";
 import { useCallback, useEffect, useState } from "react";
-import { useFetch } from "../hooks/use-fetch";
 
 type UseReceivePasswordPhoneFetch = ({
   phone,
@@ -18,9 +18,12 @@ export const useReceivePassword = () => {
   const [isFetched, setIsFetched] = useState<boolean>(false);
 
   const receivePassword: UseReceivePasswordPhoneFetch = useCallback(
-    async ({ phone }) => {
+    async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<StaffReceivePasswordResponse>>("password-phone", { phone });
+      const response = await post<ApiResponse<StaffReceivePasswordResponse>>({
+        url: "password-phone",
+        body,
+      });
       setIsFetching(false);
       setIsFetched(true);
       return response;
@@ -38,16 +41,17 @@ export const useReceivePassword = () => {
 type UseLoginFetch = ({ identification, password }: StaffLoginBodyRequest) => Promise<ApiResponse<StaffLoginResponse>>;
 
 export const useLogin = () => {
-  const { post } = useFetch();
+  const { post, mutate } = useFetch();
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isFetched, setIsFetched] = useState<boolean>(false);
 
   const login: UseLoginFetch = useCallback(
     async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<StaffLoginResponse>>("login", body);
+      const response = await post<ApiResponse<StaffLoginResponse>>({ url: "login", body });
       setIsFetching(false);
       setIsFetched(true);
+      mutate(["settings"]);
       const token = response.payload.token;
       localStorage.setItem("token", token);
       return response;
@@ -65,12 +69,12 @@ export const useLogin = () => {
 export const useCheckLogin = () => {
   const { get } = useFetch();
   const [isFetching, setIsFetching] = useState<boolean>(true);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   useEffect(() => {
     const login = async () => {
       try {
-        const response = await get<ApiResponse<StaffLoginResponse>>("settings");
+        const response = await get<ApiResponse<StaffLoginResponse>>({ url: "settings" });
         setIsFetching(false);
         setIsLoggedIn(response.success);
       } catch (error) {

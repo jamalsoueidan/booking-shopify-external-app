@@ -5,10 +5,10 @@ import {
   ScheduleFormOneShiftBody,
   ScheduleFormOneShiftRefMethod,
   ScheduleFormOneShiftSubmitResult,
+  useStaffScheduleCreate,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
-import { useStaffScheduleCreate } from "@services/staff/schedule";
 import { Suspense, forwardRef, lazy, useCallback, useMemo } from "react";
 
 interface CreateDayScheduleProps {

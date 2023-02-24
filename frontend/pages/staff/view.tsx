@@ -1,8 +1,7 @@
 import MetaData from "@components/staff/meta-data";
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
-import { LoadingModal, LoadingPage, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { LoadingModal, LoadingPage, LoadingSpinner, useStaffSchedule, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useStaffGet } from "@services/staff";
-import { useStaffSchedule } from "@services/staff/schedule";
 import { Card, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";

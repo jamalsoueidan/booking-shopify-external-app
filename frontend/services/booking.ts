@@ -1,4 +1,3 @@
-import { useFetch } from "@hooks/use-fetch";
 import {
   ApiResponse,
   Booking,
@@ -6,16 +5,17 @@ import {
   BookingServiceGetAllProps,
   BookingServiceUpdateProps,
 } from "@jamalsoueidan/pkg.bsb-types";
+import { useFetch } from "@jamalsoueidan/pkg.bsf";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 
-export const useBookings = ({ start, end, staff }: BookingServiceGetAllProps) => {
+export const useBookings = (params: Omit<BookingServiceGetAllProps, "staff"> & { staff?: string }) => {
   const { get } = useFetch();
 
   const { data, isLoading } = useQuery<ApiResponse<Array<Booking>>>({
-    enabled: !!start && !!end,
-    queryFn: () => get(`bookings?start=${start.toJSON()}&end=${end.toJSON()}${staff ? "&staff=" + staff : ""}`),
-    queryKey: ["bookings", { end, staff, start }],
+    enabled: !!params.start && !!params.end,
+    queryFn: () => get({ url: "bookings", params }),
+    queryKey: ["bookings", params],
   });
 
   return {
@@ -32,7 +32,7 @@ export const useBookingGet = ({ id }: UseBookingGetProps) => {
   const { get } = useFetch();
 
   const { data } = useQuery<ApiResponse<Booking>>({
-    queryFn: () => get(`bookings/${id}`),
+    queryFn: () => get({ url: `bookings/${id}` }),
     queryKey: ["booking", id],
   });
 
@@ -46,7 +46,7 @@ export const useBookingUpdate = ({ id }: { id: BookingServiceUpdateProps["query"
 
   const update = useCallback(
     async (body: BookingServiceUpdateProps["body"]) => {
-      await put("bookings/" + id, body);
+      await put({ url: `bookings/${id}`, body });
       await mutate(["bookings"]);
       await mutate(["booking", id]);
       await mutate(["widget", "availability"]);
@@ -64,7 +64,7 @@ export const useBookingCreate = () => {
 
   const create = useCallback(
     async (body: BookingServiceCreateProps) => {
-      await post("bookings", body);
+      await post({ url: "bookings", body });
       await mutate(["bookings"]);
       await mutate(["widget", "availability"]);
     },

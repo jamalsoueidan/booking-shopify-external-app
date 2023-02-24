@@ -7,65 +7,81 @@ if (import.meta.env.PROD) {
   shop = "bysistersdk.myshopify.com";
 }
 
+export type Options = {
+  url: string;
+  params?: Record<string, number | Date | undefined>;
+  body?: unknown;
+};
+
 export const useFetch = () => {
   const queryClient = useQueryClient();
 
-  const token = localStorage.getItem("token");
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete axios.defaults.headers.common["Authorization"];
-  }
-
-  const createURL = useCallback((url: string) => {
-    let uri = url;
-    let params = new URLSearchParams();
-    if (url.indexOf("?") > -1) {
-      uri = url.substring(0, url.indexOf("?"));
-      params = new URLSearchParams(url.substring(url.indexOf("?") + 1));
+  const getHeaders = useCallback(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      return {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
     }
-    params.append("shop", shop);
-    return uri + "?" + params.toString();
+    return {};
+  }, []);
+
+  const createURL = useCallback((options: Options) => {
+    let params: Array<string> = [];
+    if (options?.params) {
+      Object.keys(options.params).forEach((param) => {
+        const value = options.params && options.params[param];
+        if (typeof value === "object") {
+          params.push(`${param}=${value.toJSON()}`);
+        } else {
+          params.push(`${param}=${value}`);
+        }
+      });
+    }
+    params.push(`shop=${shop}`);
+    return "/api/" + options.url + "?" + params.join("&");
   }, []);
 
   const put = useCallback(
-    async (url: string, body?: unknown) => {
-      const response = await axios.put(createURL(`/api/${url}`), body);
+    async (options: Options) => {
+      const response = await axios.put(createURL(options), options.body, getHeaders());
       return response.data;
     },
-    [createURL],
+    [createURL, getHeaders],
   );
 
   const destroy = useCallback(
-    async (url: string) => {
-      const response = await axios.delete(createURL(`/api/${url}`));
+    async (options: Options) => {
+      const response = await axios.delete(createURL(options), getHeaders());
       return response.data;
     },
-    [createURL],
+    [createURL, getHeaders],
   );
 
   const post = useCallback(
-    async <T>(url: string, body?: unknown): Promise<T> => {
+    async <T>(options: Options): Promise<T> => {
       try {
-        const response = await axios.post<unknown, AxiosResponse<T>>(createURL(`/api/${url}`), body);
-        return response.data;
+        const response = await axios.post<unknown, AxiosResponse<T>>(createURL(options), options.body, getHeaders());
+        return response?.data;
       } catch (error) {
         return error.response.data;
       }
     },
-    [createURL],
+    [createURL, getHeaders],
   );
 
   const get = useCallback(
-    async <T = never>(url: string): Promise<T> => {
+    async <T = never>(options: Options): Promise<T> => {
       try {
-        const response = await axios.get<never, AxiosResponse<T>>(createURL(`/api/${url}`));
+        const response = await axios.get<never, AxiosResponse<T>>(createURL(options), getHeaders());
         return response.data;
       } catch (error) {
         return error.response.data;
       }
     },
-    [createURL],
+    [createURL, getHeaders],
   );
 
   return {

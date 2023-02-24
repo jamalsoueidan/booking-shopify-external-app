@@ -5,10 +5,10 @@ import {
   ScheduleFormManyShiftsBody,
   ScheduleFormManyShiftsRefMethod,
   ScheduleFormManyShiftsSubmitResult,
+  useStaffScheduleCreateGroup,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
-import { useStaffScheduleCreateGroup } from "@services/staff/schedule";
 import { endOfMonth } from "date-fns";
 import { Suspense, forwardRef, lazy, useCallback, useMemo } from "react";
 

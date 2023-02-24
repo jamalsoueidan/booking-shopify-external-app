@@ -1,15 +1,15 @@
-import { useFetch } from "@hooks/use-fetch";
 import { ApiResponse, NotificationBody, NotificationQuery } from "@jamalsoueidan/pkg.bsb-types";
+import { useFetch } from "@jamalsoueidan/pkg.bsf";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 
-export const useNotification = ({ orderId, lineItemId }: NotificationQuery) => {
+export const useNotification = (params: NotificationQuery) => {
   const { get } = useFetch();
 
   const { data, isLoading } = useQuery<ApiResponse<Array<Notification>>>({
-    enabled: !!orderId && !!lineItemId,
-    queryFn: () => get(`/api/admin/notifications?orderId=${orderId}&lineItemId=${lineItemId}`),
-    queryKey: ["notification", orderId, lineItemId],
+    enabled: !!params.orderId && !!params.lineItemId,
+    queryFn: () => get({ url: "/api/admin/notifications", params } as any),
+    queryKey: ["notification", params],
   });
 
   return {
@@ -23,7 +23,7 @@ type UseSendCustomerNotificaionCreate = (body: NotificationBody) => Promise<ApiR
 export const useSendCustomNotification = ({ orderId, lineItemId }: NotificationQuery) => {
   const { post } = useFetch();
   const send: UseSendCustomerNotificaionCreate = useCallback(
-    (body) => post(`/api/admin/notifications`, { ...body, lineItemId, orderId }),
+    (body) => post({ url: `/api/admin/notifications`, body: { ...body, lineItemId, orderId } }),
     [lineItemId, orderId, post],
   );
 
@@ -40,7 +40,10 @@ type UseResendNotificaionCreate = ({ id }: UseResendNotificationBody) => Promise
 
 export const useResendNotification = () => {
   const { post } = useFetch();
-  const resend: UseResendNotificaionCreate = useCallback(({ id }) => post(`/api/admin/notifications/${id}`), [post]);
+  const resend: UseResendNotificaionCreate = useCallback(
+    ({ id }) => post({ url: `/api/admin/notifications/${id}` }),
+    [post],
+  );
 
   return {
     resend,

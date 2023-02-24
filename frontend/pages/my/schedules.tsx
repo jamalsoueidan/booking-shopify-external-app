@@ -1,7 +1,13 @@
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
-import { CalendarDate, LoadingModal, LoadingPage, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
+import {
+  CalendarDate,
+  LoadingModal,
+  LoadingPage,
+  LoadingSpinner,
+  useStaffSchedule,
+  useTranslation,
+} from "@jamalsoueidan/pkg.bsf";
 import { useAccount } from "@services/account";
-import { useStaffSchedule } from "@services/staff/schedule";
 import { Card, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 

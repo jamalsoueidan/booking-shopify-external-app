@@ -4,15 +4,13 @@ import {
   ScheduleFormManyShiftsBody,
   ScheduleFormManyShiftsRefMethod,
   ScheduleFormManyShiftsSubmitResult,
-  useToast,
-  useTranslation,
-} from "@jamalsoueidan/pkg.bsf";
-import {
   useStaffScheduleDestroy,
   useStaffScheduleDestroyGroup,
   useStaffScheduleGetGroup,
   useStaffScheduleUpdateGroup,
-} from "@services/staff/schedule";
+  useToast,
+  useTranslation,
+} from "@jamalsoueidan/pkg.bsf";
 import { Modal } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useRef } from "react";
 

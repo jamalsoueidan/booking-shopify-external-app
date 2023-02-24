@@ -13,7 +13,7 @@ export const useAccountSetting = () => {
   const { get } = useFetch();
   const { data, isLoading } = useQuery<ApiResponse<StaffSettingsResponse>>({
     enabled: !!localStorage.getItem("token"),
-    queryFn: () => get(`settings`),
+    queryFn: () => get({ url: `settings` }),
     queryKey: ["settings"],
   });
 
@@ -30,7 +30,7 @@ export const useAccountSettingUpdate = () => {
 
   const update: UseUserSettingUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<StaffSettingsResponse> = await put("settings", body);
+      const response: ApiResponse<StaffSettingsResponse> = await put({ url: "settings", body });
       await mutate(["settings"]);
       return response;
     },
@@ -44,7 +44,7 @@ export const useAccountSettingUpdate = () => {
 
 export const useAccount = () => {
   const { get } = useFetch();
-  const { data } = useQuery<ApiResponse<Staff>>(["account"], () => get<ApiResponse<Staff>>("account"));
+  const { data } = useQuery<ApiResponse<Staff>>(["account"], () => get<ApiResponse<Staff>>({ url: "account" }));
   return { data: data?.payload };
 };
 
@@ -55,7 +55,7 @@ export const useAccountUpdate = () => {
 
   const update: UseStaffUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<Staff> = await put("account", body);
+      const response: ApiResponse<Staff> = await put({ url: "account", body });
       await mutate(["account"]);
       return response;
     },

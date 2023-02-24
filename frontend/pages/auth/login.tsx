@@ -5,37 +5,6 @@ import { Banner, Button, Card, Form, FormLayout, Link, Stack, Text, TextField } 
 import { useField, useForm } from "@shopify/react-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const locales = {
-  da: {
-    error: "Forkert email/mobilnummer eller adgangskode!",
-    login: {
-      label: "E-mail eller mobilnummer",
-    },
-    login_submit: "Log ind",
-    or: "eller",
-    password: {
-      label: "Adgangskode",
-    },
-    receive_action: "Modtag kode på mobil",
-    received_msg: "Indtast det adgangskode du har modtaget på din mobil",
-    title: "Log ind på BySisters",
-  },
-  en: {
-    error: "Wrong email/phone or password!",
-    login: {
-      label: "Email or Phone",
-    },
-    login_submit: "Login",
-    or: "or",
-    password: {
-      label: "Password",
-    },
-    receive_action: "Receive code on phone",
-    received_msg: "Please type the password you received on your mobile.",
-    title: "Login on BySisters",
-  },
-};
-
 export default () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -93,4 +62,35 @@ export default () => {
       </Card>
     </AuthPage>
   );
+};
+
+const locales = {
+  da: {
+    error: "Forkert email/mobilnummer eller adgangskode!",
+    login: {
+      label: "E-mail eller mobilnummer",
+    },
+    login_submit: "Log ind",
+    or: "eller",
+    password: {
+      label: "Adgangskode",
+    },
+    receive_action: "Modtag kode på mobil",
+    received_msg: "Indtast det adgangskode du har modtaget på din mobil",
+    title: "Log ind på BySisters",
+  },
+  en: {
+    error: "Wrong email/phone or password!",
+    login: {
+      label: "Email or Phone",
+    },
+    login_submit: "Login",
+    or: "or",
+    password: {
+      label: "Password",
+    },
+    receive_action: "Receive code on phone",
+    received_msg: "Please type the password you received on your mobile.",
+    title: "Login on BySisters",
+  },
 };

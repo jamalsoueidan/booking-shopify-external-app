@@ -4,10 +4,12 @@ import {
   ScheduleFormOneShiftBody,
   ScheduleFormOneShiftRefMethod,
   ScheduleFormOneShiftSubmitResult,
+  useStaffScheduleDestroy,
+  useStaffScheduleUpdate,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
-import { useStaffScheduleDestroy, useStaffScheduleUpdate } from "@services/staff/schedule";
+
 import { Modal } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useRef } from "react";
 

@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 export const useStaff = () => {
   const { get } = useFetch();
 
-  const { data } = useQuery<ApiResponse<Array<Staff>>>(["staff"], () => get("/staff"));
+  const { data } = useQuery<ApiResponse<Array<Staff>>>(["staff"], () => get({ url: "/staff" }));
 
   return { data: data?.payload };
 };
@@ -18,7 +18,7 @@ interface UseStaffGetProps {
 export const useStaffGet = ({ userId }: UseStaffGetProps) => {
   const { get } = useFetch();
 
-  const { data } = useQuery<ApiResponse<Staff>>(["staff", userId], () => get(`/staff/${userId}`));
+  const { data } = useQuery<ApiResponse<Staff>>(["staff", userId], () => get({ url: `/staff/${userId}` }));
 
   return {
     data: data?.payload,
@@ -32,7 +32,7 @@ export const useStaffCreate = () => {
 
   const create: UseStaffCreateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<Staff> = await post("/staff", body);
+      const response: ApiResponse<Staff> = await post({ url: "/staff", body });
       await mutate(["staff"]);
       return response;
     },
@@ -55,7 +55,7 @@ export const useStaffUpdate = ({ userId }: UseStaffUpdateProps) => {
 
   const update: UseStaffUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<Staff> = await put("/staff/" + userId, body);
+      const response: ApiResponse<Staff> = await put({ url: "/staff/" + userId, body });
       await mutate(["staff"]);
       return response;
     },
