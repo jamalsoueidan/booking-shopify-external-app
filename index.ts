@@ -1,14 +1,11 @@
-import { mongodb } from "@jamalsoueidan/pkg.bsb";
-import { bookingRouter, widgetRouter } from "@jamalsoueidan/pkg.bsb-routes";
+import { bookingRouter, mongodb, scheduleRouter, staffRouter, widgetRouter } from "@jamalsoueidan/pkg.bsb";
+import accountRoutes from "@libs/account/account.routes";
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import customerRoutes from "@libs/customer/customer.route";
 import groupRoutes from "@libs/group/group.routes";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
 import notificationRoutes from "@libs/notification/notification.routes";
 import productRoutes from "@libs/product/product.route";
-import schedulesRoutes from "@libs/staff-schedule/staff-schedule.routes";
-import staffRoutes from "@libs/staff/staff.routes";
-import userRoutes from "@libs/user/user.route";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -46,13 +43,13 @@ export async function createServer(root = process.cwd(), isProd = process.env.NO
 
   app.use("/api", bookingRouter);
   app.use("/api", productRoutes);
-  app.use("/api", userRoutes);
   app.use("/api", groupRoutes);
   app.use("/api", customerRoutes);
   app.use("/api", widgetRouter);
   app.use("/api", notificationRoutes);
-  app.use("/api", staffRoutes);
-  app.use("/api", schedulesRoutes);
+  app.use("/api", accountRoutes);
+  app.use("/api", staffRouter);
+  app.use("/api", scheduleRouter);
 
   app.get("/*", (_req, res) => {
     const htmlFile = path.join(isProd ? PROD_INDEX_PATH + "index.html" : DEV_INDEX_PATH + "dev.html");
