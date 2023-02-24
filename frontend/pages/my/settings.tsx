@@ -1,39 +1,19 @@
 import {
-    FormErrors,
-    InputLanguage,
-    InputTimeZone,
-    LoadingPage,
-    useForm,
-    useToast,
-    useTranslation,
+  FormErrors,
+  InputLanguage,
+  InputTimeZone,
+  LoadingPage,
+  useForm,
+  useToast,
+  useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
-import { useUserSetting, useUserSettingUpdate } from "@services/user";
+import { useAccountSetting, useAccountSettingUpdate } from "@services/account";
 import { Card, Form, FormLayout, Layout, Page, PageActions } from "@shopify/polaris";
 import { useField } from "@shopify/react-form";
 
-const da = {
-  loading: "Henter indstillinger",
-  title: "Indstillinger",
-  toast: "Ændringer er blevet opdateret",
-  user_settings: {
-    subtitle: "Ændre udefra din preference",
-    title: "Bruger indstillinger",
-  },
-};
-
-const en: typeof da = {
-  loading: "Loading settings",
-  title: "Settings",
-  toast: "Changes is updated",
-  user_settings: {
-    subtitle: "Change to whatever you like",
-    title: "User Settings",
-  },
-};
-
 export default () => {
-  const { data } = useUserSetting();
-  const { update } = useUserSettingUpdate();
+  const { data } = useAccountSetting();
+  const { update } = useAccountSettingUpdate();
 
   const { t } = useTranslation({
     id: "settings",
@@ -84,4 +64,24 @@ export default () => {
       </Page>
     </Form>
   );
+};
+
+const da = {
+  loading: "Henter indstillinger",
+  title: "Indstillinger",
+  toast: "Ændringer er blevet opdateret",
+  user_settings: {
+    subtitle: "Ændre udefra din preference",
+    title: "Bruger indstillinger",
+  },
+};
+
+const en: typeof da = {
+  loading: "Loading settings",
+  title: "Settings",
+  toast: "Changes is updated",
+  user_settings: {
+    subtitle: "Change to whatever you like",
+    title: "User Settings",
+  },
 };

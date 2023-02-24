@@ -1,15 +1,16 @@
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
 import {
-  EditManyShiftsBody,
-  EditManyShiftsRefMethod,
-  EditManyShiftsSubmitResult,
   LoadingSpinner,
+  ScheduleFormManyShiftsBody,
+  ScheduleFormManyShiftsRefMethod,
+  ScheduleFormManyShiftsSubmitResult,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
 import {
   useStaffScheduleDestroy,
   useStaffScheduleDestroyGroup,
+  useStaffScheduleGetGroup,
   useStaffScheduleUpdateGroup,
 } from "@services/staff/schedule";
 import { Modal } from "@shopify/polaris";
@@ -17,7 +18,7 @@ import { Suspense, lazy, useCallback, useRef } from "react";
 
 const EditManyShifts = lazy(() =>
   import("@jamalsoueidan/pkg.bsf").then((module) => ({
-    default: module.EditManyShifts,
+    default: module.ScheduleFormManyShifts,
   })),
 );
 
@@ -27,20 +28,28 @@ interface EditManyScheduleProps {
 }
 
 export const EditManyShiftsModal = ({ schedule, close }: EditManyScheduleProps) => {
-  const ref = useRef<EditManyShiftsRefMethod>();
+  const ref = useRef<ScheduleFormManyShiftsRefMethod>();
   const { show } = useToast();
-  const { t } = useTranslation({ id: "edit-one-shifts-modal", locales });
+  const { t } = useTranslation({ id: "edit-many-shifts-modal", locales });
+
+  const { data: group } = useStaffScheduleGetGroup({
+    groupId: schedule.groupId,
+    staff: schedule.staff,
+  });
 
   const { updateGroup } = useStaffScheduleUpdateGroup({
     groupId: schedule.groupId,
+    staff: schedule.staff,
   });
 
   const { destroyGroup } = useStaffScheduleDestroyGroup({
     groupId: schedule.groupId,
+    staff: schedule.staff,
   });
 
   const { destroy } = useStaffScheduleDestroy({
     schedule: schedule._id,
+    staff: schedule.staff,
   });
 
   const onDestroy = useCallback(() => {
@@ -54,7 +63,7 @@ export const EditManyShiftsModal = ({ schedule, close }: EditManyScheduleProps) 
   }, [destroy]);
 
   const onSubmit = useCallback(
-    (fieldValues: EditManyShiftsBody): EditManyShiftsSubmitResult => {
+    (fieldValues: ScheduleFormManyShiftsBody): ScheduleFormManyShiftsSubmitResult => {
       updateGroup(fieldValues);
       show({ content: t("success") });
       return { status: "success" };
@@ -68,6 +77,8 @@ export const EditManyShiftsModal = ({ schedule, close }: EditManyScheduleProps) 
       close();
     }
   }, [close]);
+
+  console.log(group);
 
   return (
     <Modal
@@ -93,7 +104,7 @@ export const EditManyShiftsModal = ({ schedule, close }: EditManyScheduleProps) 
     >
       <Modal.Section>
         <Suspense fallback={<LoadingSpinner />}>
-          <EditManyShifts schedule={schedule} onSubmit={onSubmit} ref={ref} />
+          {group && <EditManyShifts data={group} onSubmit={onSubmit} ref={ref} />}
         </Suspense>
       </Modal.Section>
     </Modal>

@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 const Admin = lazy(() => import("pages/admin"));
 const Auth = lazy(() => import("pages/auth/auth"));
 
-export default () => (
+export const ApplicationRoutes = () => (
   <Suspense fallback={<LoadingPage title="Loading page..." />}>
     <Routes>
       <Route

@@ -1,44 +1,59 @@
+import { Tag } from "@jamalsoueidan/pkg.bsb-types";
 import {
-  CreateManyShiftsBody,
-  CreateManyShiftsRefMethod,
-  CreateManyShiftsSubmitResult,
+  HelperDate,
   LoadingSpinner,
+  ScheduleFormManyShiftsBody,
+  ScheduleFormManyShiftsRefMethod,
+  ScheduleFormManyShiftsSubmitResult,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
 import { useStaffScheduleCreateGroup } from "@services/staff/schedule";
-import { Suspense, forwardRef, lazy, useCallback } from "react";
+import { endOfMonth } from "date-fns";
+import { Suspense, forwardRef, lazy, useCallback, useMemo } from "react";
 
 interface CreateDayScheduleProps {
   date: Date;
+  staff: string;
 }
 
 const CreateManyShifts = lazy(() =>
   import("@jamalsoueidan/pkg.bsf").then((module) => ({
-    default: module.CreateManyShifts,
+    default: module.ScheduleFormManyShifts,
   })),
 );
 
-export const CreateManyShiftsModal = forwardRef<CreateManyShiftsRefMethod, CreateDayScheduleProps>(({ date }, ref) => {
-  const { show } = useToast();
-  const { createGroup } = useStaffScheduleCreateGroup();
-  const { t } = useTranslation({ id: "create-many-shifts-modal", locales });
+export const CreateManyShiftsModal = forwardRef<ScheduleFormManyShiftsRefMethod, CreateDayScheduleProps>(
+  ({ date, staff }, ref) => {
+    const { show } = useToast();
+    const { createGroup } = useStaffScheduleCreateGroup({ staff });
+    const { t } = useTranslation({ id: "create-many-shifts-modal", locales });
 
-  const onSubmit = useCallback(
-    (fieldValues: CreateManyShiftsBody): CreateManyShiftsSubmitResult => {
-      createGroup(fieldValues);
-      show({ content: t("success") });
-      return { status: "success" };
-    },
-    [createGroup, show, t],
-  );
+    const onSubmit = useCallback(
+      (fieldValues: ScheduleFormManyShiftsBody): ScheduleFormManyShiftsSubmitResult => {
+        createGroup(fieldValues);
+        show({ content: t("success") });
+        return { status: "success" };
+      },
+      [createGroup, show, t],
+    );
 
-  return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <CreateManyShifts selectedDate={date} onSubmit={onSubmit} ref={ref} />
-    </Suspense>
-  );
-});
+    const initData = useMemo(() => {
+      return {
+        days: [],
+        end: HelperDate.resetDateTime(endOfMonth(date), 16),
+        start: HelperDate.resetDateTime(date, 10),
+        tag: Tag.all_day,
+      };
+    }, [date]);
+
+    return (
+      <Suspense fallback={<LoadingSpinner />}>
+        <CreateManyShifts data={initData} onSubmit={onSubmit} ref={ref} allowEditing={{ tag: true }} />
+      </Suspense>
+    );
+  },
+);
 
 const locales = {
   da: {

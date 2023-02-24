@@ -1,9 +1,9 @@
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
 import {
-  EditOneShiftBody,
-  EditOneShiftRefMethod,
-  EditOneShiftSubmitResult,
   LoadingSpinner,
+  ScheduleFormOneShiftBody,
+  ScheduleFormOneShiftRefMethod,
+  ScheduleFormOneShiftSubmitResult,
   useToast,
   useTranslation,
 } from "@jamalsoueidan/pkg.bsf";
@@ -13,7 +13,7 @@ import { Suspense, lazy, useCallback, useRef } from "react";
 
 const EditOneShift = lazy(() =>
   import("@jamalsoueidan/pkg.bsf").then((module) => ({
-    default: module.EditOneShift,
+    default: module.ScheduleFormOneShift,
   })),
 );
 
@@ -23,16 +23,18 @@ interface EditOneScheduleProps {
 }
 
 export const EditOneShiftModal = ({ schedule, close }: EditOneScheduleProps) => {
-  const ref = useRef<EditOneShiftRefMethod>();
+  const ref = useRef<ScheduleFormOneShiftRefMethod>();
   const { show } = useToast();
   const { t } = useTranslation({ id: "edit-one-shifts-modal", locales });
 
   const { update } = useStaffScheduleUpdate({
     schedule: schedule._id,
+    staff: schedule.staff,
   });
 
   const { destroy } = useStaffScheduleDestroy({
     schedule: schedule._id,
+    staff: schedule.staff,
   });
 
   const onDestroy = useCallback(() => {
@@ -41,7 +43,7 @@ export const EditOneShiftModal = ({ schedule, close }: EditOneScheduleProps) => 
   }, [destroy]);
 
   const onSubmit = useCallback(
-    (fieldValues: EditOneShiftBody): EditOneShiftSubmitResult => {
+    (fieldValues: ScheduleFormOneShiftBody): ScheduleFormOneShiftSubmitResult => {
       update(fieldValues);
       show({ content: t("success") });
       return { status: "success" };
@@ -75,7 +77,7 @@ export const EditOneShiftModal = ({ schedule, close }: EditOneScheduleProps) => 
     >
       <Modal.Section>
         <Suspense fallback={<LoadingSpinner />}>
-          <EditOneShift schedule={schedule} onSubmit={onSubmit} ref={ref} />
+          <EditOneShift data={schedule} onSubmit={onSubmit} ref={ref} />
         </Suspense>
       </Modal.Section>
     </Modal>

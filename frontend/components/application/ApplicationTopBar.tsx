@@ -1,5 +1,5 @@
 import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/pkg.bsf";
-import { useStaff } from "@services/staff";
+import { useAccount } from "@services/account";
 import { TopBar } from "@shopify/polaris";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ interface AppTopBarProps {
 }
 
 export const AppTopBar = ({ toggleNavigation }: AppTopBarProps) => {
-  const { data } = useStaff();
+  const { data } = useAccount();
   const { t } = useTranslation({ id: "app-topbar", locales });
   const { selectPosition } = usePosition();
   const navigate = useNavigate();

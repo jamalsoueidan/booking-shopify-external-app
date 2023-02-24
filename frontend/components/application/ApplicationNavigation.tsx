@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 const locales = {
   da: {
     booking: {
+      staff: "Medarbejder",
       bookings: "Min tider",
       dashboard: "Dashboard",
       title: "Applikation",
@@ -27,6 +28,7 @@ const locales = {
   },
   en: {
     booking: {
+      staff: "Staff",
       bookings: "My bookings",
       dashboard: "Dashboard",
       title: "Application",
@@ -59,6 +61,11 @@ export const AppNavigation = () => {
             label: t("booking.bookings"),
             onClick: () => navigate("/admin/bookings"),
           },
+          {
+            icon: CalendarTickMajor,
+            label: t("booking.staff"),
+            onClick: () => navigate("/admin/staff"),
+          },
         ]}
       />
       <Navigation.Section
@@ -67,17 +74,17 @@ export const AppNavigation = () => {
           {
             icon: CalendarMajor,
             label: t("staff.schedules"),
-            onClick: () => navigate("/admin/schedules"),
+            onClick: () => navigate("/admin/my/schedules"),
           },
           {
             icon: ProfileMajor,
             label: t("staff.account"),
-            onClick: () => navigate("/admin/staff"),
+            onClick: () => navigate("/admin/my/account"),
           },
           {
             icon: SettingsMajor,
             label: t("staff.settings"),
-            onClick: () => navigate("/admin/settings"),
+            onClick: () => navigate("/admin/my/settings"),
           },
           {
             icon: ExitMajor,

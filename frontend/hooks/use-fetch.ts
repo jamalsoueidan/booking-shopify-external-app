@@ -57,9 +57,9 @@ export const useFetch = () => {
   );
 
   const get = useCallback(
-    async <T = unknown>(url: string): Promise<T> => {
+    async <T = never>(url: string): Promise<T> => {
       try {
-        const response = await axios.get<unknown, AxiosResponse<T>>(createURL(`/api/${url}`));
+        const response = await axios.get<never, AxiosResponse<T>>(createURL(`/api/${url}`));
         return response.data;
       } catch (error) {
         return error.response.data;
@@ -70,7 +70,6 @@ export const useFetch = () => {
 
   return {
     destroy,
-    fetch,
     get,
     mutate: (key: unknown) => queryClient.invalidateQueries(key),
     post,

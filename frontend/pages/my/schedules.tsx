@@ -1,6 +1,6 @@
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
 import { CalendarDate, LoadingModal, LoadingPage, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
-import { useStaff } from "@services/staff";
+import { useAccount } from "@services/account";
 import { useStaffSchedule } from "@services/staff/schedule";
 import { Card, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
@@ -12,19 +12,19 @@ const ScheduleCalendar = lazy(() =>
 );
 
 const CreateScheduleModal = lazy(() =>
-  import("../components/staff/modals/create-shift-modal").then((module) => ({
+  import("../../components/staff/modals/create-shift-modal").then((module) => ({
     default: module.CreateShiftModal,
   })),
 );
 
 const EditOneScheduleModal = lazy(() =>
-  import("../components/staff/modals/edit-one-shift-modal").then((module) => ({
+  import("../../components/staff/modals/edit-one-shift-modal").then((module) => ({
     default: module.EditOneShiftModal,
   })),
 );
 
 const EditManyScheduleModal = lazy(() =>
-  import("../components/staff/modals/edit-many-shifts-modal").then((module) => ({
+  import("../../components/staff/modals/edit-many-shifts-modal").then((module) => ({
     default: module.EditManyShiftsModal,
   })),
 );
@@ -50,10 +50,11 @@ export default () => {
     }
   }, []);
 
-  const { data: staff } = useStaff();
+  const { data: staff } = useAccount();
 
   const { data: calendar } = useStaffSchedule({
     end: rangeDate?.end,
+    staff: staff._id,
     start: rangeDate?.start,
   });
 
@@ -66,7 +67,7 @@ export default () => {
       <Card sectioned>
         {date && (
           <Suspense fallback={<LoadingModal />}>
-            <CreateScheduleModal selectedDate={date} close={close} />
+            <CreateScheduleModal selectedDate={date} staff={staff._id} close={close} />
           </Suspense>
         )}
         {editOneSchedule && (
