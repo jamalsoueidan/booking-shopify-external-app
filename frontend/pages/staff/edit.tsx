@@ -1,6 +1,6 @@
 import MetaData from "@components/staff/meta-data";
-import { StaffForm } from "@jamalsoueidan/pkg.bsf";
-import { useStaffGet, useStaffUpdate } from "@services/staff";
+import { StaffForm, useStaffGet, useStaffUpdate } from "@jamalsoueidan/pkg.bsf";
+
 import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 

@@ -1,6 +1,10 @@
 import { Customer } from "@jamalsoueidan/pkg.bsb-types";
-import { InputAutoComplete, InputAutoCompleteInput, InputAutoCompleteOption } from "@jamalsoueidan/pkg.bsf";
-import { useCustomer } from "@services/customer";
+import {
+  InputAutoComplete,
+  InputAutoCompleteInput,
+  InputAutoCompleteOption,
+  useCustomer,
+} from "@jamalsoueidan/pkg.bsf";
 import { Icon } from "@shopify/polaris";
 import { CustomersMajor } from "@shopify/polaris-icons";
 import { Field } from "@shopify/react-form";

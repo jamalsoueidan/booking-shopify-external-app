@@ -11,13 +11,14 @@ import {
   LoadingSpinner,
   WidgetInputStaff,
   WidgetInputStaffField,
+  useBookingUpdate,
   useForm,
   useModal,
   useToast,
   useTranslation,
+  useWidgetAvailability,
+  useWidgetStaff,
 } from "@jamalsoueidan/pkg.bsf";
-import { useBookingUpdate } from "@services/booking";
-import { useWidgetDate, useWidgetStaff } from "@services/widget";
 import { endOfMonth, isSameDay, startOfMonth } from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -96,7 +97,7 @@ export const BookingDetailsEdit = ({ booking }: { booking: Booking }) => {
     };
   }, [setPrimaryAction, setSecondaryActions, navigate, t, submit]);
 
-  const { data: schedules } = useWidgetDate({
+  const { data: schedules } = useWidgetAvailability({
     end: end,
     productId: booking.productId,
     staff: fields.staff.value?.staff,

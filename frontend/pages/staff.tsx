@@ -1,7 +1,6 @@
 import MetaData from "@components/staff/meta-data";
 import { Staff } from "@jamalsoueidan/pkg.bsb-types";
-import { usePosition, useTranslation } from "@jamalsoueidan/pkg.bsf";
-import { useStaff } from "@services/staff";
+import { usePosition, useStaff, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Avatar, Card, Page, ResourceItem, ResourceList, Text } from "@shopify/polaris";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";

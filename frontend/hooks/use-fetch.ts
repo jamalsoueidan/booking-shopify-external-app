@@ -29,7 +29,7 @@ export const useFetch = () => {
   }, []);
 
   const createURL = useCallback((options: Options) => {
-    let params: Array<string> = [];
+    const params: Array<string> = [];
     if (options?.params) {
       Object.keys(options.params).forEach((param) => {
         const value = options.params && options.params[param];

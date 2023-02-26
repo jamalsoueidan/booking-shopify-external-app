@@ -1,6 +1,5 @@
 import { Booking } from "@jamalsoueidan/pkg.bsb-types";
-import { LoadingModal, LoadingSpinner, useTranslation } from "@jamalsoueidan/pkg.bsf";
-import { useBookings } from "@services/booking";
+import { LoadingModal, LoadingSpinner, useBookings, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useGroup } from "@services/group";
 import { Card, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";

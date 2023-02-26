@@ -1,5 +1,4 @@
-import { StaffForm } from "@jamalsoueidan/pkg.bsf";
-import { useStaffCreate } from "@services/staff";
+import { StaffForm, useStaffCreate } from "@jamalsoueidan/pkg.bsf";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 

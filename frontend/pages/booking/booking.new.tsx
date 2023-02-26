@@ -7,12 +7,13 @@ import {
   Validators,
   WidgetInputStaff,
   WidgetInputStaffField,
+  useBookingCreate,
   useForm,
   useToast,
   useTranslation,
+  useWidgetAvailability,
+  useWidgetStaff,
 } from "@jamalsoueidan/pkg.bsf";
-import { useBookingCreate } from "@services/booking";
-import { useWidgetDate, useWidgetStaff } from "@services/widget";
 import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 import { endOfMonth, isSameDay } from "date-fns";
@@ -74,7 +75,7 @@ export default () => {
     productId: fields.productId.value,
   });
 
-  const { data: schedules } = useWidgetDate({
+  const { data: schedules } = useWidgetAvailability({
     end: end,
     productId: fields.productId.value,
     staff: fields.staff.value?.staff,
