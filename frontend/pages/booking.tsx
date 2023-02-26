@@ -2,23 +2,9 @@ import { Booking } from "@jamalsoueidan/pkg.bsb-types";
 import { LoadingModal, LoadingSpinner, useBookings, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useGroup } from "@services/group";
 import { Card, FooterHelp, Page } from "@shopify/polaris";
+import { useAbility } from "application-ability";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
-const locales = {
-  da: {
-    create: "Opret en ny behandlingstid",
-    footer_help: "Kan ikke ændre i bookinger der er refunderet eller oprettet tidligere end dagens dato.",
-    in_progress: "I process",
-    title: "Behandlinger",
-  },
-  en: {
-    create: "Create new booking",
-    footer_help: "You can't edit bookings that are refunded or created before today.",
-    in_progress: "In progress",
-    title: "Bookings",
-  },
-};
 
 const BookingModal = lazy(() =>
   import("../components/booking/booking-modal/booking-modal").then((module) => ({
@@ -34,6 +20,7 @@ const BookingCalendar = lazy(() =>
 
 export default () => {
   const navigate = useNavigate();
+  const ability = useAbility();
   const [date, setDate] = useState<Pick<Booking, "start" | "end">>();
 
   const { t } = useTranslation({ id: "bookings", locales });
@@ -55,10 +42,12 @@ export default () => {
     <Page
       fullWidth
       title={t("title")}
-      primaryAction={{
-        content: t("create"),
-        onAction: () => navigate("new"),
-      }}
+      primaryAction={
+        ability.can("create", "booking") && {
+          content: t("create"),
+          onAction: () => navigate("new"),
+        }
+      }
     >
       <Routes>
         <Route
@@ -80,4 +69,19 @@ export default () => {
       <FooterHelp>{t("footer_help")}</FooterHelp>
     </Page>
   );
+};
+
+const locales = {
+  da: {
+    create: "Opret en ny behandlingstid",
+    footer_help: "Kan ikke ændre i bookinger der er refunderet eller oprettet tidligere end dagens dato.",
+    in_progress: "I process",
+    title: "Behandlinger",
+  },
+  en: {
+    create: "Create new booking",
+    footer_help: "You can't edit bookings that are refunded or created before today.",
+    in_progress: "In progress",
+    title: "Bookings",
+  },
 };

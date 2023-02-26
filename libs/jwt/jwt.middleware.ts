@@ -17,6 +17,7 @@ export const jwtMiddleware = (req, res: Response, next) => {
     req.session = {
       ...token,
       isAdmin: token.role === StaffRole.admin,
+      isOwner: token.role === StaffRole.owner,
       isUser: token.role === StaffRole.user,
     };
 

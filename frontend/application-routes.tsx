@@ -1,4 +1,5 @@
 import { LoadingPage } from "@jamalsoueidan/pkg.bsf";
+import { AbilityProvider } from "application-ability";
 import NotFound from "pages/NotFound";
 import { ProtectedRoute } from "providers/Protected";
 import { Suspense, lazy } from "react";
@@ -14,7 +15,9 @@ export const ApplicationRoutes = () => (
         path="admin/*"
         element={
           <ProtectedRoute>
-            <Admin />
+            <AbilityProvider>
+              <Admin />
+            </AbilityProvider>
           </ProtectedRoute>
         }
       />

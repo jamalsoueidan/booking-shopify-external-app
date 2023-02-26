@@ -1,4 +1,4 @@
-import { AppSession, IStaffDocument } from "@jamalsoueidan/pkg.bsb";
+import { AppSession, IStaffDocument, StaffRole } from "@jamalsoueidan/pkg.bsb";
 import jwt from "jsonwebtoken";
 
 export const createToken = (staff: IStaffDocument) => {
@@ -8,6 +8,9 @@ export const createToken = (staff: IStaffDocument) => {
       shop: staff.shop,
       role: staff.role,
       group: staff.group,
+      isOwner: staff.role === StaffRole.owner,
+      isAdmin: staff.role === StaffRole.admin,
+      isUser: staff.role === StaffRole.user,
     } as AppSession,
     process.env.TOKEN_SECRET,
     { expiresIn: "1h" },

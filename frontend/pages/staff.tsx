@@ -42,7 +42,7 @@ export default () => {
       title={t("title")}
       primaryAction={{
         content: t("add"),
-        url: "/staff/new",
+        url: "/admin/staff/new",
       }}
     >
       <Card>
