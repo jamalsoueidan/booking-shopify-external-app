@@ -1,5 +1,6 @@
 import { AbilityBuilder, AbilityTuple, PureAbility } from "@casl/ability";
 import { createContextualCan, useAbility as useA } from "@casl/react";
+import { AppSession } from "@jamalsoueidan/pkg.bsb-types";
 import { createContext } from "react";
 
 type Actions = "all" | "create" | "read" | "update" | "delete";
@@ -7,8 +8,8 @@ type Subjects = "booking" | "staff" | "schedule";
 
 type AppAbility = PureAbility<AbilityTuple<Actions, Subjects>>;
 
-export default function defineAbilityFor(user: any): AppAbility {
-  const { can, rules, build } = new AbilityBuilder<AppAbility>(PureAbility);
+export default function defineAbilityFor(user: AppSession): AppAbility {
+  const { can, build } = new AbilityBuilder<AppAbility>(PureAbility);
 
   if (user.isAdmin) {
     can("create", "booking");
@@ -22,9 +23,7 @@ export default function defineAbilityFor(user: any): AppAbility {
 export const AbilityContext = createContext<AppAbility>(undefined);
 export const Can = createContextualCan(AbilityContext.Consumer);
 
-export const useAbility = () => {
-  return useA(AbilityContext);
-};
+export const useAbility = () => useA(AbilityContext);
 
 export const AbilityProvider = ({ children }: { children: JSX.Element }) => {
   const parse = parseJwt(localStorage.getItem("token"));
@@ -33,9 +32,9 @@ export const AbilityProvider = ({ children }: { children: JSX.Element }) => {
 };
 
 function parseJwt(token: string) {
-  var base64Url = token.split(".")[1];
-  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-  var jsonPayload = decodeURIComponent(
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
     window
       .atob(base64)
       .split("")
