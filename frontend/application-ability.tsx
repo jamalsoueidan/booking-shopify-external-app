@@ -1,21 +1,21 @@
-import { AbilityBuilder, AbilityTuple, PureAbility } from "@casl/ability";
+import { AbilityBuilder, AbilityTuple, PureAbility, createMongoAbility } from "@casl/ability";
 import { createContextualCan, useAbility as useA } from "@casl/react";
-import { AppSession } from "@jamalsoueidan/pkg.bsb-types";
+import { AppSession, Staff } from "@jamalsoueidan/pkg.bsb-types";
 import { createContext } from "react";
 
 type Actions = "all" | "create" | "read" | "update" | "delete";
-type Subjects = "booking" | "staff" | "schedule";
+type Subjects = "booking" | "staff" | "schedule" | Staff;
 
 type AppAbility = PureAbility<AbilityTuple<Actions, Subjects>>;
 
 export default function defineAbilityFor(user: AppSession): AppAbility {
-  const { can, build } = new AbilityBuilder<AppAbility>(PureAbility);
+  const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
   if (user.isAdmin) {
     can("create", "booking");
   }
 
-  can("read", "booking");
+  can("update", "staff", { _id: user.staff });
 
   return build();
 }

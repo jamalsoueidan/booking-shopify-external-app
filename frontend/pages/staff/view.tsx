@@ -1,3 +1,4 @@
+import { subject } from "@casl/ability";
 import MetaData from "@components/staff/meta-data";
 import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@jamalsoueidan/pkg.bsf";
 
 import { Card, Page } from "@shopify/polaris";
+import { useAbility } from "application-ability";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -39,6 +41,7 @@ const EditManyScheduleModal = lazy(() =>
 
 export default () => {
   const { t } = useTranslation({ id: "staff-schedule", locales });
+  const ability = useAbility();
   const params = useParams();
   const navigate = useNavigate();
   const [rangeDate, setRangeDate] = useState<{ start: Date; end: Date }>();
@@ -74,22 +77,31 @@ export default () => {
 
   const { _id, fullname, active } = staff;
 
+  const editSchedule = ability.can("update", "schedule") && {
+    onClick: setDate,
+    onClickSchedule: edit,
+  };
+
   return (
     <Page
       fullWidth
       title={t("title", { fullname })}
       titleMetadata={<MetaData active={active} />}
-      breadcrumbs={[{ content: "staff", onAction: () => navigate("/staff") }]}
-      primaryAction={{
-        content: t("edit", { fullname }),
-        onAction: () => navigate("/staff/edit/" + _id),
-      }}
-      secondaryActions={[
-        {
-          content: t("add"),
-          onAction: () => setDate(new Date()),
-        },
-      ]}
+      breadcrumbs={[{ content: "staff", onAction: () => navigate("/admin/staff") }]}
+      primaryAction={
+        ability.can("update", subject("staff", staff)) && {
+          content: t("edit", { fullname }),
+          onAction: () => navigate("/staff/edit/" + _id),
+        }
+      }
+      secondaryActions={
+        ability.can("create", "schedule") && [
+          {
+            content: t("add"),
+            onAction: () => setDate(new Date()),
+          },
+        ]
+      }
     >
       <Card sectioned>
         {date && (
@@ -109,7 +121,7 @@ export default () => {
         )}
         <Card sectioned>
           <Suspense fallback={<LoadingSpinner />}>
-            <ScheduleCalendar onChangeDate={setRangeDate} data={calendar} onClick={setDate} onClickSchedule={edit} />
+            <ScheduleCalendar onChangeDate={setRangeDate} data={calendar} {...editSchedule} />
           </Suspense>
         </Card>
       </Card>
@@ -119,21 +131,21 @@ export default () => {
 
 const locales = {
   da: {
-    title: "{fullname} vagtplan",
-    edit: "Redigere bruger",
     add: "Tilføj vagt",
+    edit: "Redigere bruger",
     loading: {
-      staff: "Henter medarbejder data",
       data: "Henter medarbejder vagtplan",
+      staff: "Henter medarbejder data",
     },
+    title: "{fullname} vagtplan",
   },
   en: {
-    title: "{fullname} shifts",
-    edit: "Edit staff",
     add: "Add shift",
+    edit: "Edit staff",
     loading: {
-      staff: "Loading staff data",
       data: "Loading staff shifts",
+      staff: "Loading staff data",
     },
+    title: "{fullname} shifts",
   },
 };
