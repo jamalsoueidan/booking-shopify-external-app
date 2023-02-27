@@ -12,9 +12,9 @@ export default () => {
   const { update } = useStaffUpdate({ userId: params.id });
 
   const submit = useCallback(
-    async (fieldValues: any) => {
+    async (fieldValues: unknown) => {
       await update(fieldValues);
-      navigate("/staff/" + staff._id);
+      navigate("/admin/staff/" + staff._id);
     },
     [update, navigate, staff],
   );
@@ -27,9 +27,9 @@ export default () => {
     <StaffForm
       data={staff}
       action={submit}
-      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/staff/" + staff._id) }]}
+      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/admin/staff/" + staff._id) }]}
       titleMetadata={<MetaData active={staff.active} />}
-      allowEditing={{ group: true, active: true, role: true }}
+      allowEditing={{ active: true, group: true, role: true }}
     />
   );
 };

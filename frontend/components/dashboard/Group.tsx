@@ -23,7 +23,7 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
           const media = <Avatar customer size="medium" name={fullname} source={avatar} />;
 
           return (
-            <ResourceList.Item id={_id} url="asd" media={media}>
+            <ResourceList.Item id={_id} url={`/admin/staff/${_id}`} media={media}>
               <Text variant="bodyMd" fontWeight="bold" as="h3">
                 {fullname}
               </Text>

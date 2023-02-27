@@ -1,3 +1,4 @@
+import { StaffRole } from "@jamalsoueidan/pkg.bsb-types";
 import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { useAccount } from "@services/account";
 import { TopBar } from "@shopify/polaris";
@@ -44,12 +45,17 @@ export const AppTopBar = ({ toggleNavigation }: AppTopBarProps) => {
     },
   ];
 
+  let role = data?.role === StaffRole.admin ? "A" : "U";
+  if (data?.role === StaffRole.owner) {
+    role = "O";
+  }
+
   const userMenuMarkup = data ? (
     <TopBar.UserMenu
       actions={userMenuActions}
       name={data?.fullname.split(" ").map(HelperText.titlize).join(" ")}
       detail={selectPosition(data?.position)}
-      initials={data?.active ? "A" : "D"}
+      initials={role}
       open={userMenuActive}
       onToggle={toggleUserMenuActive}
     />

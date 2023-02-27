@@ -3,45 +3,13 @@ import { Navigation } from "@shopify/polaris";
 import {
   CalendarMajor,
   CalendarTickMajor,
+  CustomersMajor,
   ExitMajor,
   HomeMajor,
   ProfileMajor,
   SettingsMajor,
 } from "@shopify/polaris-icons";
 import { useNavigate } from "react-router-dom";
-
-const locales = {
-  da: {
-    booking: {
-      staff: "Medarbejder",
-      bookings: "Min tider",
-      dashboard: "Dashboard",
-      title: "Applikation",
-    },
-    staff: {
-      account: "Min konto",
-      logout: "Log ud",
-      schedules: "Min vagtplan",
-      settings: "Indstillinger",
-      title: "Profil",
-    },
-  },
-  en: {
-    booking: {
-      staff: "Staff",
-      bookings: "My bookings",
-      dashboard: "Dashboard",
-      title: "Application",
-    },
-    staff: {
-      account: "My account",
-      logout: "Logout",
-      schedules: "My shifts",
-      settings: "My settings",
-      title: "Profile",
-    },
-  },
-};
 
 export const AppNavigation = () => {
   const navigate = useNavigate();
@@ -62,7 +30,7 @@ export const AppNavigation = () => {
             onClick: () => navigate("/admin/bookings"),
           },
           {
-            icon: CalendarTickMajor,
+            icon: CustomersMajor,
             label: t("booking.staff"),
             onClick: () => navigate("/admin/staff"),
           },
@@ -98,4 +66,37 @@ export const AppNavigation = () => {
       />
     </Navigation>
   );
+};
+
+const locales = {
+  da: {
+    booking: {
+      bookings: "Bestillinger",
+      dashboard: "Dashboard",
+      staff: "Medarbejder",
+      title: "BySisters",
+    },
+    staff: {
+      account: "Min konto",
+      logout: "Log ud",
+      schedules: "Min vagtplan",
+      settings: "Min Indstillinger",
+      title: "Profil",
+    },
+  },
+  en: {
+    booking: {
+      bookings: "My bookings",
+      dashboard: "Dashboard",
+      staff: "Staff",
+      title: "Application",
+    },
+    staff: {
+      account: "My account",
+      logout: "Logout",
+      schedules: "My shifts",
+      settings: "My settings",
+      title: "Profile",
+    },
+  },
 };

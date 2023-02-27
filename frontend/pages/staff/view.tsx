@@ -15,30 +15,6 @@ import { useAbility } from "application-ability";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ScheduleCalendar = lazy(() =>
-  import("@jamalsoueidan/pkg.bsf").then((module) => ({
-    default: module.ScheduleCalendar,
-  })),
-);
-
-const CreateScheduleModal = lazy(() =>
-  import("../../components/staff/modals/create-shift-modal").then((module) => ({
-    default: module.CreateShiftModal,
-  })),
-);
-
-const EditOneScheduleModal = lazy(() =>
-  import("../../components/staff/modals/edit-one-shift-modal").then((module) => ({
-    default: module.EditOneShiftModal,
-  })),
-);
-
-const EditManyScheduleModal = lazy(() =>
-  import("../../components/staff/modals/edit-many-shifts-modal").then((module) => ({
-    default: module.EditManyShiftsModal,
-  })),
-);
-
 export default () => {
   const { t } = useTranslation({ id: "staff-schedule", locales });
   const ability = useAbility();
@@ -77,7 +53,7 @@ export default () => {
 
   const { _id, fullname, active } = staff;
 
-  const editSchedule = ability.can("update", "schedule") && {
+  const editSchedule = ability.can("update", subject("staff", staff)) && {
     onClick: setDate,
     onClickSchedule: edit,
   };
@@ -91,11 +67,11 @@ export default () => {
       primaryAction={
         ability.can("update", subject("staff", staff)) && {
           content: t("edit", { fullname }),
-          onAction: () => navigate("/staff/edit/" + _id),
+          onAction: () => navigate("/admin/staff/edit/" + _id),
         }
       }
       secondaryActions={
-        ability.can("create", "schedule") && [
+        ability.can("update", subject("staff", staff)) && [
           {
             content: t("add"),
             onAction: () => setDate(new Date()),
@@ -128,6 +104,30 @@ export default () => {
     </Page>
   );
 };
+
+const ScheduleCalendar = lazy(() =>
+  import("@jamalsoueidan/pkg.bsf").then((module) => ({
+    default: module.ScheduleCalendar,
+  })),
+);
+
+const CreateScheduleModal = lazy(() =>
+  import("../../components/staff/modals/create-shift-modal").then((module) => ({
+    default: module.CreateShiftModal,
+  })),
+);
+
+const EditOneScheduleModal = lazy(() =>
+  import("../../components/staff/modals/edit-one-shift-modal").then((module) => ({
+    default: module.EditOneShiftModal,
+  })),
+);
+
+const EditManyScheduleModal = lazy(() =>
+  import("../../components/staff/modals/edit-many-shifts-modal").then((module) => ({
+    default: module.EditManyShiftsModal,
+  })),
+);
 
 const locales = {
   da: {

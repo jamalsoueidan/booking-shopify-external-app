@@ -2,11 +2,13 @@ import MetaData from "@components/staff/meta-data";
 import { Staff } from "@jamalsoueidan/pkg.bsb-types";
 import { usePosition, useStaff, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Avatar, Card, Page, ResourceItem, ResourceList, Text } from "@shopify/polaris";
+import { useAbility } from "application-ability";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
   const { t } = useTranslation({ id: "staff", locales });
+  const ability = useAbility();
   const navigate = useNavigate();
   const { data } = useStaff();
   const { selectPosition } = usePosition();
@@ -40,10 +42,12 @@ export default () => {
     <Page
       fullWidth
       title={t("title")}
-      primaryAction={{
-        content: t("add"),
-        url: "/admin/staff/new",
-      }}
+      primaryAction={
+        ability.can("create", "staff") && {
+          content: t("add"),
+          url: "/admin/staff/new",
+        }
+      }
     >
       <Card>
         <ResourceList
@@ -61,19 +65,19 @@ export default () => {
 
 const locales = {
   da: {
-    title: "Medarbejder ",
     add: "Tilføj ny medarbejder",
     resource: {
       plural: "medarbejder",
       singular: "medarbejder",
     },
+    title: "Medarbejder ",
   },
   en: {
-    title: "Staff",
     add: "Add staff member",
     resource: {
       plural: "customers",
       singular: "customer",
     },
+    title: "Staff",
   },
 };
