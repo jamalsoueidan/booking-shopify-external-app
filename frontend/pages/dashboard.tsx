@@ -1,11 +1,10 @@
 import { DashboardGroup } from "@components/dashboard/Group";
-import { LoadingSpinner } from "@jamalsoueidan/pkg.bsf";
-import { useGroup } from "@services/group";
+import { LoadingSpinner, useStaff } from "@jamalsoueidan/pkg.bsf";
 import { Card, Grid, Page } from "@shopify/polaris";
 import { Suspense } from "react";
 
 export default () => {
-  const { data: group } = useGroup();
+  const { data } = useStaff();
 
   return (
     <Page title="Dashboard">
@@ -17,7 +16,7 @@ export default () => {
         </Grid.Cell>
         <Grid.Cell columnSpan={{ lg: 6, md: 3, sm: 6, xl: 6, xs: 6 }}>
           <Suspense fallback={<LoadingSpinner />}>
-            <DashboardGroup data={group} />
+            <DashboardGroup data={data} />
           </Suspense>
         </Grid.Cell>
       </Grid>

@@ -1,3 +1,4 @@
+import { StaffBodyCreate } from "@jamalsoueidan/pkg.bsb-types";
 import { StaffForm, useStaffCreate } from "@jamalsoueidan/pkg.bsf";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +8,7 @@ export default () => {
   const { create } = useStaffCreate();
 
   const submit = useCallback(
-    async (fieldValues: any) => {
+    async (fieldValues: StaffBodyCreate) => {
       const staff = await create(fieldValues);
       navigate(`/staff/${staff.payload?._id}`);
     },
@@ -18,7 +19,7 @@ export default () => {
     <StaffForm
       action={submit}
       breadcrumbs={[{ content: "Staff", onAction: () => navigate("/staff") }]}
-      allowEditing={{ group: true, active: true, role: true }}
+      allowEditing={{ active: true, group: true, role: true }}
     />
   );
 };

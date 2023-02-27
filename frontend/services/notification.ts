@@ -8,7 +8,7 @@ export const useNotification = (params: NotificationQuery) => {
 
   const { data, isLoading } = useQuery<ApiResponse<Array<Notification>>>({
     enabled: !!params.orderId && !!params.lineItemId,
-    queryFn: () => get({ url: "/api/admin/notifications", params } as any),
+    queryFn: () => get({ params, url: "/api/admin/notifications" }),
     queryKey: ["notification", params],
   });
 
@@ -23,7 +23,7 @@ type UseSendCustomerNotificaionCreate = (body: NotificationBody) => Promise<ApiR
 export const useSendCustomNotification = ({ orderId, lineItemId }: NotificationQuery) => {
   const { post } = useFetch();
   const send: UseSendCustomerNotificaionCreate = useCallback(
-    (body) => post({ url: `/api/admin/notifications`, body: { ...body, lineItemId, orderId } }),
+    (body) => post({ body: { ...body, lineItemId, orderId }, url: `/api/admin/notifications` }),
     [lineItemId, orderId, post],
   );
 

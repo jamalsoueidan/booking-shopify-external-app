@@ -1,6 +1,5 @@
 import { Booking } from "@jamalsoueidan/pkg.bsb-types";
-import { LoadingModal, LoadingSpinner, useBookings, useTranslation } from "@jamalsoueidan/pkg.bsf";
-import { useGroup } from "@services/group";
+import { LoadingModal, LoadingSpinner, useBookings, useStaff, useTranslation } from "@jamalsoueidan/pkg.bsf";
 import { Card, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -11,7 +10,8 @@ export default () => {
 
   const { t } = useTranslation({ id: "bookings", locales });
 
-  const { data: staffier } = useGroup();
+  const { data: staffier } = useStaff();
+
   const { data: bookings } = useBookings({
     end: date?.end,
     start: date?.start,

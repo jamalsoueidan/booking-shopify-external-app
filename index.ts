@@ -9,7 +9,6 @@ import {
 } from "@jamalsoueidan/pkg.bsb";
 import accountRoutes from "@libs/account/account.routes";
 import authenticationRoutes from "@libs/authentication/authentication.route";
-import groupRoutes from "@libs/group/group.routes";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
 import notificationRoutes from "@libs/notification/notification.routes";
 import dotenv from "dotenv";
@@ -49,7 +48,6 @@ export async function createServer(root = process.cwd(), isProd = process.env.NO
 
   app.use("/api", bookingRouter);
   app.use("/api", productRouter);
-  app.use("/api", groupRoutes);
   app.use("/api", customerRouter);
   app.use("/api", widgetRouter);
   app.use("/api", notificationRoutes);

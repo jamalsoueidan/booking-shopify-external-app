@@ -21,8 +21,8 @@ export const useReceivePassword = () => {
     async (body) => {
       setIsFetching(true);
       const response = await post<ApiResponse<StaffReceivePasswordResponse>>({
-        url: "password-phone",
         body,
+        url: "password-phone",
       });
       setIsFetching(false);
       setIsFetched(true);
@@ -48,7 +48,7 @@ export const useLogin = () => {
   const login: UseLoginFetch = useCallback(
     async (body) => {
       setIsFetching(true);
-      const response = await post<ApiResponse<StaffLoginResponse>>({ url: "login", body });
+      const response = await post<ApiResponse<StaffLoginResponse>>({ body, url: "login" });
       setIsFetching(false);
       setIsFetched(true);
       mutate(["settings"]);
@@ -56,7 +56,7 @@ export const useLogin = () => {
       localStorage.setItem("token", token);
       return response;
     },
-    [post],
+    [mutate, post],
   );
 
   return {

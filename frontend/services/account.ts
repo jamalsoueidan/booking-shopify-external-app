@@ -30,7 +30,7 @@ export const useAccountSettingUpdate = () => {
 
   const update: UseUserSettingUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<StaffSettingsResponse> = await put({ url: "settings", body });
+      const response: ApiResponse<StaffSettingsResponse> = await put({ body, url: "settings" });
       await mutate(["settings"]);
       return response;
     },
@@ -55,7 +55,7 @@ export const useAccountUpdate = () => {
 
   const update: UseStaffUpdateFetch = useCallback(
     async (body) => {
-      const response: ApiResponse<Staff> = await put({ url: "account", body });
+      const response: ApiResponse<Staff> = await put({ body, url: "account" });
       await mutate(["account"]);
       return response;
     },

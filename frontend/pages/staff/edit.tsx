@@ -1,4 +1,5 @@
 import MetaData from "@components/staff/meta-data";
+import { StaffBodyUpdate } from "@jamalsoueidan/pkg.bsb-types";
 import { StaffForm, useStaffGet, useStaffUpdate } from "@jamalsoueidan/pkg.bsf";
 
 import { useCallback } from "react";
@@ -12,7 +13,7 @@ export default () => {
   const { update } = useStaffUpdate({ userId: params.id });
 
   const submit = useCallback(
-    async (fieldValues: unknown) => {
+    async (fieldValues: StaffBodyUpdate) => {
       await update(fieldValues);
       navigate("/admin/staff/" + staff._id);
     },
