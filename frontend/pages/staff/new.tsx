@@ -1,5 +1,5 @@
-import { StaffBodyCreate } from "@jamalsoueidan/pkg.bsb-types";
-import { StaffForm, useStaffCreate } from "@jamalsoueidan/pkg.bsf";
+import { StaffBodyCreate } from "@jamalsoueidan/pkg.backend-types";
+import { StaffForm, useStaffCreate } from "@jamalsoueidan/pkg.frontend";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 

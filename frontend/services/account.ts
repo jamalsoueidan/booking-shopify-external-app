@@ -4,8 +4,8 @@ import {
   StaffBodyUpdate,
   StaffSettingsResponse,
   StaffSettingsUpdateBodyRequest,
-} from "@jamalsoueidan/pkg.bsb-types";
-import { useFetch } from "@jamalsoueidan/pkg.bsf";
+} from "@jamalsoueidan/pkg.backend-types";
+import { useFetch } from "@jamalsoueidan/pkg.frontend";
 import { useCallback } from "react";
 import { useQuery } from "react-query";
 

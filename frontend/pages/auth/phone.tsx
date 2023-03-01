@@ -1,5 +1,5 @@
 import { AuthPage } from "@components/auth/AuthPage";
-import { useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { useReceivePassword } from "@services/login";
 import { Button, Card, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";

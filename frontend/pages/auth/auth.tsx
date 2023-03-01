@@ -1,5 +1,5 @@
 import { AuthFrame } from "@components/auth/AuthFrame";
-import { LoadingPage, useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { LoadingPage, useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { Box, Button, Image, Text, TextContainer } from "@shopify/polaris";
 import { Suspense, lazy } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";

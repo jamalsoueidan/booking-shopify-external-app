@@ -1,6 +1,6 @@
 import { useFetch } from "@hooks/use-fetch";
 import "@jamalsoueidan/bsf.polyfills.json";
-import { FetchProvider } from "@jamalsoueidan/pkg.bsf";
+import { FetchProvider } from "@jamalsoueidan/pkg.frontend";
 import { QueryProvider } from "@providers/QueryProvider";
 import "@shopify/polaris/build/esm/styles.css";
 import React from "react";

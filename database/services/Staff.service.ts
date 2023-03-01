@@ -1,4 +1,4 @@
-import { ShopQuery, StaffModel, StaffServiceGetStaffIdsbyGroup } from "@jamalsoueidan/pkg.bsb";
+import { ShopQuery, StaffModel, StaffServiceGetStaffIdsbyGroup } from "@jamalsoueidan/pkg.backend";
 
 interface FindByProps {
   shop: string;

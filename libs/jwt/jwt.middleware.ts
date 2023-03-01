@@ -1,4 +1,4 @@
-import { AppSession, StaffRole } from "@jamalsoueidan/pkg.bsb";
+import { AppSession, StaffRole } from "@jamalsoueidan/pkg.backend";
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 

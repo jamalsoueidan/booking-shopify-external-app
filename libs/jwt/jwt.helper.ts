@@ -1,4 +1,4 @@
-import { AppSession, IStaffDocument, StaffRole } from "@jamalsoueidan/pkg.bsb";
+import { AppSession, IStaffDocument, StaffRole } from "@jamalsoueidan/pkg.backend";
 import jwt from "jsonwebtoken";
 
 export const createToken = (staff: IStaffDocument) => {

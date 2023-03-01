@@ -13,7 +13,7 @@ import {
   useTranslation,
   useWidgetAvailability,
   useWidgetStaff,
-} from "@jamalsoueidan/pkg.bsf";
+} from "@jamalsoueidan/pkg.frontend";
 import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 import { endOfMonth, isSameDay } from "date-fns";

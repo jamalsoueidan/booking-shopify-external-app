@@ -1,4 +1,4 @@
-import { Staff } from "@jamalsoueidan/pkg.bsb-types";
+import { Staff } from "@jamalsoueidan/pkg.backend-types";
 import { Avatar, Card, ResourceList, Text } from "@shopify/polaris";
 import { memo } from "react";
 

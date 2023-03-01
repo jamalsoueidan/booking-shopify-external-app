@@ -1,4 +1,4 @@
-import { Schedule } from "@jamalsoueidan/pkg.bsb-types";
+import { Schedule } from "@jamalsoueidan/pkg.backend-types";
 import {
   CalendarDate,
   LoadingModal,
@@ -6,13 +6,13 @@ import {
   LoadingSpinner,
   useStaffSchedule,
   useTranslation,
-} from "@jamalsoueidan/pkg.bsf";
+} from "@jamalsoueidan/pkg.frontend";
 import { useAccount } from "@services/account";
 import { Card, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 
 const ScheduleCalendar = lazy(() =>
-  import("@jamalsoueidan/pkg.bsf").then((module) => ({
+  import("@jamalsoueidan/pkg.frontend").then((module) => ({
     default: module.ScheduleCalendar,
   })),
 );

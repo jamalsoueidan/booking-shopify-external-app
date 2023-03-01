@@ -1,12 +1,13 @@
 import {
   bookingRouter,
+  collectionRouter,
   customerRouter,
   mongodb,
   productRouter,
   scheduleRouter,
   staffRouter,
   widgetRouter,
-} from "@jamalsoueidan/pkg.bsb";
+} from "@jamalsoueidan/pkg.backend";
 import accountRoutes from "@libs/account/account.routes";
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
@@ -47,6 +48,7 @@ export async function createServer(root = process.cwd(), isProd = process.env.NO
   app.use("/api/*", jwtMiddleware);
 
   app.use("/api", bookingRouter);
+  app.use("/api", collectionRouter);
   app.use("/api", productRouter);
   app.use("/api", customerRouter);
   app.use("/api", widgetRouter);

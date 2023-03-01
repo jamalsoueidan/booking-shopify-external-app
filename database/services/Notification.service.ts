@@ -1,4 +1,4 @@
-import { BookingModel, NotificationModel, ShopQuery } from "@jamalsoueidan/pkg.bsb";
+import { BookingModel, NotificationModel, ShopQuery } from "@jamalsoueidan/pkg.backend";
 
 interface CanModifiyProps extends ShopQuery {
   staff: string;

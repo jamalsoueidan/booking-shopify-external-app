@@ -1,4 +1,4 @@
-import { ProductModel, ShopQuery } from "@jamalsoueidan/pkg.bsb";
+import { ProductModel, ShopQuery } from "@jamalsoueidan/pkg.backend";
 
 interface GetProductsProps extends ShopQuery {
   staff: string;

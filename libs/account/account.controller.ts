@@ -6,7 +6,7 @@ import {
   StaffServiceFindOne,
   StaffSettingsResponse,
   StaffSettingsUpdateBodyRequest,
-} from "@jamalsoueidan/pkg.bsb";
+} from "@jamalsoueidan/pkg.backend";
 
 export const getSettings = ({ session }: AppControllerProps<never, never>) =>
   StaffModel.findById(session.staff, "_id language timeZone");

@@ -1,12 +1,12 @@
 import {
-    AppControllerProps,
-    NotificationBody,
-    NotificationQuery,
-    NotificationServiceCancel,
-    NotificationServiceGet,
-    NotificationServiceResend,
-    NotificationServiceSendCustom,
-} from "@jamalsoueidan/pkg.bsb";
+  AppControllerProps,
+  NotificationBody,
+  NotificationQuery,
+  NotificationServiceCancel,
+  NotificationServiceGet,
+  NotificationServiceResend,
+  NotificationServiceSendCustom,
+} from "@jamalsoueidan/pkg.backend";
 
 import * as NotificationService from "@services/Notification.service";
 
@@ -14,12 +14,7 @@ export const get = ({ query, session }: AppControllerProps<NotificationQuery>) =
   return NotificationServiceGet({ ...query, shop: session.shop });
 };
 
-
-export const sendCustom = async ({
-  query,
-  body,
-  session,
-}: AppControllerProps<NotificationQuery, NotificationBody>) => {
+export const sendCustom = async ({ query, body, session }: AppControllerProps<NotificationQuery, NotificationBody>) => {
   const canModify = await NotificationService.canModifiy({
     orderId: query.orderId,
     lineItemId: query.lineItemId,
@@ -37,10 +32,7 @@ export const sendCustom = async ({
   });
 };
 
-export const resend = async ({
-  query,
-  session,
-}: AppControllerProps<{ id: string }>) => {
+export const resend = async ({ query, session }: AppControllerProps<{ id: string }>) => {
   const canModify = await NotificationService.canModifiy({
     id: query.id,
     ...session,
@@ -53,10 +45,7 @@ export const resend = async ({
   return NotificationServiceResend({ id: query.id, shop: session.shop });
 };
 
-export const cancel = async ({
-  query,
-  session,
-}: AppControllerProps<{ id: string }>) => {
+export const cancel = async ({ query, session }: AppControllerProps<{ id: string }>) => {
   const canModify = await NotificationService.canModifiy({
     id: query.id,
     ...session,

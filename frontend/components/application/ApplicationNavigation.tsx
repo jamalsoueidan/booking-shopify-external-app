@@ -1,8 +1,9 @@
-import { useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { Navigation } from "@shopify/polaris";
 import {
   CalendarMajor,
   CalendarTickMajor,
+  CollectionsMajor,
   CustomersMajor,
   ExitMajor,
   HomeMajor,
@@ -28,6 +29,11 @@ export const AppNavigation = () => {
             icon: CalendarTickMajor,
             label: t("booking.bookings"),
             onClick: () => navigate("/admin/bookings"),
+          },
+          {
+            icon: CollectionsMajor,
+            label: t("booking.collections"),
+            onClick: () => navigate("/admin/collections"),
           },
           {
             icon: CustomersMajor,
@@ -72,6 +78,7 @@ const locales = {
   da: {
     booking: {
       bookings: "Bestillinger",
+      collections: "Produkter",
       dashboard: "Dashboard",
       staff: "Medarbejder",
       title: "BySisters",
@@ -87,6 +94,7 @@ const locales = {
   en: {
     booking: {
       bookings: "My bookings",
+      collections: "Products",
       dashboard: "Dashboard",
       staff: "Staff",
       title: "Application",

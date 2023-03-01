@@ -1,5 +1,5 @@
 import { DashboardGroup } from "@components/dashboard/Group";
-import { LoadingSpinner, useStaff } from "@jamalsoueidan/pkg.bsf";
+import { LoadingSpinner, useStaff } from "@jamalsoueidan/pkg.frontend";
 import { Card, Grid, Page } from "@shopify/polaris";
 import { Suspense } from "react";
 

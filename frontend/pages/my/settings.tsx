@@ -6,7 +6,7 @@ import {
   useForm,
   useToast,
   useTranslation,
-} from "@jamalsoueidan/pkg.bsf";
+} from "@jamalsoueidan/pkg.frontend";
 import { useAccountSetting, useAccountSettingUpdate } from "@services/account";
 import { Card, Form, FormLayout, Layout, Page, PageActions } from "@shopify/polaris";
 import { useField } from "@shopify/react-form";

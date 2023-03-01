@@ -1,5 +1,5 @@
-import { StaffRole } from "@jamalsoueidan/pkg.bsb-types";
-import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { StaffRole } from "@jamalsoueidan/pkg.backend-types";
+import { HelperText, usePosition, useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { useAccount } from "@services/account";
 import { TopBar } from "@shopify/polaris";
 import { useCallback, useState } from "react";

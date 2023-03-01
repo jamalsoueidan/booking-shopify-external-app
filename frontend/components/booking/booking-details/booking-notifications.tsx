@@ -1,5 +1,5 @@
-import { Booking, Notification } from "@jamalsoueidan/pkg.bsb-types";
-import { useToast } from "@jamalsoueidan/pkg.bsf";
+import { Booking, Notification } from "@jamalsoueidan/pkg.backend-types";
+import { useToast } from "@jamalsoueidan/pkg.frontend";
 import { useNotification, useResendNotification } from "@services/notification";
 import { Badge, EmptyState, ResourceItem, ResourceList, Text } from "@shopify/polaris";
 import { format } from "date-fns";

@@ -4,8 +4,8 @@ import {
   StaffLoginResponse,
   StaffReceivePasswordBodyRequest,
   StaffReceivePasswordResponse,
-} from "@jamalsoueidan/pkg.bsb-types";
-import { useFetch } from "@jamalsoueidan/pkg.bsf";
+} from "@jamalsoueidan/pkg.backend-types";
+import { useFetch } from "@jamalsoueidan/pkg.frontend";
 import { useCallback, useEffect, useState } from "react";
 
 type UseReceivePasswordPhoneFetch = ({

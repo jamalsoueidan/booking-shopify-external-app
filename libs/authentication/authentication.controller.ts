@@ -8,7 +8,7 @@ import {
   StaffReceivePasswordResponse,
   StaffServiceCreateNewPassword,
   StaffServiceLogin,
-} from "@jamalsoueidan/pkg.bsb";
+} from "@jamalsoueidan/pkg.backend";
 import { createToken } from "@libs/jwt/jwt.helper";
 import * as StaffService from "@services/Staff.service";
 

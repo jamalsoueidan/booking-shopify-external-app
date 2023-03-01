@@ -1,5 +1,5 @@
-import { Booking } from "@jamalsoueidan/pkg.bsb-types";
-import { LoadingModal, LoadingSpinner, useBookings, useStaff, useTranslation } from "@jamalsoueidan/pkg.bsf";
+import { Booking } from "@jamalsoueidan/pkg.backend-types";
+import { LoadingModal, LoadingSpinner, useBookings, useStaff, useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { Card, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const BookingModal = lazy(() =>
 );
 
 const BookingCalendar = lazy(() =>
-  import("@jamalsoueidan/pkg.bsf").then((module) => ({
+  import("@jamalsoueidan/pkg.frontend").then((module) => ({
     default: module.BookingCalendar,
   })),
 );

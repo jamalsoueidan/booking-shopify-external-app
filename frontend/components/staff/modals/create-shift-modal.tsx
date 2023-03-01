@@ -1,4 +1,8 @@
-import { LoadingSpinner, ScheduleFormManyShiftsRefMethod, ScheduleFormOneShiftRefMethod } from "@jamalsoueidan/pkg.bsf";
+import {
+  LoadingSpinner,
+  ScheduleFormManyShiftsRefMethod,
+  ScheduleFormOneShiftRefMethod,
+} from "@jamalsoueidan/pkg.frontend";
 import { Modal, Tabs } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useRef, useState } from "react";
 
