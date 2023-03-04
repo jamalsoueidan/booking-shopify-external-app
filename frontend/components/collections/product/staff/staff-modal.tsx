@@ -32,7 +32,9 @@ export default ({ show, close }: StaffModalProps) => {
   });
 
   const { data } = useProductStaff();
-  const { value, fields, addItem, removeItems } = useContext(FormContext);
+  const {
+    field: { value, fields, addItem, removeItems },
+  } = useContext(FormContext);
   const [selected, setSelected] = useState<Array<ProductServiceUpdateBodyStaffProperty>>([]);
 
   const toggle = useCallback(

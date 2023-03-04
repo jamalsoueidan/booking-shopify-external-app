@@ -15,7 +15,7 @@ export default () => {
 
   const renderItems = useCallback(
     (item: Staff) => {
-      const { _id, fullname, active, avatar, position } = item;
+      const { _id, fullname, active, avatar, position, phone } = item;
       const media = <Avatar customer size="medium" name={fullname} source={avatar} />;
 
       return (
@@ -29,7 +29,7 @@ export default () => {
             {fullname} <MetaData active={active} />
           </Text>
           <div>
-            {selectPosition(position)}
+            {selectPosition(position)}, {phone}
             <br />
           </div>
         </ResourceItem>

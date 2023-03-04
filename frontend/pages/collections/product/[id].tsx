@@ -79,7 +79,7 @@ export default () => {
         {product.staff.length === 0 && <ProductBanner />}
         <Grid>
           <Grid.Cell columnSpan={{ lg: 8, md: 4, sm: 6, xl: 8, xs: 6 }}>
-            <ProductStaff product={product} form={staff} />
+            <ProductStaff product={product} field={staff} />
           </Grid.Cell>
           <Grid.Cell columnSpan={{ lg: 4, md: 2, sm: 6, xl: 4, xs: 6 }}>
             <ProductActivate active={fields.active} staffLength={product.staff.length} />
