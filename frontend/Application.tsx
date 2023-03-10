@@ -17,9 +17,9 @@ const ApplicationSettings = () => {
 
   const value = useMemo(
     () => ({
+      LinkComponent,
       language: data?.language || "da",
       timeZone: data?.timeZone || "Europe/Copenhagen",
-      LinkComponent,
       useNavigate,
     }),
     [data],
@@ -38,7 +38,7 @@ function LinkComponent({ url, children, external, ...rest }: any) {
   const navigate = useNavigate();
   const handleClick = useCallback(() => {
     navigate(url);
-  }, [url]);
+  }, [navigate, url]);
 
   const IS_EXTERNAL_LINK_REGEX = /^(?:[a-z][a-z\d+.-]*:|\/\/)/;
   const DEFAULT_PROPS = url ? { cursor: "pointer" } : {};
@@ -52,7 +52,6 @@ function LinkComponent({ url, children, external, ...rest }: any) {
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <a {...rest} onClick={handleClick} role="alert" style={DEFAULT_PROPS}>
       {children}
     </a>

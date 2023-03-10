@@ -10,7 +10,7 @@ export default () => {
   const submit = useCallback(
     async (fieldValues: StaffBodyCreate) => {
       const staff = await create(fieldValues);
-      navigate(`/staff/${staff.payload?._id}`);
+      navigate(`/admin/staff/${staff.payload?._id}`);
     },
     [create, navigate],
   );
@@ -18,7 +18,7 @@ export default () => {
   return (
     <StaffForm
       action={submit}
-      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/staff") }]}
+      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/admin/staff") }]}
       allowEditing={{ active: true, group: true, role: true }}
     />
   );

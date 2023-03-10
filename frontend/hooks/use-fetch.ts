@@ -1,3 +1,4 @@
+import { useUrl } from "@jamalsoueidan/pkg.frontend";
 import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useQueryClient } from "react-query";
@@ -15,6 +16,7 @@ export type Options = {
 
 export const useFetch = () => {
   const queryClient = useQueryClient();
+  const { createURL } = useUrl("/api", { shop });
 
   const getHeaders = useCallback(() => {
     const token = localStorage.getItem("token");
@@ -26,22 +28,6 @@ export const useFetch = () => {
       };
     }
     return {};
-  }, []);
-
-  const createURL = useCallback((options: Options) => {
-    const params: Array<string> = [];
-    if (options?.params) {
-      Object.keys(options.params).forEach((param) => {
-        const value = options.params && options.params[param];
-        if (typeof value === "object") {
-          params.push(`${param}=${value.toJSON()}`);
-        } else {
-          params.push(`${param}=${value}`);
-        }
-      });
-    }
-    params.push(`shop=${shop}`);
-    return "/api/" + options.url + "?" + params.join("&");
   }, []);
 
   const put = useCallback(

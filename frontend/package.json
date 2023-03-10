@@ -12,7 +12,7 @@
   "dependencies": {
     "@jamalsoueidan/pkg.frontend": "^0.0.2",
     "@jamalsoueidan/pkg.backend-types": "^0.0.1",
-    "@jamalsoueidan/bsf.polyfills.json": "^0.0.1",
+    "@jamalsoueidan/frontend.polyfills.json": "^0.0.1",
     "@shopify/polaris": "^10.19.0",
     "@shopify/polaris-icons": "^6.7.0",
     "@shopify/react-form": "^2.5.0",
