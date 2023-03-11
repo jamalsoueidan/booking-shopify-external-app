@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { useQueryClient } from "react-query";
 
 let shop = "testeriphone.myshopify.com";
+console.log(import.meta.env);
 if (import.meta.env.PROD) {
   shop = "bysistersdk.myshopify.com";
 }
@@ -16,7 +17,7 @@ export type Options = {
 
 export const useFetch = () => {
   const queryClient = useQueryClient();
-  const { createURL } = useUrl("/api", { shop });
+  const { createURL } = useUrl("/api/", { shop });
 
   const getHeaders = useCallback(() => {
     const token = localStorage.getItem("token");
