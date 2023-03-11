@@ -3,4 +3,3 @@ build:
     web: Dockerfile
   config:
     NODE_ENV: ${secrets.NODE_ENV}
-    ENV: ${secrets.ENV}
