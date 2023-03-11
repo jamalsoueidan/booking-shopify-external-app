@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useQueryClient } from "react-query";
 
 let shop = "testeriphone.myshopify.com";
-console.log(import.meta.env);
+//console.log(import.meta.env.PROD);
 if (import.meta.env.PROD) {
   shop = "bysistersdk.myshopify.com";
 }

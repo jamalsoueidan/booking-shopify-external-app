@@ -1,6 +1,4 @@
 FROM node:16-alpine
-ARG mode
-RUN if [ "x$mode" = "development" ] ; then echo "Development" ; else echo "Production" ; fi
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
 RUN if [ "x$NODE_ENV" = "development" ] ; then echo "Development" ; else echo "Production" ; fi
