@@ -3,9 +3,9 @@ build:
     NODE_ENV: ${{secrets.NODE_ENV}}
   docker:
     web: Dockerfile
-      env:
-        NODE_ENV: ${{secrets.NODE_ENV}}
-      environment:
-        NODE_ENV: ${{secrets.NODE_ENV}}
-      args:
-        NODE_ENV: ${{secrets.NODE_ENV}}
+    env:
+      NODE_ENV: ${{secrets.NODE_ENV}}
+    environment:
+      NODE_ENV: ${{secrets.NODE_ENV}}
+    args:
+      NODE_ENV: ${{secrets.NODE_ENV}}
