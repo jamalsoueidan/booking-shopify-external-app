@@ -1,4 +1,4 @@
-import "@jamalsoueidan/bsf.polyfills.json";
+import "@jamalsoueidan/frontend.polyfills.json";
 import { FetchProvider } from "@jamalsoueidan/pkg.frontend";
 import "@shopify/polaris/build/esm/styles.css";
 import React from "react";
