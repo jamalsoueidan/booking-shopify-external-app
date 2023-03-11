@@ -1,11 +1,11 @@
-import { useFetch } from "@hooks/use-fetch";
 import "@jamalsoueidan/bsf.polyfills.json";
 import { FetchProvider } from "@jamalsoueidan/pkg.frontend";
-import { QueryProvider } from "@providers/QueryProvider";
 import "@shopify/polaris/build/esm/styles.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Application } from "./application";
+import Application from "./application";
+import { useFetch } from "./hooks/use-fetch";
+import { QueryProvider } from "./providers/QueryProvider";
 
 export const FetchProviderWrapper = () => {
   const fetch = useFetch();
