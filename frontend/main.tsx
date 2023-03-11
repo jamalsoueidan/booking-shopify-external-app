@@ -3,7 +3,7 @@ import { FetchProvider } from "@jamalsoueidan/pkg.frontend";
 import "@shopify/polaris/build/esm/styles.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Application from "./application";
+import { Application } from "./application";
 import { useFetch } from "./hooks/use-fetch";
 import { QueryProvider } from "./providers/QueryProvider";
 
