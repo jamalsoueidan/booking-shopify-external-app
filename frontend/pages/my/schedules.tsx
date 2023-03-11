@@ -60,7 +60,7 @@ export default () => {
 
   const { data: calendar } = useStaffSchedule({
     end: rangeDate?.end,
-    staff: staff._id,
+    staff: staff?._id,
     start: rangeDate?.start,
   });
 
@@ -102,19 +102,19 @@ export default () => {
 
 const locales = {
   da: {
-    title: "Min vagtplan",
     create: "Opret vagtplan",
     loading: {
-      staff: "Henter din data",
       data: "Henter din vagtplan",
+      staff: "Henter din data",
     },
+    title: "Min vagtplan",
   },
   en: {
-    title: "My Shifts",
     create: "Create shift",
     loading: {
-      staff: "Loading your data",
       data: "Loading your shifts",
+      staff: "Loading your data",
     },
+    title: "My Shifts",
   },
 };
