@@ -1,5 +1,6 @@
 setup:
   config:
+    env_file: .env
     NODE_ENV: ${{secrets.NODE_ENV}}
     env:
       NODE_ENV: ${{secrets.NODE_ENV}}
