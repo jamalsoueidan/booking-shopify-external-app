@@ -2,4 +2,5 @@ build:
   docker:
     web: Dockerfile
   config:
-    NODE_ENV: ${{secrets.NODE_ENV}}
+    NODE_ENV: ${secrets.NODE_ENV}
+    ENV: ${secrets.ENV}

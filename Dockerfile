@@ -1,12 +1,10 @@
 FROM node:16-alpine
 ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}
-RUN if [ "x$NODE_ENV" = "development" ] ; then echo "Development" ; else echo "Production" ; fi
 RUN echo $NODE_ENV
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
-RUN echo $NODE_ENV
-RUN if [ "x$NODE_ENV" = "development" ] ; then echo "Development" ; else echo "Production" ; fi
+ARG ENV
+ENV ENV ${ENV}
+RUN echo $ENV
 EXPOSE 8081
 WORKDIR /usr/app
 COPY ./ /usr/app
