@@ -1,14 +1,16 @@
 setup:
   config:
     env_file: .env
-    NODE_ENV: ${{secrets.NODE_ENV}}
+    NODE_ENV: test2
     env:
-      NODE_ENV: ${{secrets.NODE_ENV}}
+      NODE_ENV: test2
     environment:
-      NODE_ENV: ${{secrets.NODE_ENV}}
+      NODE_ENV: test3
     args:
-      NODE_ENV: ${{secrets.NODE_ENV}}
+      NODE_ENV: test4
 
 build:
   docker:
     web: Dockerfile
+  config:
+    NODE_ENV: test1
