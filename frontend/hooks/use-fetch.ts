@@ -11,6 +11,7 @@ DEV: false
 MODE: "production"
 PROD: true
 */
+console.log(import.meta.env);
 if (import.meta.env.PROD) {
   shop = "bysistersdk.myshopify.com";
 }

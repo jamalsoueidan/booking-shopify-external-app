@@ -7,9 +7,8 @@ export const jwtMiddleware = async (req, res: Response, next) => {
   const authHeader = req.headers["authorization"];
   let token = authHeader && authHeader.split(" ")[1];
 
-  console.log(process.env);
   // for bit.dev
-  if (process.env.NODE_ENV === "development" && !token) {
+  if (process.env.ENV === "development" && !token) {
     const staff = await StaffModel.findOne({ role: StaffRole.owner });
     token = createToken(staff);
   }

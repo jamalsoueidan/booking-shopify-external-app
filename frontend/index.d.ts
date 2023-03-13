@@ -8,3 +8,11 @@ declare module "*.svg" {
   const src: string;
   export default src;
 }
+
+declare global {
+  interface process {
+    //types of envs
+    NODE_ENV: "development" | "production" | "test";
+    PUBLIC_URL: string;
+  }
+}
