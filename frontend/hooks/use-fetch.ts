@@ -5,7 +5,12 @@ import { useQueryClient } from "react-query";
 
 let shop = "testeriphone.myshopify.com";
 
-console.log(import.meta.env);
+/*
+BASE_URL: "/"
+DEV: false
+MODE: "production"
+PROD: true
+*/
 if (import.meta.env.PROD) {
   shop = "bysistersdk.myshopify.com";
 }
