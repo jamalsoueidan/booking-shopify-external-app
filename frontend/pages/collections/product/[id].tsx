@@ -11,7 +11,7 @@ import {
   useProductUpdate,
   useTranslation,
 } from "@jamalsoueidan/pkg.frontend";
-import { Badge, Form, Grid, Page, PageActions } from "@shopify/polaris";
+import { AlphaStack, Badge, Columns, Form, Page, PageActions } from "@shopify/polaris";
 import { useDynamicList, useField } from "@shopify/react-form";
 import { useParams } from "react-router-dom";
 
@@ -77,16 +77,15 @@ export default () => {
       >
         <FormErrors errors={submitErrors} />
         {product.staff.length === 0 && <ProductBanner />}
-        <Grid>
-          <Grid.Cell columnSpan={{ lg: 8, md: 4, sm: 6, xl: 8, xs: 6 }}>
+        <Columns columns={["twoThirds", "oneThird"]} gap="4">
+          <AlphaStack>
             <ProductStaff product={product} field={staff} />
-          </Grid.Cell>
-          <Grid.Cell columnSpan={{ lg: 4, md: 2, sm: 6, xl: 4, xs: 6 }}>
+          </AlphaStack>
+          <AlphaStack gap="4">
             <ProductActivate active={fields.active} staffLength={product.staff.length} />
-
             <ProductOptionsCard fields={fields} />
-          </Grid.Cell>
-        </Grid>
+          </AlphaStack>
+        </Columns>
         <br />
         <PageActions primaryAction={primaryAction} />
       </Page>

@@ -1,7 +1,7 @@
 import ModalConfirm from "@components/modals/ModalConfirm";
 import { CollectionServiceGetAllReturn } from "@jamalsoueidan/pkg.backend-types";
 import { ProductResourceList, useAbility, useCollectionDestroy, useTranslation } from "@jamalsoueidan/pkg.frontend";
-import { Card } from "@shopify/polaris";
+import { AlphaCard, Box, Button, Columns, Inline, Text } from "@shopify/polaris";
 import { memo, useCallback, useState } from "react";
 
 interface CollectionProps {
@@ -29,14 +29,25 @@ export default memo(({ collection }: CollectionProps) => {
   return (
     <>
       {modalConfirm}
-      <Card
-        title={collection.title}
-        actions={[
-          ability.can("delete", "collection") && { content: t("remove_collection"), onAction: removeCollection },
-        ]}
-      >
+      <AlphaCard padding="0">
+        <Box paddingBlockStart="4" paddingInlineStart="4" paddingInlineEnd="4">
+          <Columns columns={2}>
+            <Inline blockAlign="center">
+              <Text as="h2" variant="bodyMd">
+                {collection.title}
+              </Text>
+            </Inline>
+            <Inline align="end">
+              {ability.can("delete", "collection") && (
+                <Button onClick={removeCollection} plain>
+                  {t("remove_collection")}
+                </Button>
+              )}
+            </Inline>
+          </Columns>
+        </Box>
         <ProductResourceList items={collection.products} />
-      </Card>
+      </AlphaCard>
     </>
   );
 });

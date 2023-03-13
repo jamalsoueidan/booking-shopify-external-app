@@ -1,7 +1,7 @@
 import MetaData from "@components/staff/meta-data";
 import { Staff } from "@jamalsoueidan/pkg.backend-types";
 import { useAbility, usePosition, useStaff, useTranslation } from "@jamalsoueidan/pkg.frontend";
-import { Avatar, Card, Page, ResourceItem, ResourceList, Text } from "@shopify/polaris";
+import { AlphaCard, Avatar, Page, ResourceItem, ResourceList, Text } from "@shopify/polaris";
 
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ export default () => {
         }
       }
     >
-      <Card>
+      <AlphaCard>
         <ResourceList
           resourceName={{
             plural: t("resource.plural"),
@@ -58,7 +58,7 @@ export default () => {
           items={data || []}
           renderItem={renderItems}
         />
-      </Card>
+      </AlphaCard>
     </Page>
   );
 };

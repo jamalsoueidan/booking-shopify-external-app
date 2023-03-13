@@ -8,7 +8,7 @@ import {
   useTranslation,
 } from "@jamalsoueidan/pkg.frontend";
 import { useAccount } from "@services/account";
-import { Card, Page } from "@shopify/polaris";
+import { AlphaCard, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 
 const ScheduleCalendar = lazy(() =>
@@ -70,7 +70,7 @@ export default () => {
 
   return (
     <Page fullWidth title={t("title")} primaryAction={{ content: t("create"), onAction: () => setDate(new Date()) }}>
-      <Card sectioned>
+      <AlphaCard>
         {date && (
           <Suspense fallback={<LoadingModal />}>
             <CreateScheduleModal selectedDate={date} staff={staff._id} close={close} />
@@ -95,7 +95,7 @@ export default () => {
             initialView="dayGridMonth"
           />
         </Suspense>
-      </Card>
+      </AlphaCard>
     </Page>
   );
 };

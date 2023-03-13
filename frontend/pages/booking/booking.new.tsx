@@ -14,7 +14,7 @@ import {
   useWidgetAvailability,
   useWidgetStaff,
 } from "@jamalsoueidan/pkg.frontend";
-import { Card, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
+import { AlphaCard, Form, FormLayout, Layout, Page, PageActions, Range } from "@shopify/polaris";
 import { notEmpty, useField } from "@shopify/react-form";
 import { endOfMonth, isSameDay } from "date-fns";
 import { useMemo, useState } from "react";
@@ -99,19 +99,19 @@ export default () => {
       >
         <Layout>
           <Layout.AnnotatedSection title={t("product.title")} description={t("product.desc")}>
-            <Card sectioned>
+            <AlphaCard>
               <FormLayout>
                 <ProductSelect {...fields.productId} />
               </FormLayout>
-            </Card>
+            </AlphaCard>
           </Layout.AnnotatedSection>
           <Layout.AnnotatedSection title={t("customer.title")} description={t("customer.desc")}>
-            <Card sectioned>
+            <AlphaCard>
               <CustomerInputAutoComplete field={fields.customer} />
-            </Card>
+            </AlphaCard>
           </Layout.AnnotatedSection>
           <Layout.AnnotatedSection title={t("staff.title")} description={t("staff.desc")}>
-            <Card sectioned>
+            <AlphaCard>
               <FormLayout>
                 <WidgetInputStaff field={fields.staff} data={staffOptions} input={{ disabled: !staffOptions }} />
                 <InputDateDrop
@@ -123,7 +123,7 @@ export default () => {
                 />
                 <InputTimerDivider field={fields.time} data={selectedDate?.hours} />
               </FormLayout>
-            </Card>
+            </AlphaCard>
           </Layout.AnnotatedSection>
         </Layout>
         <br />

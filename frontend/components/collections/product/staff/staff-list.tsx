@@ -23,14 +23,12 @@ export const StaffList = ({ action }: StaffListProps) => {
   const { field } = useContext(FormContext);
 
   const renderItem = useCallback(
-    ({ fullname, avatar, position, tag }: ProductServiceUpdateBodyStaffProperty) => {
-      return {
-        media: <Avatar customer size="medium" name={fullname} source={avatar} />,
-        title: `${fullname}, ${selectPosition(position)}`,
-        desc: selectTagLabel(tag),
-      };
-    },
-    [action, selectPosition, selectTagLabel],
+    ({ fullname, avatar, position, tag }: ProductServiceUpdateBodyStaffProperty) => ({
+      desc: selectTagLabel(tag),
+      media: <Avatar customer size="medium" name={fullname} source={avatar} />,
+      title: `${fullname}, ${selectPosition(position)}`,
+    }),
+    [selectPosition, selectTagLabel],
   );
 
   const items = useMemo(() => [...field.value].sort(HelperArray.sortByText((d) => d.fullname)), [field]);
@@ -53,20 +51,20 @@ const StaffListHeader = ({ itemsLength, action }: StaffListHeader) => {
     id: "product-staff-list",
     locales: {
       da: {
-        title: "Medarbejder",
         browse: "Tilføj/fjern medarbejder",
         staff: {
           other: "{count} medarbejder tilføjet",
           zero: "Tillføje medarbejder til dette produkt",
         },
+        title: "Medarbejder",
       },
       en: {
-        title: "Staff",
         browse: "Add/remove staff",
         staff: {
           other: "{count} staff added",
           zero: "Add staff to this product",
         },
+        title: "Staff",
       },
     },
   });

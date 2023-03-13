@@ -1,5 +1,5 @@
 import { LoadingPage, useCollection, useCollectionCreate, useTranslation } from "@jamalsoueidan/pkg.frontend";
-import { Card, EmptyState, Page } from "@shopify/polaris";
+import { AlphaCard, EmptyState, Page } from "@shopify/polaris";
 import { useNavigate } from "react-router-dom";
 
 export default () => {
@@ -19,14 +19,14 @@ export default () => {
 
   return (
     <Page fullWidth title={t("title")}>
-      <Card sectioned>
+      <AlphaCard>
         <EmptyState
           image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
           heading={t("title")}
         >
           <p>{t("text")} 🚀</p>
         </EmptyState>
-      </Card>
+      </AlphaCard>
     </Page>
   );
 };

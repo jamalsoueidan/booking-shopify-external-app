@@ -1,6 +1,6 @@
 import { Booking } from "@jamalsoueidan/pkg.backend-types";
 import { LoadingModal, LoadingSpinner, useBookings, useStaff, useTranslation } from "@jamalsoueidan/pkg.frontend";
-import { Card, FooterHelp, Page } from "@shopify/polaris";
+import { AlphaCard, FooterHelp, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
@@ -43,13 +43,11 @@ export default () => {
           }
         />
       </Routes>
-      <Card sectioned>
-        <Card.Section>
-          <Suspense fallback={<LoadingSpinner />}>
-            <BookingCalendar data={bookings} onChangeDate={setDate} onClickBooking={onClickBooking} staff={staffier} />
-          </Suspense>
-        </Card.Section>
-      </Card>
+      <AlphaCard>
+        <Suspense fallback={<LoadingSpinner />}>
+          <BookingCalendar data={bookings} onChangeDate={setDate} onClickBooking={onClickBooking} staff={staffier} />
+        </Suspense>
+      </AlphaCard>
       <FooterHelp>{t("footer_help")}</FooterHelp>
     </Page>
   );

@@ -1,5 +1,5 @@
 import { Product } from "@jamalsoueidan/pkg.backend-types";
-import { Card, Select } from "@shopify/polaris";
+import { AlphaCard, Box, Select, Text } from "@shopify/polaris";
 import { FieldDictionary } from "@shopify/react-form";
 import { memo, useCallback, useMemo } from "react";
 
@@ -30,7 +30,12 @@ export default memo(({ active, staffLength }: FormFields) => {
   );
 
   return (
-    <Card sectioned title="Product status">
+    <AlphaCard>
+      <Box paddingBlockEnd="4">
+        <Text variant="bodyMd" as="h1" fontWeight="semibold">
+          Product status
+        </Text>
+      </Box>
       <Select
         label=""
         options={options}
@@ -39,6 +44,6 @@ export default memo(({ active, staffLength }: FormFields) => {
         disabled={staffLength === 0}
         onBlur={active.onBlur}
       />
-    </Card>
+    </AlphaCard>
   );
 });

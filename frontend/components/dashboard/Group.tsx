@@ -1,5 +1,5 @@
 import { Staff } from "@jamalsoueidan/pkg.backend-types";
-import { Avatar, Card, ResourceList, Text } from "@shopify/polaris";
+import { AlphaCard, Avatar, Box, ResourceList, Text } from "@shopify/polaris";
 import { memo } from "react";
 
 interface DashboardGroupProps {
@@ -13,7 +13,12 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
   };
 
   return (
-    <Card title="Medarbejder">
+    <AlphaCard padding="0">
+      <Box paddingBlockStart="4" paddingInlineEnd="4" paddingInlineStart="4">
+        <Text as="h1" variant="bodyMd" fontWeight="semibold">
+          Medarbejder
+        </Text>
+      </Box>
       <ResourceList
         resourceName={resourceName}
         showHeader
@@ -32,6 +37,6 @@ export const DashboardGroup = memo(({ data }: DashboardGroupProps) => {
           );
         }}
       />
-    </Card>
+    </AlphaCard>
   );
 });

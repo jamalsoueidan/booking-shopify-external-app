@@ -11,7 +11,7 @@ import {
   useTranslation,
 } from "@jamalsoueidan/pkg.frontend";
 
-import { Card, Page } from "@shopify/polaris";
+import { AlphaCard, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -79,7 +79,7 @@ export default () => {
         ]
       }
     >
-      <Card sectioned>
+      <>
         {date && (
           <Suspense fallback={<LoadingModal />}>
             <CreateScheduleModal selectedDate={date} staff={params.id} close={close} />
@@ -95,12 +95,12 @@ export default () => {
             <EditManyScheduleModal schedule={editManySchedule} close={close} />
           </Suspense>
         )}
-        <Card sectioned>
+        <AlphaCard>
           <Suspense fallback={<LoadingSpinner />}>
             <ScheduleCalendar onChangeDate={setRangeDate} data={calendar} {...editSchedule} />
           </Suspense>
-        </Card>
-      </Card>
+        </AlphaCard>
+      </>
     </Page>
   );
 };

@@ -8,7 +8,7 @@ import {
   useTranslation,
 } from "@jamalsoueidan/pkg.frontend";
 import { useAccountSetting, useAccountSettingUpdate } from "@services/account";
-import { Card, Form, FormLayout, Layout, Page, PageActions } from "@shopify/polaris";
+import { AlphaCard, Form, FormLayout, Layout, Page, PageActions } from "@shopify/polaris";
 import { useField } from "@shopify/react-form";
 
 export default () => {
@@ -51,12 +51,12 @@ export default () => {
         <Layout>
           <FormErrors errors={submitErrors} />
           <Layout.AnnotatedSection title={t("user_settings.title")} description={t("user_settings.subtitle")}>
-            <Card sectioned>
+            <AlphaCard>
               <FormLayout>
                 <InputTimeZone {...fields.timeZone} />
                 <InputLanguage {...fields.language} />
               </FormLayout>
-            </Card>
+            </AlphaCard>
           </Layout.AnnotatedSection>
         </Layout>
         <br />

@@ -1,5 +1,5 @@
 import { LoadingSpinner, ModalProvider, useBookingGet } from "@jamalsoueidan/pkg.frontend";
-import { Card, Tabs } from "@shopify/polaris";
+import { AlphaCard, Tabs } from "@shopify/polaris";
 import { lazy, useCallback, useMemo } from "react";
 import { Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 import { BookingDetailsEdit } from "../booking-details/booking-details-edit";
@@ -61,7 +61,7 @@ export const BookingModal = () => {
 
   return (
     <ModalProvider large open={true} onClose={onClose} title={data?.title}>
-      <Card>
+      <AlphaCard>
         <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
           {!data ? (
             <LoadingSpinner />
@@ -74,7 +74,7 @@ export const BookingModal = () => {
             </Routes>
           )}
         </Tabs>
-      </Card>
+      </AlphaCard>
     </ModalProvider>
   );
 };

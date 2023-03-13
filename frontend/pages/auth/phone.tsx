@@ -1,7 +1,7 @@
 import { AuthPage } from "@components/auth/AuthPage";
 import { useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { useReceivePassword } from "@services/login";
-import { Button, Card, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
+import { AlphaCard, Button, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useNavigate } from "react-router-dom";
 
@@ -54,7 +54,7 @@ export default () => {
 
   return (
     <AuthPage title={t("title")}>
-      <Card sectioned>
+      <AlphaCard>
         <Form onSubmit={submit}>
           <FormLayout>
             <TextField label={t("phone.label")} autoComplete="phone" {...phone} />
@@ -67,7 +67,7 @@ export default () => {
             </Stack>
           </FormLayout>
         </Form>
-      </Card>
+      </AlphaCard>
     </AuthPage>
   );
 };
