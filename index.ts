@@ -12,6 +12,7 @@ import accountRoutes from "@libs/account/account.routes";
 import authenticationRoutes from "@libs/authentication/authentication.route";
 import { jwtMiddleware } from "@libs/jwt/jwt.middleware";
 import notificationRoutes from "@libs/notification/notification.routes";
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -28,6 +29,7 @@ mongodb.connect(null);
 
 export async function createServer(root = process.cwd(), isProd = process.env.NODE_ENV === "production") {
   const app = express();
+  app.use(cors());
 
   if (isProd) {
     const compression = await import("compression").then(({ default: fn }) => fn);
