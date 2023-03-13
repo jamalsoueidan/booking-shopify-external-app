@@ -51,7 +51,7 @@ const StaffListHeader = ({ itemsLength, action }: StaffListHeader) => {
     id: "product-staff-list",
     locales: {
       da: {
-        browse: "Tilføj/fjern medarbejder",
+        browse: "Redigere medarbejder",
         staff: {
           other: "{count} medarbejder tilføjet",
           zero: "Tillføje medarbejder til dette produkt",
@@ -59,7 +59,7 @@ const StaffListHeader = ({ itemsLength, action }: StaffListHeader) => {
         title: "Medarbejder",
       },
       en: {
-        browse: "Add/remove staff",
+        browse: "Edit staff",
         staff: {
           other: "{count} staff added",
           zero: "Add staff to this product",

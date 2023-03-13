@@ -4,12 +4,10 @@ import { useAbility, usePosition, useStaff, useTranslation } from "@jamalsoueida
 import { AlphaCard, Avatar, Page, ResourceItem, ResourceList, Text } from "@shopify/polaris";
 
 import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default () => {
   const { t } = useTranslation({ id: "staff", locales });
   const ability = useAbility();
-  const navigate = useNavigate();
   const { data } = useStaff();
   const { selectPosition } = usePosition();
 
@@ -21,7 +19,7 @@ export default () => {
       return (
         <ResourceItem
           id={_id}
-          onClick={() => navigate("/admin/staff/" + _id)}
+          url={`/admin/staff/${_id}`}
           media={media}
           accessibilityLabel={`View details for ${fullname}`}
         >
@@ -35,7 +33,7 @@ export default () => {
         </ResourceItem>
       );
     },
-    [navigate, selectPosition],
+    [selectPosition],
   );
 
   return (
@@ -49,7 +47,7 @@ export default () => {
         }
       }
     >
-      <AlphaCard>
+      <AlphaCard padding="0">
         <ResourceList
           resourceName={{
             plural: t("resource.plural"),

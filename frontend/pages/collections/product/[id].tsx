@@ -77,10 +77,8 @@ export default () => {
       >
         <FormErrors errors={submitErrors} />
         {product.staff.length === 0 && <ProductBanner />}
-        <Columns columns={["twoThirds", "oneThird"]} gap="4">
-          <AlphaStack>
-            <ProductStaff product={product} field={staff} />
-          </AlphaStack>
+        <Columns columns={["twoThirds", "oneThird"]} gap="4" alignItems="start">
+          <ProductStaff product={product} field={staff} />
           <AlphaStack gap="4">
             <ProductActivate active={fields.active} staffLength={product.staff.length} />
             <ProductOptionsCard fields={fields} />

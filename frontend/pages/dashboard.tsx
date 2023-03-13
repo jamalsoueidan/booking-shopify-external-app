@@ -1,6 +1,6 @@
 import { DashboardGroup } from "@components/dashboard/Group";
 import { LoadingSpinner, useStaff } from "@jamalsoueidan/pkg.frontend";
-import { Card, Grid, Page } from "@shopify/polaris";
+import { AlphaCard, Columns, Page, Text } from "@shopify/polaris";
 import { Suspense } from "react";
 
 export default () => {
@@ -8,18 +8,18 @@ export default () => {
 
   return (
     <Page title="Dashboard">
-      <Grid>
-        <Grid.Cell columnSpan={{ lg: 6, md: 3, sm: 6, xl: 6, xs: 6 }}>
-          <Card title="Dashboard" sectioned>
-            <p>Welcome to dashboard</p>
-          </Card>
-        </Grid.Cell>
-        <Grid.Cell columnSpan={{ lg: 6, md: 3, sm: 6, xl: 6, xs: 6 }}>
-          <Suspense fallback={<LoadingSpinner />}>
-            <DashboardGroup data={data} />
-          </Suspense>
-        </Grid.Cell>
-      </Grid>
+      <Columns columns={2} alignItems="start" gap="4">
+        <AlphaCard>
+          <Text variant="bodyMd" fontWeight="bold" as="h2">
+            Dashboard
+          </Text>
+          <p>Welcome to dashboard</p>
+        </AlphaCard>
+
+        <Suspense fallback={<LoadingSpinner />}>
+          <DashboardGroup data={data} />
+        </Suspense>
+      </Columns>
     </Page>
   );
 };
