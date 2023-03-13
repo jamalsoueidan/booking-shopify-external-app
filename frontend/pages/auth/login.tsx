@@ -1,7 +1,7 @@
 import { AuthPage } from "@components/auth/AuthPage";
 import { useTranslation } from "@jamalsoueidan/pkg.frontend";
 import { useLogin } from "@services/login";
-import { AlphaCard, Banner, Button, Form, FormLayout, Link, Stack, Text, TextField } from "@shopify/polaris";
+import { AlphaCard, Banner, Button, Form, FormLayout, Inline, Link, Text, TextField } from "@shopify/polaris";
 import { useField, useForm } from "@shopify/react-form";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -50,13 +50,13 @@ export default () => {
 
             <TextField label={t("password.label")} type="password" autoComplete="false" {...password} />
 
-            <Stack alignment="center" spacing="tight">
+            <Inline gap="1" blockAlign="center">
               <Button submit>{t("login_submit")}</Button>
               <Text variant="bodyMd" as="span">
                 {t("or")}
               </Text>
               <Link onClick={() => navigate("/phone")}>{t("receive_action")}</Link>
-            </Stack>
+            </Inline>
           </FormLayout>
         </Form>
       </AlphaCard>

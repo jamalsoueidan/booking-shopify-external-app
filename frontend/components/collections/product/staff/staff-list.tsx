@@ -8,7 +8,7 @@ import {
   useTag,
   useTranslation,
 } from "@jamalsoueidan/pkg.frontend";
-import { AlphaCard, Avatar, Box, Button, Stack, Text } from "@shopify/polaris";
+import { AlphaCard, Avatar, Box, Button, Columns, Inline, Text } from "@shopify/polaris";
 import { PlusMinor } from "@shopify/polaris-icons";
 import { useCallback, useContext, useMemo } from "react";
 import FormContext from "./form-context";
@@ -79,20 +79,22 @@ const StaffListHeader = ({ itemsLength, action }: StaffListHeader) => {
         </Text>
       </Box>
       <Box paddingInlineStart="4" paddingInlineEnd="4" paddingBlockEnd="4">
-        <Stack alignment="center">
-          <Stack.Item fill>
+        <Columns columns={2}>
+          <Inline blockAlign="center">
             <Text as="h2" variant="bodyLg">
               {tdynamic("staff", {
                 count: itemsLength || 0,
               })}
             </Text>
-          </Stack.Item>
-          <AbilityCan I="update" a="product" this={product}>
-            <Button size="slim" onClick={action} outline icon={PlusMinor}>
-              {t("browse")}
-            </Button>
-          </AbilityCan>
-        </Stack>
+          </Inline>
+          <Inline align="end" blockAlign="center">
+            <AbilityCan I="update" a="product" this={product}>
+              <Button size="slim" onClick={action} outline icon={PlusMinor}>
+                {t("browse")}
+              </Button>
+            </AbilityCan>
+          </Inline>
+        </Columns>
       </Box>
     </>
   );

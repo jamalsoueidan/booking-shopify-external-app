@@ -28,7 +28,7 @@ export default () => {
     <StaffForm
       data={staff}
       action={submit}
-      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/admin/staff/" + staff._id) }]}
+      breadcrumbs={[{ content: "Staff", url: "/admin/staff/" + staff._id }]}
       titleMetadata={<MetaData active={staff.active} />}
       allowEditing={{ active: true, group: true, role: true }}
     />

@@ -13,13 +13,12 @@ import {
 
 import { AlphaCard, Page } from "@shopify/polaris";
 import { Suspense, lazy, useCallback, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default () => {
   const { t } = useTranslation({ id: "staff-schedule", locales });
   const ability = useAbility();
   const params = useParams();
-  const navigate = useNavigate();
   const [rangeDate, setRangeDate] = useState<{ start: Date; end: Date }>();
   const [date, setDate] = useState<Date>();
   const [editOneSchedule, setEditOneSchedule] = useState<Schedule>();
@@ -63,11 +62,11 @@ export default () => {
       fullWidth
       title={t("title", { fullname })}
       titleMetadata={<MetaData active={active} />}
-      breadcrumbs={[{ content: "staff", onAction: () => navigate("/admin/staff") }]}
+      backAction={{ content: "staff", url: "/admin/staff" }}
       primaryAction={
         ability.can("update", subject("staff", staff)) && {
           content: t("edit", { fullname }),
-          onAction: () => navigate("/admin/staff/edit/" + _id),
+          url: "/admin/staff/edit/" + _id,
         }
       }
       secondaryActions={

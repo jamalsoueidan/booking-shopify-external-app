@@ -73,7 +73,7 @@ export default () => {
         titleMetadata={
           <Badge status={product.active ? "attention" : "info"}>{product.active ? t("active") : t("deactive")}</Badge>
         }
-        breadcrumbs={[{ content: "Collections", url: "/admin/collections" }]}
+        backAction={{ content: "Collections", url: "/admin/collections" }}
       >
         <FormErrors errors={submitErrors} />
         {product.staff.length === 0 && <ProductBanner />}

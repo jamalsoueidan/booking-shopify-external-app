@@ -1,6 +1,6 @@
 import { Product } from "@jamalsoueidan/pkg.backend-types";
 import { useTranslation } from "@jamalsoueidan/pkg.frontend";
-import { AlphaCard, Button, ButtonGroup, FormLayout, Icon, Select, Stack, Text } from "@shopify/polaris";
+import { AlphaCard, Button, ButtonGroup, FormLayout, Icon, Inline, Select, Text } from "@shopify/polaris";
 import { ClockMajor } from "@shopify/polaris-icons";
 import { FieldDictionary } from "@shopify/react-form";
 import { memo, useCallback, useMemo } from "react";
@@ -26,12 +26,12 @@ export default memo(({ fields }: { fields: FieldDictionary<Pick<Product, "buffer
 
   const selectLabel = useMemo(
     () => (
-      <Stack spacing="tight">
-        <Stack.Item>
-          <Icon source={ClockMajor} />
-        </Stack.Item>
-        <Stack.Item>{t("buffertime.label")}</Stack.Item>
-      </Stack>
+      <Inline gap="2">
+        <Icon source={ClockMajor} />
+        <Text as="span" variant="bodyMd">
+          {t("buffertime.label")}
+        </Text>
+      </Inline>
     ),
     [t],
   );
@@ -47,7 +47,7 @@ export default memo(({ fields }: { fields: FieldDictionary<Pick<Product, "buffer
     <>
       <AlphaCard>
         <FormLayout>
-          <Text variant="headingSm" as="h6">
+          <Text variant="bodyMd" as="span" fontWeight="semibold">
             {t("duration.label")}
           </Text>
           <ButtonGroup segmented>
@@ -65,7 +65,7 @@ export default memo(({ fields }: { fields: FieldDictionary<Pick<Product, "buffer
       </AlphaCard>
       <AlphaCard>
         <FormLayout>
-          <Text variant="headingXs" as="h6">
+          <Text variant="bodyMd" as="span" fontWeight="semibold">
             {t("duration.help")}
           </Text>
           <Select

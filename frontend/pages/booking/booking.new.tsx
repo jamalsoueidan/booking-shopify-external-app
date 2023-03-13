@@ -95,7 +95,7 @@ export default () => {
       <Page
         fullWidth
         title={t("title")}
-        breadcrumbs={[{ content: "Bookings", onAction: () => navigate("/admin/bookings") }]}
+        backAction={{ content: "Bookings", onAction: () => navigate("/admin/bookings") }}
       >
         <Layout>
           <Layout.AnnotatedSection title={t("product.title")} description={t("product.desc")}>
