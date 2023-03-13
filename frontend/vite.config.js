@@ -36,9 +36,6 @@ export default defineConfig({
     sourcemap: false,
     ...build,
   },
-  define: {
-    ENV: process.env.ENV,
-  },
   plugins: [react(), checker({ typescript: true }), splitVendorChunkPlugin(), visualizer(), tsconfigPaths()],
   root: path.join(__dirname, "."),
   server: {
