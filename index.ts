@@ -29,7 +29,9 @@ mongodb.connect(null);
 
 export async function createServer(root = process.cwd(), isProd = process.env.NODE_ENV === "production") {
   const app = express();
-  app.use(cors());
+  if (process.env.ENV === "development") {
+    app.use(cors());
+  }
 
   if (isProd) {
     const compression = await import("compression").then(({ default: fn }) => fn);
