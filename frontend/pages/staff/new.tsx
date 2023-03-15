@@ -18,7 +18,7 @@ export default () => {
   return (
     <StaffForm
       action={submit}
-      breadcrumbs={[{ content: "Staff", onAction: () => navigate("/admin/staff") }]}
+      breadcrumbs={{ content: "Staff", onAction: () => navigate("/admin/staff") }}
       allowEditing={{ active: true, group: true, role: true }}
     />
   );

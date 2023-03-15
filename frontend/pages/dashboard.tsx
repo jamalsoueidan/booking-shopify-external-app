@@ -17,7 +17,7 @@ export default () => {
         </AlphaCard>
 
         <Suspense fallback={<LoadingSpinner />}>
-          <DashboardGroup data={data} />
+          <DashboardGroup data={data || []} />
         </Suspense>
       </Columns>
     </Page>

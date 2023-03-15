@@ -14,15 +14,16 @@ export const Application = () => (
 
 const ApplicationSettings = () => {
   const { data } = useAccountSetting();
+  const navigate = useNavigate();
 
   const value = useMemo(
     () => ({
       LinkComponent,
       language: data?.language || "da",
       timeZone: data?.timeZone || "Europe/Copenhagen",
-      useNavigate,
+      navigate,
     }),
-    [data],
+    [data, navigate],
   );
 
   setDefaultOptions({ locale: value.language === "da" ? da : undefined });
