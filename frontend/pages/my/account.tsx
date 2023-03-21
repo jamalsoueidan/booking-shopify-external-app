@@ -1,5 +1,4 @@
-import Metadata from "@components/staff/meta-data";
-import { StaffForm } from "@jamalsoueidan/pkg.frontend";
+import { BadgeStatus, StaffForm } from "@jamalsoueidan/pkg.frontend";
 import { useAccount, useAccountUpdate } from "@services/account";
 import { useCallback } from "react";
 
@@ -18,5 +17,5 @@ export default () => {
     return <></>;
   }
 
-  return <StaffForm data={staff} action={submit} titleMetadata={<Metadata active={staff.active} />} />;
+  return <StaffForm data={staff} action={submit} titleMetadata={<BadgeStatus active={staff.active} />} />;
 };

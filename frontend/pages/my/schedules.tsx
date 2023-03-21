@@ -18,20 +18,20 @@ const ScheduleCalendar = lazy(() =>
 );
 
 const CreateScheduleModal = lazy(() =>
-  import("../../components/staff/modals/create-shift-modal").then((module) => ({
-    default: module.CreateShiftModal,
+  import("@jamalsoueidan/pkg.frontend").then((module) => ({
+    default: module.ScheduleModalCreateShift,
   })),
 );
 
 const EditOneScheduleModal = lazy(() =>
-  import("../../components/staff/modals/edit-one-shift-modal").then((module) => ({
-    default: module.EditOneShiftModal,
+  import("@jamalsoueidan/pkg.frontend").then((module) => ({
+    default: module.ScheduleModalEditOneShift,
   })),
 );
 
 const EditManyScheduleModal = lazy(() =>
-  import("../../components/staff/modals/edit-many-shifts-modal").then((module) => ({
-    default: module.EditManyShiftsModal,
+  import("@jamalsoueidan/pkg.frontend").then((module) => ({
+    default: module.ScheduleModalEditManyShifts,
   })),
 );
 

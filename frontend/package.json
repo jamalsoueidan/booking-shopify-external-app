@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
-    "@jamalsoueidan/pkg.frontend": "^0.0.19",
+    "@jamalsoueidan/pkg.frontend": "^0.0.24",
     "@jamalsoueidan/pkg.backend-types": "^0.0.1",
     "@jamalsoueidan/frontend.polyfills.json": "^0.0.1",
     "@shopify/polaris": "^10.19.0",
