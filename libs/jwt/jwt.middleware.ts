@@ -10,7 +10,9 @@ export const jwtMiddleware = async (req, res: Response, next) => {
   // for bit.dev
   if (process.env.ENV === "development" && !token) {
     const staff = await StaffModel.findOne({ role: StaffRole.owner });
-    token = createToken(staff);
+    if (staff) {
+      token = createToken(staff);
+    }
   }
 
   if (!token) return res.sendStatus(401);
