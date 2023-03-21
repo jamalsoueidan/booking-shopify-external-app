@@ -10,9 +10,12 @@ export const jwtMiddleware = async (req, res: Response, next) => {
   // for bit.dev
   if (process.env.ENV === "development" && !token) {
     const staff = await StaffModel.findOne({ role: StaffRole.owner });
-    if (staff) {
-      token = createToken(staff);
-    }
+    token = createToken({
+      _id: staff?._id || "2388932983892",
+      shop: staff?.shop || "testeriphone.myshopify.com",
+      role: staff?.role || StaffRole.owner,
+      group: staff?.group || "all",
+    });
   }
 
   if (!token) return res.sendStatus(401);

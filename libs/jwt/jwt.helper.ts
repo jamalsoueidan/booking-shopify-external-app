@@ -1,7 +1,7 @@
-import { AppSession, IStaffDocument, StaffRole } from "@jamalsoueidan/pkg.backend";
+import { AppSession, Staff, StaffRole } from "@jamalsoueidan/pkg.backend";
 import jwt from "jsonwebtoken";
 
-export const createToken = (staff: IStaffDocument) => {
+export const createToken = (staff: Pick<Staff, "_id" | "shop" | "role" | "group">) => {
   return jwt.sign(
     {
       staff: staff._id.toString(),
