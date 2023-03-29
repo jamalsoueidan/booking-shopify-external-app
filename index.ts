@@ -29,9 +29,7 @@ mongodb.connect(null);
 
 export async function createServer(root = process.cwd(), isProd = process.env.NODE_ENV === "production") {
   const app = express();
-  if (process.env.ENV === "development") {
-    app.use(cors());
-  }
+  app.use(cors());
 
   if (isProd) {
     const compression = await import("compression").then(({ default: fn }) => fn);
@@ -47,6 +45,7 @@ export async function createServer(root = process.cwd(), isProd = process.env.NO
   app.use(express.json({ limit: "1mb", extended: true } as any));
 
   app.use("/api", authenticationRoutes);
+  app.use("/api", widgetRouter);
 
   // All endpoints after this point will require an active session
   app.use("/api/*", jwtMiddleware);
